@@ -44,19 +44,49 @@ input {
     }
 }
 
+body {
+	background: rgb(211, 211, 211, 0.4);
+    font-family: 'InterRegular', sans-serif;
+    font-size: 19px;
+}
+
 .d_none {
     display: none;
 }
 
+button {
+    cursor: pointer;
+    border: unset;
+}
+
+input {
+    border: unset;
+}
+
 h1 {
-    font-size: 4.2rem;
+    font-size: 61px;
 }
 
-h2 {
-    font-size: 3.4rem;
+@font-face {
+    font-family: "InterRegular";
+    src: url("/assets/Fonts/Inter_28pt-Regular.ttf") format("truetype");
 }
 
-h3 {
-    font-size: 1.8rem;
+@font-face {
+    font-family: "InterBold";
+    src: url("/assets/Fonts/Inter_28pt-Bold.ttf") format("truetype");
+}
+
+.overlay { // Elternelement
+    
+    justify-content: center;
+    .content { // Kindelement
+        //  Hier kann man noch spezielle Eigenschafen festgelegt werden,
+        // die eintreten genau dann wenn .content ein Kind von .overlay ist.
+        display: flex;
+        justify-content: center;
+        // Das würde ich hier nicht weiter verschachteln, 
+        // speziellere Eigenschaften werden in den Komponenten festgelegt
+    }
 }
 

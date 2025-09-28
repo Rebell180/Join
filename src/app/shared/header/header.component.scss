@@ -1,0 +1,122 @@
+@use './../../../../public/styles/all_styles.scss' as all;
+
+// Hier hatte ich den header-Selctor zu host geändert.
+// Mit :host kann man in Angular die gesamte Komponente stylen.
+
+.content {
+
+	.smallHeader {
+		position: absolute;
+		width: 100%;
+		height: 10vh;
+		z-index: 10;
+		display: flex;
+		justify-content: end;
+		align-items: center;
+		gap: 10px;
+		padding-right: 1rem;
+		cursor: pointer;
+		background-color: white;
+
+		.help {
+				width: 24px;
+				height: 24px;
+				cursor: pointer;
+
+				@include all.mobile {
+					display: none;
+				}
+			}
+
+			img {
+				width: 64px;
+				height: 64px;
+			}
+	}
+
+	aside {
+			width: 200px;
+			height: 100dvh;
+			z-index: 10;
+			@include all.fl($jc: space-between);
+			padding: 50px 0;
+			background: #2a3647;
+
+			@include all.tablet {
+				width: 100%;
+				height: 5rem;
+				flex-direction: row;
+				position: fixed;
+				bottom: 0;
+				top: auto;
+			}
+
+			img {
+				width: 100px;
+				height: 110px;
+
+				@include all.tablet {
+					display: none;
+					}
+			}
+
+			nav {
+				width: 100%;
+				height: 40dvh;
+
+				@include all.tablet {
+					height: 5rem;
+					@include all.fl($flexdir: row);
+					flex: 1;
+					gap: 8rem;
+					}
+
+				@include all.mobile {
+					gap: 2.5rem;
+				}
+
+				@include all.smart {
+					gap: 1.5rem;
+				}
+			}
+				
+			.links {
+				width: 100%;
+				height: 8dvh;
+
+				@include all.tablet {
+						display: none;
+					}
+
+				li {
+					height: 8dvh;
+					@include all.fl();
+
+					@include all.tablet {
+						display: none;
+					}
+
+					a {
+						width: 100%;
+						color: grey;
+						text-align: center;
+						padding: 5px 0;
+						margin: 5px 0;
+						font-size: clamp(16px, 0.8dvw, 32px);
+
+							&:hover {
+							color: rgb(17, 119, 227);
+						}
+					}
+				}
+			}
+		}
+
+	#main {
+		width: 100%;
+		height: 100vh;
+		background: rgb(211, 211, 211, 0.4);
+		flex-direction: column;
+		padding-top: 10vh;
+	}
+}
