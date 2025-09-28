@@ -10,19 +10,18 @@
             <!-- 
                 Hier wird durchiteriert über das 'items'-Array und rendert die app-nav-item Komponente für jedes Element.
             -->
+            <!-- Ein List-Item liegt auch in einer Liste (unordered list) -->
+            <ul>
                 @for (navItem of item; track navItem.sectionId) {
-                    <app-nav-item [item]="navItem"></app-nav-item>
+                    <li nav-item [item]="navItem"></li>
                 }
+            </ul>
         </nav>
         <div class="links">
-            <li>
-                <a href="">Privacy Policy</a>
-                <a href="">Legal notice</a>
-            </li>
+            <ul>
+                <li><a href="">Privacy Policy</a></li>
+                <li><a href="">Legal notice</a></li>
+            </ul>
         </div>
     </aside>
-    <section id="main">
-		<h1>hallo</h1>
-		<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores sapiente odit unde blanditiis sed voluptas. Rerum suscipit nobis maiores laudantium vero sapiente odit, voluptates, temporibus asperiores mollitia vitae explicabo a!</p>
-	</section>
 </div>
