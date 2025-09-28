@@ -2,7 +2,7 @@ import { Component, input } from '@angular/core';
 import { NavItemData } from './../interfaces/navitemdata';
 
 @Component({
-  selector: 'app-nav-item',
+  selector: 'li[nav-item]',
   imports: [],
   templateUrl: './nav-item.component.html',
   styleUrl: './nav-item.component.scss'

@@ -1,38 +1,37 @@
 @use './../../../../public/styles/all_styles.scss' as all;
 
+:host {
+	height: 5dvh;
+	display: flex;
+	align-items: center;
+	margin: 1rem 0;
+	padding-left: 20%;
+	gap: 5%;
+	cursor: pointer;
+	color: white;
 
+	@include all.tablet {
+		width: 100%;
+		height: 5rem;
+		@include all.fl();
+		margin: 0;
+		padding: 0;
+		gap: 0.5rem;
+		border-radius: 10px;
+	}
 
-li {
-					height: 5dvh;
-					display: flex;
-					align-items: center;
-					margin: 1rem 0;
-					padding-left: 20%;
-					gap: 5%;
-					cursor: pointer;
+	&:hover {
+		background: #2f3f57;
+	}
+	
+	a {
+		color: white;
+		font-size: clamp(16px, 1dvw, 32px);
+	}
 
-					@include all.tablet {
-						width: 100%;
-						height: 5rem;
-						@include all.fl();
-						margin: 0;
-						padding: 0;
-						gap: 0.5rem;
-						border-radius: 10px;
-					}
-
-					&:hover {
-						background: #2f3f57;
-					}
-					
-					a {
-						color: white;
-						font-size: clamp(16px, 1dvw, 32px);
-					}
-
-					img {
-						display: flex;
-						width: 24px;
-						height: 24px;
-					}
-				}
+	img {
+		display: flex;
+		width: 24px;
+		height: 24px;
+	}
+}
