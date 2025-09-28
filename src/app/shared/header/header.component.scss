@@ -76,42 +76,7 @@
 				}
 
 				@include all.smart {
-					gap: 0.5rem;
-				}
-
-				li {
-					height: 5dvh;
-					display: flex;
-					align-items: center;
-					margin: 1rem 0;
-					padding-left: 20%;
-					gap: 5%;
-					cursor: pointer;
-
-					@include all.tablet {
-						width: 5rem;
-						height: 5rem;
-						@include all.fl();
-						margin: 0;
-						padding: 0;
-						gap: 0.5rem;
-						border-radius: 10px;
-					}
-
-					&:hover {
-						background: #2f3f57;
-					}
-					
-					a {
-						color: white;
-						font-size: clamp(16px, 1dvw, 32px);
-					}
-
-					img {
-						display: flex;
-						width: 24px;
-						height: 24px;
-					}
+					gap: 1.5rem;
 				}
 			}
 				
