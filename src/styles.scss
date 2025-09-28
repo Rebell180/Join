@@ -7,65 +7,21 @@
     box-sizing: border-box;
     text-decoration: none;
     scroll-behavior: smooth;
-    border: unset;
-}
-
-html {
-    font-size: 10px; // für Verwendung von rem, 1rem = 10px
-}
-
-body {
-	background: rgb(211, 211, 211, 0.4);
-    font-family: 'InterRegular', sans-serif;
-    font-size: 19px;
-}
-
-button, a,
-input {
-    cursor: pointer;
+    list-style: none;
 }
 
 .content {
-    display: grid;
-    grid-template-columns: 20rem 1fr;
-    grid-template-rows: 10dvh 90dvh;
-    grid-template-areas: "aside header" "aside main";
-    height: 100dvh;
-
-    @include all.tablet {
-        grid-template-columns: 1fr;
-        grid-template-rows: 10dvh 1fr 11dvh; 
-        grid-template-areas: 
-            "header"
-            "main"
-            "aside";
-
-    }
-}
-
-.d_none {
-    display: none;
-}
-
-h1 {
-    font-size: 61px;
-}
-
-@font-face {
-    font-family: "InterRegular";
-    src: url("/assets/Fonts/Inter_28pt-Regular.ttf") format("truetype");
-}
-
-@font-face {
-    font-family: "InterBold";
-    src: url("/assets/Fonts/Inter_28pt-Bold.ttf") format("truetype");
-}
-
-.overlay {
-    justify-content: center;
-    .content { 
+        width: 100%;
+        max-width: 1920px;
+        height: 100dvh;
         display: flex;
-        justify-content: center;
-    }
+
+		header,
+		section,
+		footer {
+			width: 100%;
+			display: flex;
+			justify-content: left;
+	}
 }
 

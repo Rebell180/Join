@@ -111,14 +111,7 @@ export class Contact implements DBObject {
      * @returns - Contact as JSON.
      */
     toJson() {
-        return {
-            id: this.id || "",
-            firstname: this.firstName || "",
-            lastname: this.lastName || "",
-            email: this.email || "",
-            telnr: this.tel || "",
-            group: this.firstName[0] || "*",
-            bgcolor: this.iconColor || "orange"
-        }
+        // keep backward-compatible alias for older callers
+        return this.toJSON();
     }
 }
