@@ -82,7 +82,7 @@
 				
 			.links {
 				width: 100%;
-				height: 8dvh;
+				height: 16dvh; //Erhöht auf 16dvh wegen 2 mal li, passt sonst nicht rein
 
 				@include all.tablet {
 						display: none;
