@@ -75,37 +75,4 @@ export class Contact {
             bgcolor: this.iconColor || "orange"
         }
     }
-
-    // #region Methods
-    /**
-     * Compares this object, with another object
-     * @param other - Instance for compare.
-     * @returns true, it both objects are the same
-     */
-    equals(other:unknown):boolean {
-        if (!(other instanceof Contact)) return false;
-        return this.firstName == other.firstName && this.lastName == other.lastName;
-    }
-    // #endregion
-
-    /**
-     * Gets a random color for new Contacts
-     * @returns - a random color.
-     */
-    static getRandomIconColor():string {
-        const colors:string[] = ['orange', 'purple', 'blue', 'pink', 'yellow', 'green'];
-        return colors[Math.floor(colors.length * Math.random())];
-    }
-
-    // #region Methods
-    /**
-     * Compares this object, with another object
-     * @param other - Instance for compare.
-     * @returns true, it both objects are the same
-     */
-    equals(other:unknown):boolean {
-        if (!(other instanceof Contact)) return false;
-        return this.firstName == other.firstName && this.lastName == other.lastName;
-    }
-    // #endregion
 }
