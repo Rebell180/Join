@@ -1,12 +1,4 @@
-@font-face {
-    font-family: "InterRegular";
-    src: url("/assets/Fonts/Inter_28pt-Regular.ttf") format("truetype");
-}
-
-@font-face {
-    font-family: "InterBold";
-    src: url("/assets/Fonts/Inter_28pt-Bold.ttf") format("truetype");
-}
+// TODO: Font Roboto muss hier noch eingebunden und herunter geladen werden.
 
 *{
     position: relative;
@@ -74,6 +66,16 @@ input {
 
 h1 {
     font-size: 61px;
+}
+
+@font-face {
+    font-family: "InterRegular";
+    src: url("/assets/Fonts/Inter_28pt-Regular.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "InterBold";
+    src: url("/assets/Fonts/Inter_28pt-Bold.ttf") format("truetype");
 }
 
 .overlay { // Elternelement
