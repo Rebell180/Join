@@ -7,10 +7,12 @@
     <aside class="headerNav">
         <img src="assets/Icons/JoinLogoWhite.png" alt="das Logo von Join">
         <nav>
-            <li><img src="assets/Icons/Summary.png" alt="Summary"><a href="#Summary">Summary</a></li>
-            <li><img src="assets/Icons/addTask.png" alt="addTask"><a href="#addTask">Add Task</a></li>
-            <li><img src="assets/Icons/Board.png" alt="Boards"><a href="#Boards">Boards</a></li>
-            <li><img src="assets/Icons/Contacts.png" alt="Contacts"><a href="#Contacts">Contacts</a></li>
+            <!-- 
+                Hier wird durchiteriert über das 'items'-Array und rendert die app-nav-item Komponente für jedes Element.
+            -->
+                @for (navItem of item; track navItem.sectionId) {
+                    <app-nav-item [item]="navItem"></app-nav-item>
+                }
         </nav>
         <div class="links">
             <li>

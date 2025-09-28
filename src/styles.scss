@@ -46,7 +46,8 @@ button {
 
 body {
 	background: rgb(211, 211, 211, 0.4);
-    font-family: 'Roboto', sans-serif;
+    font-family: 'InterRegular', sans-serif;
+    font-size: 19px;
 }
 
 button {
@@ -63,6 +64,20 @@ input {
     src: url("/assets/Fonts/Roboto/static/Roboto-Medium.ttf") format("truetype");
 }
 
+h1 {
+    font-size: 61px;
+}
+
+@font-face {
+    font-family: "InterRegular";
+    src: url("/assets/Fonts/Inter_28pt-Regular.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "InterBold";
+    src: url("/assets/Fonts/Inter_28pt-Bold.ttf") format("truetype");
+}
+
 .overlay { // Elternelement
     
     justify-content: center;
@@ -74,9 +89,4 @@ input {
         // Das würde ich hier nicht weiter verschachteln, 
         // speziellere Eigenschaften werden in den Komponenten festgelegt
     }
-}
-
-// Sollte global definiert werden, damit es überall verwendent werden kann.
-.d-none {
-    display: none;
 }

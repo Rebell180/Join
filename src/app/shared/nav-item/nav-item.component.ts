@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, input } from '@angular/core';
+import { NavItemData } from './../interfaces/navitemdata';
 
 @Component({
   selector: 'app-nav-item',
@@ -8,4 +9,5 @@ import { Component } from '@angular/core';
 })
 export class NavItemComponent {
 
+  item = input.required<NavItemData>()
 }
