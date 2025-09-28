@@ -3,7 +3,7 @@
 // Hier hatte ich den header-Selctor zu host geändert.
 // Mit :host kann man in Angular die gesamte Komponente stylen.
 
-:host { //header ist bereits im Content enthalten, das wäre eine doppelte Contentbegrenzung, daher Selector geändet zu host.
+.content {
 
 	.smallHeader {
 		position: absolute;
