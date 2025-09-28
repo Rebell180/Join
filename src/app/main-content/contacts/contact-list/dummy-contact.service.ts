@@ -9,12 +9,18 @@ export class DummyContactService {
   contacts: Contact[];
 
   constructor() {
-    this.contacts = this.getAllContacts();
+    this.contacts = DummyContactService.getAllContacts();
   }
 
-  getAllContacts():Contact[] {
+  static getAllContacts(): Contact[] {
     return [
+      new Contact({id:'', firstName:'Anton', lastName:'Mayer', group:'A', email:'antonm@gmail.com',tel: '0171 123456789', iconColor:null}),
+      new Contact({id:'', firstName:'Anja', lastName:'Schulz', group:'A', email:'schulz@hotmail.com',tel: '0171 123456789', iconColor:null}),
       new Contact({id:'', firstName:'John', lastName:'Doe', group:'J', email:'johndoe@mail.de',tel: '0171 123456789', iconColor:null})
     ]
+  }
+
+  getContactsByGroup(group: string): Contact[] {
+    return this.contacts.filter(contact => contact.group == group);
   }
 }
