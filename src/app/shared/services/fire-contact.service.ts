@@ -1,7 +1,6 @@
 import { inject, Injectable, OnDestroy } from '@angular/core';
-import { addDoc, collection, deleteDoc, doc, Firestore, onSnapshot, Unsubscribe, updateDoc } from '@angular/fire/firestore';
-import { Contact } from '../classes/contact';
-
+import { addDoc, collection, deleteDoc, doc, Firestore, onSnapshot, updateDoc } from '@angular/fire/firestore';
+import { Contact } from '../models/Contact';
 
 /***
  * FireContactService is a service to manage communication between firebase database 
@@ -25,54 +24,18 @@ import { Contact } from '../classes/contact';
 })
 export class FireContactService implements OnDestroy {
 
-  private contacts: Contact[] = [];
-  private firestore: Firestore = inject(Firestore);
-  public currentContact: Contact | null = null;
+  contacts: Array<Contact> = [];
+  firestore = inject(Firestore);
   
-  unsubContacts: Unsubscribe;
+  unsubContacts;
 
   constructor() {
       this.unsubContacts = this.subContactsList();
+      console.log(this.firestore.app);
   }
 
-  /**
-   * On Destroy, we have to unsubscribe our snapshots.
-   */
   ngOnDestroy() {
     this.unsubContacts();
-  }
-
-  /**
-   * Return and Array<Contact>
-   * @returns an array of all loaded Contact-objects 
-   */
-  getContacts(): Contact[] {
-    return this.contacts;
-  }
-
-  /**
-   * Gets all groups.
-   * @returns - All group letter.
-   */
-  getGroups(): string[] {
-    const groups: string[] = [];
-    for (let i = 0; i < this.contacts.length; i++) {
-      const tempLetter = this.contacts[i].firstName[0];
-      if (!groups.includes(tempLetter)) {
-        groups.push(tempLetter);
-      }
-    }
-    return groups.sort();
-  }
-
-  /**
-   * Filters the current loaded Contact-object-List for the group of them.
-   * 
-   * @param group the group to filter contacts.
-   * @returns an Array of Contact-objects filtered by group
-   */
-  getMembers(group:string): Contact[] {
-    return this.contacts.filter(contact => contact.group == group);
   }
 
   /**
@@ -81,8 +44,7 @@ export class FireContactService implements OnDestroy {
    * @param contact the contact object to add as Json.
    */
   async addContact(contact: Contact) {
-    const colRef = this.getContactsRef();
-    return await addDoc(colRef, contact.toJson());
+    await addDoc(this.getContactsRef(), contact.toJson());
   }
 
   /**
@@ -91,8 +53,9 @@ export class FireContactService implements OnDestroy {
    * @param contact the contact to update in database.
    */
   async updateContact(contact: Contact) {
-    const docRef = this.getSingleContactRef(contact.id);
-    await updateDoc(docRef, contact.toJson());
+    contact.firstname = "changed";
+    const ref = this.getSingleContactRef('contacts', contact.id);
+    await updateDoc(ref, contact.toJson());
   }
 
   /**
@@ -101,8 +64,7 @@ export class FireContactService implements OnDestroy {
    * @param contact the spezific contact to delete.
    */
   async deleteContact(contact: Contact) {
-    const docRef = this.getSingleContactRef(contact.id);
-    await deleteDoc(docRef); 
+    await deleteDoc(this.getSingleContactRef('contacts', contact.id)); 
   }
 
   /**
@@ -112,12 +74,11 @@ export class FireContactService implements OnDestroy {
    * @returns a snapshot
    */
   subContactsList() {
-    return onSnapshot(this.getContactsRef(), (resultList) => {
-      const contacts:Contact[] = [];
-      resultList.forEach(contact => {
-        contacts.push(this.mapResponseToContact(contact.data()));
+    return onSnapshot(this.getContactsRef(), (list) => {
+      this.contacts = [];
+      list.forEach(element => {
+        this.contacts.push(this.setNoteObject(element.data(), element.id));
       });
-      this.contacts = contacts.sort();
     });
   }
 
@@ -133,21 +94,30 @@ export class FireContactService implements OnDestroy {
   /**
    * Returns a single document of a collection in database.
    * 
+   * @param colId id of collection
    * @param docId id of document in collection
    * @returns 
    */
-  getSingleContactRef(docId: string) {
-    return doc(this.firestore, 'contacts', docId);
+  getSingleContactRef(colId: string, docId: string) {
+    return doc(this.firestore, colId, docId);
   }
   
   /**
    * Creates an single contact object from database-object
    *  
-   * @param obj object from database.
+   * @param obj object from database. 
+   * @param id id from object.
    * @returns returns the created contact object.
    */
-  mapResponseToContact(obj: any): Contact {
-    const contact = new Contact({id: obj.id, firstName: obj.firstname, lastName: obj.lastname, group: obj.firstname[0], email: obj.email, tel: obj.telnr, iconColor: obj.bgcolor});
+  setNoteObject(obj: any, id: string): Contact {
+    const contact = new Contact();
+    contact.id = id;
+    contact.firstname = obj.firstname;
+    contact.lastname = obj.lastname;
+    contact.email = obj.email;
+    contact.telnr = obj.telnr;
+    contact.group = obj.firstname[0];
+
     return contact;
   }
 }
