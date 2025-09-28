@@ -87,4 +87,13 @@ export class Contact {
         return this.firstName == other.firstName && this.lastName == other.lastName;
     }
     // #endregion
+
+    /**
+     * Gets a random color for new Contacts
+     * @returns - a random color.
+     */
+    static getRandomIconColor():string {
+        const colors:string[] = ['orange', 'purple', 'blue', 'pink', 'yellow', 'green'];
+        return colors[Math.floor(colors.length * Math.random())];
+    }
 }
