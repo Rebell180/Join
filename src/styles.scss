@@ -25,3 +25,25 @@
 	}
 }
 
+body {
+	background: rgb(211, 211, 211, 0.4);
+    font-family: 'Roboto', sans-serif;
+}
+
+.d_none {
+    display: none;
+}
+
+button {
+    cursor: pointer;
+    border: unset;
+}
+
+input {
+    border: unset;
+}
+
+@font-face {
+    font-family: "Roboto";
+    src: url("/assets/Fonts/Roboto/static/Roboto-Medium.ttf") format("truetype");
+}
