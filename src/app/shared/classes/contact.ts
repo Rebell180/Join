@@ -36,7 +36,7 @@ export class Contact {
         this.group = group,
         this.email = email,
         this.tel = tel,
-        this.iconColor = iconColor
+        this.iconColor = iconColor ? iconColor : Contact.getRandomIconColor();
     }
 
     // #region Methods
@@ -50,4 +50,13 @@ export class Contact {
         return this.firstName == other.firstName && this.lastName == other.lastName;
     }
     // #endregion
+
+    /**
+     * Gets a random color for new Contacts
+     * @returns - a random color.
+     */
+    static getRandomIconColor():string {
+        const colors:string[] = ['orange', 'purple', 'blue', 'pink', 'yellow', 'green'];
+        return colors[Math.floor(colors.length * Math.random())];
+    }
 }
