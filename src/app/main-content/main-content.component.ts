@@ -6,7 +6,6 @@ import { SectionType } from '../shared/enums/section-type';
 
 @Component({
   selector: 'app-main-content',
-  standalone: true,
   imports: [
     HeaderComponent,
     AsideComponent,
