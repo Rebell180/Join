@@ -48,8 +48,7 @@ button {
 
 body {
 	background: rgb(211, 211, 211, 0.4);
-    font-family: 'InterRegular', sans-serif;
-    font-size: 19px;
+    font-family: 'Roboto', sans-serif;
 }
 
 .d_none {
@@ -61,29 +60,7 @@ body {
     z-index: 1000;
 }
 
-h1 {
-    font-size: 61px;
-}
-
 @font-face {
-    font-family: "InterRegular";
-    src: url("/assets/Fonts/Inter_28pt-Regular.ttf") format("truetype");
-}
-
-@font-face {
-    font-family: "InterBold";
-    src: url("/assets/Fonts/Inter_28pt-Bold.ttf") format("truetype");
-}
-
-.overlay { // Elternelement
-    
-    justify-content: center;
-    .content { // Kindelement
-        //  Hier kann man noch spezielle Eigenschafen festgelegt werden,
-        // die eintreten genau dann wenn .content ein Kind von .overlay ist.
-        display: flex;
-        justify-content: center;
-        // Das würde ich hier nicht weiter verschachteln, 
-        // speziellere Eigenschaften werden in den Komponenten festgelegt
-    }
+    font-family: "Roboto";
+    src: url("/assets/Fonts/Roboto/static/Roboto-Medium.ttf") format("truetype");
 }
