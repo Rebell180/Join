@@ -1,5 +1,4 @@
-<li>
-    <img [src]="item().imagePath" [alt]="item().title">
-    
-    <a [href]="'#' + item().sectionId">{{ item().title }}</a>
-</li>
+<img [src]="item().imagePath" [alt]="item().title">
+
+<!-- Ein a-tag kann keine CSS Klassen enternen, wir legen dann ein Click-Event auf das NavItem -->
+{{ item().title }}
