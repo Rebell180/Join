@@ -1,7 +1,7 @@
 @use './../../../../public/styles/all_styles.scss' as all;
 
 :host {
-	height: 5dvh;
+	height: 5vh;
 	width: 100%;
 	display: flex;
 	align-items: center;
@@ -15,7 +15,7 @@
 
 	@include all.tablet {
 		width: 100%;
-		height: 5rem;
+		height: 5vh;
 		@include all.fl($flexdir: column);
 		margin: 0;
 		padding: 0;
@@ -25,7 +25,7 @@
 
 	@include all.smart {
 		width: 80px;
-		height: 5rem;
+		height: 5vh;
 		@include all.fl($flexdir: column);
 		margin: 0;
 		padding: 0;
