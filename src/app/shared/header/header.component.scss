@@ -7,7 +7,8 @@
     height: 100vh;
     width: 100%;
 
-    .content {
+:host {
+	.content {
         display: grid;
         grid-template-columns: 20rem 1fr;
         grid-template-rows: 10vh 1fr; 
