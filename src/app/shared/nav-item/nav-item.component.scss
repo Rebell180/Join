@@ -1,0 +1,45 @@
+@use './../../../../public/styles/all_styles.scss' as all;
+
+:host {
+	height: 5vh;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	margin: 1rem 0;
+	padding-left: 4rem;
+	gap: 1rem;
+	cursor: pointer;
+	color: white;
+	background: transparent;
+	font-size: clamp(16px, 1dvw, 24px);
+
+	@include all.tablet {
+		width: 100%;
+		height: 5vh;
+		@include all.fl($flexdir: column);
+		margin: 0;
+		padding: 0;
+		gap: 0.5rem;
+		border-radius: 10px;
+	}
+
+	@include all.smart {
+		width: 80px;
+		height: 5vh;
+		@include all.fl($flexdir: column);
+		margin: 0;
+		padding: 0;
+		gap: 0.5rem;
+		border-radius: 10px;
+	}
+
+	&:hover {
+		background: #2f3f57;
+	}
+
+	img {
+		display: flex;
+		width: 28px;
+		height: 28px;
+	}
+}
