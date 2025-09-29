@@ -1,0 +1,16 @@
+@use '../../../../../../public/styles/all_styles' as all;
+
+hr {
+    margin: 8px 0;
+    border: 1px solid rgba(0,0,0,0.1);
+}
+
+// TODO: Use Mixin
+.letter {
+    // @include all.fl($alit: center);
+    display: flex;
+    align-items: center;
+    height: 58px;
+    padding-left: 36px;
+    font-size: 2rem;
+}
