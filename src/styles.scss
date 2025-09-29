@@ -29,31 +29,16 @@ button {
 }
 
 .content {
-    display: grid;
-    grid-template-columns: 20rem 1fr;
-    grid-template-rows: 10dvh 90dvh;
-    grid-template-areas: "aside header" "aside main";
-    height: 100dvh;
-
-    @include all.tablet {
-        grid-template-columns: 1fr;
-        grid-template-rows: 10dvh 1fr 11dvh; 
-        grid-template-areas: 
-            "header"
-            "main"
-            "aside";
-
-    }
+        display: grid;
+        grid-template-columns: 20rem 1fr;
+        grid-template-rows: 10vh 1fr; 
+        height: 100vh; 
 }
 
 body {
 	background: rgb(211, 211, 211, 0.4);
     font-family: 'InterRegular', sans-serif;
     font-size: 19px;
-}
-
-.d_none {
-    display: none;
 }
 
 button {
@@ -84,15 +69,10 @@ h1 {
     src: url("/assets/Fonts/Inter_28pt-Bold.ttf") format("truetype");
 }
 
-.overlay { // Elternelement
-    
+.overlay {
     justify-content: center;
-    .content { // Kindelement
-        //  Hier kann man noch spezielle Eigenschafen festgelegt werden,
-        // die eintreten genau dann wenn .content ein Kind von .overlay ist.
+    .content { 
         display: flex;
         justify-content: center;
-        // Das würde ich hier nicht weiter verschachteln, 
-        // speziellere Eigenschaften werden in den Komponenten festgelegt
     }
 }
