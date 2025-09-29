@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { AsideComponent } from "../../main-content/aside/aside.component";
 
 @Component({
   /* Wenn der Selector so in eckige Klammern gesceiben wird,
@@ -7,10 +8,10 @@ import { Component } from '@angular/core';
    * Der Name der Komponente app-header muss sich dabei vom Tag <header> unterscheien. */
   selector: 'header[app-header]',
   standalone: true,
-  imports: [CommonModule], 
+  imports: [CommonModule, AsideComponent], 
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent {
-
+  
 }
