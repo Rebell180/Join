@@ -42,15 +42,7 @@ aside {
 				}
 
 				@include all.smart {
-					gap: 1.5rem;
-				}
-
-				ul {
-					@include all.tablet {
-					height: 5rem;
-					@include all.fl($flexdir: row);
-					flex: 1;
-					}
+					gap: 1rem;
 				}
 			}
 		}
