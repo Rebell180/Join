@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { AsideComponent } from "../../main-content/aside/aside.component";
 
 @Component({
   /* Wenn der Selector so in eckige Klammern gesceiben wird,

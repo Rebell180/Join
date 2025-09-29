@@ -1,7 +1,7 @@
 @use './../../../../public/styles/all_styles.scss' as all;
 
-aside {
-			width: 200px;
+.navSide {
+			width: 20rem;
 			height: 100dvh;
 			z-index: 10;
 			@include all.fl($jc: space-between);
