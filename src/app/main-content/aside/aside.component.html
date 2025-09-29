@@ -1,17 +1,13 @@
 <div class="content">
-	<aside class="headerNav">
+	<aside class="navSide">
         <img src="assets/Icons/JoinLogoWhite.png" alt="das Logo von Join">
 
 		<nav>
-    <!-- 
-        Hier wird über das 'item'-Array iteriert. 
-        Jedes Element wird nun als Button mit dem nav-item Attribut gerendert.
-    -->
-    @for (navItem of item; track navItem.sectionId) {
-        <button type="button" nav-item [item]="navItem">
-        </button>
-    }
-</nav>
+    <!-- Hier wird über das 'item'-Array iteriert. Jedes Element wird nun als Button mit dem nav-item Attribut gerendert.-->
+            @for (navItem of item; track navItem.sectionId) {
+                <button type="button" nav-item [item]="navItem"></button>
+            }
+        </nav>
             <ul class="links">
                 <li><a href="#">Privacy Policy</a></li>
                 <li><a href="#">Legal notice</a></li>

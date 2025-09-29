@@ -1,26 +1,14 @@
 @use './../../../public/styles/all_styles.scss' as all;
-.content {
 
-    app-aside {
-        grid-area: aside;
+app-aside {
+        grid-column: 1;
+        grid-row: 1;
+		width: 10%;
+
     }
 
-    .smallHeader {
-        grid-area: header;
-        height: 10vh;
+    .main {
+        grid-column: 2;
+        grid-row: 2;
+        height: auto;
     }
-
-    main {
-        grid-area: main;
-        width: 100%;
-        height: 95%;
-
-        @include all.tablet{
-            height: 100%;
-        }
-
-        section {
-            // width: 100%;
-        }
-    }
-}
