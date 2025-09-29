@@ -3,7 +3,7 @@ import { NavItemComponent } from '../../shared/nav-item/nav-item.component';
 import { NavItemData } from '../../shared/interfaces/navitemdata';
 
 @Component({
-  selector: 'aside[app-aside]',
+  selector: 'app-aside',
   imports: [NavItemComponent],
   templateUrl: './aside.component.html',
   styleUrl: './aside.component.scss'
