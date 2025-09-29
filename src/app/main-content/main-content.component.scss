@@ -5,10 +5,21 @@ app-aside {
         grid-row: 1;
 		width: 10%;
 
+		@include all.tablet {
+			grid-column: 1;
+			grid-row: 3;
+			width: 100%;
+    }
     }
 
     .main {
         grid-column: 2;
         grid-row: 2;
         height: auto;
+
+		@include all.tablet {
+			grid-column: 1;
+			grid-row: 2;
+			height: auto;
+		}
     }
