@@ -1,4 +1,5 @@
 // TODO: Font Roboto muss hier noch eingebunden und herunter geladen werden.
+@use './../public/styles/all_styles.scss' as all;
 
 *{
     position: relative;
@@ -32,7 +33,12 @@ button {
         display: grid;
         grid-template-columns: 20rem 1fr;
         grid-template-rows: 10vh 1fr; 
-        height: 100vh; 
+        height: 100vh;
+        
+        @include all.tablet {
+            grid-template-columns: 1fr;
+            grid-template-rows: 10vh 1fr 11vh;
+    }
 }
 
 body {
