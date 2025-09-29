@@ -1,6 +1,6 @@
 @use './../../../../public/styles/all_styles.scss' as all;
 
-.navSide {
+:host {
 			width: 20rem;
 			height: 100vh;
 			z-index: 10;
