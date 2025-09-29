@@ -2,7 +2,7 @@
 
 .navSide {
 			width: 20rem;
-			height: 100dvh;
+			height: 100vh;
 			z-index: 10;
 			@include all.fl($jc: space-between, $flexdir: column);
 			padding: 50px 0;
@@ -28,7 +28,7 @@
 
 			nav {
 				width: 100%;
-				height: 40dvh;
+				height: 40vh;
 				@include all.fl($flexdir: column);
 
 				@include all.tablet {
@@ -51,7 +51,7 @@
 
 		.links {
 				width: 100%;
-				height: 8dvh; //Erhöht auf 16dvh wegen 2 mal li, passt sonst nicht rein
+				height: 8vh; //Erhöht auf 16dvh wegen 2 mal li, passt sonst nicht rein
 
 				@include all.tablet {
 						display: none;
