@@ -1,97 +1,87 @@
 @use './../../../../public/styles/all_styles.scss' as all;
 
-// #region host
-:host {
-	@include all.fl($jc: space-between, $flexdir: column, $alit: center);
-	@include all.marpad($pad: 5rem 0);
-	grid-area: aside;
-	background: #2a3647;
-
-	@include all.tablet {
-		@include all.fl($jc: center, $alit: center);
-		@include all.marpad($pad: 0.5rem);
-	}
-
-	@include all.mobile {
-		@include all.size($w: 100dvw);
-		@include all.fl($jc: center, $alit: center);
-		@include all.marpad($pad: 0.5rem);
-	}
-
-	img {
-
-		@include all.tablet {
-			display: none;
-		}
-	}
-
-	// #endregion
-
-	// #region nav-btn
-	nav {
-		width: 100%;
-		@include all.fl($flexdir: column, $alit: center, $jc: center);
-
-		@include all.tablet {
-			@include all.fl($gap: 1%, $jc: space-evenly);
-		}
-
-		button {
+aside {
+			width: 200px;
+			height: 100dvh;
+			z-index: 10;
+			@include all.fl($jc: space-between);
+			padding: 50px 0;
+			background: #2a3647;
 
 			@include all.tablet {
-				@include all.size($w: 10rem, $h: 10dvh);
-				@include all.fl($flexdir: column, $jc: center, $alit: center);
+				width: 100%;
+				height: 5rem;
+				flex-direction: row;
+				position: fixed;
+				bottom: 0;
+				top: auto;
 			}
 
-			@include all.mobile {
-				@include all.size($w: 6rem, $h: 6rem);
-			}
-
-			&:hover {
-				background: #091930;
-			}
-		}
-	}
-
-
-	// #endregion
-
-	// #region nav
-
-	.select-legal-button {
-
-		ol {
-			@include all.size($w: 100%, $h: 5rem);
-			margin-bottom: 3rem;
-
-			@include all.tablet {
-				display: none;
-			}
-
-			li {
-				@include all.size($h: 100%);
-				display: flex;
-				flex-direction: column;
-				padding: 1rem;
+			img {
+				width: 100px;
+				height: 110px;
 
 				@include all.tablet {
 					display: none;
+					}
+			}
+
+			nav {
+				width: 100%;
+				height: 40dvh;
+
+				@include all.tablet {
+					height: 5rem;
+					@include all.fl($flexdir: row);
+					flex: 1;
+					gap: 8rem;
+					}
+
+				@include all.mobile {
+					gap: 2.5rem;
 				}
 
-				button {
-					@include all.size($h: 100%);
-					@include all.fl($jc: center, $alit: center);
-					color: grey;
-					background-color: transparent;
-					font-size: 1.6rem;
+				@include all.smart {
+					gap: 1.5rem;
+				}
 
-					&:hover {
-						color: rgb(17, 119, 227);
+				ul {
+					@include all.tablet {
+					height: 5rem;
+					@include all.fl($flexdir: row);
+					flex: 1;
 					}
 				}
 			}
 		}
-	}
-}
 
-// #endregion
+		.links {
+				width: 100%;
+				height: 8dvh; //Erhöht auf 16dvh wegen 2 mal li, passt sonst nicht rein
+
+				@include all.tablet {
+						display: none;
+					}
+
+				li {
+					height: 4dvh;
+					@include all.fl();
+
+					@include all.tablet {
+						display: none;
+					}
+
+					a {
+						width: 100%;
+						color: grey;
+						text-align: center;
+						padding: 5px 0;
+						margin: 5px 0;
+						font-size: clamp(16px, 0.8dvw, 32px);
+
+							&:hover {
+							color: rgb(17, 119, 227);
+						}
+					}
+				}
+			}
