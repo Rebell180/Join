@@ -1,4 +1,5 @@
 <div class="letter">{{ letter() }}</div>
+<hr>
 @for (contact of getContacts(); track contact.id) {
     <app-single-contact [contact]="contact"></app-single-contact>
 }
