@@ -1,5 +1,5 @@
 <div class="icon-wrapper">
-    <app-contact-icon [contact]="contact()"></app-contact-icon>
+    <app-contact-icon class="{{ contact().iconColor }}" [contact]="contact()"></app-contact-icon>
 </div>
 <div class="contact-data">
     <p class="name">{{ contact().firstName }} {{ contact().lastName }}</p>

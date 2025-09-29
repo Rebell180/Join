@@ -1,0 +1,7 @@
+@use '../../../../../../../public/styles/all_styles' as all;
+
+.icon-wrapper {
+    @include all.fl($jc:center, $alit:center);
+    width: 42px;
+    height: 42px;
+}

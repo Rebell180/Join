@@ -1,0 +1,33 @@
+@use '../../../../../public/styles/all_styles' as all;
+
+:host {
+    @include all.fl($jc: center, $alit: center);
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    color: white;
+}
+
+:host(.orange) {
+    background: #ff7a00;
+}
+
+:host(.purple) {
+    background: #9227ff;
+}
+
+:host(.blue) {
+    background: #6e52ff;
+}
+
+:host(.pink) {
+    background: #fc71ff;
+}
+
+:host(.yellow) {
+    background: #ffbb2b;
+}
+
+:host(.green) {
+    background: #1fd7c1;
+}
