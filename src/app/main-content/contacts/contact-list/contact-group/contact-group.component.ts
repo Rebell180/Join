@@ -15,9 +15,10 @@ import { SingleContactComponent } from './single-contact/single-contact.componen
 })
 export class ContactGroupComponent {
   public letter = input.required<string>();
-  protected contacts:Contact[];
 
-  constructor(private dcs:DummyContactService) {
-    this.contacts = dcs.getContactsByGroup('A');
+  constructor(private dcs:DummyContactService) {}
+
+  getContacts():Contact[] {
+    return this.dcs.getContactsByGroup(this.letter());
   }
 }
