@@ -117,6 +117,7 @@ export class FireContactService implements OnDestroy {
     contact.email = obj.email;
     contact.telnr = obj.telnr;
     contact.group = obj.firstname[0];
+    contact.bgcolor = obj.bgcolor;
 
     return contact;
   }
