@@ -5,32 +5,7 @@
     <!-- Am besten ist es wenn die Komponente als aside-tag benutz, wie ich dir beim Header gezeigt haben. -->
     <!-- WWenn du möchtest kannst du auch eine Grid area erstellen, dann ist es egal, wer zuerst genant wird -->
     <header app-header></header>
-    <main>
-        @switch (currentSection) {
-
-            @case (SectionType.TASK) {
-                <app-add-task-container></app-add-task-container>
-            }
-
-            @case (SectionType.SUMMARY) {
-                <section summary (selectedSection)="changeSection($event)"></section>
-            }
-
-            @case (SectionType.BOARD) {
-                <section board></section>
-            }
-
-            @case (SectionType.CONTACT) {
-                <section contacts></section>
-            }
-
-            @case (SectionType.PRIVACY) {
-                <section privacy-policy (back)="changeSection(SectionType.CONTACT)"></section>
-            }
-
-            @case (SectionType.LEGAL) {
-                <section legal-notice (back)="changeSection(SectionType.CONTACT)"></section>
-            }
-        }
-    </main>
+    
+    <div class="main">
+    </div>
 </div>
