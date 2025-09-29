@@ -1,7 +1,10 @@
 <div class="content"> <!-- bekommt style display: grid-->
+<div class="content"> <!-- bekommt style display: grid-->
     <!-- Hier wird die Header-Komponente aus Angular als normals HTML-Tage eingebunden -->
     <!-- app-heder ist dabei der Name der Kopoenente. Der Name muss sich von den normalen Tag untersccheiden. -->
-    <app-aside></app-aside>
+    <!-- <app-aside> kommt hierhin, weil es im grid in der 1. Spalte steht -->
+    <!-- Am besten ist es wenn die Komponente als aside-tag benutz, wie ich dir beim Header gezeigt haben. -->
+    <!-- WWenn du möchtest kannst du auch eine Grid area erstellen, dann ist es egal, wer zuerst genant wird -->
     <header app-header></header>
     
     <div class="main">
