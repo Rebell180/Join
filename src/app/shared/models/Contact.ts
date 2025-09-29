@@ -6,6 +6,8 @@ export class Contact {
     email: string = "";
     telnr: string = "";
     group: string = "*";
+    bgcolor: string = "lightgrey";
+
 
 
     constructor() {
@@ -19,7 +21,8 @@ export class Contact {
             lastname: this.lastname || "",
             email: this.email || "",
             telnr: this.telnr || "",
-            group: this.firstname[0] || "*" 
+            group: this.firstname[0] || "*",
+            bgcolor: this.bgcolor
         }
     }
 }
