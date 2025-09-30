@@ -1,7 +1,4 @@
-@use "sass:string";
-// @forward '../styles/fonts';
-
-@mixin marpad($pad: 0, $mar: 0) {
+@mixin marpad($pad:0, $mar:0) {
 	padding: $pad;
 	margin: $mar;
 }
