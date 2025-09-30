@@ -1,5 +1,5 @@
 import { inject, Injectable, OnDestroy } from '@angular/core';
-import { addDoc, collection, deleteDoc, doc, Firestore, onSnapshot, Unsubscribe, updateDoc } from '@angular/fire/firestore';
+import { addDoc, collection, deleteDoc, doc, Firestore, onSnapshot, orderBy, query, Unsubscribe, updateDoc, where } from '@angular/fire/firestore';
 import { Contact } from '../classes/contact';
 
 
@@ -26,13 +26,16 @@ import { Contact } from '../classes/contact';
 export class FireContactService implements OnDestroy {
 
   private contacts: Contact[] = [];
+  private groups: string[] = [];
   private firestore: Firestore = inject(Firestore);
   public currentContact: Contact | null = null;
   
   unsubContacts: Unsubscribe;
+  unsubGroups: Unsubscribe;
 
   constructor() {
       this.unsubContacts = this.subContactsList();
+      this.unsubGroups = this.subGroupList();
   }
 
   /**
@@ -40,6 +43,7 @@ export class FireContactService implements OnDestroy {
    */
   ngOnDestroy() {
     this.unsubContacts();
+    this.unsubGroups();
   }
 
   /**
@@ -103,6 +107,23 @@ export class FireContactService implements OnDestroy {
       resultList.forEach(contact => {
         this.contacts.push(this.mapResponseToContact(contact.data()));
       });
+    });
+  }
+
+  /**
+   * Gets snapshots for groups.
+   * @returns a snapshot for groups.
+   */
+  subGroupList() {
+    const q = query(this.getContactsRef(), orderBy('group','asc'));
+    return onSnapshot(q, letterList => {
+      this.groups = []; 
+      letterList.forEach(letter => {
+        const tempLeter = letter.data()['group'];
+        if (!this.groups.includes(tempLeter)) {
+          this.groups.push(tempLeter);
+        }
+      })
     });
   }
 
