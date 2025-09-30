@@ -105,6 +105,20 @@ export class Contact implements DBObject {
         const colors: string[] = ['orange', 'purple', 'blue', 'pink', 'yellow', 'green'];
         return colors[Math.floor(colors.length * Math.random())];
     }
-    
-    // #endregion methods
+
+    /**
+     * Gets a JSON-String from Contact.
+     * @returns - Contact as JSON.
+     */
+    toJson() {
+        return {
+            id: this.id || "",
+            firstname: this.firstName || "",
+            lastname: this.lastName || "",
+            email: this.email || "",
+            telnr: this.tel || "",
+            group: this.firstName[0] || "*",
+            bgcolor: this.iconColor || "orange"
+        }
+    }
 }
