@@ -132,7 +132,7 @@ export class FireContactService implements OnDestroy {
    * @returns returns the created contact object.
    */
   mapResponseToContact(obj: any): Contact {
-    const contact = new Contact({id: obj.id, firstName: obj.firstname, lastName: obj.lastName, group: obj.firstname[0], email: obj.email, tel: obj.telnr, iconColor: obj.bgcolor});
+    const contact = new Contact({id: obj.id, firstName: obj.firstname, lastName: obj.lastname, group: obj.firstname[0], email: obj.email, tel: obj.telnr, iconColor: obj.bgcolor});
     return contact;
   }
 }
