@@ -1,6 +1,7 @@
 import { inject, Injectable, OnDestroy } from '@angular/core';
 import { addDoc, collection, deleteDoc, doc, Firestore, onSnapshot, Unsubscribe, updateDoc } from '@angular/fire/firestore';
-import { Contact } from '../models/Contact';
+import { Contact } from '../classes/contact';
+
 
 /***
  * FireContactService is a service to manage communication between firebase database 
@@ -24,8 +25,9 @@ import { Contact } from '../models/Contact';
 })
 export class FireContactService implements OnDestroy {
 
-  private contacts: Array<Contact> = [];
+  private contacts: Contact[] = [];
   private firestore: Firestore = inject(Firestore);
+  public currentContact: Contact | null = null;
   
   unsubContacts: Unsubscribe;
 
@@ -130,15 +132,7 @@ export class FireContactService implements OnDestroy {
    * @returns returns the created contact object.
    */
   mapResponseToContact(obj: any): Contact {
-    const contact = new Contact();
-    contact.id = obj.id;
-    contact.firstname = obj.firstname;
-    contact.lastname = obj.lastname;
-    contact.email = obj.email;
-    contact.telnr = obj.telnr;
-    contact.group = obj.firstname[0];
-    contact.bgcolor = obj.bgcolor ;
-
+    const contact = new Contact({id: obj.id, firstName: obj.firstname, lastName: obj.lastName, group: obj.firstname[0], email: obj.email, tel: obj.telnr, iconColor: obj.bgcolor});
     return contact;
   }
 }
