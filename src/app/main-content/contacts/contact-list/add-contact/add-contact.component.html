@@ -1,4 +1,4 @@
-<button class="btn-add-contact" (click)="openAddContactModal()" type="button">
+<button class="btn-add-contact" (click)="toggleAddContactModal()" type="button">
     Add new contact
     <img src="assets/Icons/person_add.png" alt="">
 </button>
@@ -6,10 +6,28 @@
 
 <aside id="addContactModal" class="add-contact-modal-container" [style.visibility]=addContactModalVisiblity>
     <div class="leftpanel">
-
+        <img src="assets/Icons/JoinLogoWhite.png" alt="">
+        <h1>Add Contact</h1>
+        <h2>Tasks are better with a team!</h2>
+        <div></div>
     </div>
 
     <div class="rightpanel">
-        
+        <div class="line-close-btn">
+            <button type="button" (click)="toggleAddContactModal()">x</button>
+        </div>
+        <div class="line-form">
+            <img src="assets/Icons/contact_icon_grey.png" alt="">
+            <form action="submit" method="post">
+                <input type="text" name="" id="">
+                <input type="email" name="" id="">
+                <input type="tel" name="" id="">
+                <div class="form-button-container">
+                    <button type="button" (click)="toggleAddContactModal()">Cancel X</button>
+                    <button type="submit" (submit)="addContact()">Create contact ✓</button>
+                </div>
+            </form>
+        </div>
+
     </div>
 </aside>    

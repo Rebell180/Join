@@ -13,13 +13,19 @@ export class AddContactComponent {
 
   addContactModalVisiblity: "hidden" | "visible" = "hidden";
 
-  openAddContactModal() {
-    console.log('Add contact');
+  toggleAddContactModal() {
+    // console.log('Add contact');
     if(this.addContactModalVisiblity === "hidden"){
       this.addContactModalVisiblity = "visible";
 
     } else {
       this.addContactModalVisiblity = "hidden";
     }
+  }
+
+  addContact() {
+    // inputfields values
+    // set contact
+    // add to firestore
   }
 }
