@@ -1,5 +1,5 @@
 import { inject, Injectable, OnDestroy } from '@angular/core';
-import { addDoc, collection, deleteDoc, doc, Firestore, onSnapshot, updateDoc } from '@angular/fire/firestore';
+import { addDoc, collection, deleteDoc, doc, Firestore, onSnapshot, Unsubscribe, updateDoc } from '@angular/fire/firestore';
 import { Contact } from '../models/Contact';
 
 /***
@@ -24,18 +24,39 @@ import { Contact } from '../models/Contact';
 })
 export class FireContactService implements OnDestroy {
 
-  contacts: Array<Contact> = [];
-  firestore = inject(Firestore);
+  private contacts: Array<Contact> = [];
+  private firestore: Firestore = inject(Firestore);
   
-  unsubContacts;
+  unsubContacts: Unsubscribe;
 
   constructor() {
       this.unsubContacts = this.subContactsList();
-      console.log(this.firestore.app);
   }
 
+  /**
+   * On Destroy, we have to unsubscribe our snapshots.
+   */
   ngOnDestroy() {
     this.unsubContacts();
+  }
+
+  /**
+   * Return and Array<Contact>
+   * @returns an array of all loaded Contact-objects 
+   */
+  getContacts() {
+    return this.contacts;
+  }
+
+  /**
+   * Filters the current loaded Contact-object-List for the group of them.
+   *  
+   * @param group the group to filter contacts.
+   * @returns an Array of Contact-objects filtered by group
+   */
+  getContactsByGroup(group: string) {
+    const sortedList = this.contacts.filter((contact) => contact.group == group);
+    return sortedList;
   }
 
   /**
@@ -44,7 +65,8 @@ export class FireContactService implements OnDestroy {
    * @param contact the contact object to add as Json.
    */
   async addContact(contact: Contact) {
-    await addDoc(this.getContactsRef(), contact.toJson());
+    const colRef = this.getContactsRef();
+    return await addDoc(colRef, contact.toJson());
   }
 
   /**
@@ -53,9 +75,8 @@ export class FireContactService implements OnDestroy {
    * @param contact the contact to update in database.
    */
   async updateContact(contact: Contact) {
-    contact.firstname = "changed";
-    const ref = this.getSingleContactRef('contacts', contact.id);
-    await updateDoc(ref, contact.toJson());
+    const docRef = this.getSingleContactRef(contact.id);
+    await updateDoc(docRef, contact.toJson());
   }
 
   /**
@@ -64,7 +85,8 @@ export class FireContactService implements OnDestroy {
    * @param contact the spezific contact to delete.
    */
   async deleteContact(contact: Contact) {
-    await deleteDoc(this.getSingleContactRef('contacts', contact.id)); 
+    const docRef = this.getSingleContactRef(contact.id);
+    await deleteDoc(docRef); 
   }
 
   /**
@@ -74,10 +96,10 @@ export class FireContactService implements OnDestroy {
    * @returns a snapshot
    */
   subContactsList() {
-    return onSnapshot(this.getContactsRef(), (list) => {
+    return onSnapshot(this.getContactsRef(), (resultList) => {
       this.contacts = [];
-      list.forEach(element => {
-        this.contacts.push(this.setNoteObject(element.data(), element.id));
+      resultList.forEach(contact => {
+        this.contacts.push(this.mapResponseToContact(contact.data()));
       });
     });
   }
@@ -94,30 +116,28 @@ export class FireContactService implements OnDestroy {
   /**
    * Returns a single document of a collection in database.
    * 
-   * @param colId id of collection
    * @param docId id of document in collection
    * @returns 
    */
-  getSingleContactRef(colId: string, docId: string) {
-    return doc(this.firestore, colId, docId);
+  getSingleContactRef(docId: string) {
+    return doc(this.firestore, 'contacts', docId);
   }
   
   /**
    * Creates an single contact object from database-object
    *  
-   * @param obj object from database. 
-   * @param id id from object.
+   * @param obj object from database.
    * @returns returns the created contact object.
    */
-  setNoteObject(obj: any, id: string): Contact {
+  mapResponseToContact(obj: any): Contact {
     const contact = new Contact();
-    contact.id = id;
+    contact.id = obj.id;
     contact.firstname = obj.firstname;
     contact.lastname = obj.lastname;
     contact.email = obj.email;
     contact.telnr = obj.telnr;
     contact.group = obj.firstname[0];
-    contact.bgcolor = obj.bgcolor;
+    contact.bgcolor = obj.bgcolor ;
 
     return contact;
   }
