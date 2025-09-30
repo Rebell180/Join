@@ -3,15 +3,19 @@
 // Hier hatte ich den header-Selctor zu host geändert.
 // Mit :host kann man in Angular die gesamte Komponente stylen.
 :host {
-	grid-area: header;
-	width: 100%;
-	height: 100%;
-	gap: 10px;
-	@include all.fl($jc: end);
-	padding-right: 2rem;
-	background: white;
 
-	img {
-			cursor: pointer;
+	.smallHeader {
+
+		grid-area: header;
+		width: 100%;
+		height: 10vh;
+		@include all.fl($jc: end);
+		padding-right: 2rem;
+		background: white;
+
+		img {
+				cursor: pointer;
+				padding-right: 1rem;
+			}
 		}
 }

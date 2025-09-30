@@ -1,82 +1,82 @@
 @use './../../../../public/styles/all_styles.scss' as all;
 
-:host {		
-			grid-area: aside;
-			width: 100%; //20 rem wird vom grid festgelet.
-			height: 100%;
-			// z-index: 10;, Z-Index am besten nur verwenden wenn der auch benötigt wird.
-			@include all.fl($jc: space-between, $flexdir: column);
-			padding: 50px 0;
-			background: #2a3647;
+:host {
+	grid-area: aside;
+	width: 100%; //20 rem wird vom grid festgelet.
+	height: 100%;
+	// z-index: 10;, Z-Index am besten nur verwenden wenn der auch benötigt wird.
+	@include all.fl($jc: space-between, $flexdir: column);
+	padding: 50px 0;
+	background: #2a3647;
 
-			@include all.tablet {
-				width: 100%;
-				height: 5rem;
-				flex-direction: row;
-				position: fixed;
-				bottom: 0;
-				top: auto;
-			}
+	@include all.tablet {
+		width: 100%;
+		height: 5rem;
+		flex-direction: row;
+		position: fixed;
+		bottom: 0;
+		top: auto;
+	}
 
-			img {
-				width: 100px;
-				height: 110px;
+	img {
+		width: 100px;
+		height: 110px;
 
-				@include all.tablet {
-					display: none;
-					}
-			}
+		@include all.tablet {
+			display: none;
+		}
+	}
 
-			nav {
-				width: 100%;
-				height: 40vh;
-				@include all.fl($flexdir: column);
+	nav {
+		width: 100%;
+		height: 40vh;
+		@include all.fl($flexdir: column);
 
-				@include all.tablet {
-					height: 5rem;
-					@include all.fl($flexdir: row);
-					flex: 1;
-					gap: 4rem;
-					}
-
-				@include all.mobile {
-					gap: 1.5rem;
-				}
-
-				@include all.smart {
-					gap: 0.1rem;
-
-				}
-			}
+		@include all.tablet {
+			height: 5rem;
+			@include all.fl($flexdir: row);
+			flex: 1;
+			gap: 4rem;
 		}
 
-		.links {
-				width: 100%;
-				height: 8vh; //Erhöht auf 16dvh wegen 2 mal li, passt sonst nicht rein
+		@include all.mobile {
+			gap: 1.5rem;
+		}
 
-				@include all.tablet {
-						display: none;
-					}
+		@include all.smart {
+			gap: 0.1rem;
 
-				li {
-					height: 4dvh;
-					@include all.fl();
+		}
+	}
+}
 
-					@include all.tablet {
-						display: none;
-					}
+.links {
+	width: 100%;
+	height: 8vh; //Erhöht auf 16dvh wegen 2 mal li, passt sonst nicht rein
 
-					a {
-						width: 100%;
-						color: grey;
-						text-align: center;
-						padding: 5px 0;
-						margin: 5px 0;
-						font-size: clamp(16px, 0.8dvw, 32px);
+	@include all.tablet {
+		display: none;
+	}
 
-							&:hover {
-							color: rgb(17, 119, 227);
-						}
-					}
-				}
+	li {
+		height: 4dvh;
+		@include all.fl();
+
+		@include all.tablet {
+			display: none;
+		}
+
+		a {
+			width: 100%;
+			color: grey;
+			text-align: center;
+			padding: 5px 0;
+			margin: 5px 0;
+			font-size: clamp(16px, 0.8dvw, 32px);
+
+			&:hover {
+				color: rgb(17, 119, 227);
 			}
+		}
+	}
+}
