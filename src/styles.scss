@@ -35,16 +35,15 @@ button {
     grid-template-columns: 20rem 1fr;
     grid-template-rows: auto 1fr;
     grid-template-areas: "aside header" "aside main";
-    height: 100vh;
+    height: 100dvh;
 
     @include all.tablet {
         grid-template-columns: 1fr;
-        grid-template-rows: 10vh 1fr 11vh; 
+        grid-template-rows: 10dvh 1fr 11dvh; 
         grid-template-areas: 
             "header"
             "main"
             "aside";
-        height: 100vh;
 
     }
 }
