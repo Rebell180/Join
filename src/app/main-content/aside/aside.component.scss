@@ -1,9 +1,10 @@
 @use './../../../../public/styles/all_styles.scss' as all;
 
-:host {
-			width: 20rem;
-			height: 100vh;
-			z-index: 10;
+:host {		
+			grid-area: aside;
+			width: 100%; //20 rem wird vom grid festgelet.
+			height: 100%;
+			// z-index: 10;, Z-Index am besten nur verwenden wenn der auch benötigt wird.
 			@include all.fl($jc: space-between, $flexdir: column);
 			padding: 50px 0;
 			background: #2a3647;
