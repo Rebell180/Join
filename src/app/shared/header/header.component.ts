@@ -6,10 +6,11 @@ import { Component } from '@angular/core';
    * bedeutet das, die Komponente in ein normales Header-Tag eingebunden wird
    * Der Name der Komponente app-header muss sich dabei vom Tag <header> unterscheien. */
   selector: 'header[app-header]',
-  imports: [], 
+  standalone: true,
+  imports: [CommonModule], 
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent {
-  
+
 }
