@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
    * Der Name der Komponente app-header muss sich dabei vom Tag <header> unterscheien. */
   selector: 'header[app-header]',
   standalone: true,
-  imports: [CommonModule, AsideComponent], 
+  imports: [CommonModule], 
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })

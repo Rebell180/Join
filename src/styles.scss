@@ -1,6 +1,5 @@
 // TODO: Font Roboto muss hier noch eingebunden und herunter geladen werden.
 @use './../public/styles/all_styles.scss' as all;
-@use './../public/styles/all_styles.scss' as all;
 
 *{
     position: relative;
@@ -44,7 +43,6 @@ button {
             "header"
             "main"
             "aside";
-
     }
 }
 
