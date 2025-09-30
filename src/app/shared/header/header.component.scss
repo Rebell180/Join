@@ -4,21 +4,16 @@
 // Mit :host kann man in Angular die gesamte Komponente stylen.
 
 :host {
-    
 	.smallHeader {
-        grid-column: 1 / -1;
-        grid-row: 1; 
-		@include all.fl($jc: end, $flexdir: row);
+		width: 100%;
+		height: 10vh;
 		gap: 10px;
-		padding-right: 1rem;
-		cursor: pointer;
-        }
+		@include all.fl($jc: end, $flexdir: row);
+		padding-right: 2rem;
+		background: white;
 
-    .main {
-        grid-column: 2;
-        grid-row: 2;
-        height: auto;
-        padding-top: 0;
-        flex-direction: column;
-    }
-}
+		img {
+				cursor: pointer;
+			}
+        }
+	}
