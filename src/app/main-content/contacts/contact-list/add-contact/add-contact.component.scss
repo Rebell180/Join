@@ -1,0 +1,35 @@
+.btn-add-contact {
+
+}
+
+
+
+#addContactModal {
+    width: 60vw;
+    height: 60vh;
+
+    position: absolute;
+    z-index: 100000;
+    border-radius: 16px;
+ 
+    left: 50%;
+    top:50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+
+
+    .leftpanel {
+        width: 33vw;
+        height: 100%;
+        border-top-left-radius: 16px;
+        border-bottom-left-radius: 16px;
+        background-color: rgb(15, 15, 63);
+    }
+
+    .rightpanel {
+        width: 66vw;
+        height: 100vh;
+    }
+}

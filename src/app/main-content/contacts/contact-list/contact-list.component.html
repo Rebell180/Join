@@ -1,3 +1,4 @@
-@for (group of groups; track group) {
+<app-add-contact></app-add-contact>
+@for (group of groups; track $index) {
     <app-contact-group letter="{{ group }}"></app-contact-group>
 }
