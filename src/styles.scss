@@ -25,23 +25,25 @@ button, input {
 
 button {
     cursor: pointer; // Vorgabe in Checklist
+    background: transparent;
 }
 
 .content {
-        // Diese Eigenshaften gelten für alle Elemente, 
-        // die die Klasse Kontent haben, egal in welcher Strutue
-        width: 100%;
-        max-width: 1920px;
-        height: 100dvh;
-        display: flex;
+    display: grid;
+    grid-template-columns: 20rem 1fr;
+    grid-template-rows: 10dvh 90dvh;
+    grid-template-areas: "aside header" "aside main";
+    height: 100dvh;
 
-		header,
-		section,
-		footer {
-			width: 100%;
-			display: flex;
-			// justify-content: left; flex-start, ist default Wert
-	}
+    @include all.tablet {
+        grid-template-columns: 1fr;
+        grid-template-rows: 10dvh 1fr 11dvh; 
+        grid-template-areas: 
+            "header"
+            "main"
+            "aside";
+
+    }
 }
 
 body {
@@ -50,18 +52,13 @@ body {
     font-size: 19px;
 }
 
-button {
-    cursor: pointer;
-    border: unset;
+.d_none {
+    display: none;
 }
 
-input {
-    border: unset;
-}
-
-@font-face {
-    font-family: "Roboto";
-    src: url("/assets/Fonts/Roboto/static/Roboto-Medium.ttf") format("truetype");
+.d_flex {
+    display: flex;
+    z-index: 1000;
 }
 
 h1 {

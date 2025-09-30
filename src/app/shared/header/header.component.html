@@ -1,25 +1,8 @@
 <!-- Das header-Tag habe ich hier rausgenommen, weil es jetzt in der mein-content.component.html ist. -->
-<div class="content">
+
+    <!-- Keine weitere Kontentbegrenzung, Contentbegrenzung erfolgt uber MainContentComponent -->
+    <!-- Hier kommt <app-aside> nicht hin, sondern in main-content.component.html -->
     <div class="smallHeader">
-        <img class="help" src="assets/Icons/help.png" alt="">
-        <img src="assets/Icons/User profile initials.png" alt="">
+        <img class="help" src="assets/Icons/help.png">
+        <img src="assets/Icons/User profile initials.png">
     </div>
-    <aside class="headerNav">
-        <img src="assets/Icons/JoinLogoWhite.png" alt="das Logo von Join">
-        <nav>
-            <!-- 
-                Hier wird durchiteriert über das 'items'-Array und rendert die app-nav-item Komponente für jedes Element.
-            -->
-            <!-- Ein List-Item liegt auch in einer Liste (unordered list) -->
-            <ul>
-                @for (navItem of item; track navItem.sectionId) {
-                    <li nav-item [item]="navItem"></li>
-                }
-            </ul>
-        </nav>
-        <ul class="links">
-            <li><a href="#">Privacy Policy</a></li>
-            <li><a href="#">Legal notice</a></li>
-        </ul>
-    </aside>
-</div>
