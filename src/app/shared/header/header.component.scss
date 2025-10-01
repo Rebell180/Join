@@ -5,12 +5,12 @@
 :host {
 
 	.smallHeader {
-	grid-area: header;
-	width: 100%;
-	height: 10vh;
-	@include all.fl($jc: end);
-	padding-right: 2rem;
-	background: white;
+		grid-area: header;
+		width: 100%;
+		height: 10vh;
+		@include all.fl($jc: end);
+		padding-right: 2rem;
+		background: white;
 
 	img {
 			cursor: pointer;
