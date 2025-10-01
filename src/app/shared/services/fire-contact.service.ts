@@ -1,6 +1,7 @@
 import { inject, Injectable, OnDestroy } from '@angular/core';
 import { addDoc, collection, deleteDoc, doc, Firestore, onSnapshot, orderBy, query, Unsubscribe, updateDoc, where } from '@angular/fire/firestore';
 import { Contact } from '../classes/contact';
+import { Unsubscribable } from 'rxjs';
 
 
 /***
@@ -27,11 +28,13 @@ export class FireContactService implements OnDestroy {
 
   private contacts: Contact[] = [];
   private groups: string[] = [];
+  private groupContacts: Contact[] = [];
   private firestore: Firestore = inject(Firestore);
   public currentContact: Contact | null = null;
   
   unsubContacts: Unsubscribe;
   unsubGroups: Unsubscribe;
+  unsubGroupContacts: Unsubscribe | null = null;
 
   constructor() {
       this.unsubContacts = this.subContactsList();
@@ -52,6 +55,10 @@ export class FireContactService implements OnDestroy {
    */
   getContacts() {
     return this.contacts;
+  }
+
+  getMembers() {
+    return this.groupContacts;
   }
 
   /**
@@ -124,6 +131,17 @@ export class FireContactService implements OnDestroy {
           this.groups.push(tempLeter);
         }
       })
+    });
+  }
+
+  subGroupContactList(group:string):void {
+    if (this.unsubGroupContacts) this.unsubGroupContacts();
+    const q = query(this.getContactsRef(), where('group', '==', group), orderBy('firstname', 'asc'), orderBy('lastname', 'asc'));
+    this.unsubGroupContacts = onSnapshot(q, memberList => {
+      this.groupContacts = [];
+      memberList.forEach(member => {
+        this.groupContacts.push(this.mapResponseToContact(member.data()));
+      });
     });
   }
 

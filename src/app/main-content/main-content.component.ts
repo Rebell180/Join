@@ -1,15 +1,12 @@
 import { Component } from '@angular/core';
 import { HeaderComponent } from '../shared/header/header.component';
-import { AsideComponent } from "./../../app/main-content/aside/aside.component";
-import { AddTaskContainerComponent } from "./add-task-container/add-task-container.component";
-import { SectionType } from '../shared/enums/section-type';
+import { FireTestComponent } from './fire-test/fire-test.component';
 
 @Component({
   selector: 'app-main-content',
   imports: [
     HeaderComponent,
-    AsideComponent,
-    AddTaskContainerComponent
+    FireTestComponent
 ],
   templateUrl: './main-content.component.html',
   styleUrl: './main-content.component.scss'
