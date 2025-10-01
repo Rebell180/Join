@@ -1,6 +1,7 @@
 import { inject, Injectable, OnDestroy } from '@angular/core';
-import { addDoc, collection, deleteDoc, doc, Firestore, onSnapshot, orderBy, query, Unsubscribe, updateDoc, where } from '@angular/fire/firestore';
+import { addDoc, collection, collectionData, deleteDoc, doc, Firestore, onSnapshot, orderBy, query, Unsubscribe, updateDoc, where } from '@angular/fire/firestore';
 import { Contact } from '../classes/contact';
+import { map, Observable } from 'rxjs';
 
 
 /***
@@ -46,6 +47,7 @@ export class FireContactService implements OnDestroy {
   ngOnDestroy() {
     this.unsubContacts();
     this.unsubGroups();
+    if (this.unsubGroupContacts) this.unsubGroupContacts();
   }
 
   /**
@@ -69,9 +71,13 @@ export class FireContactService implements OnDestroy {
    * Gets Members of group.
    * @returns - List of Members of a group
    */
-  getMembers():Contact[] {
-    return this.groupContacts;
-  }
+  // getMembers(group:string):Observable<Contact[]> {
+  //   const q = query(this.getContactsRef(), where('group','==',group), orderBy('fristname', 'asc'), orderBy('lastname', 'asc'));
+  //   return collectionData(q, {idField: 'id'}).pipe(
+  //     map(contacts => contacts.map(
+  //       c => new Contact({id: c['id'], firstName:c['firstname'], lastName:c['lastname'], group:c['group'], email:c['email'], tel:c['telnr'], iconColor:c['bgcolor']})))
+  //   );
+  // }
 
   /**
    * Filters the current loaded Contact-object-List for the group of them.
@@ -143,21 +149,6 @@ export class FireContactService implements OnDestroy {
           this.groups.push(tempLeter);
         }
       })
-    });
-  }
-
-  /**
-   * Subscribes ab list of a group in alphabetical order.
-   * @param group - Letter of a group
-   */
-  subGroupContactList(group:string):void {
-    if (this.unsubGroupContacts) this.unsubGroupContacts();
-    const q = query(this.getContactsRef(), where('group', '==', group), orderBy('firstname', 'asc'), orderBy('lastname', 'asc'));
-    this.unsubGroupContacts = onSnapshot(q, memberList => {
-      this.groupContacts = [];
-      memberList.forEach(member => {
-        this.groupContacts.push(this.mapResponseToContact(member.data()));
-      });
     });
   }
 
