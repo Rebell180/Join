@@ -52,8 +52,17 @@ export class FireContactService implements OnDestroy {
    * Return and Array<Contact>
    * @returns an array of all loaded Contact-objects 
    */
-  getContacts() {
+  getContacts(): Contact[] {
     return this.contacts;
+  }
+
+
+  /**
+   * Gets all groups.
+   * @returns - All group letter.
+   */
+  getGroups(): string[] {
+    return this.groups;
   }
 
   /**
