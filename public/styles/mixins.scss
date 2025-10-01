@@ -1,4 +1,4 @@
-@mixin marpad($pad:0, $mar:0) {
+@mixin marpad($pad: 0, $mar: 0) {
 	padding: $pad;
 	margin: $mar;
 }
@@ -10,5 +10,6 @@
 	flex-direction: $flexdir;
 	row-gap: $rgap;
 	column-gap: $cgap;
+	gap: $gap;
 	gap: $gap;
 }
