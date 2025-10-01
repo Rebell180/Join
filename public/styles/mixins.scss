@@ -3,7 +3,7 @@
 	margin: $mar;
 }
 
-@mixin fl($jc: start, $alit: start, $flexdir: row, $gap: 0, $rgap: 0, $cgap: 0, ) {
+@mixin fl($jc: flex-start, $alit: flex-start, $flexdir: row, $gap: 0, $rgap: 0, $cgap: 0, ) {
 	display: flex;
 	justify-content: $jc;
 	align-items: $alit;
