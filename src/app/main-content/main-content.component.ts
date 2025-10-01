@@ -1,12 +1,10 @@
 import { Component } from '@angular/core';
 import { HeaderComponent } from '../shared/header/header.component';
-import { FireTestComponent } from './fire-test/fire-test.component';
 
 @Component({
   selector: 'app-main-content',
   imports: [
-    HeaderComponent,
-    FireTestComponent
+    HeaderComponent
 ],
   templateUrl: './main-content.component.html',
   styleUrl: './main-content.component.scss'

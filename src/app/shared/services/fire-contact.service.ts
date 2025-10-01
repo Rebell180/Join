@@ -1,7 +1,6 @@
 import { inject, Injectable, OnDestroy } from '@angular/core';
 import { addDoc, collection, deleteDoc, doc, Firestore, onSnapshot, orderBy, query, Unsubscribe, updateDoc, where } from '@angular/fire/firestore';
 import { Contact } from '../classes/contact';
-import { Unsubscribable } from 'rxjs';
 
 
 /***
@@ -57,7 +56,11 @@ export class FireContactService implements OnDestroy {
     return this.contacts;
   }
 
-  getMembers() {
+  /**
+   * Gets Members of group.
+   * @returns - List of Members of a group
+   */
+  getMembers():Contact[] {
     return this.groupContacts;
   }
 
@@ -134,6 +137,10 @@ export class FireContactService implements OnDestroy {
     });
   }
 
+  /**
+   * Subscribes ab list of a group in alphabetical order.
+   * @param group - Letter of a group
+   */
   subGroupContactList(group:string):void {
     if (this.unsubGroupContacts) this.unsubGroupContacts();
     const q = query(this.getContactsRef(), where('group', '==', group), orderBy('firstname', 'asc'), orderBy('lastname', 'asc'));
