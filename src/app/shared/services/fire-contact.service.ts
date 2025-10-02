@@ -1,7 +1,6 @@
-import { inject, Injectable, OnDestroy } from '@angular/core';
-import { addDoc, collection, collectionData, deleteDoc, doc, Firestore, onSnapshot, orderBy, query, Unsubscribe, updateDoc, where } from '@angular/fire/firestore';
+import { inject, Injectable, OnDestroy, TemplateRef } from '@angular/core';
+import { addDoc, collection, deleteDoc, doc, Firestore, onSnapshot, Unsubscribe, updateDoc } from '@angular/fire/firestore';
 import { Contact } from '../classes/contact';
-import { map, Observable } from 'rxjs';
 
 
 /***
@@ -27,8 +26,6 @@ import { map, Observable } from 'rxjs';
 export class FireContactService implements OnDestroy {
 
   private contacts: Contact[] = [];
-  private groups: string[] = [];
-  private groupContacts: Contact[] = [];
   private firestore: Firestore = inject(Firestore);
   public currentContact: Contact | null = null;
   
@@ -64,20 +61,24 @@ export class FireContactService implements OnDestroy {
    * @returns - All group letter.
    */
   getGroups(): string[] {
-    return this.groups;
+    const groups: string[] = [];
+    for (let i = 0; i < this.contacts.length; i++) {
+      const tempLetter = this.contacts[i].firstName[0];
+      if (!groups.includes(tempLetter)) {
+        groups.push(tempLetter);
+      }
+    }
+    return groups.sort();
   }
 
   /**
    * Gets Members of group.
    * @returns - List of Members of a group
    */
-  // getMembers(group:string):Observable<Contact[]> {
-  //   const q = query(this.getContactsRef(), where('group','==',group), orderBy('fristname', 'asc'), orderBy('lastname', 'asc'));
-  //   return collectionData(q, {idField: 'id'}).pipe(
-  //     map(contacts => contacts.map(
-  //       c => new Contact({id: c['id'], firstName:c['firstname'], lastName:c['lastname'], group:c['group'], email:c['email'], tel:c['telnr'], iconColor:c['bgcolor']})))
-  //   );
-  // }
+  getMembers(group:string): Contact[] {
+    const members:Contact[] = [];
+
+  }
 
   /**
    * Filters the current loaded Contact-object-List for the group of them.
