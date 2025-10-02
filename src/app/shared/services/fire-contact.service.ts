@@ -1,4 +1,4 @@
-import { inject, Injectable, OnDestroy, TemplateRef } from '@angular/core';
+import { inject, Injectable, OnDestroy } from '@angular/core';
 import { addDoc, collection, deleteDoc, doc, Firestore, onSnapshot, Unsubscribe, updateDoc } from '@angular/fire/firestore';
 import { Contact } from '../classes/contact';
 
@@ -30,12 +30,9 @@ export class FireContactService implements OnDestroy {
   public currentContact: Contact | null = null;
   
   unsubContacts: Unsubscribe;
-  unsubGroups: Unsubscribe;
-  unsubGroupContacts: Unsubscribe | null = null;
 
   constructor() {
       this.unsubContacts = this.subContactsList();
-      this.unsubGroups = this.subGroupList();
   }
 
   /**
@@ -43,8 +40,6 @@ export class FireContactService implements OnDestroy {
    */
   ngOnDestroy() {
     this.unsubContacts();
-    this.unsubGroups();
-    if (this.unsubGroupContacts) this.unsubGroupContacts();
   }
 
   /**
@@ -54,7 +49,6 @@ export class FireContactService implements OnDestroy {
   getContacts(): Contact[] {
     return this.contacts;
   }
-
 
   /**
    * Gets all groups.
@@ -72,23 +66,13 @@ export class FireContactService implements OnDestroy {
   }
 
   /**
-   * Gets Members of group.
-   * @returns - List of Members of a group
-   */
-  getMembers(group:string): Contact[] {
-    const members:Contact[] = [];
-
-  }
-
-  /**
    * Filters the current loaded Contact-object-List for the group of them.
-   *  
+   * 
    * @param group the group to filter contacts.
    * @returns an Array of Contact-objects filtered by group
    */
-  getContactsByGroup(group: string) {
-    const sortedList = this.contacts.filter((contact) => contact.group == group);
-    return sortedList;
+  getMembers(group:string): Contact[] {
+    return this.contacts.filter(contact => contact.group == group);
   }
 
   /**
@@ -129,27 +113,11 @@ export class FireContactService implements OnDestroy {
    */
   subContactsList() {
     return onSnapshot(this.getContactsRef(), (resultList) => {
-      this.contacts = [];
+      const contacts:Contact[] = [];
       resultList.forEach(contact => {
-        this.contacts.push(this.mapResponseToContact(contact.data()));
+        contacts.push(this.mapResponseToContact(contact.data()));
       });
-    });
-  }
-
-  /**
-   * Gets snapshots for groups.
-   * @returns a snapshot for groups.
-   */
-  subGroupList() {
-    const q = query(this.getContactsRef(), orderBy('group','asc'));
-    return onSnapshot(q, letterList => {
-      this.groups = []; 
-      letterList.forEach(letter => {
-        const tempLeter = letter.data()['group'];
-        if (!this.groups.includes(tempLeter)) {
-          this.groups.push(tempLeter);
-        }
-      })
+      this.contacts = contacts.sort();
     });
   }
 
