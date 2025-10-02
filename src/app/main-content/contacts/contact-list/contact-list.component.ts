@@ -3,14 +3,13 @@ import { Component } from '@angular/core';
 import { ContactGroupComponent } from './contact-group/contact-group.component';
 import { DummyContactService } from './dummy-contact.service';
 import { Contact } from '../../../shared/classes/contact';
-import { AddContactComponent } from "./add-contact/add-contact.component";
+
 
 @Component({
   selector: 'app-contact-list',
   imports: [
     CommonModule,
-    ContactGroupComponent,
-    AddContactComponent
+    ContactGroupComponent
 ],
   templateUrl: './contact-list.component.html',
   styleUrl: './contact-list.component.scss'
