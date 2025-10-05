@@ -16,9 +16,29 @@ import { SingleContactComponent } from './single-contact/single-contact.componen
 export class ContactGroupComponent {
   public letter = input.required<string>();
 
-  constructor(private dcs:DummyContactService) {}
+  constructor(private fcs: FireContactService) {
+    this.allContacts = fcs.getContacts();
+  }
 
-  getContacts():Contact[] {
-    return this.dcs.getContactsByGroup(this.letter());
+  /**
+   * Gets the members of this Group.
+   * @returns - Memberlist
+   */
+  getMembers(): Contact[] {
+    return this.fcs.getMembers(this.letter());
+  }
+
+  /**
+   * Selects a contact.
+   * @param selectedContact - Contact, which has been selected.
+   */
+  select(selectedContact:Contact):void {
+    for(let i = 0; i < this.allContacts.length; i++) {
+      this.allContacts[i].selected = false;
+      if (this.allContacts[i].equals(selectedContact)) {
+        this.allContacts[i].selected = true;
+        this.fcs.currentContact = selectedContact;
+      }
+    }
   }
 }

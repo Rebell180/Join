@@ -9,6 +9,10 @@
     cursor: pointer;
 }
 
+:host:hover {
+    background: rgba(225, 255, 255, 0.2);
+}
+
 :host(.active) {
     background: #2a3647;
     color: white;
@@ -22,6 +26,8 @@
 }
 
 .contact-data {
+    width: auto;
+    max-width: 220px;
     height: 48px;
 }
 
