@@ -37,10 +37,9 @@ button {
     height: 100dvh;
 
     @include all.tablet {
-        grid-template-columns: 1fr;
-        grid-template-rows: 10dvh 1fr 11dvh; 
+        grid-template-columns: 100%;
+        grid-template-rows: 90dvh 10dvh; 
         grid-template-areas: 
-            "header"
             "main"
             "aside";
     }
