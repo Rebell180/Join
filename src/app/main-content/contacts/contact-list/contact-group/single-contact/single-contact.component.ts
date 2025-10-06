@@ -5,8 +5,8 @@ import { ContactIconComponent } from '../../../contact-icon/contact-icon.compone
 @Component({
   selector: 'app-single-contact',
   imports: [
-    ContactIconComponent
-  ],
+    ContactIconComponent,
+],
   templateUrl: './single-contact.component.html',
   styleUrl: './single-contact.component.scss'
 })
@@ -28,7 +28,7 @@ export class SingleContactComponent {
    * @returns - Full name of contact.
    */
   fullName():string {
-    return `${this.contact().firstName} ${this.contact().lastName}`
+    return `${this.contact().firstname} ${this.contact().lastname}`
   }
 
   limit(word: string, maxLength: number): string {

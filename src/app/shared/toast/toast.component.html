@@ -1,0 +1,6 @@
+<div id="toast-container" *ngFor="let toast of toastMsgService.toasts; let i = index">
+    <div >
+        {{ toast.message }}
+        <button (click)="removeToast(i)">X</button>
+    </div>
+</div>

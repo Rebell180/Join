@@ -10,4 +10,5 @@ import { NavItemData } from './../interfaces/navitemdata';
 export class NavItemComponent {
 
   item = input.required<NavItemData>()
+
 }

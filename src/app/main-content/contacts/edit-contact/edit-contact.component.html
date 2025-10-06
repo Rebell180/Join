@@ -1,0 +1,33 @@
+<aside id="editContactModal" class="editContactModalContainer" [ngClass]="editModalState">
+
+    <div class="leftSide">
+        <img src="assets/Icons/JoinLogoWhite.png" alt=""/>
+        <div class="lineCloseBtn d_none">
+            <button type="button" (click)="onCloseModal()">x</button>
+        </div>
+        <h1>Edit Contact</h1>
+    </div>
+
+    <div class="rightSide">
+        <div class="lineCloseBtn">
+            <button type="button" (click)="onCloseModal()">x</button>
+        </div>
+
+        <div class="lineForm">
+            @if (contact) {
+            <app-contact-icon class="{{ contact.iconColor }} singleIcon" [contact]="contact"></app-contact-icon>
+            }
+            <form action="submit" method="post">
+                <input type="text" name="" id="" placeholder="{{ contact?.lastname }}" required>
+                <input type="email" name="" id="" placeholder="{{ contact?.email }}" required>
+                <input type="tel" name="" id="" placeholder="{{ contact?.tel }}" required>
+
+            <div class="formBtnContainer">
+                <button type="button" (click)="deleteContact()">Delete</button>
+                
+                <button type="submit" (click)="saveContact()">Save ✓</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</aside>

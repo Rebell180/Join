@@ -1,0 +1,72 @@
+<div class="iconContactMain">
+    <div class="iconName">
+        <h1>Contacts</h1>
+        <hr />
+        <h2>Better with a team</h2>
+    </div>
+
+    <div class="iconNameMobile">
+        <h1>Contacts</h1>
+        <h2>Better with a team</h2>
+        <hr />
+    </div>
+
+    <div class="contactInfo" [ngClass]="{ 'is-open': editModalState === 'open' }">
+        <div *ngIf="contact$ | async as contact" class="contactDetail">
+            <div class="contactIcon">
+                <app-contact-icon class="{{ contact.iconColor }}" [contact]="contact"></app-contact-icon>
+            </div>
+
+            <div class="editDelete">
+                <p class="name">{{ contact.firstname }} {{ contact.lastname }}</p>
+
+                <div class="iconMain">
+                    <button (click)="openModal()" type="button">
+                        <img src="assets/Icons/digitaler-controller.png" alt="" />Edit
+                    </button>
+                    <button (click)="deleteContact(contact)">
+                        <img class="deleteBtn" src="assets/Icons/—Pngtree—vector trash icon_4152654.png" alt="" />Delete
+                    </button>
+                </div>
+            </div>
+
+            <div class="lastInfo">
+                <h2>Contact Information</h2>
+
+                <div class="emailPhone">
+                    <h3>Email</h3>
+                    <a href="mailto:{{ contact.email }}">{{ contact.email }}</a>
+                    <h3>Phone</h3>
+                    <a href="tel:+49{{ contact.tel }}">{{ contact.tel }}</a>
+                </div>
+            </div>
+            <div class="optionsContainer" id="mobileMenu">
+                <button class="optionsBtn" (click)="toggleMenu()">
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                </button>
+
+                <div class="dropDownMenu" *ngIf="isMenuVisible">
+                    <div class="menuItem" (click)="openModal()">
+                        <img src="assets/Icons/digitaler-controller.png" alt="Edit Icon" />
+                        <span>Edit</span>
+                    </div>
+                    <div class="menuItem deleteItem" (click)="deleteContact(contact)">
+                        <img src="assets/Icons/—Pngtree—vector trash icon_4152654.png" alt="Delete Icon" />
+                        <span>Delete</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- <app-edit-contact [editModalState]="editModalState" [contact]="contact"
+    (closeModal)="handleModalClose()"></app-edit-contact> -->
+
+<!-- TODO
+    Responsive fertig machen
+    Save Button function
+    Form Validation
+    mobile design aside edit contact-->

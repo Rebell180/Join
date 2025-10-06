@@ -1,5 +1,6 @@
-import { Component, input } from '@angular/core';
+import { Component, input, InputSignal } from '@angular/core';
 import { Contact } from '../../../shared/classes/contact';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-contact-icon',
@@ -8,13 +9,17 @@ import { Contact } from '../../../shared/classes/contact';
   styleUrl: './contact-icon.component.scss'
 })
 export class ContactIconComponent {
-  public contact = input.required<Contact>();
+  public contact: InputSignal<Contact> = input.required<Contact>();
 
   /**
    * Gets Intials of contact.
    * @returns Intials of contact.
    */
-  getInitials():string {
-    return this.contact().firstName[0].toUpperCase() + this.contact().lastName[0].toUpperCase()
+  getInitials(): string {
+    const contactObj: Contact = this.contact();
+    if(contactObj !== null && contactObj.id != '' ) {
+      return contactObj.firstname[0].toUpperCase() + contactObj.lastname[0].toUpperCase();
+    }
+    return '';
   }
 }

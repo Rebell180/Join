@@ -37,12 +37,17 @@ button {
     height: 100dvh;
 
     @include all.tablet {
-        grid-template-columns: 100%;
-        grid-template-rows: 90dvh 10dvh; 
+        grid-template-columns: 1fr;
         grid-template-areas: 
             "main"
             "aside";
     }
+}
+
+body {
+	background: rgb(211, 211, 211, 0.4);
+    font-family: 'InterRegular', sans-serif;
+    font-size: 19px;
 }
 
 button {
@@ -54,9 +59,21 @@ input {
     border: unset;
 }
 
+input {
+    border: unset;
+}
+
+input {
+    border: unset;
+}
+
 @font-face {
     font-family: "Roboto";
     src: url("/assets/Fonts/Roboto/static/Roboto-Medium.ttf") format("truetype");
+}
+
+input {
+    border: unset;
 }
 
 h1 {

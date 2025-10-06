@@ -1,20 +1,26 @@
 @use '../../../../../public/styles/all_styles' as all;
 
 :host { 
-    @include all.fl($flexdir: column);
-    width: 456px;
+    // @include all.fl($flexdir: column);
+    width: 100%;
     height: 100%;
     overflow-y: auto;
-    @include all.marpad($pad: 0 24px, $mar: 0 24px);
-    @include all.mobile {
-        @include all.marpad($pad: 0 24px);
-        width: 100%;
+    @include all.marpad($pad: 0 4px);
+
+    @include all.tablet {
+        // @include all.marpad($pad: 0 8px);
+        width: 80%;
     }
-    @media (max-width: 360px) {
-        @include all.marpad();
+    @include all.mobile {
+        @include all.marpad($pad: 0 16px);
+        width: 100%;
     }
 }
 
 ::-webkit-scrollbar {
     width: 24px;
+}
+
+.letterFont {
+    font-size: 16px;
 }

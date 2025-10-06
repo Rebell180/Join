@@ -1,8 +1,12 @@
 <section class="contact-section">
-    <button class="btn-add-contact" (click)="toggleAddContactModal()" type="button">
-        Add new contact
-        <img src="assets/Icons/person_add.png" alt="">
-    </button>
-    <app-contact-list></app-contact-list>
+    <div class="addList">
+        <button class="btn-add-contact" (click)="toggleAddContactModal()" type="button">
+            Add new contact
+            <img src="assets/Icons/person_add.png" alt="">
+        </button>
+        <app-contact-list></app-contact-list>
+    </div>
+    <app-contact-detail (openEditModal)="editContact($event)"></app-contact-detail>
 </section>
-<app-add-contact [kindOf]="kindOfModal" (closeOutput)="toggleAddContactModal()" [style.visibility]="modalVisiblity"></app-add-contact>
+<app-add-contact [kindOf]="kindOfModal" [contact$]="contact" (closeOutput)="toggleAddContactModal()" [style.visibility]="modalVisiblity"></app-add-contact>
+<app-toast></app-toast>

@@ -2,8 +2,8 @@ export class Contact {
 
     // #region Attributes
     id: string;
-    firstName: string;
-    lastName: string;
+    firstname: string;
+    lastname: string;
     group: string;
     email: string;
     tel: string;
@@ -14,26 +14,26 @@ export class Contact {
     /**
      * Creates a contact.
      * @param id - Id of contact in database, empty, if not exiist in database.
-     * @param firstName - First name of contact.
-     * @param lastName - Last name of contact.
+     * @param firstname - First name of contact.
+     * @param lastname - Last name of contact.
      * @param group - Group of letter in register.
      * @param email - E-Mail of contact.
-     * @param tal - Phone number of contact.
+     * @param tel - Phone number of contact.
      * @param iconColor - Background-Color of User-Icon, null for new contacts, who doesn't exists in database. 
      */
-    constructor({id = '', firstName, lastName, group, email, tel, iconColor = null}: {
+    constructor({id = '', firstname, lastname, group, email, tel, iconColor = null}: {
         id: string,
-        firstName: string,
-        lastName: string,
+        firstname: string,
+        lastname: string,
         group: string,
         email: string,
         tel: string,
         iconColor: string | null
     }) {
         this.id = id;
-        this.firstName = firstName,
-        this.lastName = lastName,
-        this.group = group,
+        this.firstname = firstname,
+        this.lastname = lastname,
+        this.group = group.toUpperCase(),
         this.email = email,
         this.tel = tel,
         this.iconColor = iconColor ? iconColor : Contact.getRandomIconColor();
@@ -47,7 +47,7 @@ export class Contact {
      */
     equals(other:unknown):boolean {
         if (!(other instanceof Contact)) return false;
-        return this.firstName == other.firstName && this.lastName == other.lastName;
+        return this.id == other.id;
     }
     // #endregion
 
@@ -67,12 +67,12 @@ export class Contact {
     toJson() {
         return {
             id: this.id || "",
-            firstname: this.firstName || "",
-            lastname: this.lastName || "",
+            firstname: this.firstname || "",
+            lastname: this.lastname || "",
             email: this.email || "",
-            telnr: this.tel || "",
-            group: this.firstName[0] || "*",
-            bgcolor: this.iconColor || "orange"
+            tel: this.tel || "",
+            group: this.firstname[0].toUpperCase() || "",
+            iconColor: this.iconColor || Contact.getRandomIconColor()
         }
     }
 }
