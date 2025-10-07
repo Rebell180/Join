@@ -1,162 +1,231 @@
 @use '../../../../public/styles/all_styles' as all;
 
 #addContactModal {
-    width: 65dvw;
-    max-width: 100rem;
-    height: 65dvw;
-    max-height: 50rem;
-
-    background-color: white;
-    border-radius: 8px;
+    width: 90dvw;
+    max-width: 900px;
+    height: 60dvh;
     
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    // TODO ab tablet ganze View bis auf footer und ? header? 
+    background-color: white;
+    border-radius: 16px;
+    
+    @include all.fl($jc: center, $alit: center);
+    
+    @include all.notebook {
+        width: 90dvw;
+        max-width: 900px;
+        left: 0%;
+        transform: translateX(-50%);
+        margin-top: 4rem;
+    }
 
     @include all.tablet() {
-        width: 100dvw;
-        max-width: 100dvw;
-        height: 80dvh;
-        max-height: 80dvh;
-        flex-direction: column;
-        align-items: center;
+        width: 70dvw;
+        max-width: 800px;
+        height: 70dvh;
+        z-index: 20;
+        left: 35%;
+        transform: translateX(0);
+        @include all.fl($flexdir: column, $alit: center);
     }
 
-    .leftpanel {
-        width: 34%;
-        height: 100%;
-        
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        gap: 2rem;
-        padding: 0 2rem;
-        
-        border-top-left-radius: 16px;
-        border-bottom-left-radius: 16px;
-        background-color: #2a3647;
-
-        @include all.tablet() {
-            width: 100%;
-            height: 20dvh;
-            flex-direction: row;
-            align-items: center;
-            border-top-left-radius: 0;
-            border-bottom-left-radius: 0;
-            box-shadow: 2px 2px 2px 2px darkgrey;
-        }
-
-        img {
-            width: 6.4rem;
-            height: 6.4rem;
-            
-            @include all.tablet() {
-            margin-right: 3%;
-        }
-        }
-
-        .add-contact-header {
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: start;
-            
-
-            h1, h2 {
-                color: white;
-            }
-            
-            h1 {
-                font-size: 48px;
-            }
-            h2 {
-                font-size: 20px;
-                text-wrap: no-wrap;
-            }
-        }
-
-        .mobile-close-btn{
-            display: none;
-
-            @include all.tablet() {
-                height: 100%;
-                display: flex;
-                align-items: center;
-                justify-content: start;
-                button {
-                    color: white;
-                }
-            }
-        }
+    @include all.mobile {
+        width: 90dvw;
+        height: 70dvh;
+        left: 10%;
+        transform: translateX(0);
     }
+}
 
-    .rightpanel {
-        width: 66%;
-        height: 100%;
-        padding: 1% 5%;
+.leftPanel {
+    width: 45%;
+    height: 100%;
+    background-color: #2a3647;
+    padding: 0 2rem;
+    border-radius: 16px 0 0 16px;
+    @include all.fl($flexdir: column, $jc: center);
 
-        display: flex;
-        flex-direction: column;
-        justify-content: start;
+    @include all.notebook {
+        width: 40%;
         align-items: start;
+    }
 
-        @include all.tablet() {
-            padding: 1rem 0;
+    @include all.tablet {
+        border-radius: 16px 16px 0 0; 
+        width: 100%;
+        height: 25rem;
+        @include all.fl($alit: center);
+    }
+
+    .mobileCloseBtn {
+        display: none;
+
+        @include all.tablet {
+            display: flex;
+            position: absolute;
+            right: 20px;
+            top: 20px;
         }
 
-        .line-close-btn {
-            width: 100%;
-            display: flex;
-            justify-content: end;
-            align-items: center;
-            margin: 3rem 0;
+        button {
+            width: 48px;
+            height: 48px;
+            color: white;
+            border: none;
+            background: transparent;
+        }
+    }
+}
 
-            @include all.tablet() {
-                margin-bottom: 0;
-                display: none;
+.lineCloseBtn {
+    width: 100%;
+    @include all.fl($jc: end);
+    margin: 2rem 0;
+    display: none;
+}
+
+hr {
+    width: 60px; 
+    height: 0.25rem;
+    background: rgb(17, 148, 213);
+    border: none
+}
+
+img {
+    width: 4rem; 
+    height: 4rem;
+    margin-bottom: 2rem;
+
+    @include all.tablet {
+        display: none;
+    }
+}
+
+h1 {
+    color: white;
+    font-size: clamp(28px, 5vw, 48px); 
+    margin-bottom: 0.5rem;
+    line-height: 1.2;
+
+    @include all.tablet {
+        font-size: 50px;
+    }
+}
+
+h2 {
+    width: 100%;
+    color: white;
+    font-size: clamp(16px, 1.5vw, 24px); 
+    margin-bottom: 1rem;
+
+    @include all.tablet {
+        font-size: 22px;
+    }
+}
+
+.rightPanel {
+    width: 60%;
+    height: 100%;
+    padding: 1rem 2rem;
+    @include all.fl($flexdir: column);
+
+    @include all.tablet {
+        width: 100%;
+        height: auto; 
+        @include all.fl($alit: flex-start); 
+        padding: 1.5rem;
+    }
+
+    .lineCloseBtn { 
+        width: 100%;
+        @include all.fl($jc: end);
+        margin: 2rem 0;
+
+        @include all.tablet {
+            display: none;
+        }
+    }
+
+    .lineForm {
+        width: 100%;
+        height: auto; 
+        padding-top: 9rem;
+        @include all.fl($alit: center, $jc: space-between);
+
+        @include all.tablet {
+            flex-direction: column;
+            margin-top: 0;
+            padding-top: 9rem;
+            align-items: center; 
+        }
+
+        .singleIcon {
+            width: 35%;
+            height: 130px;
+
+            @include all.tablet {
+                z-index: 1;
+                position: absolute;
+                top: -15dvh;
+                left: 50%;
+                transform: translate(-50%,70%);
+                width: 10rem;
+                height: 10rem;
+                object-fit: contain;
+                border-radius: 50%;
+                background: white;
+                display: block;
             }
         }
+    }
+}
 
-        .line-form {
-            width: 100%;
+form {
+    width: 100%;
+
+    .formField {
+        width: 100%;
+        height: auto; 
+        margin-bottom: 1.5rem;
+        @include all.fl($flexdir: column, $alit: center);
+
+        .inputContainer {
+            width: 70%;
+            height: 40px;
+            padding: 0 10px;
+            border: 1px solid grey;
+            border-radius: 5px;
             display: flex;
-            align-items: center;
             justify-content: space-between;
-            gap: 4rem;
-            margin: 2rem 0;
+            align-items: center;
             
-            @include all.tablet() {
-                flex-direction: column;
-                gap: 2rem;
-                align-items: start;
-                justify-content: start;
-            }
-
-
             img {
-                width: 30%;
-                height: 50%;
-
-                @include all.tablet() {
-                    margin-bottom: 2rem;
-                }
-
+                width: 20px;
+                height: 20px;
+                margin: 0; 
+                display: flex;
             }
 
-            form {
-                width: 100%;
-                display: flex;
-                flex-direction: column;
-                align-items: start;
-                gap: 4rem;
+            @include all.notebook {
+                width: 90%;
+                padding: 0 15px;
+            }
+
+            @include all.tablet {
+                width: 50%;
+                padding: 0 15px;
+            }
+
+            @include all.mobile {
+                width: 90%;
+                padding: 0 15px;
+            }
+        }
 
                 @include all.tablet() {
-                    gap: 4rem;
+                    gap: 3rem;
                     padding: 0 0;
                 }
-
+                
                 input {
                     width: 100%;
                     min-width: 20rem;
@@ -168,21 +237,52 @@
                     
                 }
 
-                .form-button-container {
-                    display: flex;
-                    width: 100%;
-                    justify-content: start;
-                    gap: 2rem;
+                .errmsg {
+                    width: 70%;
+                    height: 1rem;
+                    color: #c00000;
+                    font-size: 1rem;
+                    padding: 4px 16px;
+                }
 
-                    button {
+                .formBtnContainer {
+    width: 100%;
+    margin-top: 2rem;
+    @include all.fl($jc: center, $flexdir: row);
+    gap: 1rem;
+
+    @include all.tablet {
+        gap: 0.5rem;
+        flex-direction: row; 
+    }
+
+                    input[type=button], input[type=submit] {
                         min-width: max-content;
                         padding: 12px;
                         border-radius: 8px;
                         border: 1px solid grey;
                     }
+
+                    input[type=submit] {
+                        background: #2a3647;
+                        color: white;
+                    }
+
+                    #createContactBtn {
+        
+        @include all.tablet {
+            width: 40%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            &:hover {
+                background: #2a3647;
+                color: white;
+            }
+        }
+    }
                 }
             }   
         }
 
-    }
-}

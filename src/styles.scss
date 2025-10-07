@@ -39,6 +39,7 @@ button {
     @include all.tablet {
         grid-template-columns: 1fr;
         grid-template-areas: 
+            "header"
             "main"
             "aside";
     }
@@ -59,8 +60,10 @@ input {
     border: unset;
 }
 
-input {
-    border: unset;
+@include all.mobile {
+    .mob_none {
+        display: none;
+    }
 }
 
 input {

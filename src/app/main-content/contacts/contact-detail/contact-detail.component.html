@@ -1,18 +1,24 @@
-<div class="iconContactMain">
+<div class="iconContactMain {{ classToDisplay }}">
     <div class="iconName">
         <h1>Contacts</h1>
         <hr />
         <h2>Better with a team</h2>
     </div>
 
-    <div class="iconNameMobile">
-        <h1>Contacts</h1>
-        <h2>Better with a team</h2>
-        <hr />
+    <div class="iconNameMobile" (click)="goBack()">
+        <div class="headerInfo">
+            <h1>Contacts</h1>
+            <h2>Better with a team</h2>
+            <hr />
+        </div>
+        <div class="backBtn">
+            <button><img src="assets/Icons/arrow-left-line.png" alt=""></button>
+        </div>
     </div>
 
-    <div class="contactInfo" [ngClass]="{ 'is-open': editModalState === 'open' }">
-        <div *ngIf="contact$ | async as contact" class="contactDetail">
+    <div class="contactInfo">
+        <div *ngIf="cs.contactToEdit | async as contact" class="contactDetail">
+            <div class="contactHeaderRow">
             <div class="contactIcon">
                 <app-contact-icon class="{{ contact.iconColor }}" [contact]="contact"></app-contact-icon>
             </div>
@@ -21,7 +27,7 @@
                 <p class="name">{{ contact.firstname }} {{ contact.lastname }}</p>
 
                 <div class="iconMain">
-                    <button (click)="openModal()" type="button">
+                    <button (click)="cs.openModal('edit')" type="button">
                         <img src="assets/Icons/digitaler-controller.png" alt="" />Edit
                     </button>
                     <button (click)="deleteContact(contact)">
@@ -29,6 +35,7 @@
                     </button>
                 </div>
             </div>
+        </div>
 
             <div class="lastInfo">
                 <h2>Contact Information</h2>
@@ -48,7 +55,7 @@
                 </button>
 
                 <div class="dropDownMenu" *ngIf="isMenuVisible">
-                    <div class="menuItem" (click)="openModal()">
+                    <div class="menuItem" (click)="cs.openModal('edit')">
                         <img src="assets/Icons/digitaler-controller.png" alt="Edit Icon" />
                         <span>Edit</span>
                     </div>

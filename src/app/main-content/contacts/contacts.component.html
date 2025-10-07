@@ -1,12 +1,12 @@
 <section class="contact-section">
     <div class="addList">
-        <button class="btn-add-contact" (click)="toggleAddContactModal()" type="button">
-            Add new contact
+        <button class="btn-add-contact" (click)="cs.openModal('add')" type="button">
+            <span class="mob_none">Add new contact</span>
             <img src="assets/Icons/person_add.png" alt="">
         </button>
         <app-contact-list></app-contact-list>
     </div>
-    <app-contact-detail (openEditModal)="editContact($event)"></app-contact-detail>
+    <app-contact-detail></app-contact-detail>
 </section>
-<app-add-contact [kindOf]="kindOfModal" [contact$]="contact" (closeOutput)="toggleAddContactModal()" [style.visibility]="modalVisiblity"></app-add-contact>
+<app-add-contact *ngIf="(cs.isAddModalOpen | async) || (cs.isEditModalOpen | async)"></app-add-contact>
 <app-toast></app-toast>

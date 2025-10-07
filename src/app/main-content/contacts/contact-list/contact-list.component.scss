@@ -1,26 +1,108 @@
 @use '../../../../../public/styles/all_styles' as all;
 
-:host { 
-    // @include all.fl($flexdir: column);
+#section-contact-list {
     width: 100%;
     height: 100%;
     overflow-y: auto;
     @include all.marpad($pad: 0 4px);
-
     @include all.tablet {
-        // @include all.marpad($pad: 0 8px);
         width: 80%;
     }
     @include all.mobile {
         @include all.marpad($pad: 0 16px);
         width: 100%;
     }
+
+    .contact-group-container {
+        @include all.fl($flexdir: column);
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        padding-left: 24px;
+        border-radius: 10px;
+
+        .letter {
+            @include all.fl($alit: center);
+            height: 58px;
+            padding-left: 36px;
+            font-size: 2rem;
+            cursor: default;
+            @include all.mobile {
+                padding: 0;
+            }
+        }
+
+        hr {
+            width: 100%;
+            margin: 8px 0;
+            border: 1px solid rgba(0,0,0,0.1);
+        }
+
+        .single-contact-container {
+            @include all.fl($alit: center, $gap: 35px);
+            width: 100%;
+            height: 78px;
+            padding-left: 24px;
+            border-radius: 10px;
+            cursor: pointer;
+            @include all.mobile {
+                padding: 0;
+            }
+
+            .icon-wrapper {
+                @include all.fl($jc:center, $alit:center);
+                width: 42px;
+                height: 42px;
+            }
+
+            .contact-data {
+                @include all.fl($flexdir: column, $jc: center);
+                width: auto;
+                max-width: 220px;
+                height: 48px;
+
+                .name {
+                    margin-bottom: 5px;
+                    font-size: 24px;
+                }
+
+                .email {
+                    color: #007cee;
+                    font-size: 18px;
+                }
+            }
+            &:hover {
+                background: rgba(225, 255, 255, 0.2);
+            }
+        }
+
+        .active{
+            background: #2a3647;
+            color: white;
+            cursor: default;
+            &:hover {
+                background: #2a3647;
+            }
+        }
+    }
 }
 
-::-webkit-scrollbar {
-    width: 24px;
-}
+    ::-webkit-scrollbar {
+        width: 10px;
+        scroll-behavior: smooth;
+    }
 
-.letterFont {
-    font-size: 16px;
-}
+    ::-webkit-scrollbar-thumb {
+        border-radius: 5px;
+        border: 1px solid transparent;
+        background: #a8a8a8;
+        background-clip: content-box;
+    }
+
+    ::-webkit-scrollbar-button:single-button:vertical:decrement {
+        background: url('../../../../../public/assets/Icons/contact/scroll-up.png') no-repeat center center / contain;
+    }
+
+    ::-webkit-scrollbar-button:single-button:vertical:increment {
+        background: url('../../../../../public/assets/Icons/contact/scroll-down.png') no-repeat center center / contain;
+    }

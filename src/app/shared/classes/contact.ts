@@ -33,7 +33,7 @@ export class Contact {
         this.id = id;
         this.firstname = firstname,
         this.lastname = lastname,
-        this.group = group.toUpperCase(),
+        this.group = group,
         this.email = email,
         this.tel = tel,
         this.iconColor = iconColor ? iconColor : Contact.getRandomIconColor();
@@ -71,7 +71,7 @@ export class Contact {
             lastname: this.lastname || "",
             email: this.email || "",
             tel: this.tel || "",
-            group: this.firstname[0].toUpperCase() || "",
+            group: this.group || "",
             iconColor: this.iconColor || Contact.getRandomIconColor()
         }
     }

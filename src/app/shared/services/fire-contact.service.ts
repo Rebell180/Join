@@ -1,7 +1,8 @@
 import { inject, Injectable, OnDestroy } from '@angular/core';
-import { addDoc, collection, deleteDoc, doc, Firestore, onSnapshot, query, Query, Unsubscribe, updateDoc, where } from '@angular/fire/firestore';
-import { BehaviorSubject, combineLatest, filter, map } from 'rxjs';
+import { addDoc, collection, CollectionReference, deleteDoc, doc, DocumentReference, Firestore, onSnapshot, query, Query, Unsubscribe, updateDoc, where } from '@angular/fire/firestore';
+import { BehaviorSubject, combineLatest, filter, map, Observable } from 'rxjs';
 import { Contact } from '../classes/contact';
+import { ContactGroup } from '../classes/contactGroup';
 
 /**
  * FireContactService is a service to manage communication between firebase database 
@@ -27,7 +28,7 @@ export class FireContactService implements OnDestroy {
 
   // #region properties
 
-  private contactsSubject = new BehaviorSubject<Contact[]>([]);
+  private contactsSubject = new BehaviorSubject<Array<Contact>>([]);
   contacts$ = this.contactsSubject.asObservable();
 
   private currentContactIdSubject = new BehaviorSubject<string | null>(null);
@@ -39,12 +40,12 @@ export class FireContactService implements OnDestroy {
     this.currentContactId$
   ]).pipe(
     map(([contacts, id]) =>
-    contacts.find(contact => contact.id === id) 
+    contacts.find(contact => contact.id === id ) 
       ?? new Contact({ id: '', firstname: '', lastname: '', group: '', email: '', tel: '', iconColor: '' })
   ));
 
-  private unsubContacts: Unsubscribe | null = null;
-  firestore: Firestore = inject(Firestore);
+  private unsubContacts: Unsubscribe;
+  private firestore: Firestore = inject(Firestore);
 
   // #endregion properties
 
@@ -53,10 +54,12 @@ export class FireContactService implements OnDestroy {
   }
 
   ngOnDestroy() {
-    if (this.unsubContacts) this.unsubContacts();
+    this.unsubContacts();
   }
 
   // #region methods
+
+
 
   /**
    * Subscribes firestore 'contacts' collection and keep
@@ -111,6 +114,22 @@ export class FireContactService implements OnDestroy {
     );
   }
 
+  getContactGroups(): Array<ContactGroup> {
+    const allGroupedContacts: Array<ContactGroup> = [];
+    const currentGroups: Observable<Array<string>> = this.getAllGroups$();
+    currentGroups.forEach((groupStream: Array<string>) => {
+      groupStream.forEach((group: string) => {
+        const contactGroup: ContactGroup = new ContactGroup();
+        const contactsByGroup$ = this.getContactsByGroup$(group).subscribe((contactsByGroup: Contact[]) => {
+          contactGroup.name = group;
+          contactGroup.contactsBS.next(contactsByGroup);
+          allGroupedContacts.push(contactGroup);
+        });
+      });
+    })
+    return allGroupedContacts;
+  }
+
   // #region CRUD
 
   /**
@@ -119,9 +138,13 @@ export class FireContactService implements OnDestroy {
    * @param contact The contact object to add.
    */
   async addContact(contact: Contact) {
+    contact. group = contact.firstname[0];
     const newContactRef = await addDoc(this.getContactsRef(), contact.toJson());
     // update is important to get and save the id inside of component.
-    await updateDoc(newContactRef, {id: newContactRef.id});
+    console.log(newContactRef);
+    if(newContactRef !== null){
+      await updateDoc(newContactRef, {id: newContactRef.id});
+    }
   }
 
   /**
@@ -147,8 +170,9 @@ export class FireContactService implements OnDestroy {
   /**
    * Returns the reference of 'contacts' collection.
    */
-  private getContactsRef() {
-    return collection(this.firestore, 'contacts');
+  private getContactsRef(): CollectionReference {
+    const contactsCollection = collection(this.firestore, 'contacts');
+    return contactsCollection;
   }
 
   /**
@@ -156,8 +180,9 @@ export class FireContactService implements OnDestroy {
    * 
    * @param docId Firestore document ID
    */
-  private getSingleContactRef(docId: string) {
-    return doc(this.firestore, `contacts/${docId}`);
+  private getSingleContactRef(docId: string): DocumentReference {
+    const contactsRef = this.getContactsRef();
+    return doc(contactsRef, `/${docId}`);
   }
 
   /**

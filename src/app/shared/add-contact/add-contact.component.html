@@ -1,31 +1,44 @@
-<aside id="addContactModal" class="add-contact-modal-container" [style.visibility]=isVisible>
+<aside id="addContactModal" class="add-contact-modal-container">
     <div class="leftpanel">
         <img src="assets/Icons/JoinLogoWhite.png" alt="">
-        <div class="add-contact-header">
-            <h1 id="add-contact-headline">{{ kindOfHeadlineTxt }} Contact</h1>
+        <div class="addContactHeader">
+            <h1 id="addContactHeadline">{{ cs.modalHeadlineTxt | async }} Contact</h1>
             <h2>Tasks are better with a team!</h2>
+            <hr>
         </div>
-        <div class="mobile-close-btn">
-            <button type="button" (click)="closeModal()">x</button>
+        <div class="mobileCloseBtn d_none">
+            <button type="button" (click)="cs.closeModal()">X</button>
         </div>
     </div>
 
-    <div class="rightpanel">
-        <div class="line-close-btn">
-            <button type="button" (click)="closeModal()">x</button>
+    <div class="rightPanel">
+        <div class="lineCloseBtn">
+            <button type="button" (click)="cs.closeModal()">x</button>
         </div>
-        <div class="line-form">
-            <img src="assets/Icons/contact_icon_grey.png" alt="">
+        <div class="lineForm">
+            <img class="singleIcon" src="assets/Icons/contact_icon_grey.png" alt="">
 
-            <form action="submit" method="post" *ngIf="(contact$() | async) as contact ">
-               <input type="text" name="firstname" id="firstname" placeholder="firstname" [(ngModel)]="contact.firstname" required minlength="3" >
-               <input type="text" name="lastname" id="lastname" placeholder="lastname" [(ngModel)]="contact.lastname"  required minlength="3" >
-               <input type="email" name="email" id="email" placeholder="e-mail" [(ngModel)]="contact.email" required minlength="9">
-               <input type="tel" name="tel" id="tel" placeholder="phonenumber" [(ngModel)]="contact.tel" required minlength="7">
-               <div class="form-button-container">
-                   <button type="button" (click)="closeModal()" >Cancel X</button>
-                   <button id="create-contact-btn" type="submit" (click)="addContact()">{{ kindOfButtonTxt }}</button>
-               </div>
+            <form method="post" (submit)="submitForm($event)" *ngIf="cs.contactToEdit | async as contact">
+                <div class="formField">
+                    <input type="text" name="firstname" id="firstname" placeholder="firstname" [(ngModel)]="contact.firstname" (keyup)="validateFirstName()">
+                    <div #errEl class="errmsg"></div>
+                </div>
+                <div class="formField">
+                    <input type="text" name="lastname" id="lastname" placeholder="lastname" [(ngModel)]="contact.lastname" (keyup)="validateLastName()">
+                    <div #errEl class="errmsg"></div>
+                </div>
+                <div class="formField">
+                    <input type="text" name="email" id="email" placeholder="email" [(ngModel)]="contact.email" (keyup)="validateEmail()">
+                    <div #errEl class="errmsg"></div>
+                </div>
+                <div class="formField">
+                    <input type="text" name="tel" id="tel" placeholder="tel" [(ngModel)]="contact.tel" (keyup)="validateTel()">
+                    <div #errEl class="errmsg"></div>
+                </div>
+                <div class="formBtnContainer">
+                    <input type="button" (click)="cs.closeModal()" value="Cancel X">
+                    <input id="createContactBtn" type="submit" value="{{ cs.modalSaveBtnTxt | async }}">
+                </div>
             </form>
             
         </div>

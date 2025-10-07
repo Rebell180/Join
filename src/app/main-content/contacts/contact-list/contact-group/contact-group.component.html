@@ -1,5 +1,0 @@
-<div class="letter">{{ letter() }}</div>
-<hr>
-@for (contact of getContactsByGroup() | async ; track contact || $index) {
-    <app-single-contact [ngClass]="{'active': contact.selected }" [contact]="contact" (click)="select(contact)"></app-single-contact>
-}
