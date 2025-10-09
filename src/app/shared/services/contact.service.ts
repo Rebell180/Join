@@ -30,7 +30,7 @@ export class ContactService implements OnDestroy {
   //  contact-detail
 
   private classToDisplayBS: BehaviorSubject<string> = new BehaviorSubject('');
-  classToDisplay: Observable<string> = this.classToDisplayBS.asObservable();
+  classToDisplay$: Observable<string> = this.classToDisplayBS.asObservable();
 
   // fireContactService integration properties
 

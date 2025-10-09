@@ -17,13 +17,6 @@ export class ContactDetailComponent {
 
   private firestore: FireContactService = inject(FireContactService);
   cs: ContactService = inject(ContactService);
-
-  openEditModal: OutputEmitterRef<Observable<Contact>> = output<Observable<Contact>>();
-
-  contact$: Observable<Contact> = this.firestore.currentContact$;
-
-  classToDisplayBS: string = "";
-  
   isMenuVisible: boolean = false;
 
   constructor() {
@@ -36,9 +29,5 @@ export class ContactDetailComponent {
   
   deleteContact(contact: Contact) {
     this.firestore.deleteContact(contact); 
-  }
-
-  openModal() {
-    this.openEditModal.emit(this.contact$);
   }
 }

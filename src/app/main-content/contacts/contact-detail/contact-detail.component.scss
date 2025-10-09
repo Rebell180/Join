@@ -1,8 +1,11 @@
 @use "./../../../../../public/styles/all_styles.scss" as all;
 
-.iconContactMain {
-    width: 40dvw;
+:host {
+    flex: 1;
+}
 
+.iconContactMain {
+    
     @include all.notebook {
         background: #ededed;
         @include all.big($hgt: 37dvw);
