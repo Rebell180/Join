@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Injectable, OnDestroy } from '@angular/core';
+import { BehaviorSubject, debounceTime, fromEvent, map, Observable, shareReplay, startWith, Subscription } from 'rxjs';
 
 export enum DisplayType {
   NONE,
@@ -14,7 +14,7 @@ export enum DisplayType {
 @Injectable({
   providedIn: 'root'
 })
-export class DisplaySizeService {
+export class DisplaySizeService implements OnDestroy{
   // #region Attributes
   private sizes: {
     smart: number,
@@ -35,9 +35,22 @@ export class DisplaySizeService {
   private curSizeBS: BehaviorSubject<DisplayType> = new BehaviorSubject<DisplayType>(DisplayType.NONE);
   private curSize$:Observable<DisplayType> = this.curSizeBS.asObservable();
 
+  private resizeSub?: Subscription;
+  private resize$: Observable<number> = fromEvent(window, 'resize').pipe(
+      debounceTime(3000),
+      map(() => window.innerWidth),
+      startWith(window.innerWidth),
+      shareReplay(1)
+    );;
+
   // #endregion
   constructor() { 
-    this.adustSize();
+    this.resize$.subscribe(size => this.adustSize(size));
+  }
+
+  // #region Methodes
+  ngOnDestroy(): void {
+    this.resizeSub?.unsubscribe();
   }
 
   /**
@@ -47,8 +60,7 @@ export class DisplaySizeService {
   size(): Observable<DisplayType> {return this.curSize$}
 
   /** Detects the current display size. */
-  private adustSize() {
-    const displaySize:number = window.innerWidth;
+  private adustSize(displaySize:number) {
     if (displaySize >= this.sizes.bigscreen) this.curSizeBS.next(DisplayType.BIGSCREEN);
     else if (displaySize >= this.sizes.desktop) this.curSizeBS.next(DisplayType.DESKTOP);
     else if (displaySize >= this.sizes.tablet) this.curSizeBS.next(DisplayType.NOTEBOOK);
@@ -57,3 +69,4 @@ export class DisplaySizeService {
     else this.curSizeBS.next(DisplayType.SMART);
   }
 }
+// #endregion
