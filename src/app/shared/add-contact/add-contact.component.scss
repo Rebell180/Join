@@ -11,18 +11,8 @@
         transform: translateX(-50%);
         margin-top: 4rem;
     }
-
-    @include all.tablet() {
-        position: absolute;
-        @include all.big($wid: 100dvw, $hgt: 100.9dvh);
-        border-radius: 0;
-        top: -14rem;
-        z-index: 30;
-        transform: translateX(0);
-        @include all.fl($flexdir: column, $alit: center);
-    }
-
-    @include all.smart() {
+    
+    @include all.tablet-smart() {
         position: absolute;
         @include all.big($wid: 100dvw, $hgt: 100.9dvh);
         border-radius: 0;
@@ -46,7 +36,7 @@
     }
 
     @include all.tablet {
-        border-radius: 16px 16px 0 0; 
+        border-radius: 0; 
         @include all.big($wid: 100%, $hgt: 35rem);
         @include all.fl($alit: center);
     }

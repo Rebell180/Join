@@ -17,8 +17,7 @@
         @include all.big($wid: 60dvw, $hgt: 64dvh);
     }
     @include all.mobile {
-        @include all.marpad($pad: 0 4px);
-        @include all.big($wid: 78dvw, $hgt: 68dvh);
+        @include all.big($wid: 58dvw, $hgt: 70dvh);
         margin-top: 2rem;
     }
 
