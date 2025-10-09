@@ -1,9 +1,13 @@
 @use '../../../../../public/styles/all_styles' as all;
 #section-contact-list {
-    @include all.big($wid: 41rem, $hgt: 70rem);
+    @include all.big($wid: 41rem, $hgt: 59rem);
     overflow-y: auto;
     background: white;
     padding: 0 10px;
+
+    @include all.bigscreen {
+        @include all.big($wid: 28dvw, $hgt: 76dvh);
+    }
 
     @include all.notebook {
         @include all.big($wid: 38dvw, $hgt: 76dvh);

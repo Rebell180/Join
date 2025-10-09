@@ -37,7 +37,7 @@
         }
 
         h2 {
-            font-size: clamp(16px, 1dvw, 32px);
+            font-size: clamp(16px, 1.5dvw, 32px);
         }
 
         hr {
@@ -216,6 +216,7 @@
 
                 .dropDownMenu {
                     position: absolute;
+                    top: -10rem;
                     right: 0;
                     background-color: white;
                     border-radius: 8px;
