@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 export enum DisplayType {
+  NONE,
   SMART,
   MOBILE,
   TABLET,
@@ -29,6 +31,16 @@ export class DisplaySizeService {
     desktop: 1025,
     bigscreen: 1920,
   }
+
+  private curSizeBS: BehaviorSubject<DisplayType> = new BehaviorSubject<DisplayType>(DisplayType.NONE);
+  private curSize$:Observable<DisplayType> = this.curSizeBS.asObservable();
+
   // #endregion
   constructor() { }
+
+  /**
+   * gets current size.
+   * @returns - Current size as Obervable
+   */
+  size(): Observable<DisplayType> {return this.curSize$}
 }
