@@ -34,16 +34,6 @@ export class FireContactService implements OnDestroy {
   private currentContactIdSubject = new BehaviorSubject<string | null>(null);
   currentContactId$ = this.currentContactIdSubject.asObservable();
 
-  // currencContact gets data from contacts width current id
-  currentContact$ = combineLatest([
-    this.contacts$,
-    this.currentContactId$
-  ]).pipe(
-    map(([contacts, id]) =>
-    contacts.find(contact => contact.id === id ) 
-      ?? new Contact({ id: '', firstname: '', lastname: '', group: '', email: '', tel: '', iconColor: '' })
-  ));
-
   private unsubContacts: Unsubscribe;
   private firestore: Firestore = inject(Firestore);
 

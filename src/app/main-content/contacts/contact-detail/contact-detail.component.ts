@@ -1,9 +1,9 @@
-import { Component, inject, Input, output, OutputEmitterRef } from '@angular/core';
+import { Component, HostBinding, inject, Input, OnDestroy, OnInit, output, OutputEmitterRef } from '@angular/core';
 import { Contact } from './../../../shared/classes/contact';
 import { ContactIconComponent } from '../contact-icon/contact-icon.component';
 import { FireContactService } from '../../../shared/services/fire-contact.service';
 import { CommonModule } from '@angular/common';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { ContactService } from '../../../shared/services/contact.service';
 
 
@@ -13,14 +13,25 @@ import { ContactService } from '../../../shared/services/contact.service';
   templateUrl: './contact-detail.component.html',
   styleUrl: './contact-detail.component.scss'
 })
-export class ContactDetailComponent {
+export class ContactDetailComponent implements OnInit, OnDestroy {
 
   private firestore: FireContactService = inject(FireContactService);
+  
   cs: ContactService = inject(ContactService);
+  subCurrentContact!: Subscription;
+  @HostBinding('class.d_none') isHidden:boolean = true;
+
   isMenuVisible: boolean = false;
 
-  constructor() {
+  
+  ngOnInit() {
+    this.subCurrentContact = this.cs.currentContact$.subscribe(contact => {
+      this.isHidden = !contact;
+    })
+  }
 
+  ngOnDestroy(): void {
+    
   }
 
   toggleMenu(): void {

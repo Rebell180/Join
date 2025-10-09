@@ -43,12 +43,8 @@ export class ContactService implements OnDestroy {
   contactToEditBS: BehaviorSubject<Contact> = new BehaviorSubject(new Contact({ id: '', firstname: '', lastname: '', group: '', email: '', tel: '', iconColor: '' }));
   contactToEdit: Observable<Contact> = this.contactToEditBS.asObservable();  
   
-  currentContactBS: BehaviorSubject<Contact> = new BehaviorSubject(new Contact({ id: '', firstname: '', lastname: '', group: '', email: '', tel: '', iconColor: '' }));
-  currentContact: Observable<Contact> = this.currentContactBS.asObservable();
-  currentContact$ = this.fcs.currentContact$.subscribe((contact: Contact) => {
-    this.currentContactBS.next(contact);
-    this.contactToEditBS.next(contact);
-  });
+  private currentContactBS: BehaviorSubject<Contact | null > = new BehaviorSubject<Contact | null>(null);;
+  currentContact$: Observable<Contact | null> = this.currentContactBS.asObservable();
 
   contactGroupsBS: BehaviorSubject<Array<string>> = new BehaviorSubject(new Array<string>());
   contactGroups: Observable<Array<string>> = this.contactGroupsBS.asObservable();
@@ -74,7 +70,6 @@ export class ContactService implements OnDestroy {
 
   ngOnDestroy(): void {
     this.contacts$.unsubscribe();
-    this.currentContact$.unsubscribe();
     this.contactGroups$.unsubscribe();
   }
 
@@ -90,7 +85,6 @@ export class ContactService implements OnDestroy {
       this.modalHeadlineTxtBS.next('Add');
       this.modalSaveBtnTxtBS.next('Create contact ✓');
     } else if (kindOfModal == 'edit') {
-      this.contactToEdit = this.currentContact;
       this.isEditModalOpenBS.next(true);
       this.isAddModalOpenBS.next(false);
       this.modalHeadlineTxtBS.next('Edit');
