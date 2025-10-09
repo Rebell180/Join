@@ -71,8 +71,8 @@
             @include all.big($wid: 56px, $hgt: 56px);
             border-radius: 50%;
             position: fixed;
-            right: -1rem;
-            bottom: 92px;
+            right: -20px;
+            bottom: 72px;
             z-index: 0;
         }
     }
