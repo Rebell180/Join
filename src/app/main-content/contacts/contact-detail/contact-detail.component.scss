@@ -37,7 +37,11 @@
         }
 
         h2 {
-            font-size: clamp(16px, 1.5dvw, 32px);
+            font-size: clamp(16px, 2dvw, 32px);
+
+            @include all.notebook {
+                font-size: 14px;
+            }
         }
 
         hr {
@@ -204,8 +208,7 @@
                     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
                     padding: 0;
                     position: absolute;
-                    right: -3rem;
-                    bottom: -8rem;
+                    right: 10px;
                 }
 
                 .dot {
@@ -217,7 +220,7 @@
 
                 .dropDownMenu {
                     position: absolute;
-                    top: -10rem;
+                    bottom: -43rem;
                     right: 0;
                     background-color: white;
                     border-radius: 8px;
@@ -253,12 +256,6 @@
                     @include all.mobile {
                         font-size: 20px;
                     }
-                }
-
-                h3 {
-                    margin: 1.5rem 0;
-                    font-size: clamp(16px, 1.2dvw, 64px);
-                    font-family: "InterRegular", sans-serif;
                 }
 
                 h3 {
