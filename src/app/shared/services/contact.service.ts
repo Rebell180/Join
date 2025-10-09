@@ -64,7 +64,6 @@ export class ContactService implements OnDestroy {
   constructor() { 
     this.contactsByGroup = this.fcs.getContactGroups();
     this.curSize$.subscribe(displayType => {
-      console.log(displayType);
       if (displayType == DisplayType.MOBILE || displayType == DisplayType.TABLET) {
         this.closeDetail();
       } else {
