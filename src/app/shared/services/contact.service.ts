@@ -3,6 +3,7 @@ import { FireContactService } from './fire-contact.service';
 import { Contact } from '../classes/contact';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { ContactGroup } from '../classes/contactGroup';
+import { DisplaySizeService, DisplayType } from './display-size.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,8 @@ export class ContactService implements OnDestroy {
 
   private fcs : FireContactService = inject(FireContactService);
   newContact: Contact = new Contact({ id: '', firstname: '', lastname: '', group: '', email: '', tel: '', iconColor: '' });
+  private dss: DisplaySizeService = inject(DisplaySizeService);
+  private curSize$: Observable<DisplayType> = this.dss.size();
   // add or edit contact modal properties 
 
   private isEditModalOpenBS: BehaviorSubject<boolean> = new BehaviorSubject(false);
@@ -60,6 +63,14 @@ export class ContactService implements OnDestroy {
 
   constructor() { 
     this.contactsByGroup = this.fcs.getContactGroups();
+    this.curSize$.subscribe(displayType => {
+      console.log(displayType);
+      if (displayType == DisplayType.MOBILE || displayType == DisplayType.TABLET) {
+        this.closeDetail();
+      } else {
+        this.showDetail();
+      }
+    });
   }
 
   ngOnDestroy(): void {
