@@ -40,4 +40,8 @@ export class ContactListComponent {
   limit(word: string, maxLength: number): string {
     return word.length <= maxLength ? word : word.slice(0, maxLength) + '...';
   }
+
+  protected selectContact(contact:Contact|null) {
+    this.cs.selectContact(contact)
+  }
 }

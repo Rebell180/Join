@@ -5,7 +5,7 @@
             <div class="letter">{{ contactGroup.name }}</div>
             <hr>
             @for (contact of contactGroup.contacts| async ; track contact.id || $index) {
-                <div id="{{ 'contact_' + contact.group + '_' + contact.id + '_' + $index}}" class="single-contact-container" [ngClass]="{'active': contact.selected }" (click)="cs.selectContact(contact.id)">
+                <div id="{{ 'contact_' + contact.group + '_' + contact.id + '_' + $index}}" class="single-contact-container" [ngClass]="{'active': contact.selected }" (click)="cs.selectContact(contact)">
                     <div class="icon-wrapper">
                         <app-contact-icon id="{{ 'contact_icon_' + contact.id}}" class="{{ contact.iconColor }}" [contact]="contact"></app-contact-icon>
                     </div>
