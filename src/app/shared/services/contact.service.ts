@@ -59,7 +59,7 @@ export class ContactService implements OnDestroy {
   // #endregion properties
 
   constructor() { 
-    this.contactsByGroupBS.next(this.fcs.getContactGroups());
+    this.contactsByGroup = this.fcs.getContactGroups();
   }
 
   ngOnDestroy(): void {

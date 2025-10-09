@@ -20,22 +20,31 @@
 
             <form method="post" (submit)="submitForm($event)" *ngIf="cs.contactToEdit | async as contact">
                 <div class="formField">
-                    <input type="text" name="firstname" id="firstname" placeholder="firstname" [(ngModel)]="contact.firstname" (keyup)="validateFirstName()">
-                    <div #errEl class="errmsg"></div>
-                </div>
-                <div class="formField">
-                    <input type="text" name="lastname" id="lastname" placeholder="lastname" [(ngModel)]="contact.lastname" (keyup)="validateLastName()">
-                    <div #errEl class="errmsg"></div>
-                </div>
-                <div class="formField">
                     <div class="inputImg">
-                    <input type="text" name="email" id="email" placeholder="email" [(ngModel)]="contact.email" (keyup)="validateEmail()">
-                    <img src="assets/Icons/person.png" alt="">
+                        <input type="text" name="firstname" id="firstname" placeholder="firstname" [(ngModel)]="contact.firstname" (keyup)="validateFirstName()">
+                        <img src="assets/Icons/person.png" alt="">
                     </div>
                     <div #errEl class="errmsg"></div>
                 </div>
                 <div class="formField">
-                    <input type="text" name="tel" id="tel" placeholder="tel" [(ngModel)]="contact.tel" (keyup)="validateTel()">
+                    <div class="inputImg">
+                        <input type="text" name="lastname" id="lastname" placeholder="lastname" [(ngModel)]="contact.lastname" (keyup)="validateLastName()">
+                        <img src="assets/Icons/person.png" alt="">
+                    </div>
+                    <div #errEl class="errmsg"></div>
+                </div>
+                <div class="formField">
+                    <div class="inputImg">
+                        <input type="text" name="email" id="email" placeholder="email" [(ngModel)]="contact.email" (keyup)="validateEmail()">
+                        <img src="assets/Icons/mail.png" alt="">
+                    </div>
+                    <div #errEl class="errmsg"></div>
+                </div>
+                <div class="formField">
+                    <div class="inputImg">
+                        <input type="text" name="tel" id="tel" placeholder="tel" [(ngModel)]="contact.tel" (keyup)="validateTel()">
+                        <img src="assets/Icons/call.png" alt="">
+                    </div>
                     <div #errEl class="errmsg"></div>
                 </div>
                 <div class="formBtnContainer">
@@ -48,4 +57,4 @@
         </div>
 
     </div>
-</aside>    
+</aside>  
