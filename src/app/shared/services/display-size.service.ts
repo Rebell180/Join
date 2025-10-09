@@ -36,11 +36,24 @@ export class DisplaySizeService {
   private curSize$:Observable<DisplayType> = this.curSizeBS.asObservable();
 
   // #endregion
-  constructor() { }
+  constructor() { 
+    this.adustSize();
+  }
 
   /**
    * gets current size.
    * @returns - Current size as Obervable
    */
   size(): Observable<DisplayType> {return this.curSize$}
+
+  /** Detects the current display size. */
+  private adustSize() {
+    const displaySize:number = window.innerWidth;
+    if (displaySize >= this.sizes.bigscreen) this.curSizeBS.next(DisplayType.BIGSCREEN);
+    else if (displaySize >= this.sizes.desktop) this.curSizeBS.next(DisplayType.DESKTOP);
+    else if (displaySize >= this.sizes.tablet) this.curSizeBS.next(DisplayType.NOTEBOOK);
+    else if (displaySize >= this.sizes.mobile) this.curSizeBS.next(DisplayType.TABLET);
+    else if (displaySize >= this.sizes.smart) this.curSizeBS.next(DisplayType.MOBILE);
+    else this.curSizeBS.next(DisplayType.SMART);
+  }
 }
