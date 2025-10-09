@@ -55,7 +55,19 @@
             border-radius: 10px;
             cursor: pointer;
 
+            @include all.tablet {
+                width: 50dvw;
+                padding: 10px;
+                gap: 10px;
+            }
+
             @include all.mobile {
+                width: 55dvw;
+                padding: 10px;
+                gap: 10px;
+            }
+
+            @include all.smart {
                 width: 80dvw;
                 padding: 10px;
                 gap: 10px;
