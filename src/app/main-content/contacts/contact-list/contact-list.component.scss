@@ -1,6 +1,6 @@
 @use '../../../../../public/styles/all_styles' as all;
 #section-contact-list {
-    @include all.big($wid: 41rem, $hgt: 59rem);
+    @include all.big($wid: 41rem, $hgt: 70rem);
     overflow-y: auto;
     background: white;
     padding: 0 10px;
