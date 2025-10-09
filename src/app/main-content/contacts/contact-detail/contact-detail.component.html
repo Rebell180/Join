@@ -1,11 +1,11 @@
-<div class="iconContactMain {{ classToDisplay }}">
+<div class="iconContactMain {{ classToDisplayBS }}" >
     <div class="iconName">
         <h1>Contacts</h1>
         <hr />
         <h2>Better with a team</h2>
     </div>
 
-    <div class="iconNameMobile" (click)="goBack()">
+    <div class="iconNameMobile" (click)="cs.closeDetail()">
         <div class="headerInfo">
             <h1>Contacts</h1>
             <h2>Better with a team</h2>
@@ -16,8 +16,10 @@
         </div>
     </div>
 
+
     <div class="contactInfo">
-        <div *ngIf="cs.contactToEdit | async as contact" class="contactDetail">
+        <div *ngIf="cs.contactToEdit | async as contact" class="contactDetail" [ngClass]="{'d_none': !contact.selected }">
+            
             <div class="contactHeaderRow">
             <div class="contactIcon">
                 <app-contact-icon class="{{ contact.iconColor }}" [contact]="contact"></app-contact-icon>
@@ -47,6 +49,7 @@
                     <a href="tel:+49{{ contact.tel }}">{{ contact.tel }}</a>
                 </div>
             </div>
+
             <div class="optionsContainer" id="mobileMenu">
                 <button class="optionsBtn" (click)="toggleMenu()">
                     <span class="dot"></span>

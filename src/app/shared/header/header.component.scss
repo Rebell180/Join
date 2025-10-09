@@ -4,7 +4,6 @@
 // Mit :host kann man in Angular die gesamte Komponente stylen.
 :host {
     .smallHeader {
-        width: 100%;
         padding: 0 2rem;
 
         grid-area: header;
@@ -46,6 +45,12 @@
         & > img { 
             cursor: pointer;
             padding-right: 1rem;
+        }
+
+        .help {
+            @include all.tablet {
+                display: none;
+            }
         }
     }
 }

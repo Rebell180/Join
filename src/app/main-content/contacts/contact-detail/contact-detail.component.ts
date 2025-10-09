@@ -1,9 +1,9 @@
-import { Component, inject, output, OutputEmitterRef } from '@angular/core';
+import { Component, inject, Input, output, OutputEmitterRef } from '@angular/core';
 import { Contact } from './../../../shared/classes/contact';
 import { ContactIconComponent } from '../contact-icon/contact-icon.component';
 import { FireContactService } from '../../../shared/services/fire-contact.service';
 import { CommonModule } from '@angular/common';
-import { filter, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { ContactService } from '../../../shared/services/contact.service';
 
 
@@ -22,7 +22,7 @@ export class ContactDetailComponent {
 
   contact$: Observable<Contact> = this.firestore.currentContact$;
 
-  classToDisplay: string = "";
+  classToDisplayBS: string = "";
   
   isMenuVisible: boolean = false;
 
@@ -33,10 +33,6 @@ export class ContactDetailComponent {
   toggleMenu(): void {
         this.isMenuVisible = !this.isMenuVisible;
     }
-
-  goBack() {
-    this.classToDisplay = "d_none";
-  }
   
   deleteContact(contact: Contact) {
     this.firestore.deleteContact(contact); 
@@ -46,5 +42,3 @@ export class ContactDetailComponent {
     this.openEditModal.emit(this.contact$);
   }
 }
-//this.firestore.currentContact anstatt contact.
-// output schreiben

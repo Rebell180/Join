@@ -1,43 +1,44 @@
 @use '../../../../public/styles/all_styles' as all;
 
 #addContactModal {
-    width: 90dvw;
-    max-width: 900px;
+    width: 95rem;
     height: 60dvh;
-    
+    top: 15rem;
     background-color: white;
     border-radius: 16px;
-    
     @include all.fl($jc: center, $alit: center);
     
     @include all.notebook {
         width: 90dvw;
-        max-width: 900px;
-        left: 0%;
         transform: translateX(-50%);
         margin-top: 4rem;
     }
 
     @include all.tablet() {
-        width: 70dvw;
-        max-width: 800px;
-        height: 70dvh;
-        z-index: 20;
-        left: 35%;
+        position: absolute;
+        width: 100dvw;
+        height: 100.9dvh;
+        border-radius: 0;
+        top: -14rem;
+        z-index: 30;
         transform: translateX(0);
         @include all.fl($flexdir: column, $alit: center);
     }
 
-    @include all.mobile {
-        width: 90dvw;
-        height: 70dvh;
-        left: 10%;
+    @include all.smart() {
+        position: absolute;
+        width: 100dvw;
+        height: 100.9dvh;
+        border-radius: 0;
+        top: -14rem;
+        z-index: 30;
         transform: translateX(0);
+        @include all.fl($flexdir: column, $alit: center);
     }
 }
 
 .leftPanel {
-    width: 45%;
+    width: 40%;
     height: 100%;
     background-color: #2a3647;
     padding: 0 2rem;
@@ -84,8 +85,9 @@
 }
 
 hr {
+    border: 2px solid red;
     width: 60px; 
-    height: 0.25rem;
+    height: 3px;
     background: rgb(17, 148, 213);
     border: none
 }
@@ -102,24 +104,16 @@ img {
 
 h1 {
     color: white;
-    font-size: clamp(28px, 5vw, 48px); 
+    font-size: clamp(28px, 4vw, 48px); 
     margin-bottom: 0.5rem;
     line-height: 1.2;
-
-    @include all.tablet {
-        font-size: 50px;
-    }
 }
 
 h2 {
     width: 100%;
     color: white;
-    font-size: clamp(16px, 1.5vw, 24px); 
+    font-size: clamp(16px, 2vw, 24px); 
     margin-bottom: 1rem;
-
-    @include all.tablet {
-        font-size: 22px;
-    }
 }
 
 .rightPanel {
@@ -132,7 +126,7 @@ h2 {
         width: 100%;
         height: auto; 
         @include all.fl($alit: flex-start); 
-        padding: 1.5rem;
+        padding: 0;
     }
 
     .lineCloseBtn { 
@@ -153,7 +147,6 @@ h2 {
 
         @include all.tablet {
             flex-direction: column;
-            margin-top: 0;
             padding-top: 9rem;
             align-items: center; 
         }
@@ -188,7 +181,7 @@ form {
         margin-bottom: 1.5rem;
         @include all.fl($flexdir: column, $alit: center);
 
-        .inputContainer {
+        .inputImg {
             width: 70%;
             height: 40px;
             padding: 0 10px;
@@ -197,6 +190,10 @@ form {
             display: flex;
             justify-content: space-between;
             align-items: center;
+
+            input {
+                outline: none;
+            }
             
             img {
                 width: 20px;
@@ -211,41 +208,36 @@ form {
             }
 
             @include all.tablet {
-                width: 50%;
+                width: 60%;
                 padding: 0 15px;
             }
 
             @include all.mobile {
-                width: 90%;
+                width: 60%;
+                padding: 0 15px;
+            }
+
+            @include all.smart {
+                width: 70%;
                 padding: 0 15px;
             }
         }
 
-                @include all.tablet() {
-                    gap: 3rem;
-                    padding: 0 0;
-                }
-                
-                input {
-                    width: 100%;
-                    min-width: 20rem;
-                    height: 3.5rem;
-                    background-color: whitesmoke;
-                    border-radius: 8px;
-                    border: 1px solid lightgrey;
-                    padding: 5px 1rem;
-                    
-                }
+        .errmsg {
+            width: 70%;
+            height: 1rem;
+            color: #c00000;
+            font-size: 1rem;
+            padding: 4px 16px;
 
-                .errmsg {
-                    width: 70%;
-                    height: 1rem;
-                    color: #c00000;
-                    font-size: 1rem;
-                    padding: 4px 16px;
-                }
+            @include all.tablet {
+                padding-left: 40px;
+            }
+        }
+    }
+}
 
-                .formBtnContainer {
+.formBtnContainer {
     width: 100%;
     margin-top: 2rem;
     @include all.fl($jc: center, $flexdir: row);
@@ -256,19 +248,23 @@ form {
         flex-direction: row; 
     }
 
-                    input[type=button], input[type=submit] {
-                        min-width: max-content;
-                        padding: 12px;
-                        border-radius: 8px;
-                        border: 1px solid grey;
-                    }
+    input {
+        width: 11rem;
+        height: 4rem;
+        border: 1px solid lightgrey;
+        border-radius: 5px;
 
-                    input[type=submit] {
-                        background: #2a3647;
-                        color: white;
-                    }
+        &:hover {
+            background: #2a3647;
+            color: white;
+        }
 
-                    #createContactBtn {
+        @include all.tablet {
+            display: none;
+        }
+    }
+
+    #createContactBtn {
         
         @include all.tablet {
             width: 40%;
@@ -282,7 +278,23 @@ form {
             }
         }
     }
-                }
-            }   
-        }
+    .deleteBtnMobile {
+        display: none;
 
+        @include all.tablet {
+            display: block;
+            width: 20%;
+            height: 3rem;
+            border: 1px solid lightgrey;
+            border-radius: 5px;
+            background: #c00000;
+            color: white;
+            @include all.fl($alit: center, $jc: center);
+
+            &:hover {
+                background: #a00000;
+                color: white;
+            }
+        }
+    }
+}

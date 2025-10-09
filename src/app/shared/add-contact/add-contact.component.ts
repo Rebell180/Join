@@ -1,6 +1,5 @@
 import { Component, ElementRef, inject, OnInit, QueryList, Renderer2, ViewChildren } from '@angular/core';
 import { Contact } from '../classes/contact';
-import { FireContactService } from '../services/fire-contact.service';
 import { FormsModule } from '@angular/forms';
 import { ToastMsgService } from '../services/toast-msg.service';
 import { CommonModule } from '@angular/common';
@@ -14,10 +13,8 @@ import { Observable } from 'rxjs';
   templateUrl: './add-contact.component.html',
   styleUrl: './add-contact.component.scss'
 })
-export class AddContactComponent implements OnInit{
+export class AddContactComponent{
 
-  // private fcs: FireContactService = inject(FireContactService);
-  // private tms: ToastMsgService = inject(ToastMsgService);
   cs: ContactService = inject(ContactService);
   defaultContact: Observable<Contact> = this.cs.contactToEdit;
   private renderer: Renderer2 = inject(Renderer2);
@@ -25,48 +22,6 @@ export class AddContactComponent implements OnInit{
   errors: boolean[] = [false, false, false, false];
   @ViewChildren('errEl') errorRefs!: QueryList<ElementRef<HTMLDivElement>>;
   
-
-  ngOnInit(): void {
-
-  }
-
-  async addContact() { 
-
-    // contactData.firstname = this.getInputElementValue('firstname');
-    // contactData.lastname = this.getInputElementValue('lastname');
-    // contactData.email = this.getInputElementValue('email');
-    // contactData.tel = this.getInputElementValue('tel');
-    // contactData.group = contactData.firstname[0] ? contactData.firstname[0].toUpperCase() : '';
-
-    // if (!contactData || !contactData.firstname || !contactData.lastname || !contactData.email || !contactData.tel) {
-    //   this.tms.add('Create was failed by missing information', 3000, 'error');
-    //   return;
-    // }
-
-    // let result = null;
-    // if (this.cs.isAddModalOpen) {
-    //   result = await this.fcs.addContact(contactData);
-    //   if(result !== null) {
-    //     result = await this.fcs.updateContact(contactData);
-    //     if(result !== null) {
-    //       this.tms.add('Contact created', 3000, 'success');
-    //       this.isVisible = false;
-    //       this.closeModal();
-    //     } else {
-    //       this.tms.add('Sorry, something went wrong', 3000, 'error');
-    //     }
-    //   }
-    // } else if (this.cs.isEditModalOpen) {
-    //   result = await this.fcs.updateContact(contactData);
-    //   if(result !== null) {
-    //       this.tms.add('Contact created', 3000, 'success');
-    //       this.isVisible = false;
-    //       this.closeModal();
-    //     } else {
-    //       this.tms.add('Sorry, something went wrong', 3000, 'error');
-    //     }
-    // }
-  }
 
   getInputElementValue(elementId: string) {
     const inputRef = document.getElementById(elementId) as HTMLInputElement;
@@ -82,35 +37,16 @@ export class AddContactComponent implements OnInit{
   }
 
   async submitForm(e:SubmitEvent) {
-    // e.preventDefault();
-    const a = this.validateAll();
-    console.log('validate success: ' + a);
-    if (a) {
-      console.log('reach 1');
+    e.preventDefault();
+    if (this.validateAll()) {
       this.cs.contactToEdit.forEach(async (contact) => {
-        console.log('reach 2');
-        console.log(contact);
         if(contact.id == '') {
-          console.log('reach 3');
           await this.cs.addContactToDB(contact);
         } else {
-          console.log('reach 4');
           await this.cs.updateContactInDB(contact);
         }
-
-        // const data = this.contact$();
-        //   await data.forEach( async contactData => {
-        //   if (contactData) {
-        //     contact.id = contactData.id;
-        //     contact.iconColor = contactData.iconColor;
-        //   } 
-        //   contactData = contact;
-        // });
       });
-      console.log('reach end');
-      // TODO: ContactService add/edit.
       this.closeModal();
-      console.log('reach closed');
     }
   }
   
@@ -121,7 +57,6 @@ export class AddContactComponent implements OnInit{
     let valueToValidate: string = '';
     contactInForm.forEach((contact: Contact) => {
       valueToValidate = contact.firstname;
-      console.log('validate firstname: ' + valueToValidate);
     });
 
     const errors:boolean[] = [];
@@ -143,7 +78,6 @@ export class AddContactComponent implements OnInit{
     let valueToValidate: string = '';
     contactInForm.forEach((contact: Contact) => {
       valueToValidate = contact.lastname;
-      console.log('validate lastname: ' + valueToValidate);
     });
 
     const errors:boolean[] = [];
@@ -165,7 +99,6 @@ export class AddContactComponent implements OnInit{
     let valueToValidate: string = '';
     contactInForm.forEach((contact: Contact) => {
       valueToValidate = contact.email;
-      console.log('validate email: ' + valueToValidate);
     });
 
     const errors:boolean[] = [];
@@ -187,7 +120,6 @@ export class AddContactComponent implements OnInit{
     let valueToValidate: string = '';
     contactInForm.forEach((contact: Contact) => {
       valueToValidate = contact.tel;
-      console.log('validate tel: ' + valueToValidate);
     });
 
     const errors:boolean[] = [];
@@ -260,50 +192,4 @@ export class AddContactComponent implements OnInit{
     this.renderer.setProperty(errElem.nativeElement, 'innerText', '');
     return true;
   }
-
-  // TODO 
-  // #region validation
-
-  // verifyData(): boolean {
-  //   if(
-  //     this.validateFirstname() &&
-  //     this.validateLastname() && 
-  //     this.validateEmail() && 
-  //     this.validateTel()
-  //   ) {
-  //     return true;
-  //   } else {
-  //     return false;
-  //   }  
-  // }
-
-  // private validateFirstname(): boolean {
-  //   if(this.contact().firstname != '' && this.contact().firstname.length >= 3){
-  //     return true;
-  //   }
-  //   return false;
-  // }
-
-  // private validateLastname(): boolean {
-  //   if(this.contact().lastname != '' && this.contact().lastname.length >= 3){
-  //     return true;
-  //   }
-  //   return false;
-  // }
-
-  // private validateEmail(): boolean {
-  //   if(this.contact().email != '' && this.contact().email.match(new RegExp(`/^\S+@\S+\.\S+$/`))) {
-  //     return true;
-  //   }
-  //   return false;
-  // }
-
-  // private validateTel(): boolean {
-  //   if(this.contact().tel != '' && this.contact().tel.length >= 7 && this.contact().tel.match(new RegExp('^[0-9]'))){
-  //     return true;
-  //   }
-  //   return false;
-  // }
-
-  // #endregion validation
 }

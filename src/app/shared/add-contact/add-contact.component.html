@@ -1,5 +1,5 @@
 <aside id="addContactModal" class="add-contact-modal-container">
-    <div class="leftpanel">
+    <div class="leftPanel">
         <img src="assets/Icons/JoinLogoWhite.png" alt="">
         <div class="addContactHeader">
             <h1 id="addContactHeadline">{{ cs.modalHeadlineTxt | async }} Contact</h1>
@@ -28,7 +28,10 @@
                     <div #errEl class="errmsg"></div>
                 </div>
                 <div class="formField">
+                    <div class="inputImg">
                     <input type="text" name="email" id="email" placeholder="email" [(ngModel)]="contact.email" (keyup)="validateEmail()">
+                    <img src="assets/Icons/person.png" alt="">
+                    </div>
                     <div #errEl class="errmsg"></div>
                 </div>
                 <div class="formField">
@@ -36,8 +39,9 @@
                     <div #errEl class="errmsg"></div>
                 </div>
                 <div class="formBtnContainer">
+                    <input id="deleteContactBtn" *ngIf="cs.isEditModalOpen | async" type="button" class="deleteBtnMobile" (click)="cs.deleteContactInDB(contact)" value="Delete">
                     <input type="button" (click)="cs.closeModal()" value="Cancel X">
-                    <input id="createContactBtn" type="submit" value="{{ cs.modalSaveBtnTxt | async }}">
+                    <input id="createContactBtn" class="createBtn" type="submit" value="{{ cs.modalSaveBtnTxt | async }}">
                 </div>
             </form>
             

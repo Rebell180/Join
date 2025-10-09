@@ -94,7 +94,7 @@ export class FireContactService implements OnDestroy {
     return this.contacts$.pipe(
       map(contacts => {
         const groups: Array<string> = contacts
-          .map(c => c.group.toUpperCase())                // extract group values
+          .map(c => c.group.toUpperCase()) // extract group values
           .filter(g => !!g); // !! remove undefined and null values
         // the reason for the usage of Array.from is to remove duplicates.
         // else we could return groups directly with duplicates.
@@ -114,20 +114,22 @@ export class FireContactService implements OnDestroy {
     );
   }
 
-  getContactGroups(): Array<ContactGroup> {
-    const allGroupedContacts: Array<ContactGroup> = [];
-    const currentGroups: Observable<Array<string>> = this.getAllGroups$();
-    currentGroups.forEach((groupStream: Array<string>) => {
-      groupStream.forEach((group: string) => {
-        const contactGroup: ContactGroup = new ContactGroup();
-        const contactsByGroup$ = this.getContactsByGroup$(group).subscribe((contactsByGroup: Contact[]) => {
+  getContactGroups(): Observable<Array<ContactGroup>> {
+    return this.getAllGroups$().pipe(
+      map((groups: Array<string>) =>
+        groups.map((group: string) => {
+          const contactGroup = new ContactGroup();
           contactGroup.name = group;
-          contactGroup.contactsBS.next(contactsByGroup);
-          allGroupedContacts.push(contactGroup);
-        });
-      });
-    })
-    return allGroupedContacts;
+          // Fülle die Kontakte synchron aus dem aktuellen contacts$-Value
+          this.contacts$.pipe(
+            map(contacts => contacts.filter(c => c.group.toUpperCase() === group))
+          ).subscribe(contactsByGroup => {
+            contactGroup.contactsBS.next(contactsByGroup);
+          });
+          return contactGroup;
+        })
+      )
+    );
   }
 
   // #region CRUD
@@ -137,13 +139,16 @@ export class FireContactService implements OnDestroy {
    * 
    * @param contact The contact object to add.
    */
-  async addContact(contact: Contact) {
+  async addContact(contact: Contact): Promise<void> {
     contact. group = contact.firstname[0];
+    if(contact.firstname === '' || contact.lastname === '' || contact.email === '' || contact.tel === '') {
+      return;
+    }
     const newContactRef = await addDoc(this.getContactsRef(), contact.toJson());
     // update is important to get and save the id inside of component.
-    console.log(newContactRef);
-    if(newContactRef !== null){
+    if(newContactRef.id !== ''){
       await updateDoc(newContactRef, {id: newContactRef.id});
+      this.setCurrentContact(newContactRef.id);
     }
   }
 

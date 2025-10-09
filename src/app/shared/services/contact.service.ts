@@ -24,6 +24,11 @@ export class ContactService implements OnDestroy {
   private modalSaveBtnTxtBS: BehaviorSubject<string> = new BehaviorSubject('Create contact ✓');
   modalSaveBtnTxt: Observable<string> = this.modalSaveBtnTxtBS.asObservable();
 
+  //  contact-detail
+
+  private classToDisplayBS: BehaviorSubject<string> = new BehaviorSubject('d_none');
+  classToDisplay: Observable<string> = this.classToDisplayBS.asObservable();
+
   // fireContactService integration properties
 
   contactsBS: BehaviorSubject<Array<Contact>> = new BehaviorSubject(new Array<Contact>());
@@ -93,15 +98,17 @@ export class ContactService implements OnDestroy {
   // contact list methods
 
   async selectContact(id: string) {
+    this.showDetail();
     await this.contacts.forEach((contactStream) => {
       contactStream.forEach((contact) => {
+        contact.selected = false;
         if(contact.id == id) {
+          contact.selected = true;
           this.contactToEditBS.next(contact);
           this.setActiveContact(id);
         }
       });
     });
-    console.log(this.contacts);
   }
 
   setActiveContact(id: string | null) {
@@ -123,6 +130,17 @@ export class ContactService implements OnDestroy {
   }
 
   // #endregion CRUD methods
+
+  // contact detail methods
+
+  closeDetail() {
+    this.classToDisplayBS.next("d_none");
+  }
+
+  showDetail() {
+    this.classToDisplayBS.next("");
+  }
+
 
   // #endregion methods
 }

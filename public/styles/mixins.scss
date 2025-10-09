@@ -11,4 +11,10 @@
 	gap: $gap;
 	row-gap: $rgap;
 	column-gap: $cgap;
+	gap: $gap;
+}
+
+@mixin big($wid: 0, $hgt: 0) {
+	width: $wid;
+	height: $hgt;
 }

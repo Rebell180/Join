@@ -1,24 +1,31 @@
 @use '../../../../../public/styles/all_styles' as all;
-
 #section-contact-list {
-    width: 100%;
-    height: 100%;
+    @include all.big($wid: 41rem, $hgt: 70rem);
     overflow-y: auto;
-    @include all.marpad($pad: 0 4px);
+    background: white;
+    padding: 0 10px;
+
+    @include all.notebook {
+        width: 38dvw;
+    }
+
     @include all.tablet {
-        width: 80%;
+        @include all.big($wid: 60dvw, $hgt: 64dvh);
     }
     @include all.mobile {
-        @include all.marpad($pad: 0 16px);
-        width: 100%;
+        @include all.marpad($pad: 0 4px);
+        @include all.big($wid: 78dvw, $hgt: 68dvh);
+        margin-top: 2rem;
+    }
+
+    @include all.smart {
+        width: 80dvw;
     }
 
     .contact-group-container {
         @include all.fl($flexdir: column);
-        width: 100%;
-        height: auto;
+        @include all.big($wid: 100%, $hgt: auto);
         max-height: 100%;
-        padding-left: 24px;
         border-radius: 10px;
 
         .letter {
@@ -39,27 +46,24 @@
         }
 
         .single-contact-container {
-            @include all.fl($alit: center, $gap: 35px);
-            width: 100%;
-            height: 78px;
-            padding-left: 24px;
+            @include all.fl($alit: center, $gap: 25px);
+            @include all.big($wid: 90%, $hgt: 78px);
+            padding-left: 5px;
             border-radius: 10px;
             cursor: pointer;
+
             @include all.mobile {
                 padding: 0;
             }
 
             .icon-wrapper {
                 @include all.fl($jc:center, $alit:center);
-                width: 42px;
-                height: 42px;
+                @include all.big($wid: 42px, $hgt: 42px);
             }
 
             .contact-data {
                 @include all.fl($flexdir: column, $jc: center);
-                width: auto;
-                max-width: 220px;
-                height: 48px;
+                @include all.big($wid: 250px, $hgt: 48px);
 
                 .name {
                     margin-bottom: 5px;
@@ -84,25 +88,42 @@
                 background: #2a3647;
             }
         }
+        
+        .letter {
+            @include all.fl($alit: center);
+            height: 58px;
+            padding-left: 36px;
+            font-size: 2rem;
+            cursor: default;
+            @include all.mobile {
+                padding: 0;
+            }
+        }
+
+        hr {
+            width: 100%;
+            margin: 8px 0;
+            border: 1px solid rgba(0,0,0,0.1);
+        }
+
+        ::-webkit-scrollbar {
+            width: 10px;
+            scroll-behavior: smooth;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            border-radius: 5px;
+            border: 1px solid transparent;
+            background: #a8a8a8;
+            background-clip: content-box;
+        }
+
+        ::-webkit-scrollbar-button:single-button:vertical:decrement {
+            background: url('../../../../../public/assets/Icons/contact/scroll-up.png') no-repeat center center / contain;
+        }
+
+        ::-webkit-scrollbar-button:single-button:vertical:increment {
+            background: url('../../../../../public/assets/Icons/contact/scroll-down.png') no-repeat center center / contain;
+        }
     }
 }
-
-    ::-webkit-scrollbar {
-        width: 10px;
-        scroll-behavior: smooth;
-    }
-
-    ::-webkit-scrollbar-thumb {
-        border-radius: 5px;
-        border: 1px solid transparent;
-        background: #a8a8a8;
-        background-clip: content-box;
-    }
-
-    ::-webkit-scrollbar-button:single-button:vertical:decrement {
-        background: url('../../../../../public/assets/Icons/contact/scroll-up.png') no-repeat center center / contain;
-    }
-
-    ::-webkit-scrollbar-button:single-button:vertical:increment {
-        background: url('../../../../../public/assets/Icons/contact/scroll-down.png') no-repeat center center / contain;
-    }

@@ -5,17 +5,13 @@
 			width: 100%;
 			height: 100%;
 			@include all.fl($jc: space-between, $flexdir: column, $alit: center);
-			padding: 50px 0;
+			padding: 20px 0;
 			background: #2a3647;
 
 			@include all.tablet {
-				width: 100%;
-				height: 5rem;
-				flex-direction: row;
-				justify-content: center;
-				position: fixed;
-				bottom: 0;
-				top: auto;
+				width: 100dvw;
+				height: 10rem;
+				@include all.fl($jc: center, $alit: end);
 			}
 
 			img {

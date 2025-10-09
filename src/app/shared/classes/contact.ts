@@ -9,6 +9,7 @@ export class Contact {
     tel: string;
     selected: boolean = false;
     iconColor: string | null;
+    active: boolean = false;
     // #endregion
 
     /**
