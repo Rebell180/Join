@@ -24,7 +24,7 @@
         padding-left: 2rem;
 
         @include all.notebook {
-            width: 39dvw;
+            width: 38dvw;
             font-size: 14px;
             padding-left: 0.5rem;
         }
@@ -79,13 +79,13 @@
         padding-left: 2rem;
 
         @include all.notebook {
-            @include all.big($wid: 39dvw, $hgt: 40dvh);
+            @include all.big($wid: 38dvw, $hgt: 40dvh);
             padding-left: 1.5rem;
         }
 
         @include all.tablet {
-            @include all.big($wid: 100%, $hgt: 40dvh);
-            padding-left: 3.5rem;
+            @include all.big($wid: 90%, $hgt: 40dvh);
+            padding-left: 3rem;
         }
 
         .contactDetail {

@@ -1,9 +1,7 @@
 @use '../../../../public/styles/all_styles' as all;
 
 #addContactModal {
-    width: 95rem;
-    height: 60dvh;
-    top: 15rem;
+    @include all.big($wid: 95rem, $hgt: 60dvh);
     background-color: white;
     border-radius: 16px;
     @include all.fl($jc: center, $alit: center);
@@ -16,8 +14,7 @@
 
     @include all.tablet() {
         position: absolute;
-        width: 100dvw;
-        height: 100.9dvh;
+        @include all.big($wid: 100dvw, $hgt: 100.9dvh);
         border-radius: 0;
         top: -14rem;
         z-index: 30;
@@ -27,8 +24,7 @@
 
     @include all.smart() {
         position: absolute;
-        width: 100dvw;
-        height: 100.9dvh;
+        @include all.big($wid: 100dvw, $hgt: 100.9dvh);
         border-radius: 0;
         top: -14rem;
         z-index: 30;
@@ -38,8 +34,7 @@
 }
 
 .leftPanel {
-    width: 40%;
-    height: 100%;
+    @include all.big($wid: 40%, $hgt: 100%);
     background-color: #2a3647;
     padding: 0 2rem;
     border-radius: 16px 0 0 16px;
@@ -52,8 +47,7 @@
 
     @include all.tablet {
         border-radius: 16px 16px 0 0; 
-        width: 100%;
-        height: 25rem;
+        @include all.big($wid: 100%, $hgt: 35rem);
         @include all.fl($alit: center);
     }
 
@@ -68,8 +62,7 @@
         }
 
         button {
-            width: 48px;
-            height: 48px;
+            @include all.big($wid: 48px, $hgt: 48px);
             color: white;
             border: none;
             background: transparent;
@@ -85,16 +78,15 @@
 }
 
 hr {
-    border: 2px solid red;
     width: 60px; 
     height: 3px;
+    @include all.big($wid: 60px, $hgt: 3px);
     background: rgb(17, 148, 213);
     border: none
 }
 
 img {
-    width: 4rem; 
-    height: 4rem;
+    @include all.big($wid: 4rem, $hgt: 4rem);
     margin-bottom: 2rem;
 
     @include all.tablet {
@@ -117,14 +109,12 @@ h2 {
 }
 
 .rightPanel {
-    width: 60%;
-    height: 100%;
+    @include all.big($wid: 60%, $hgt: 100%);
     padding: 1rem 2rem;
     @include all.fl($flexdir: column);
 
     @include all.tablet {
-        width: 100%;
-        height: auto; 
+        @include all.big($wid: 100%, $hgt: auto);
         @include all.fl($alit: flex-start); 
         padding: 0;
     }
@@ -140,8 +130,7 @@ h2 {
     }
 
     .lineForm {
-        width: 100%;
-        height: auto; 
+        @include all.big($wid: 100%, $hgt: auto);
         padding-top: 9rem;
         @include all.fl($alit: center, $jc: space-between);
 
@@ -152,8 +141,7 @@ h2 {
         }
 
         .singleIcon {
-            width: 35%;
-            height: 130px;
+            @include all.big($wid: 35%, $hgt: 130px);
 
             @include all.tablet {
                 z-index: 1;
@@ -161,8 +149,7 @@ h2 {
                 top: -15dvh;
                 left: 50%;
                 transform: translate(-50%,70%);
-                width: 10rem;
-                height: 10rem;
+                @include all.big($wid: 10rem, $hgt: 10rem);
                 object-fit: contain;
                 border-radius: 50%;
                 background: white;
@@ -176,28 +163,23 @@ form {
     width: 100%;
 
     .formField {
-        width: 100%;
-        height: auto; 
+        @include all.big($wid: 100%, $hgt: auto);
         margin-bottom: 1.5rem;
         @include all.fl($flexdir: column, $alit: center);
 
         .inputImg {
-            width: 70%;
-            height: 40px;
+            @include all.big($wid: 70%, $hgt: 40px);
             padding: 0 10px;
             border: 1px solid grey;
             border-radius: 5px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            @include all.fl($jc: space-between, $alit: center);
 
             input {
                 outline: none;
             }
             
             img {
-                width: 20px;
-                height: 20px;
+                @include all.big($wid: 20px, $hgt: 20px);
                 margin: 0; 
                 display: flex;
             }
@@ -224,8 +206,7 @@ form {
         }
 
         .errmsg {
-            width: 70%;
-            height: 1rem;
+            @include all.big($wid: 70%, $hgt: 1rem);
             color: #c00000;
             font-size: 1rem;
             padding: 4px 16px;
@@ -249,8 +230,7 @@ form {
     }
 
     input {
-        width: 11rem;
-        height: 4rem;
+        @include all.big($wid: 11rem, $hgt: 4rem);
         border: 1px solid lightgrey;
         border-radius: 5px;
 
@@ -267,10 +247,8 @@ form {
     #createContactBtn {
         
         @include all.tablet {
-            width: 40%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            width: 20%;
+            @include all.fl($jc: center, $alit: center);
 
             &:hover {
                 background: #2a3647;
@@ -282,17 +260,13 @@ form {
         display: none;
 
         @include all.tablet {
-            display: block;
-            width: 20%;
-            height: 3rem;
+            @include all.big($wid: 11rem, $hgt: 4rem);
             border: 1px solid lightgrey;
             border-radius: 5px;
-            background: #c00000;
-            color: white;
             @include all.fl($alit: center, $jc: center);
 
             &:hover {
-                background: #a00000;
+                background: #2a3647;
                 color: white;
             }
         }

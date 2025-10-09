@@ -6,7 +6,7 @@
     padding: 0 10px;
 
     @include all.notebook {
-        width: 38dvw;
+        @include all.big($wid: 38dvw, $hgt: 76dvh);
     }
 
     @include all.tablet {
