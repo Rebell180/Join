@@ -11,35 +11,30 @@
 @if (currentContact$ | async; as contact ) {
 
 <div class="contact-info-container">
-    <div  class="contact-detail">
+    <div class="contact-detail-header-row">
+        <app-contact-icon class="contact-icon {{ contact.iconColor }}" [contact]="contact"></app-contact-icon>
 
-        <div class="contact-detail-header-row">
-            <app-contact-icon class="contact-icon {{ contact.iconColor }}" [contact]="contact"></app-contact-icon>
+        <div class="name-option-container">
+            <p class="name">{{ contact.firstname }} {{ contact.lastname }}</p>
 
-            <div class="name-option-container">
-                <p class="name">{{ contact.firstname }} {{ contact.lastname }}</p>
-
-                <div class="option-container">
-                    <button (click)="cs.openModal('edit')" type="button">
-                        <img src="assets/Icons/digitaler-controller.png" alt="" />Edit
-                    </button>
-                    <button (click)="deleteContact(contact)">
-                        <img class="delete-btn" src="assets/Icons/—Pngtree—vector trash icon_4152654.png"
-                            alt="" />Delete
-                    </button>
-                </div>
+            <div class="option-container">
+                <button (click)="cs.openModal('edit')" type="button">
+                    <img src="assets/Icons/digitaler-controller.png" alt="" />Edit
+                </button>
+                <button (click)="deleteContact(contact)">
+                    <img class="delete-btn" src="assets/Icons/—Pngtree—vector trash icon_4152654.png" alt="" />Delete
+                </button>
             </div>
         </div>
+    </div>
 
-        <h2>Contact Information</h2>
+    <h2>Contact Information</h2>
 
-        <div class="emailPhone">
-            <h3>Email</h3>
-            <a href="mailto:{{ contact.email }}">{{ contact.email }}</a>
-            <h3>Phone</h3>
-            <a class="tel-ref" href="tel:+49{{ contact.tel }}">{{ contact.tel }}</a>
-        </div>
-
+    <div class="emailPhone">
+        <h3>Email</h3>
+        <a href="mailto:{{ contact.email }}">{{ contact.email }}</a>
+        <h3>Phone</h3>
+        <a class="tel-ref" href="tel:+49{{ contact.tel }}">{{ contact.tel }}</a>
     </div>
 </div>
 <div class="mobile-options-container" id="mobileMenu">

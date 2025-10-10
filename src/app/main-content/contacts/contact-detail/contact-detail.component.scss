@@ -71,81 +71,78 @@
     }
 
     .contact-info-container {
-        @include all.size($w: 100%, $h: 100%);
+        @include all.size($w: 100%, $h: 80%);
         @include all.marpad($mar: 3rem 0 0);
 
-        .contact-detail {
-            @include all.size($w: 100%, $h: 100%);
+        .contact-detail-header-row {
+            @include all.fl($alit: center);
+            width: 100%;
 
-            .contact-detail-header-row {
-                @include all.fl($alit: center);
+            .contact-icon {
+                @include all.size($w: 12rem, $h: 12rem);
+            }
+
+            .name-option-container {
                 width: 100%;
+                padding-left: 3dvw;
+                @include all.fl($flexdir: column);
 
-                .contact-icon {
-                    @include all.size($w: 12rem, $h: 12rem);
+                .name {
+                    @include all.fl($jc: start);
+                    font-size: 48px;
+                    font-weight: bold;
                 }
 
-                .name-option-container {
-                    width: 100%;
-                    padding-left: 3dvw;
-                    @include all.fl($flexdir: column);
+                .option-container {
+                    @include all.size($w: 100%, $h: 2.8rem);
+                    @include all.fl($jc: start, $alit: center, $gap: 2rem);
 
-                    .name {
-                        @include all.fl($jc: start);
-                        font-size: 48px;
-                        font-weight: bold;
+                    @include all.tablet {
+                        display: none;
                     }
 
-                    .option-container {
-                        @include all.size($w: 100%, $h: 2.8rem);
-                        @include all.fl($jc: start, $alit: center, $gap: 2rem);
+                    button {
+                        @include all.fl($alit: center, $gap: 0.7rem);
 
-                        @include all.tablet {
-                            display: none;
+                        .delete-btn {
+                            @include all.size($w: 24px, $h: 24px);
                         }
 
-                        button {
-                            @include all.fl($alit: center, $gap: 0.7rem);
+                        img {
+                            @include all.size($w: 16px, $h: 16px);
+                        }
 
-                            .delete-btn {
-                                @include all.size($w: 24px, $h: 24px);
-                            }
-
-                            img {
-                                @include all.size($w: 16px, $h: 16px);
-                            }
-
-                            &:hover {
-                                color: rgb(31, 135, 246);
-                            }
+                        &:hover {
+                            color: rgb(31, 135, 246);
                         }
                     }
-                }
-            }
-
-            h2 {
-                margin: 3rem 0;
-                font-size: 24px;
-            }
-
-            .emailPhone {
-
-                h3 {
-                    margin: 1.5rem 0;
-                    font-size: clamp(16px, 1.2dvw, 64px);
-                    font-family: "InterBold", sans-serif;
-                }
-
-                a {
-                    color: #007bed;
-                    font-size: clamp(16px, 1.2dvw, 64px);
-                }
-
-                .tel-ref {
-                    color: black;
                 }
             }
         }
+
+        h2 {
+            margin: 3rem 0;
+            font-size: 24px;
+        }
+
+        .emailPhone {
+
+            h3 {
+                margin: 1.5rem 0;
+                font-size: clamp(16px, 1.2dvw, 64px);
+                font-family: "InterBold", sans-serif;
+            }
+
+            a {
+                color: #007bed;
+                font-size: clamp(16px, 1.2dvw, 64px);
+            }
+
+            .tel-ref {
+                color: black;
+            }
+        }
+
     }
 
     .mobile-options-container {
