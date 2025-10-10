@@ -1,6 +1,6 @@
 @use '../../../../../public/styles/all_styles' as all;
 #section-contact-list {
-    @include all.big($w: 100%, $h: 90vh);
+    @include all.size($w: 100%, $h: 90vh);
     overflow-y: auto;
     background: white;
     padding: 0 30px;
@@ -39,7 +39,7 @@
     
     .contact-group-container {
         @include all.fl($flexdir: column);
-        @include all.big($w: 100%, $h: auto);
+        @include all.size($w: 100%, $h: auto);
         border-radius: 10px;
 
         .letter {
@@ -61,7 +61,7 @@
 
         .single-contact-container {
             @include all.fl($alit: center, $jc: center, $gap: 25px);
-            @include all.big($w: 100%, $h: 78px);
+            @include all.size($w: 100%, $h: 78px);
             padding: 15px;
             border-radius: 10px;
             cursor: pointer;
@@ -72,20 +72,20 @@
 
             .icon-wrapper {
                 @include all.fl($jc:center, $alit:center);
-                @include all.big($w: 42px, $h: 42px);
+                @include all.size($w: 42px, $h: 42px);
 
                 @include all.notebook {
-                    @include all.big($w: 50px, $h: 42px);
+                    @include all.size($w: 50px, $h: 50px);
                 }
 
                 @include all.tablet {
-                    @include all.big($w: 42px, $h: 42px);
+                    @include all.size($w: 42px, $h: 42px);
                 }
             }
 
             .contact-data {
                 @include all.fl($flexdir: column, $jc: center);
-                @include all.big($w: 250px, $h: 48px);
+                @include all.size($w: 250px, $h: 48px);
 
                 .name {
                     margin-bottom: 5px;

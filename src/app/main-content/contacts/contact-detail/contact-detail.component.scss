@@ -2,7 +2,7 @@
 
 .iconContactMain {
     background: #ededed;
-    @include all.big($w: 38dvw, $h: 50vh);
+    @include all.size($w: 38dvw, $h: 50vh);
     margin: 3dvw 0.6dvh;
 
     @include all.notebook{
@@ -24,7 +24,7 @@
 
     .iconName {
         @include all.fl($jc: space-evenly, $alit: center);
-        @include all.big($w: 100%, $h: 40%);
+        @include all.size($w: 100%, $h: 40%);
         gap: 2.5rem;
         padding-left: 3rem;
 
@@ -56,7 +56,7 @@
         @include all.tablet {
             padding-top: 2rem;
             display: flex;
-            @include all.big($w: 96dvw, $h: 20vh);
+            @include all.size($w: 96dvw, $h: 20vh);
 
         @include all.mobile {
             width: 96dvw;
@@ -81,7 +81,7 @@
             }
 
             hr {
-                @include all.big($w: 12dvh, $h: 0.5rem);
+                @include all.size($w: 12dvh, $h: 0.5rem);
                 background: rgb(17, 148, 213);
             }
         }
@@ -95,7 +95,7 @@
 }
 
     .contactInfo {
-        @include all.big($w: 100%, $h: 50dvh);
+        @include all.size($w: 100%, $h: 50dvh);
 
         @include all.mobile {
             width: 96dvw;
@@ -103,12 +103,12 @@
         }
 
         @include all.tablet {
-            @include all.big($w: 90%, $h: 40dvh);
+            @include all.size($w: 90%, $h: 40dvh);
             padding-left: 3rem;
         }
 
         .contactDetail {
-            @include all.big($w: 100%, $h: 50dvh);
+            @include all.size($w: 100%, $h: 50dvh);
             padding: 0 4rem;
 
         .contactHeaderRow {
@@ -123,10 +123,10 @@
                 }
 
             .contactIcon {
-                @include all.big($w: 100px, $h: 100px);
+                @include all.size($w: 100px, $h: 100px);
 
                 @include all.tablet {
-                    @include all.big($w: 100px, $h: 100px);
+                    @include all.size($w: 100px, $h: 100px);
                     margin-top: 1rem;
                 }
             }
@@ -138,12 +138,12 @@
 
                 .name {
                     @include all.fl($jc: start);
-                    @include all.big($w: 18dvw, $h: 4dvh);
+                    @include all.size($w: 18dvw, $h: 4dvh);
                     font-family: 'InterBold', sans-serif;
                     font-size: clamp(16px, 2.5dvw, 64px);
 
                     @include all.tablet {
-                        @include all.big($w: 45dvw, $h: 5dvh);
+                        @include all.size($w: 45dvw, $h: 5dvh);
                         @include all.fl($alit: center);
                         font-family: 'InterBold', sans-serif;
                         font-size: 28px;
@@ -165,11 +165,11 @@
                         gap: 0.5dvw;
 
                         .deleteBtn {
-                            @include all.big($w: 24px, $h: 24px);
+                            @include all.size($w: 24px, $h: 24px);
                         }
 
                         img {
-                            @include all.big($w: 16px, $h: 16px);
+                            @include all.size($w: 16px, $h: 16px);
                         }
 
                         &:hover {
@@ -222,7 +222,7 @@
             background-color: #2c3e50;
             border: none;
             border-radius: 50%;
-            @include all.big($w: 40px, $h: 40px);
+            @include all.size($w: 40px, $h: 40px);
             @include all.fl($flexdir: column, $alit: center, $jc: center);
             cursor: pointer;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -233,7 +233,7 @@
             }
 
         .dot {
-                @include all.big($w: 4px, $h: 4px);
+                @include all.size($w: 4px, $h: 4px);
                     background-color: white;
                     border-radius: 50%;
                     margin: 2px 0;
@@ -263,7 +263,7 @@
                     }
 
                     img {
-                        @include all.big($w: 18px, $h: 18px);
+                        @include all.size($w: 18px, $h: 18px);
                         margin-right: 10px;
                     }
                 }

@@ -2,7 +2,7 @@
 
 .contact-section {
     @include all.fl();
-    @include all.big($w: 100%, $h: 100%);
+    @include all.size($w: 100%, $h: 100%);
 
     .btn-add-contact {
         width: 80%;
@@ -40,7 +40,7 @@ app-add-contact {
 }
 
 app-toast {
-    @include all.big($w: 100%, $h: 100%);
+    @include all.size($w: 100%, $h: 100%);
     position: absolute;
     z-index: -2;
     bottom: 0;

@@ -1,7 +1,7 @@
 @use '../../../../public/styles/all_styles' as all;
 
 #addContactModal {
-    @include all.big($w: 100rem, $h: 65dvh);
+    @include all.size($w: 100rem, $h: 65dvh);
     background-color: white;
     border-radius: 16px;
     @include all.fl($jc: center, $alit: center);
@@ -13,7 +13,7 @@
     }
     
     @include all.tablet() {
-        @include all.big($w: 60dvw, $h: 75dvh);
+        @include all.size($w: 60dvw, $h: 75dvh);
         top: -1rem;
         z-index: 30;
         transform: translateX(30%);
@@ -22,7 +22,7 @@
 }
 
 .leftPanel {
-    @include all.big($w: 40%, $h: 100%);
+    @include all.size($w: 40%, $h: 100%);
     background-color: #2a3647;
     padding: 0 2rem;
     border-radius: 16px 0 0 16px;
@@ -35,7 +35,7 @@
 
     @include all.tablet {
         border-radius: 0; 
-        @include all.big($w: 100%, $h: 35rem);
+        @include all.size($w: 100%, $h: 35rem);
         @include all.fl($alit: center);
     }
 
@@ -50,7 +50,7 @@
         }
 
         button {
-            @include all.big($w: 48px, $h: 48px);
+            @include all.size($w: 48px, $h: 48px);
             color: white;
             border: none;
             background: transparent;
@@ -68,13 +68,13 @@
 hr {
     width: 60px; 
     height: 3px;
-    @include all.big($w: 60px, $h: 3px);
+    @include all.size($w: 60px, $h: 3px);
     background: rgb(17, 148, 213);
     border: none
 }
 
 img {
-    @include all.big($w: 4rem, $h: 4rem);
+    @include all.size($w: 4rem, $h: 4rem);
     margin-bottom: 2rem;
 
     @include all.tablet {
@@ -97,12 +97,12 @@ h2 {
 }
 
 .rightPanel {
-    @include all.big($w: 60%, $h: 100%);
+    @include all.size($w: 60%, $h: 100%);
     padding: 1rem 2rem;
     @include all.fl($flexdir: column);
 
     @include all.tablet {
-        @include all.big($w: 100%, $h: auto);
+        @include all.size($w: 100%, $h: auto);
         @include all.fl($alit: flex-start); 
         padding: 0;
     }
@@ -118,7 +118,7 @@ h2 {
     }
 
     .lineForm {
-        @include all.big($w: 100%, $h: auto);
+        @include all.size($w: 100%, $h: auto);
         padding-top: 9rem;
         @include all.fl($alit: center, $jc: space-between);
 
@@ -129,7 +129,7 @@ h2 {
         }
 
         .singleIcon {
-            @include all.big($w: 35%, $h: 180px);
+            @include all.size($w: 35%, $h: 180px);
 
             @include all.tablet {
                 z-index: 1;
@@ -137,7 +137,7 @@ h2 {
                 top: -15dvh;
                 left: 50%;
                 transform: translate(-50%,70%);
-                @include all.big($w: 10rem, $h: 10rem);
+                @include all.size($w: 10rem, $h: 10rem);
                 object-fit: contain;
                 border-radius: 50%;
                 background: white;
@@ -151,12 +151,12 @@ form {
     width: 100%;
 
     .formField {
-        @include all.big($w: 100%, $h: auto);
+        @include all.size($w: 100%, $h: auto);
         margin-bottom: 1.5rem;
         @include all.fl($flexdir: column, $alit: center);
 
         .inputImg {
-            @include all.big($w: 70%, $h: 40px);
+            @include all.size($w: 70%, $h: 40px);
             padding: 0 10px;
             border: 1px solid grey;
             border-radius: 5px;
@@ -167,7 +167,7 @@ form {
             }
             
             img {
-                @include all.big($w: 20px, $h: 20px);
+                @include all.size($w: 20px, $h: 20px);
                 margin: 0; 
                 display: flex;
             }
@@ -194,7 +194,7 @@ form {
         }
 
         .errmsg {
-            @include all.big($w: 70%, $h: 1rem);
+            @include all.size($w: 70%, $h: 1rem);
             color: #c00000;
             font-size: 1rem;
             padding: 4px 16px;
@@ -218,7 +218,7 @@ form {
     }
 
     input {
-        @include all.big($w: 11rem, $h: 4rem);
+        @include all.size($w: 11rem, $h: 4rem);
         border: 1px solid lightgrey;
         border-radius: 5px;
 
@@ -248,7 +248,7 @@ form {
         display: none;
 
         @include all.tablet {
-            @include all.big($w: 11rem, $h: 4rem);
+            @include all.size($w: 11rem, $h: 4rem);
             border: 1px solid lightgrey;
             border-radius: 5px;
             @include all.fl($alit: center, $jc: center);
