@@ -35,6 +35,10 @@ export class ContactDetailComponent implements OnInit, OnDestroy {
     
   }
 
+  close() {
+    this.isHidden = true;
+  }
+
   toggleMenu(): void {
         this.isMenuVisible = !this.isMenuVisible;
     }

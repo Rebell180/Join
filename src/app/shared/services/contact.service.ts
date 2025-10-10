@@ -59,13 +59,6 @@ export class ContactService implements OnDestroy {
 
   constructor() { 
     this.contactsByGroup = this.fcs.getContactGroups();
-    this.curSize$.subscribe(displayType => {
-      if (displayType == DisplayType.MOBILE || displayType == DisplayType.TABLET) {
-        this.closeDetail();
-      } else {
-        this.showDetail();
-      }
-    });
   }
 
   ngOnDestroy(): void {
@@ -102,6 +95,7 @@ export class ContactService implements OnDestroy {
   // contact list methods
 
   selectContact(contact:Contact|null = null) {
+    console.log(contact);
     this.currentContactBS.next(contact);
   }
 
@@ -121,17 +115,5 @@ export class ContactService implements OnDestroy {
   }
 
   // #endregion CRUD methods
-
-  // contact detail methods
-
-  closeDetail() {
-    this.classToDisplayBS.next("d_none");
-  }
-
-  showDetail() {
-    this.classToDisplayBS.next("");
-  }
-
-
   // #endregion methods
 }
