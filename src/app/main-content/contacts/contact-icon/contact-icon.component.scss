@@ -6,8 +6,12 @@
     height: 100%;
     border-radius: 50%;
     color: white;
+    // @include all.marpad($pad: 50%);
+    container-type: size;
     span {
-        font-size: 70%;
+        @include all.fl($jc: center, $alit: center);
+        @include all.size($w: 75%, $h: 75%);
+        font-size: 45cqw;
     }
 }
 

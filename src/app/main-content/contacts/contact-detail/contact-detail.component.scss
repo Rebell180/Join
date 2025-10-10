@@ -5,10 +5,6 @@
     @include all.size($w: 38dvw, $h: 50vh);
     margin: 3dvw 0.6dvh;
 
-    @include all.notebook{
-        display: none;
-    }
-
     @include all.tablet {
         display: flex;
         flex-direction: column;
@@ -123,12 +119,7 @@
                 }
 
             .contactIcon {
-                @include all.size($w: 100px, $h: 100px);
-
-                @include all.tablet {
-                    @include all.size($w: 100px, $h: 100px);
-                    margin-top: 1rem;
-                }
+                @include all.size($w: 10rem, $h: 10rem);
             }
 
             .editDelete {
