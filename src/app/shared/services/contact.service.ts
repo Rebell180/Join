@@ -100,6 +100,19 @@ export class ContactService implements OnDestroy {
     this.currentContactBS.next(contact);
   }
 
+  async setActiveContact(id: string) {
+    await this.contacts.forEach((contactStream) => {
+      contactStream.forEach((contact) => {
+        contact.selected = false;
+        if(contact.id == id) {
+          contact.selected = true;
+          this.contactToEditBS.next(contact);
+          this.selectContact(contact);
+        }
+      });
+    });
+  }
+
 
   // #region CRUD methods
 

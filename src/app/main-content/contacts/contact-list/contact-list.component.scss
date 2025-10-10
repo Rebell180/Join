@@ -1,68 +1,32 @@
 @use '../../../../../public/styles/all_styles' as all;
+@forward '../../../../../public/styles/component-styles';
 #section-contact-list {
-    @include all.size($w: 100%, $h: 90vh);
+    @include all.size($w: 100%, $h: 100%);
     overflow-y: auto;
     background: white;
-    padding: 0 30px;
+    // padding: 0 3rem;
     box-shadow: 5px 0 10px -5px grey;
 
-    @include all.notebook {
-        width: 100%;
-        padding: 0 50px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-    
-    @include all.tablet {
-        width: 100dvw;
-        height: 80dvh;
-        padding: 0 17rem;
-    }
-
-    @include all.mobile {
-        width: 100dvw;
-        height: 80dvh;
-        padding: 0 20px;
-    }
-
-    .btn-add-contact {
-        width: 100%;
-        @include all.marpad ($mar: 3rem 0, $pad: 12px 0);
-        @include all.fl($jc: center, $alit: center, $gap: 1rem);
-        color: white;
-        font-size: 2rem;
-        background-color: #2a3647;
-        border-radius: 8px;
-        border: 2px solid #4a5f7c;
-    }
-    
     .contact-group-container {
         @include all.fl($flexdir: column);
         @include all.size($w: 100%, $h: auto);
-        border-radius: 10px;
 
         .letter {
-            @include all.fl($alit: center);
-            height: 58px;
-            padding-left: 36px;
-            font-size: 2rem;
+            vertical-align: center;
+            @include all.marpad($mar: 2rem 0, $pad: 0 3rem);
             cursor: default;
-            @include all.mobile {
-                padding: 0;
-            }
         }
 
         hr {
             width: 100%;
-            margin: 8px 0;
+            margin: 1rem 0;
             border: 1px solid rgba(0,0,0,0.1);
         }
 
         .single-contact-container {
             @include all.fl($alit: center, $jc: center, $gap: 25px);
             @include all.size($w: 100%, $h: 78px);
-            padding: 15px;
+            @include all.marpad($pad: 0 1.75rem);
             border-radius: 10px;
             cursor: pointer;
 
@@ -73,14 +37,6 @@
             .icon-wrapper {
                 @include all.fl($jc:center, $alit:center);
                 @include all.size($w: 42px, $h: 42px);
-
-                @include all.notebook {
-                    @include all.size($w: 50px, $h: 50px);
-                }
-
-                @include all.tablet {
-                    @include all.size($w: 42px, $h: 42px);
-                }
             }
 
             .contact-data {
@@ -99,11 +55,15 @@
                     font-family: 'InterBoldReg', sans-serif;
                 }
             }
+        }
 
         .active{
             background: #2a3647;
             color: white;
             cursor: default;
+            &:hover {
+                background: #2a3647;
+            }
         }
 
         ::-webkit-scrollbar {
@@ -126,5 +86,4 @@
             background: url('../../../../../public/assets/Icons/contact/scroll-down.png') no-repeat center center / contain;
         }
     }
-}
 }
