@@ -3,7 +3,7 @@
 :host {
     background: #ededed;
     @include all.size($w: 100%, $h: 100%);
-    
+
 
     .contact-detail-header {
         @include all.fl($jc: space-between, $alit: center);
@@ -13,7 +13,7 @@
             @include all.fl($jc: space-between, $alit: start);
             @include all.size($w: 100%, $h: 12rem);
         }
-        
+
         .header-info {
             @include all.fl($alit: center, $gap: 2rem);
 
@@ -21,9 +21,10 @@
                 font-size: clamp(16px, 4dvw, 64px);
                 font-family: 'Interbold', sans-serif;
             }
-            
-            @include all.tablet{
+
+            @include all.tablet {
                 @include all.fl($flexdir: column, $gap: 1rem);
+
                 h1 {
                     font-size: 48px;
                 }
@@ -41,16 +42,18 @@
             }
 
             #middle-line {
-                display:block;
-                @include all.size($w: 1rem, $h:6rem);
+                display: block;
+                @include all.size($w: 1rem, $h: 6rem);
+
                 @include all.tablet {
                     display: none;
                 }
             }
 
             #bottom-line {
-                display:none;
-                @include all.size($w: 50%, $h:0.5rem);
+                display: none;
+                @include all.size($w: 50%, $h: 0.5rem);
+
                 @include all.tablet {
                     display: block;
                 }
@@ -60,6 +63,7 @@
 
         .contact-detail-back {
             display: none;
+
             @include all.tablet {
                 display: block;
             }
@@ -123,7 +127,7 @@
                 margin: 3rem 0;
                 font-size: 24px;
             }
-                
+
             .emailPhone {
 
                 h3 {
@@ -147,7 +151,14 @@
     .mobile-options-container {
         display: none;
         position: absolute;
+        bottom: 0;
+        right: 2rem;
+        @include all.size($w: 5rem, $h: 5rem);
         z-index: 1;
+
+        @include all.tablet {
+            display: flex;
+        }
 
         .option-btns {
             background-color: #2c3e50;
@@ -158,9 +169,8 @@
             cursor: pointer;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             padding: 0;
-            position: absolute;
-            right: 0;
-            bottom: -25dvh;
+            // position: absolute;
+            // right: 0;
         }
 
         .dot {
@@ -169,34 +179,34 @@
             border-radius: 50%;
             margin: 2px 0;
         }
+    }
 
-        .dropDownMenu {
-            position: absolute;
-            top: 11dvh;
-            right: 20px;
-            background-color: white;
-            border-radius: 8px 8px 0 8px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-            padding: 4px 0;
-            z-index: 11;
-            width: 110px;
-            height: 80px;
+    .popup-menu {
+        position: absolute;
+        bottom: 17rem;
+        right: 7rem;
+        background-color: white;
+        border-radius: 8px 8px 0 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        padding: 4px 0;
+        // z-index: 2;
+        width: 110px;
+        height: 80px;
 
-            .menuItem {
-                @include all.fl($alit: center);
-                padding: 8px 16px;
-                cursor: pointer;
-                font-size: 16px;
-                color: #333;
+        .menuItem {
+            @include all.fl($alit: center);
+            padding: 8px 16px;
+            cursor: pointer;
+            font-size: 16px;
+            color: #333;
 
-                &:hover {
-                    background-color: #f4f4f4;
-                }
+            &:hover {
+                background-color: #f4f4f4;
+            }
 
-                img {
-                    @include all.size($w: 18px, $h: 18px);
-                    margin-right: 10px;
-                }
+            img {
+                @include all.size($w: 18px, $h: 18px);
+                margin-right: 10px;
             }
         }
     }

@@ -2,7 +2,6 @@
 @forward '../../../../../public/styles/component-styles';
 
 #section-contact-list {
-    display: none;
     @include all.size($w: 100%, $h: 100%);
     overflow-y: auto;
     background: white;

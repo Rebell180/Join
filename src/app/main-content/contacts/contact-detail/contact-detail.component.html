@@ -1,29 +1,31 @@
 <div class="contact-detail-header">
     <div class="header-info">
         <h1>Contacts</h1>
-        <hr id="middle-line"/>
+        <hr id="middle-line" />
         <h2>Better with a team</h2>
-        <hr id="bottom-line"/>
+        <hr id="bottom-line" />
     </div>
     <button class="contact-detail-back" (click)="close()"><img src="assets/Icons/arrow-left-line.png" alt=""></button>
 </div>
 
+@if (currentContact$ | async; as contact ) {
 
 <div class="contact-info-container">
-    <div *ngIf="currentContact$ | async as contact" class="contact-detail">
-        
+    <div  class="contact-detail">
+
         <div class="contact-detail-header-row">
             <app-contact-icon class="contact-icon {{ contact.iconColor }}" [contact]="contact"></app-contact-icon>
 
             <div class="name-option-container">
                 <p class="name">{{ contact.firstname }} {{ contact.lastname }}</p>
-            
+
                 <div class="option-container">
                     <button (click)="cs.openModal('edit')" type="button">
                         <img src="assets/Icons/digitaler-controller.png" alt="" />Edit
                     </button>
                     <button (click)="deleteContact(contact)">
-                        <img class="delete-btn" src="assets/Icons/—Pngtree—vector trash icon_4152654.png" alt="" />Delete
+                        <img class="delete-btn" src="assets/Icons/—Pngtree—vector trash icon_4152654.png"
+                            alt="" />Delete
                     </button>
                 </div>
             </div>
@@ -38,24 +40,23 @@
             <a class="tel-ref" href="tel:+49{{ contact.tel }}">{{ contact.tel }}</a>
         </div>
 
-        <div class="mobile-options-container" id="mobileMenu">
-            <button class="option-btns" (click)="toggleMenu()">
-                <span class="dot"></span>
-                <span class="dot"></span>
-                <span class="dot"></span>
-            </button>
-
-            <div class="dropDownMenu" *ngIf="isMenuVisible">
-                <div class="menuItem" (click)="cs.openModal('edit')">
-                    <img src="assets/Icons/digitaler-controller.png" alt="Edit Icon" />
-                    <span>Edit</span>
-                </div>
-                <div class="menuItem deleteItem" (click)="deleteContact(contact)">
-                    <img src="assets/Icons/—Pngtree—vector trash icon_4152654.png" alt="Delete Icon" />
-                    <span>Delete</span>
-                </div>
-            </div>
-        </div>
-
     </div>
 </div>
+<div class="mobile-options-container" id="mobileMenu">
+    <button class="option-btns" (click)="toggleMenu()">
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+    </button>
+</div>
+<div class="popup-menu" *ngIf="isMenuVisible">
+    <div class="menuItem" (click)="cs.openModal('edit')">
+        <img src="assets/Icons/digitaler-controller.png" alt="Edit Icon" />
+        <span>Edit</span>
+    </div>
+    <div class="menuItem deleteItem" (click)="deleteContact(contact)">
+        <img src="assets/Icons/—Pngtree—vector trash icon_4152654.png" alt="Delete Icon" />
+        <span>Delete</span>
+    </div>
+</div>
+}
