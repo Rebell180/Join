@@ -3,16 +3,20 @@
 :host {
     background: #ededed;
     @include all.size($w: 100%, $h: 100%);
+    
 
     .contact-detail-header {
         @include all.fl($jc: space-between, $alit: center);
         @include all.size($w: 100%, $h: 8rem);
-        padding-left: 3rem;
 
+        @include all.tablet {
+            @include all.fl($jc: space-between, $alit: start);
+            @include all.size($w: 100%, $h: 12rem);
+        }
+        
         .header-info {
             @include all.fl($alit: center, $gap: 2rem);
 
-            
             h1 {
                 font-size: clamp(16px, 4dvw, 64px);
                 font-family: 'Interbold', sans-serif;
@@ -62,57 +66,44 @@
         }
     }
 
-    .contactInfo {
-        @include all.size($w: 100%, $h: 50dvh);
+    .contact-info-container {
+        @include all.size($w: 100%, $h: 100%);
+        @include all.marpad($mar: 3rem 0 0);
 
-        .contactDetail {
-            @include all.size($w: 100%, $h: 50dvh);
-            padding: 0 4rem;
+        .contact-detail {
+            @include all.size($w: 100%, $h: 100%);
 
-            .contactHeaderRow {
+            .contact-detail-header-row {
                 @include all.fl($alit: center);
                 width: 100%;
-                padding: 1rem;
-                margin: -2rem;
 
-                .contactIcon {
-                    @include all.size($w: 10rem, $h: 10rem);
+                .contact-icon {
+                    @include all.size($w: 12rem, $h: 12rem);
                 }
 
-                .editDelete {
-                    width: 80%;
+                .name-option-container {
+                    width: 100%;
                     padding-left: 3dvw;
                     @include all.fl($flexdir: column);
 
                     .name {
                         @include all.fl($jc: start);
-                        @include all.size($w: 18dvw, $h: 4dvh);
-                        font-family: 'InterBold', sans-serif;
-                        font-size: clamp(16px, 2.5dvw, 64px);
-
-                        @include all.tablet {
-                            @include all.size($w: 45dvw, $h: 5dvh);
-                            @include all.fl($alit: center);
-                            font-family: 'InterBold', sans-serif;
-                            font-size: 28px;
-                        }
+                        font-size: 48px;
+                        font-weight: bold;
                     }
 
-                    .iconMain {
-                        height: 6dvh;
-                        @include all.fl($alit: center);
-                        gap: 1.2dvw;
-                        display: flex;
+                    .option-container {
+                        @include all.size($w: 100%, $h: 2.8rem);
+                        @include all.fl($jc: start, $alit: center, $gap: 2rem);
 
                         @include all.tablet {
                             display: none;
                         }
 
                         button {
-                            @include all.fl($alit: center);
-                            gap: 0.5dvw;
+                            @include all.fl($alit: center, $gap: 0.7rem);
 
-                            .deleteBtn {
+                            .delete-btn {
                                 @include all.size($w: 24px, $h: 24px);
                             }
 
@@ -128,11 +119,12 @@
                 }
             }
 
-            .lastInfo {
-                h2 {
-                    margin: 5dvh 0;
-                    font-size: clamp(16px, 1.5dvw, 64px);
-                }
+            h2 {
+                margin: 3rem 0;
+                font-size: 24px;
+            }
+                
+            .emailPhone {
 
                 h3 {
                     margin: 1.5rem 0;
@@ -140,28 +132,24 @@
                     font-family: "InterBold", sans-serif;
                 }
 
-                .emailPhone {
-                    a {
-                        color: rgb(31, 135, 246);
-                        font-size: clamp(16px, 1.2dvw, 64px);
-                    }
+                a {
+                    color: #007bed;
+                    font-size: clamp(16px, 1.2dvw, 64px);
+                }
 
-                    span {
-                        font-size: clamp(16px, 1.2dvw, 64px);
-                    }
+                .tel-ref {
+                    color: black;
                 }
             }
         }
     }
 
-    .optionsContainer {
+    .mobile-options-container {
         display: none;
         position: absolute;
-        top: 40px;
-        right: 1.5rem;
         z-index: 1;
 
-        .optionsBtn {
+        .option-btns {
             background-color: #2c3e50;
             border: none;
             border-radius: 50%;

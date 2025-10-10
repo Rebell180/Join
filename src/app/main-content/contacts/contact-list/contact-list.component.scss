@@ -1,6 +1,8 @@
 @use '../../../../../public/styles/all_styles' as all;
 @forward '../../../../../public/styles/component-styles';
+
 #section-contact-list {
+    display: none;
     @include all.size($w: 100%, $h: 100%);
     overflow-y: auto;
     background: white;
@@ -52,7 +54,6 @@
                 .email {
                     color: #007bed;
                     font-size: clamp(16px, 1.2dvw, 64px);
-                    font-family: 'InterBoldReg', sans-serif;
                 }
             }
         }
