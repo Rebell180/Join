@@ -1,7 +1,7 @@
 @use './all_styles' as all;
 
 .btn-set {
-    width: 100%;
+    width: 90%;
     @include all.marpad ($mar: 0 0, $pad: 1rem);
     @include all.fl($jc: center, $alit: center, $gap: 1rem);
     color: white;

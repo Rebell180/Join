@@ -1,24 +1,26 @@
-<section id="section-contact-list">
-    <button class="btn-set" (click)="cs.openModal('add')" type="button">
-        <span>Add new contact</span>
-        <img src="assets/Icons/person_add.png" alt="">
-    </button>
-    
+<button id="add-contact-button" class="btn-set" (click)="cs.openModal('add')" type="button">
+    <span>Add new contact</span>
+    <img src="assets/Icons/person_add.png" alt="">
+</button>
+
+<div class="contact-groups-container">
     @for (contactGroup of cs.contactsByGroup| async ; track contactGroup.name || $index) {
-        <div id="{{ 'contact-group_' + contactGroup.name + '_' + $index}}" class="contact-group-container">
-            <h3 class="letter">{{ contactGroup.name }}</h3>
-            <hr>
-            @for (contact of contactGroup.contacts| async ; track contact.id || $index) {
-                <div id="{{ 'contact_' + contact.group + '_' + contact.id + '_' + $index}}" class="single-contact-container" [ngClass]="{'active': contact.selected }" (click)="cs.setActiveContact(contact.id)">
-                    <div class="icon-wrapper">
-                        <app-contact-icon id="{{ 'contact_icon_' + contact.id}}" class="{{ contact.iconColor }}" [contact]="contact"></app-contact-icon>
-                    </div>
-                    <div class="contact-data">
-                        <p class="name">{{ limit(fullName(contact), 20) }}</p>
-                        <p class="email">{{ limit(contact.email, 20) }}</p>
-                    </div>
-                </div>
-            }
+    <div id="{{ 'contact-group_' + contactGroup.name + '_' + $index}}" class="contact-group-container">
+        <h3 class="letter">{{ contactGroup.name }}</h3>
+        <hr>
+        @for (contact of contactGroup.contacts| async ; track contact.id || $index) {
+        <div id="{{ 'contact_' + contact.group + '_' + contact.id + '_' + $index}}" class="single-contact-container"
+            [ngClass]="{'active': contact.selected }" (click)="cs.setActiveContact(contact.id)">
+            <div class="icon-wrapper">
+                <app-contact-icon id="{{ 'contact_icon_' + contact.id}}" class="{{ contact.iconColor }}"
+                    [contact]="contact"></app-contact-icon>
+            </div>
+            <div class="contact-data">
+                <p class="name">{{ limit(fullName(contact), 20) }}</p>
+                <p class="email">{{ limit(contact.email, 20) }}</p>
+            </div>
         </div>
-    }    
-</section>
+        }
+    </div>
+    }
+</div>

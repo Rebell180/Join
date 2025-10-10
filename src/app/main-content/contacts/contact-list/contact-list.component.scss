@@ -1,11 +1,15 @@
 @use '../../../../../public/styles/all_styles' as all;
 @forward '../../../../../public/styles/component-styles';
 
-#section-contact-list {
-    @include all.size($w: 100%, $h: 100%);
+:host {
+    @include all.size($w: 100%, $h: 90dvh);
     background: white;
     // padding: 0 3rem;
     box-shadow: 5px 0 10px -5px grey;
+
+    #add-contact-button {
+        @include all.marpad ($mar: 0 3rem 0 0, $pad: 1rem 0);
+    }
 
     .contact-groups-container {
         overflow-y: auto;
@@ -23,14 +27,14 @@
             }
 
             hr {
-                width: 100%;
+                width: 95%;
                 margin: 1rem 0;
                 border: 1px solid rgba(0, 0, 0, 0.1);
             }
 
             .single-contact-container {
                 @include all.fl($alit: center, $jc: center, $gap: 25px);
-                @include all.size($w: 100%, $h: 78px);
+                @include all.size($w: 95%, $h: 78px);
                 @include all.marpad($pad: 0 1.75rem);
                 border-radius: 10px;
                 cursor: pointer;

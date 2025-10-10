@@ -6,7 +6,7 @@
     background: white;
     .contact-list {
         @include all.size($w: 40%, $h: 90dvh);
-        @include all.marpad ($pad: 2rem 3rem 0 3rem);
+        @include all.marpad ($pad: 2rem 0 0 3rem);
         @include all.tablet {
             @include all.size ($w: 100%, $h: 80dvh);
         }
