@@ -1,4 +1,3 @@
-
 <section id="section-contact-list">
     @for (contactGroup of cs.contactsByGroup| async ; track contactGroup.name || $index) {
         <div id="{{ 'contact-group_' + contactGroup.name + '_' + $index}}" class="contact-group-container">
@@ -17,12 +16,4 @@
             }
         </div>
     }
-    
 </section>
-
-
-
-
-
-
-

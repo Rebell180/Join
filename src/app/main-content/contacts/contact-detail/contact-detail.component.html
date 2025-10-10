@@ -18,7 +18,7 @@
 
 
     <div class="contactInfo">
-        <div *ngIf="cs.contactToEdit | async as contact" class="contactDetail" [ngClass]="{'d_none': !contact.selected }">
+        <div *ngIf="currentContact$ | async as contact" class="contactDetail">
             
             <div class="contactHeaderRow">
             <div class="contactIcon">

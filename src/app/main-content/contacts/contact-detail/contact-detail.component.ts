@@ -17,7 +17,8 @@ export class ContactDetailComponent implements OnInit, OnDestroy {
 
   private firestore: FireContactService = inject(FireContactService);
   
-  cs: ContactService = inject(ContactService);
+  protected cs: ContactService = inject(ContactService);
+  protected currentContact$: Observable<Contact | null> = this.cs.currentContact$;
   subCurrentContact!: Subscription;
   @HostBinding('class.d_none') isHidden:boolean = true;
 
