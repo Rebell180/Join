@@ -3,19 +3,6 @@
 .contact-section {
     @include all.fl();
     @include all.size($w: 100%, $h: 100%);
-
-    .btn-add-contact {
-        width: 80%;
-        @include all.marpad ($mar: 3rem, $pad: 12px 0);
-        @include all.fl($jc: center, $alit: center, $gap: 1rem);
-        background-color: #2a3647;
-        border-radius: 8px;
-        border: 2px solid #4a5f7c;
-        
-        padding: 5px 0;
-        color: white;
-        font-size: 2rem;
-    }
 }
 
 app-add-contact {

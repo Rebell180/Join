@@ -3,7 +3,7 @@
         
         <app-contact-list></app-contact-list>
     </div>
-    <app-contact-detail class="{{cs.classToDisplay$ | async}}"></app-contact-detail>
+    <section contact-detail class="{{cs.classToDisplay$ | async}}"></section>
 </section>
 <app-add-contact *ngIf="(cs.isAddModalOpen | async) || (cs.isEditModalOpen | async)"></app-add-contact>
-<app-toast></app-toast>
+<app-toast></app-toast> 

@@ -8,7 +8,7 @@ import { ContactService } from '../../../shared/services/contact.service';
 
 
 @Component({
-  selector: 'app-contact-detail',
+  selector: 'section[contact-detail]',
   imports: [ContactIconComponent, CommonModule],
   templateUrl: './contact-detail.component.html',
   styleUrl: './contact-detail.component.scss'
