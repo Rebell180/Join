@@ -103,7 +103,7 @@
         }
 
         @include all.tablet {
-            @include all.big($wid: 90%, $hgt: 40dvh);
+            @include all.big($w: 90%, $h: 40dvh);
             padding-left: 3rem;
         }
 
