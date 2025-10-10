@@ -1,9 +1,4 @@
-<section class="contact-section">
-    <div class="addList">
-        
-        <app-contact-list></app-contact-list>
-    </div>
-    <section contact-detail class="{{cs.classToDisplay$ | async}}"></section>
-</section>
+<section contact-list class="contact-list"></section>
+<section contact-detail class="{{cs.classToDisplay$ | async}} contact-detail"></section>
 <app-add-contact *ngIf="(cs.isAddModalOpen | async) || (cs.isEditModalOpen | async)"></app-add-contact>
 <app-toast></app-toast> 

@@ -3,67 +3,74 @@
 
 #section-contact-list {
     @include all.size($w: 100%, $h: 100%);
-    overflow-y: auto;
     background: white;
     // padding: 0 3rem;
     box-shadow: 5px 0 10px -5px grey;
 
-    .contact-group-container {
-        @include all.fl($flexdir: column);
-        @include all.size($w: 100%, $h: auto);
+    .contact-groups-container {
+        overflow-y: auto;
+        @include all.size($w: 100%, $h: 100%);
 
-        .letter {
-            vertical-align: center;
-            @include all.marpad($mar: 2rem 0, $pad: 0 3rem);
-            cursor: default;
-        }
 
-        hr {
-            width: 100%;
-            margin: 1rem 0;
-            border: 1px solid rgba(0,0,0,0.1);
-        }
+        .contact-group-container {
+            @include all.fl($flexdir: column);
+            @include all.size($w: 100%, $h: auto);
 
-        .single-contact-container {
-            @include all.fl($alit: center, $jc: center, $gap: 25px);
-            @include all.size($w: 100%, $h: 78px);
-            @include all.marpad($pad: 0 1.75rem);
-            border-radius: 10px;
-            cursor: pointer;
-
-            &:hover {
-                background: rgba(219, 220, 220, 0.7);
+            .letter {
+                vertical-align: center;
+                @include all.marpad($mar: 2rem 0, $pad: 0 3rem);
+                cursor: default;
             }
 
-            .icon-wrapper {
-                @include all.fl($jc:center, $alit:center);
-                @include all.size($w: 42px, $h: 42px);
+            hr {
+                width: 100%;
+                margin: 1rem 0;
+                border: 1px solid rgba(0, 0, 0, 0.1);
             }
 
-            .contact-data {
-                @include all.fl($flexdir: column, $jc: center);
-                @include all.size($w: 250px, $h: 48px);
+            .single-contact-container {
+                @include all.fl($alit: center, $jc: center, $gap: 25px);
+                @include all.size($w: 100%, $h: 78px);
+                @include all.marpad($pad: 0 1.75rem);
+                border-radius: 10px;
+                cursor: pointer;
 
-                .name {
-                    margin-bottom: 5px;
-                    font-size: clamp(16px, 1.5dvw, 64px);
-                    font-family: 'InterBoldReg', sans-serif;
+                &:hover {
+                    background: rgba(219, 220, 220, 0.7);
                 }
 
-                .email {
-                    color: #007bed;
-                    font-size: clamp(16px, 1.2dvw, 64px);
+                .icon-wrapper {
+                    @include all.fl($jc: center, $alit: center);
+                    @include all.size($w: 42px, $h: 42px);
+                }
+
+                .contact-data {
+                    @include all.fl($flexdir: column, $jc: center);
+                    @include all.size($w: 250px, $h: 48px);
+
+                    .name {
+                        margin-bottom: 5px;
+                        font-size: clamp(16px, 1.5dvw, 64px);
+                        font-family: 'InterBoldReg', sans-serif;
+                    }
+
+                    .email {
+                        color: #007bed;
+                        font-size: clamp(16px, 1.2dvw, 64px);
+                    }
                 }
             }
-        }
 
-        .active{
-            background: #2a3647;
-            color: white;
-            cursor: default;
-            &:hover {
+            .active {
                 background: #2a3647;
+                color: white;
+                cursor: default;
+
+                &:hover {
+                    background: #2a3647;
+                }
             }
+
         }
 
         ::-webkit-scrollbar {

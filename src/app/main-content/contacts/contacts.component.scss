@@ -1,28 +1,22 @@
 @use '../../../../public/styles/all_styles' as all;
 
-.contact-section {
+:host {
     @include all.fl();
     @include all.size($w: 100%, $h: 100%);
-}
-
-app-add-contact {
-    position: absolute;
-    z-index: 2;
-    top: 30%;
-    left: 50%;
-    transform: translate(-60%, -30%);
-
-    @include all.notebook {
-        width: 50dvw;
-        top: 30%;
-        left: 50%;
-        transform: translate(-30%, -30%); 
+    background: white;
+    .contact-list {
+        @include all.size($w: 40%, $h: 90dvh);
+        @include all.marpad ($pad: 2rem 3rem 0 3rem);
+        @include all.tablet {
+            @include all.size ($w: 100%, $h: 80dvh);
+        }
     }
 
-    @include all.tablet() {
-        top: 0;
-        left: 0;
-        transform: none;
+    .contact-detail {
+        @include all.size($w: 60%, $h: 90dvh);
+        @include all.tablet {
+            @include all.size ($w: 100%, $h: 80dvh);
+        }
     }
 }
 

@@ -10,7 +10,7 @@
 
 			@include all.tablet {
 				width: 100dvw;
-				height: 10rem;
+				height: 10dvh;
 				@include all.fl($jc: center, $alit: end);
 			}
 

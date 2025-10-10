@@ -1,13 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { Contact } from '../../../shared/classes/contact';
-import { FireContactService } from '../../../shared/services/fire-contact.service';
 import { FormsModule } from "@angular/forms";
 import { ContactService } from '../../../shared/services/contact.service';
 import { ContactIconComponent } from "../contact-icon/contact-icon.component";
 
 @Component({
-  selector: 'app-contact-list',
+  selector: 'section[contact-list]',
   imports: [
     CommonModule,
     FormsModule,
