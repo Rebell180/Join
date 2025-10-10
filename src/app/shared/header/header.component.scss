@@ -4,15 +4,16 @@
 // Mit :host kann man in Angular die gesamte Komponente stylen.
 :host {
     .smallHeader {
+        width: 100%;
         padding: 0 2rem;
-
         grid-area: header;
         height: 10vh;
         @include all.fl($jc: space-between, $alit: center);
         background: white;
 
-        @include all.mobile {
-            padding: 0 3rem;
+        @include all.tablet {
+            padding: 0 10px;
+            width: 100%;
         }
 
         .joinIcon {

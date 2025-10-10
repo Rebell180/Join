@@ -1,9 +1,6 @@
 <section class="contact-section">
     <div class="addList">
-        <button class="btn-add-contact" (click)="cs.openModal('add')" type="button">
-            <span class="mob_none">Add new contact</span>
-            <img src="assets/Icons/person_add.png" alt="">
-        </button>
+        
         <app-contact-list></app-contact-list>
     </div>
     <app-contact-detail class="{{cs.classToDisplay$ | async}}"></app-contact-detail>

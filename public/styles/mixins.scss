@@ -14,7 +14,7 @@
 	gap: $gap;
 }
 
-@mixin big($wid: 0, $hgt: 0) {
-	width: $wid;
-	height: $hgt;
+@mixin big($w: 0, $h: 0) {
+	width: $w;
+	height: $h;
 }

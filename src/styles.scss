@@ -38,7 +38,7 @@ button {
 
     @include all.tablet {
         grid-template-columns: 1fr;
-        grid-template-rows: 10dvh 79dvh 10dvh;
+        grid-template-rows: 10dvh 80dvh 10dvh;
         grid-template-areas: 
             "header"
             "main"
@@ -81,17 +81,26 @@ input {
 }
 
 h1 {
-    font-size: 61px;
+    font-family: 'Interbold', sans-serif;
+}
+
+h2 {
+    font-family: 'InterRegular', sans-serif;
 }
 
 @font-face {
     font-family: "InterRegular";
-    src: url("/assets/Fonts/Inter_28pt-Regular.ttf") format("truetype");
+    src: url("/assets/Fonts/Inter_18pt-ExtraLight.ttf") format("truetype");
 }
 
 @font-face {
     font-family: "InterBold";
     src: url("/assets/Fonts/Inter_28pt-Bold.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "InterBoldReg";
+    src: url("/assets/Fonts/Inter_28pt-Regular.ttf") format("truetype");
 }
 
 .overlay {

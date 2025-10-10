@@ -1,6 +1,8 @@
 import { inject, Injectable, OnDestroy } from '@angular/core';
 import { addDoc, collection, CollectionReference, deleteDoc, doc, DocumentReference, Firestore, onSnapshot, query, Query, Unsubscribe, updateDoc, where } from '@angular/fire/firestore';
 import { BehaviorSubject, combineLatest, filter, map, Observable } from 'rxjs';
+import { addDoc, collection, CollectionReference, deleteDoc, doc, DocumentReference, Firestore, onSnapshot, query, Query, Unsubscribe, updateDoc, where } from '@angular/fire/firestore';
+import { BehaviorSubject, combineLatest, filter, map, Observable } from 'rxjs';
 import { Contact } from '../classes/contact';
 import { ContactGroup } from '../classes/contactGroup';
 

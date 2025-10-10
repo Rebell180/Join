@@ -1,52 +1,8 @@
 @use '../../../../public/styles/all_styles' as all;
 
-:host {
-    display: flex;
-    flex-direction: row;
-    @include all.big($wid: 100%, $hgt: 100%);
-}
-
 .contact-section {
     @include all.fl();
-    @include all.big($wid: 100%, $hgt: 100%);
-
-    @include all.tablet {
-        @include all.fl($jc: center);
-        @include all.big($wid: 100dvw, $hgt: 79dvh);
-        background: white;
-    }
-
-    @include all.mobile {
-        @include all.fl($jc: center);
-        @include all.big($wid: 100dvw, $hgt: 79dvh);
-        background: white;
-    }
-
-    .addList {
-        flex: 0 0 20dvw; 
-        height: 100%;
-        background-color: white;
-        @include all.fl($flexdir: column);
-
-        @include all.notebook {
-            @include all.big($wid: 100%, $hgt: 90dvh);
-        }
-
-        @include all.tablet {
-            @include all.big($wid: 60dvw, $hgt: 72dvh);
-            align-items: center;
-        }
-
-        @include all.smart {
-            width: 90dvw;
-            align-items: center;
-            z-index: 0;
-        }
-    
-        app-contact-list {
-            height: 90dvh;
-        }
-    }
+    @include all.big($w: 100%, $h: 100%);
 
     .btn-add-contact {
         width: 80%;
@@ -56,25 +12,9 @@
         border-radius: 8px;
         border: 2px solid #4a5f7c;
         
+        padding: 5px 0;
         color: white;
         font-size: 2rem;
-
-        @include all.notebook {
-            width: 80%;
-        }
-
-        @include all.tablet {
-            width: 35%;
-        }
-
-        @include all.mobile {
-            @include all.big($wid: 56px, $hgt: 56px);
-            border-radius: 50%;
-            position: fixed;
-            right: -20px;
-            bottom: 72px;
-            z-index: 0;
-        }
     }
 }
 
@@ -83,10 +23,12 @@ app-add-contact {
     z-index: 2;
     top: 30%;
     left: 50%;
-    transform: translate(-55%, -30%);
+    transform: translate(-60%, -30%);
 
     @include all.notebook {
-        width: 40dvw;
+        width: 50dvw;
+        top: 30%;
+        left: 50%;
         transform: translate(-30%, -30%); 
     }
 
@@ -98,7 +40,7 @@ app-add-contact {
 }
 
 app-toast {
-    @include all.big($wid: 100%, $hgt: 100%);
+    @include all.big($w: 100%, $h: 100%);
     position: absolute;
     z-index: -2;
     bottom: 0;

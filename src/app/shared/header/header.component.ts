@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, input } from '@angular/core';
+import { Component} from '@angular/core';
 
 @Component({
   /* Wenn der Selector so in eckige Klammern gesceiben wird,
