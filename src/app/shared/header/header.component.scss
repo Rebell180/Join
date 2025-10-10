@@ -3,36 +3,21 @@
 // Hier hatte ich den header-Selctor zu host geändert.
 // Mit :host kann man in Angular die gesamte Komponente stylen.
 :host {
-    .smallHeader {
-        width: 100%;
-        padding: 0 2rem;
-        grid-area: header;
-        height: 10vh;
+    .small-header {
+        @include all.size($w: 100%, $h: 10dvh);
         @include all.fl($jc: space-between, $alit: center);
+        @include all.marpad($pad: 0 2rem);
+        grid-area: header;
         background: white;
 
-        @include all.tablet {
-            padding: 0 10px;
-            width: 100%;
-        }
-
-        .joinIcon {
+        .join-logo {
             display: none;
-
-            img {
-                height: 5vh;
-                padding: 0;
-                object-fit: contain; 
-            }
+            height: 7dvh;
+            object-fit: contain;
 
             @include all.tablet {
-                display: flex;
+                display: block;
             }
-        }
-
-        .headerIcon {
-            @include all.fl($alit: center);
-            gap: 10px;
         }
 
         h1 {
@@ -43,14 +28,19 @@
             }
         }
 
-        img { 
-            cursor: pointer;
-            padding-right: 1rem;
-        }
-
-        .help {
-            @include all.tablet {
-                display: none;
+        .header-icon-container {
+            @include all.fl($alit: center);
+            gap: 10px;
+            
+            .help-icon {
+                @include all.tablet {
+                    display: none;
+                }
+            }
+            
+            .user-icon {
+                @include all.size($w: 7dvh, $h: 7dvh);
+                cursor: pointer;
             }
         }
     }
