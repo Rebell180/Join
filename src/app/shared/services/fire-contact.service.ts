@@ -49,8 +49,6 @@ export class FireContactService implements OnDestroy {
 
   // #region methods
 
-
-
   /**
    * Subscribes firestore 'contacts' collection and keep
    * data updated with the latest snapshot.

@@ -16,10 +16,7 @@ import { ContactIconComponent } from "../contact-icon/contact-icon.component";
   styleUrl: './contact-list.component.scss'
 })
 export class ContactListComponent {
-  // fireContactService: FireContactService = inject(FireContactService);
   cs: ContactService = inject(ContactService);
-  
-  // single Contact
 
   /**
    * Gets the full name of contact.

@@ -12,4 +12,8 @@
     &:hover {
         background: #29ABE2;
     }
+
+    @include all.notebook {
+        width: 93%;
+    }
 }

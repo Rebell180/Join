@@ -51,6 +51,7 @@ export class AddContactComponent{
   }
   
   // #region validation 
+
   /** Validates firstname. */
   protected validateFirstName(): void {
     const contactInForm: Observable<Contact> = this.cs.contactToEdit;
@@ -192,4 +193,6 @@ export class AddContactComponent{
     this.renderer.setProperty(errElem.nativeElement, 'innerText', '');
     return true;
   }
+
+  // #endregion Validation
 }
