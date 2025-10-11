@@ -5,6 +5,7 @@ export enum DisplayType {
   NONE = 'none',
   MOBILE = 'mobile',
   TABLET = 'tablet',
+  NOTEBOOK = 'notebook',
   DESKTOP = 'desktop',
   BIGSCREEN = 'bigscreen'
 }
@@ -17,10 +18,12 @@ export class DisplaySizeService implements OnDestroy{
   private sizes: {
     mobile: number,
     tablet: number,
+    notebook: number,
     desktop: number
   } =  {
     mobile: 450,
     tablet: 768,
+    notebook: 1024,
     desktop: 1920
   }
 
@@ -29,7 +32,6 @@ export class DisplaySizeService implements OnDestroy{
 
   private resizeSub?: Subscription;
   private resize$: Observable<number> = fromEvent(window, 'resize').pipe(
-      debounceTime(500),
       map(() => window.innerWidth),
       startWith(window.innerWidth),
       shareReplay(1)
@@ -54,7 +56,8 @@ export class DisplaySizeService implements OnDestroy{
   /** Detects the current display size. */
   private adustSize(displaySize:number) {
     if (displaySize > this.sizes.desktop) this.curSizeBS.next(DisplayType.BIGSCREEN);
-    else if (displaySize > this.sizes.tablet) this.curSizeBS.next(DisplayType.DESKTOP);
+    else if (displaySize > this.sizes.notebook) this.curSizeBS.next(DisplayType.DESKTOP);
+    else if (displaySize > this.sizes.tablet) this.curSizeBS.next(DisplayType.NOTEBOOK);
     else if (displaySize > this.sizes.mobile) this.curSizeBS.next(DisplayType.TABLET);
     else this.curSizeBS.next(DisplayType.MOBILE);
   }

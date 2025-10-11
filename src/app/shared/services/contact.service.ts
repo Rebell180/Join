@@ -14,7 +14,6 @@ export class ContactService implements OnDestroy {
 
   private fcs : FireContactService = inject(FireContactService);
   private dss: DisplaySizeService = inject(DisplaySizeService);
-  private curSize$: Observable<DisplayType> = this.dss.size();
 
   // add or edit contact modal properties 
 
@@ -31,6 +30,8 @@ export class ContactService implements OnDestroy {
 
   private classToDisplayBS: BehaviorSubject<string> = new BehaviorSubject('');
   classToDisplay$: Observable<string> = this.classToDisplayBS.asObservable();
+
+  curSize$ : Subscription;
 
   // fireContactService integration properties
 
@@ -59,14 +60,30 @@ export class ContactService implements OnDestroy {
 
   constructor() { 
     this.contactsByGroup = this.fcs.getContactGroups();
+    this.curSize$ = this.subscribeWindowSize();
   }
 
   ngOnDestroy(): void {
     this.contacts$.unsubscribe();
     this.contactGroups$.unsubscribe();
+    this.curSize$.unsubscribe();
   }
 
   // #region methods
+
+  // detail methods
+
+  subscribeWindowSize () {
+    return this.dss.size().subscribe((size) => {
+      console.log(size);
+      if(size = DisplayType.NOTEBOOK) {
+        this.classToDisplayBS.next('d_none');
+      }
+      else if(size == DisplayType.DESKTOP) {
+        this.classToDisplayBS.next('');
+      }
+    })
+  }
 
   // modal methods
 
@@ -108,11 +125,18 @@ export class ContactService implements OnDestroy {
           contact.selected = true;
           this.contactToEditBS.next(contact);
           this.selectContact(contact);
+          this.classToDisplayBS.next('');
         }
       });
     });
   }
 
+  // Detail methods
+
+  setDetailVisibility(classname: string) {
+    this.classToDisplayBS.next(classname);
+    this.currentContactBS.next(null);
+  }
 
   // #region CRUD methods
 

@@ -5,7 +5,7 @@
         <h2>Better with a team</h2>
         <hr id="bottom-line" />
     </div>
-    <button class="contact-detail-back" (click)="close()"><img src="assets/Icons/arrow-left-line.png" alt=""></button>
+    <button class="contact-detail-back" (click)="cs.setDetailVisibility('d_none')"><img src="assets/Icons/arrow-left-line.png" alt=""></button>
 </div>
 
 @if (currentContact$ | async; as contact ) {
@@ -21,7 +21,7 @@
                 <button (click)="cs.openModal('edit')" type="button">
                     <img src="assets/Icons/digitaler-controller.png" alt="" />Edit
                 </button>
-                <button (click)="deleteContact(contact)">
+                <button (click)="cs.deleteContactInDB(contact)">
                     <img class="delete-btn" src="assets/Icons/—Pngtree—vector trash icon_4152654.png" alt="" />Delete
                 </button>
             </div>
@@ -49,7 +49,7 @@
         <img src="assets/Icons/digitaler-controller.png" alt="Edit Icon" />
         <span>Edit</span>
     </div>
-    <div class="menuItem deleteItem" (click)="deleteContact(contact)">
+    <div class="menuItem deleteItem" (click)="cs.deleteContactInDB(contact)">
         <img src="assets/Icons/—Pngtree—vector trash icon_4152654.png" alt="Delete Icon" />
         <span>Delete</span>
     </div>

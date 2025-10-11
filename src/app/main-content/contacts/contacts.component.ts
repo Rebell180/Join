@@ -8,6 +8,7 @@ import { FireContactService } from '../../shared/services/fire-contact.service';
 import { Observable } from 'rxjs';
 import { ContactService } from '../../shared/services/contact.service';
 import { AsyncPipe, NgIf } from '@angular/common';
+import { DisplaySizeService, DisplayType } from '../../shared/services/display-size.service';
 
 @Component({
   selector: 'section[contacts]',
@@ -25,4 +26,6 @@ import { AsyncPipe, NgIf } from '@angular/common';
 export class ContactsComponent {
   fireContactService : FireContactService = inject(FireContactService);
   cs: ContactService = inject(ContactService);
+  dss: DisplaySizeService = inject(DisplaySizeService);
+  DisplayType = DisplayType;
 }
