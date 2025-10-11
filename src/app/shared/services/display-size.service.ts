@@ -53,6 +53,15 @@ export class DisplaySizeService implements OnDestroy{
    */
   size(): Observable<DisplayType> {return this.curSize$}
 
+  /**
+   * Gets the current DiplayType without live changes.
+   * 
+   * @returns the current DisplayType
+   */
+  getSizeValue(): DisplayType {
+    return this.curSizeBS.value;
+  }
+
   /** Detects the current display size. */
   private adustSize(displaySize:number) {
     if (displaySize > this.sizes.desktop) this.curSizeBS.next(DisplayType.BIGSCREEN);

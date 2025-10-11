@@ -1,4 +1,5 @@
 @if(((cs.classToDisplay$ | async) == 'd_none') 
+
     && (((dss.size() | async) == DisplayType.NOTEBOOK) || ((dss.size() | async) == DisplayType.TABLET ) ||  ((dss.size() | async) == DisplayType.MOBILE ))
     && !(cs.currentContact$ | async)) {
     <section contact-list class="contact-list"></section>
@@ -10,13 +11,14 @@
 } 
 @else if(((cs.classToDisplay$ | async) == '') 
     && (((dss.size() | async) == DisplayType.NOTEBOOK) || ((dss.size() | async) == DisplayType.TABLET ) ||  ((dss.size() | async) == DisplayType.MOBILE ))
-    && (cs.currentContact$ | async)) { 
+    ){ 
     <section contact-detail class="contact-detail"></section>
 }
+
 @else {
     <section contact-list class="contact-list"></section>
     <section contact-detail class="contact-detail"></section>
 }
 
 <app-add-contact *ngIf="(cs.isAddModalOpen | async) || (cs.isEditModalOpen | async)"></app-add-contact>
-<app-toast></app-toast> 
+<app-toast></app-toast>

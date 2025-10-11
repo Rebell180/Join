@@ -131,11 +131,24 @@ export class ContactService implements OnDestroy {
     });
   }
 
+  unselectCurrentContact(id: string) {
+    this.contacts.forEach((contactStream) => {
+      contactStream.forEach((contact) => {
+        if(contact.id == id) {
+          contact.selected = false;
+        }
+      })
+    })
+  }
+
   // Detail methods
 
   setDetailVisibility(classname: string) {
     this.classToDisplayBS.next(classname);
-    this.currentContactBS.next(null);
+    if(this.currentContactBS.value) {
+      this.unselectCurrentContact(this.currentContactBS.value.id);
+      this.currentContactBS.next(null);
+    }
   }
 
   // #region CRUD methods
