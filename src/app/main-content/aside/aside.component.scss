@@ -13,7 +13,7 @@
 			}
 
 			img {
-				@include all.size($w: 100px, $h: 100px);
+				@include all.size($w: 10rem, $h: 10rem);
 				align-self: center;
 
 				@include all.tablet {

@@ -18,7 +18,7 @@
         display: none;
 
         button {
-            @include all.size($w: 48px, $h: 48px);
+            @include all.size($w: 4.8rem, $h: 4.8rem);
             color: white;
             border: none;
             background: transparent;
@@ -34,7 +34,7 @@
 }
 
 hr {
-    @include all.size($w: 60px, $h: 3px);
+    @include all.size($w: 6rem, $h: 0.3rem);
     background: rgb(17, 148, 213);
     border: none
 }
@@ -113,10 +113,10 @@ h2 {
     }
     
     form {
-        @include all.size();
+        @include all.size($h: auto);
         
         .form-field {
-            @include all.size($w: 100%, $h: auto);
+            @include all.size($h: auto);
             @include all.fl($flexdir: column, $alit: center);
             margin-bottom: 1.5rem;
             
