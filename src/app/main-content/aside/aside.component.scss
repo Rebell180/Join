@@ -2,21 +2,18 @@
 
 :host {		
 			grid-area: aside;
-			width: 100%;
-			height: 100%;
+			@include all.size();
 			@include all.fl($jc: space-between, $flexdir: column, $alit: center);
 			padding: 20px 0;
 			background: #2a3647;
 
 			@include all.tablet {
-				width: 100dvw;
-				height: 10dvh;
+				@include all.size($h: 10dvh);
 				@include all.fl($jc: center, $alit: end);
 			}
 
 			img {
-				width: 100px;
-				height: 110px;
+				@include all.size($w: 100px, $h: 100px);
 				align-self: center;
 
 				@include all.tablet {
@@ -24,12 +21,12 @@
 					}
 			}
 
-			.navBtn {
+			.nav-btn {
 				width: 100%;
 				@include all.fl($flexdir: column, $alit: center, $jc: center);
 
 				@include all.tablet {
-					height: 5rem;
+					@include all.size($h: 5rem);
 					@include all.fl($flexdir: row);
 					gap: 2rem;
 					}
@@ -60,8 +57,7 @@
 
 	nav {
 		ul {
-			width: 100%;
-			height: 12vh; //Erhöht auf 16dvh wegen 2 mal li, passt sonst nicht rein
+			@include all.size($h: 12dvh);
 
 				@include all.tablet {
 						display: none;

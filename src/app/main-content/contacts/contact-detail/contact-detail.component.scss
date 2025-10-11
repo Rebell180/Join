@@ -2,16 +2,15 @@
 
 :host {
     background: #ededed;
-    @include all.size($w: 100%, $h: 100%);
-
+    @include all.size();
 
     .contact-detail-header {
         @include all.fl($jc: space-between, $alit: center);
-        @include all.size($w: 100%, $h: 8rem);
+        @include all.size($h: 8rem);
 
         @include all.tablet {
             @include all.fl($jc: space-between, $alit: start);
-            @include all.size($w: 100%, $h: 12rem);
+            @include all.size($h: 12rem);
         }
 
         .header-info {
@@ -71,7 +70,7 @@
     }
 
     .contact-info-container {
-        @include all.size($w: 100%, $h: 80%);
+        @include all.size($h: 80%);
         @include all.marpad($mar: 3rem 0 0);
 
         .contact-detail-header-row {
@@ -94,7 +93,7 @@
                 }
 
                 .option-container {
-                    @include all.size($w: 100%, $h: 2.8rem);
+                    @include all.size($h: 2.8rem);
                     @include all.fl($jc: start, $alit: center, $gap: 2rem);
 
                     @include all.tablet {
@@ -166,8 +165,6 @@
             cursor: pointer;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             padding: 0;
-            // position: absolute;
-            // right: 0;
         }
 
         .dot {
@@ -186,7 +183,6 @@
         border-radius: 8px 8px 0 8px;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
         padding: 4px 0;
-        // z-index: 2;
         width: 110px;
         height: 80px;
 

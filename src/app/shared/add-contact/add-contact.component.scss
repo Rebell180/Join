@@ -1,53 +1,21 @@
 @use '../../../../public/styles/all_styles' as all;
 
 #addContactModal {
+    @include all.fl($jc: center, $alit: center);
     @include all.size($w: 100rem, $h: 65dvh);
     background-color: white;
     border-radius: 16px;
-    @include all.fl($jc: center, $alit: center);
-    
-    @include all.notebook {
-        width: 90dvw;
-        transform: translateX(-50%);
-        margin-top: 4rem;
-    }
-    
-    @include all.tablet() {
-        @include all.size($w: 60dvw, $h: 75dvh);
-        top: -1rem;
-        z-index: 30;
-        transform: translateX(30%);
-        @include all.fl($flexdir: column, $alit: center);
-    }
 }
 
-.leftPanel {
-    @include all.size($w: 40%, $h: 100%);
+.left-panel {
+    @include all.fl($flexdir: column, $jc: center);
+    @include all.size($w: 40%);
     background-color: #2a3647;
     padding: 0 2rem;
     border-radius: 16px 0 0 16px;
-    @include all.fl($flexdir: column, $jc: center);
 
-    @include all.notebook {
-        width: 40%;
-        align-items: start;
-    }
-
-    @include all.tablet {
-        border-radius: 0; 
-        @include all.size($w: 100%, $h: 35rem);
-        @include all.fl($alit: center);
-    }
-
-    .mobileCloseBtn {
+    .mobile-close-btn {
         display: none;
-
-        @include all.tablet {
-            display: flex;
-            position: absolute;
-            right: 20px;
-            top: 20px;
-        }
 
         button {
             @include all.size($w: 48px, $h: 48px);
@@ -58,7 +26,7 @@
     }
 }
 
-.lineCloseBtn {
+.line-close-btn {
     width: 100%;
     @include all.fl($jc: end);
     margin: 2rem 0;
@@ -66,8 +34,6 @@
 }
 
 hr {
-    width: 60px; 
-    height: 3px;
     @include all.size($w: 60px, $h: 3px);
     background: rgb(17, 148, 213);
     border: none
@@ -96,9 +62,9 @@ h2 {
     margin-bottom: 1rem;
 }
 
-.rightPanel {
+.right-panel {
     @include all.size($w: 60%, $h: 100%);
-    padding: 1rem 2rem;
+    // padding: 1rem 2rem;
     @include all.fl($flexdir: column);
 
     @include all.tablet {
@@ -107,7 +73,7 @@ h2 {
         padding: 0;
     }
 
-    .lineCloseBtn { 
+    .line-close-btn { 
         width: 100%;
         @include all.fl($jc: end);
         margin: 2rem 0;
@@ -117,7 +83,7 @@ h2 {
         }
     }
 
-    .lineForm {
+    .line-form {
         @include all.size($w: 100%, $h: auto);
         padding-top: 9rem;
         @include all.fl($alit: center, $jc: space-between);
@@ -128,88 +94,89 @@ h2 {
             align-items: center; 
         }
 
-        .singleIcon {
+        .single-icon {
             @include all.size($w: 35%, $h: 180px);
 
             @include all.tablet {
-                z-index: 1;
-                position: absolute;
-                top: -15dvh;
-                left: 50%;
-                transform: translate(-50%,70%);
                 @include all.size($w: 10rem, $h: 10rem);
+                position: absolute;
+                display: block;
+                // top: -15dvh;
+                // left: 50%;
+                transform: translate(-50%,70%);
                 object-fit: contain;
                 border-radius: 50%;
                 background: white;
-                display: block;
+                z-index: 1;
             }
         }
     }
-}
-
-form {
-    width: 100%;
-
-    .formField {
-        @include all.size($w: 100%, $h: auto);
-        margin-bottom: 1.5rem;
-        @include all.fl($flexdir: column, $alit: center);
-
-        .inputImg {
-            @include all.size($w: 70%, $h: 40px);
-            padding: 0 10px;
-            border: 1px solid grey;
-            border-radius: 5px;
-            @include all.fl($jc: space-between, $alit: center);
-
-            input {
-                outline: none;
+    
+    form {
+        @include all.size();
+        
+        .form-field {
+            @include all.size($w: 100%, $h: auto);
+            @include all.fl($flexdir: column, $alit: center);
+            margin-bottom: 1.5rem;
+            
+            .input-img {
+                @include all.size($w: 70%, $h: 40px);
+                @include all.fl($jc: space-between, $alit: center);
+                padding: 0 10px;
+                border: 1px solid grey;
+                border-radius: 5px;
+                
+                input {
+                    @include all.size();
+                    outline: none;
+                }
+                
+                img {
+                    @include all.size($w: 20px, $h: 20px);
+                    margin: 0; 
+                    display: flex;
+                }
+                
+                @include all.notebook {
+                    width: 90%;
+                    padding: 0 15px;
+                }
+                
+                @include all.tablet {
+                    width: 60%;
+                    padding: 0 15px;
+                }
+                
+                @include all.mobile {
+                    width: 60%;
+                    padding: 0 15px;
+                }
+                
+                @include all.smart {
+                    width: 70%;
+                    padding: 0 15px;
+                }
             }
             
-            img {
-                @include all.size($w: 20px, $h: 20px);
-                margin: 0; 
-                display: flex;
-            }
-
-            @include all.notebook {
-                width: 90%;
-                padding: 0 15px;
-            }
-
-            @include all.tablet {
-                width: 60%;
-                padding: 0 15px;
-            }
-
-            @include all.mobile {
-                width: 60%;
-                padding: 0 15px;
-            }
-
-            @include all.smart {
-                width: 70%;
-                padding: 0 15px;
-            }
-        }
-
-        .errmsg {
-            @include all.size($w: 70%, $h: 1rem);
-            color: #c00000;
-            font-size: 1rem;
-            padding: 4px 16px;
-
-            @include all.tablet {
-                padding-left: 40px;
+            .errmsg {
+                @include all.size($w: 70%, $h: 1rem);
+                color: #c00000;
+                font-size: 1rem;
+                padding: 4px 16px;
+                
+                @include all.tablet {
+                    padding-left: 40px;
+                }
             }
         }
     }
 }
-
-.formBtnContainer {
-    width: 100%;
-    margin-top: 2rem;
+    
+.form-btn-container {
+    @include all.size($h: 20%);
     @include all.fl($jc: center, $flexdir: row);
+    margin-top: 2rem;
     gap: 1rem;
 
     @include all.tablet {
@@ -232,7 +199,7 @@ form {
         }
     }
 
-    #createContactBtn {
+    #create-contact-btn {
         
         @include all.tablet {
             width: 20%;
@@ -244,7 +211,7 @@ form {
             }
         }
     }
-    .deleteBtnMobile {
+    .delete-btn-mobile {
         display: none;
 
         @include all.tablet {

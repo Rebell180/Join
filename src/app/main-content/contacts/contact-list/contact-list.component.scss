@@ -2,9 +2,8 @@
 @forward '../../../../../public/styles/component-styles';
 
 :host {
-    @include all.size($w: 100%, $h: 90dvh);
+    @include all.size($h: 90dvh);
     background: white;
-    // padding: 0 3rem;
     box-shadow: 5px 0 10px -5px grey;
 
     #add-contact-button {
@@ -13,12 +12,12 @@
 
     .contact-groups-container {
         overflow-y: auto;
-        @include all.size($w: 100%, $h: 90%);
+        @include all.size($h: 90%);
 
 
         .contact-group-container {
             @include all.fl($flexdir: column);
-            @include all.size($w: 100%, $h: auto);
+            @include all.size($h: auto);
 
             .letter {
                 vertical-align: center;
