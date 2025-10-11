@@ -32,7 +32,7 @@
             }
 
             .single-contact-container {
-                @include all.fl($alit: center, $jc: center, $gap: 25px);
+                @include all.fl($alit: center, $jc: start, $gap: 25px);
                 @include all.size($w: 95%, $h: 78px);
                 @include all.marpad($pad: 0 1.75rem);
                 border-radius: 10px;
@@ -44,7 +44,7 @@
 
                 .icon-wrapper {
                     @include all.fl($jc: center, $alit: center);
-                    @include all.size($w: 42px, $h: 42px);
+                    @include all.size($w: 4.2rem, $minW: 4.2rem, $h: 4.2rem, $minH: 4.2rem);
                 }
 
                 .contact-data {
@@ -53,13 +53,14 @@
 
                     .name {
                         margin-bottom: 5px;
-                        font-size: clamp(16px, 1.5dvw, 64px);
+                        font-size: 2.4rem;
                         font-family: 'InterBoldReg', sans-serif;
+                        white-space: nowrap;
                     }
 
                     .email {
                         color: #007bed;
-                        font-size: clamp(16px, 1.2dvw, 64px);
+                        font-size: 2rem;
                     }
                 }
             }

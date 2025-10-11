@@ -8,7 +8,7 @@
         @include all.fl($jc: space-between, $alit: center);
         @include all.size($h: 8rem);
 
-        @include all.tablet {
+        @include all.notebook {
             @include all.fl($jc: space-between, $alit: start);
             @include all.size($h: 12rem);
         }
@@ -17,21 +17,17 @@
             @include all.fl($alit: center, $gap: 2rem);
 
             h1 {
-                font-size: clamp(16px, 4dvw, 64px);
+                font-size: 6.4rem;
                 font-family: 'Interbold', sans-serif;
             }
 
-            @include all.tablet {
+            @media (max-width: 1200px) {
                 @include all.fl($flexdir: column, $gap: 1rem);
-
-                h1 {
-                    font-size: 48px;
-                }
             }
 
             h2 {
                 width: 100%;
-                font-size: clamp(16px, 1.5dvw, 32px);
+                font-size: 2.5rem;
                 font-family: 'InterRegular', sans-serif;
                 letter-spacing: 2px;
             }
@@ -44,7 +40,7 @@
                 display: block;
                 @include all.size($w: 1rem, $h: 6rem);
 
-                @include all.tablet {
+                @media (max-width: 1200px) {
                     display: none;
                 }
             }
@@ -53,8 +49,9 @@
                 display: none;
                 @include all.size($w: 50%, $h: 0.5rem);
 
-                @include all.tablet {
+                @media (max-width: 1200px) {
                     display: block;
+                    margin-bottom: 2rem;
                 }
             }
 
@@ -63,7 +60,7 @@
         .contact-detail-back {
             display: none;
 
-            @include all.tablet {
+            @include all.notebook {
                 display: block;
             }
         }
@@ -78,7 +75,7 @@
             width: 100%;
 
             .contact-icon {
-                @include all.size($w: 12rem, $h: 12rem);
+                @include all.size($w: 12rem, $minW: 12rem,  $h: 12rem, $minH: 12rem);
             }
 
             .name-option-container {
@@ -87,8 +84,9 @@
                 @include all.fl($flexdir: column);
 
                 .name {
+                    @include all.size();
                     @include all.fl($jc: start);
-                    font-size: 48px;
+                    font-size: 4rem;
                     font-weight: bold;
                 }
 
@@ -121,20 +119,20 @@
 
         h2 {
             margin: 3rem 0;
-            font-size: 24px;
+            font-size: 2.4rem;
         }
 
         .emailPhone {
 
             h3 {
                 margin: 1.5rem 0;
-                font-size: clamp(16px, 1.2dvw, 64px);
+                font-size: 2rem;
                 font-family: "InterBold", sans-serif;
             }
 
             a {
                 color: #007bed;
-                font-size: clamp(16px, 1.2dvw, 64px);
+                font-size: 2rem;
             }
 
             .tel-ref {
