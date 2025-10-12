@@ -132,26 +132,13 @@
             @include all.fl($jc: space-between, $alit: center, $gap: 2rem);
             @include all.marpad($pad: 0 3rem);
 
-            @include all.notebook {
-                // @include all.marpad($pad: 0 3rem 0 1.5rem);
-            }
-
             @include all.tablet {
                 @include all.size($h: auto);
                 margin-top: 3rem;
-                // @include all.marpad($pad: 0 5rem);
                 @include all.fl($jc: center, $alit: center);
             }
 
-            @include all.smart {
-                // @include all.marpad($pad: 0 0.8rem);
-            }
-
             .single-icon {
-
-                // @include all.notebook {
-                //     display: none;
-                // }
                 @include all.tablet {
                     display: block; 
                     @include all.size($w: 12rem, $h: 12rem);
@@ -162,6 +149,20 @@
                     border-radius: 50%;
                     background: white;
                     z-index: 1;
+                }
+            }
+
+            .single-initial-icon {
+                @include all.size($w: 14rem, $h: 12rem);
+
+                @include all.tablet {
+                    @include all.size($w: 12rem, $h: 12rem);
+                    position: absolute;
+                    top: -32%;
+                    left: 50%;
+                    transform: translate(-50%);
+                    border-radius: 50%;
+                    border: 2px solid white;
                 }
             }
 
@@ -234,9 +235,6 @@
                     @include all.size($h: 4rem);
                     @include all.fl($jc: start);
 
-                    // position: absolute;
-                    // bottom: -5rem;
-                    // right: 0;
                     margin-top: 2rem;
                     gap: 1rem;
 
@@ -245,12 +243,22 @@
                         font-size: 16px;
                     }
 
+                    @media(max-width: 840px) {
+                        #add-contact-cancel-btn {
+                            display: none;
+                        }
+                    }
+
                     @include all.tablet {
                         gap: 0.5rem;
                         @include all.fl($jc: center, $gap: 2rem);
+
+                        #add-contact-cancel-btn {
+                            display: flex;
+                        }
                     }
 
-                    @include all.mobile {
+                    @include all.mobile{
                         #add-contact-cancel-btn {
                             display: none;
                         }

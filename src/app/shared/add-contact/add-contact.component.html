@@ -1,3 +1,6 @@
+@if( cs.contactToEdit | async; as contact) {
+
+
 <dialog class="add-contact-modal-container" [@slideInOut]="isOpen ? 'open' : 'closed'">
     <header class="contact-modal-header">
         <img src="assets/Icons/JoinLogoWhite.png" alt="">
@@ -16,9 +19,13 @@
             <button type="button" (click)="closeModal()">x</button>
         </div>
         <div class="line-form">
-            <img class="single-icon" src="assets/Icons/contact_icon_grey.png" alt="">
+            @if(cs.isAddModalOpen | async) {
+                <img class="single-icon" src="assets/Icons/contact_icon_grey.png" alt="">
+            } @else if(cs.isEditModalOpen | async) {
+                <app-contact-icon id="{{ 'contact-modal-icon-' + contact.id}}" class="single-initial-icon {{ contact.iconColor }}" [contact]="contact"></app-contact-icon>
+            }
 
-            <form method="post" (submit)="submitForm($event)" *ngIf="cs.contactToEdit | async as contact">
+            <form method="post" (submit)="submitForm($event)">
                 <div class="form-field">
                     <div class="input-img-container">
                         <input type="text" name="firstname" id="firstname" placeholder="firstname"
@@ -63,3 +70,4 @@
         </div>
     </main>
 </dialog>
+}
