@@ -30,7 +30,7 @@
             }
 
             h2 {
-                width: 100%;
+                @include all.size($h: auto);
                 font-size: 2.5rem;
                 font-family: 'InterRegular', sans-serif;
                 letter-spacing: 2px;
@@ -70,7 +70,7 @@
 
             @include all.notebook {
                 display: block;
-                @include all.marpad($mar: 0 3rem);
+                @include all.marpad($mar: 0 2rem);
             }
         }
     }
@@ -81,23 +81,38 @@
 
         .contact-detail-header-row {
             @include all.fl($alit: center);
-            width: 100%;
+            @include all.size($h: auto);
 
             .contact-icon {
                 @include all.size($w: 12rem, $minW: 12rem,  $h: 12rem, $minH: 12rem);
+
+                @media(max-width: 450px) {
+                    @include all.size($w: 8rem, $minW: 8rem,  $h: 8rem, $minH: 8rem);
+                }
             }
 
             .name-option-container {
-                width: 100%;
                 @include all.size($h: auto);
-                padding-left: 3rem;
+                @include all.marpad($pad: 0 0 0 3rem);
                 @include all.fl($flexdir: column);
+
+                    @include all.mobile {
+                        @include all.marpad($pad: 0 0 0 2rem);
+                    }
 
                 .name {
                     @include all.size();
                     @include all.fl($jc: start);
                     font-size: 4rem;
                     font-weight: bold;
+
+                    @include all.tablet {
+                        font-size: 3rem;
+                    }
+
+                    @include all.smart {
+                        font-size: 2.2rem;
+                    }
                 }
 
                 .option-container {
@@ -128,14 +143,14 @@
         }
 
         h2 {
-            margin: 3rem 0;
+            @include all.marpad($mar: 3rem 0);
             font-size: 2.4rem;
         }
 
         .emailPhone {
 
             h3 {
-                margin: 1.5rem 0;
+                @include all.marpad($mar: 1.5rem 0);
                 font-size: 2rem;
                 font-family: "InterBold", sans-serif;
             }
@@ -156,7 +171,7 @@
         display: none;
         position: absolute;
         bottom: 0;
-        right: 2rem;
+        right: 1rem;
         @include all.size($w: 5rem, $h: 5rem);
         z-index: 1;
 
@@ -172,14 +187,13 @@
             @include all.fl($flexdir: column, $alit: center, $jc: center);
             cursor: pointer;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            padding: 0;
         }
 
         .dot {
             @include all.size($w: 4px, $h: 4px);
             background-color: white;
             border-radius: 50%;
-            margin: 2px 0;
+            @include all.marpad($mar: 0.2rem 0);
         }
     }
 
@@ -190,12 +204,12 @@
         background-color: white;
         border-radius: 8px 8px 0 8px;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-        padding: 4px 0;
+        @include all.marpad($pad: 0.4rem 0);
         @include all.size($w: 11rem, $h: 8rem);
 
         .menuItem {
             @include all.fl($alit: center);
-            padding: 8px 16px;
+            @include all.marpad($pad: 0.8rem 1.6rem);
             cursor: pointer;
             font-size: 16px;
             color: #333;
@@ -206,7 +220,7 @@
 
             img {
                 @include all.size($w: 18px, $h: 18px);
-                margin-right: 10px;
+                @include all.marpad($pad: 0 0.1rem 0 0);
             }
         }
     }

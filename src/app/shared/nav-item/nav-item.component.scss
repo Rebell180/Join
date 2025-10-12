@@ -1,26 +1,23 @@
 @use './../../../../public/styles/all_styles.scss' as all;
 
 :host {
-	height: 5vh;
-	width: 100%;
-	display: flex;
-	align-items: center;
-	margin: 1rem 0;
-	padding-left: 4rem;
-	gap: 1rem;
+	@include all.size($h: 5rem);
+	@include all.fl($alit: center, $gap: 1rem);
+	@include all.marpad($mar: 1rem 0, $pad: 0 0 0 4rem);
 	cursor: pointer;
 	color: white;
 	background: transparent;
-	font-size: 1.6rem;
+	font-size: 1.8rem;
 
 	@include all.tablet {
-		width: 100%;
-		height: 5vh;
-		@include all.fl($flexdir: column);
-		margin: 0;
-		padding: 0;
-		gap: 0.5rem;
+		@include all.size($h: 5rem);
+		@include all.fl($flexdir: column, $gap: 1rem);
+		@include all.marpad($mar: 0, $pad: 0);
 		border-radius: 10px;
+	}
+
+	@include all.smart {
+		font-size: 1.4rem;
 	}
 
 	&:hover {
@@ -29,7 +26,11 @@
 
 	img {
 		display: flex;
-		width: 28px;
-		height: 28px;
+		@include all.size($w: 2.8rem, $h: 2.8rem);
+		margin-bottom: 1rem;
+
+		@include all.smart {
+		@include all.size($w: 2.4rem, $h: 2.4rem);
+	}
 	}
 }
