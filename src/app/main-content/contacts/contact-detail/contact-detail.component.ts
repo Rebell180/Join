@@ -18,6 +18,7 @@ export class ContactDetailComponent {
 
   isMenuVisible: boolean = false;
 
+  /** Shows and hide the mini menu for mobile devices. */
   toggleMenu(): void {
         this.isMenuVisible = !this.isMenuVisible;
     }

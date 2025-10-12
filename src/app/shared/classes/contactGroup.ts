@@ -1,7 +1,7 @@
 import { BehaviorSubject, Observable } from "rxjs";
 import { Contact } from "./contact";
 
-
+/** Represents a group of contact. */
 export class ContactGroup {
 
     name: string = '';

@@ -42,7 +42,8 @@ export class DisplaySizeService implements OnDestroy{
     this.resize$.subscribe(size => this.adustSize(size));
   }
 
-  // #region Methodes
+  // #region Methods
+  /** Unssubsribes all subscriptions. */
   ngOnDestroy(): void {
     this.resizeSub?.unsubscribe();
   }
@@ -62,7 +63,9 @@ export class DisplaySizeService implements OnDestroy{
     return this.curSizeBS.value;
   }
 
-  /** Detects the current display size. */
+  /** Detects the current display size.
+   * @param displaySize - Width (px) of current display.
+   */
   private adustSize(displaySize:number) {
     if (displaySize > this.sizes.desktop) this.curSizeBS.next(DisplayType.BIGSCREEN);
     else if (displaySize > this.sizes.notebook) this.curSizeBS.next(DisplayType.DESKTOP);
@@ -70,5 +73,5 @@ export class DisplaySizeService implements OnDestroy{
     else if (displaySize > this.sizes.mobile) this.curSizeBS.next(DisplayType.TABLET);
     else this.curSizeBS.next(DisplayType.MOBILE);
   }
+  // #endregion
 }
-// #endregion

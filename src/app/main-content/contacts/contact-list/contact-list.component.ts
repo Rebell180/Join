@@ -27,8 +27,6 @@ export class ContactListComponent {
   }
 
   /**
-   * 
-   * 
    * @param word the string to limit.
    * @param maxLength number indicates the max of displaying chars.
    * @returns string combined name (firstname + lastname)

@@ -22,7 +22,7 @@ export class Contact {
      * @param tel - Phone number of contact.
      * @param iconColor - Background-Color of User-Icon, null for new contacts, who doesn't exists in database. 
      */
-    constructor({id = '', firstname, lastname, group, email, tel, iconColor = null}: {
+    constructor({ id = '', firstname, lastname, group, email, tel, iconColor = null }: {
         id: string,
         firstname: string,
         lastname: string,
@@ -33,11 +33,11 @@ export class Contact {
     }) {
         this.id = id;
         this.firstname = firstname,
-        this.lastname = lastname,
-        this.group = group,
-        this.email = email,
-        this.tel = tel,
-        this.iconColor = iconColor ? iconColor : Contact.getRandomIconColor();
+            this.lastname = lastname,
+            this.group = group,
+            this.email = email,
+            this.tel = tel,
+            this.iconColor = iconColor ? iconColor : Contact.getRandomIconColor();
     }
 
     // #region Methods
@@ -46,25 +46,14 @@ export class Contact {
      * @param other - Instance for compare.
      * @returns true, it both objects are the same
      */
-    equals(other:unknown):boolean {
+    equals(other: unknown): boolean {
         if (!(other instanceof Contact)) return false;
         return this.id == other.id;
     }
-    // #endregion
-
-    /**
-     * Gets a random color for new Contacts
-     * @returns - a random color.
-     */
-    static getRandomIconColor():string {
-        const colors:string[] = ['orange', 'purple', 'blue', 'pink', 'yellow', 'green'];
-        return colors[Math.floor(colors.length * Math.random())];
-    }
-
     /**
      * Gets a JSON-String from Contact.
      * @returns - Contact as JSON.
-     */
+    */
     toJson() {
         return {
             id: this.id || "",
@@ -76,4 +65,13 @@ export class Contact {
             iconColor: this.iconColor || Contact.getRandomIconColor()
         }
     }
+    /**
+     * Gets a random color for new Contacts
+      * @returns - a random color.
+      */
+    static getRandomIconColor(): string {
+        const colors: string[] = ['orange', 'purple', 'blue', 'pink', 'yellow', 'green'];
+        return colors[Math.floor(colors.length * Math.random())];
+    }
+    // #endregion
 }

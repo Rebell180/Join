@@ -1,6 +1,5 @@
 import { Component, input, InputSignal } from '@angular/core';
 import { Contact } from '../../../shared/classes/contact';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-contact-icon',

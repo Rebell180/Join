@@ -1,6 +1,6 @@
 import { inject, Injectable, OnDestroy } from '@angular/core';
 import { addDoc, collection, CollectionReference, deleteDoc, doc, DocumentReference, Firestore, onSnapshot, query, Query, Unsubscribe, updateDoc, where } from '@angular/fire/firestore';
-import { BehaviorSubject, combineLatest, filter, map, Observable } from 'rxjs';
+import { BehaviorSubject, map, Observable } from 'rxjs';
 import { Contact } from '../classes/contact';
 import { ContactGroup } from '../classes/contactGroup';
 
@@ -24,16 +24,17 @@ import { ContactGroup } from '../classes/contactGroup';
 @Injectable({
   providedIn: 'root'
 })
+/** Manges the Firestore-Handling between contacts. */
 export class FireContactService implements OnDestroy {
-
+  
   // #region properties
-
+  
   private contactsSubject = new BehaviorSubject<Array<Contact>>([]);
   contacts$ = this.contactsSubject.asObservable();
-
+  
   private currentContactIdSubject = new BehaviorSubject<string | null>(null);
   currentContactId$ = this.currentContactIdSubject.asObservable();
-
+  
   private unsubContacts: Unsubscribe;
   private firestore: Firestore = inject(Firestore);
 
@@ -43,12 +44,13 @@ export class FireContactService implements OnDestroy {
     this.unsubContacts = this.subContactsList();
   }
 
+  /** Unsubscribes contact list observable. */
   ngOnDestroy() {
     this.unsubContacts();
   }
 
   // #region methods
-
+  // #region genaral
   /**
    * Subscribes firestore 'contacts' collection and keep
    * data updated with the latest snapshot.
@@ -63,17 +65,28 @@ export class FireContactService implements OnDestroy {
       this.contactsSubject.next(contacts);
     });
   }
-
+  
   /**
    * Sets the current contact ID.
    * The id will be used to get everytime the currentContact$ from contacts$.
    * 
    * @param id docId of contact
-   */
+  */
   setCurrentContact(id: string | null) {
     this.currentContactIdSubject.next(id);
   }
+  
+  /**
+   * Maps a doc object to a contact object.
+   * @param obj data object of a document as JSON-Format.
+   * @returns - Contact-Intance of JSON-Format in database.
+   */
+  private mapResponseToContact(obj: any): Contact {
+    return new Contact(obj);
+  }
+  // #endregion
 
+  // #region groups
   /**
    * Returns an observable with all unique groups 
    * of loaded contacts$.
@@ -102,6 +115,10 @@ export class FireContactService implements OnDestroy {
     );
   }
 
+  /**
+   * Gets the asigned groups of contact.
+   * @returns - All groups of contact as obervable.
+   */
   getContactGroups(): Observable<Array<ContactGroup>> {
     return this.getAllGroups$().pipe(
       map((groups: Array<string>) =>
@@ -119,12 +136,12 @@ export class FireContactService implements OnDestroy {
       )
     );
   }
+  // #endregion
 
   // #region CRUD
 
   /**
    * Adds a new contact to the Firestore collection.
-   * 
    * @param contact The contact object to add.
    */
   async addContact(contact: Contact): Promise<void> {
@@ -142,7 +159,6 @@ export class FireContactService implements OnDestroy {
 
   /**
    * Updates an existing contact in firestore collection.
-   * 
    * @param contact The contact object with data to update.
    */
   async updateContact(contact: Contact) {
@@ -151,41 +167,34 @@ export class FireContactService implements OnDestroy {
 
   /**
    * Deletes a contact from firestore collection.
-   * 
    * @param contact The contact object to remove.
    */
   async deleteContact(contact: Contact) {
     await deleteDoc(this.getSingleContactRef(contact.id));
   }
 
-  // #endregion CRUD
+  // #endregion
 
+  // #region references
   /**
-   * Returns the reference of 'contacts' collection.
+   * Gets the reference of 'contacts' collection.
+   * @returns - That reference.
    */
   private getContactsRef(): CollectionReference {
     const contactsCollection = collection(this.firestore, 'contacts');
     return contactsCollection;
   }
 
+  
   /**
-   * Returns the reference of a single contact.
-   * 
-   * @param docId Firestore document ID
+   * Gets the reference of a single contact.
+   * @param docId Firestore document ID.
+   * @returns - That reference.
    */
   private getSingleContactRef(docId: string): DocumentReference {
     const contactsRef = this.getContactsRef();
     return doc(contactsRef, `/${docId}`);
   }
-
-  /**
-   * Maps a doc object to a contact object.
-   * 
-   * @param obj data object of a document.
-   */
-  private mapResponseToContact(obj: any): Contact {
-    return new Contact(obj);
-  }
-
+  // #endregion
   // #endregion methods
 }
