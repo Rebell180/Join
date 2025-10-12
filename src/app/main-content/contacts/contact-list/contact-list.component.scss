@@ -65,7 +65,7 @@
 
                 .contact-data {
                     @include all.fl($flexdir: column, $jc: center);
-                    @include all.size($w: 250px, $h: 48px);
+                    @include all.size($w: 25rem, $h: 3.8rem);
 
                     .name {
                         margin-bottom: 5px;
