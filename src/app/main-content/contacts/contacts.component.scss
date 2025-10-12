@@ -15,6 +15,10 @@
         @include all.tablet {
             @include all.size($minW: 37.5rem, $h: 80dvh);
         }
+
+        @media(max-width: 376px) {
+            @include all.size($w: 37.5rem, $maxW: 37.5rem, $h: 80dvh);
+        }
     }
 
     .contact-detail {

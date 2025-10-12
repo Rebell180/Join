@@ -16,4 +16,21 @@
     @include all.notebook {
         width: 93%;
     }
+
+    @include all.tablet {
+        @include all.size($w: 6.2rem, $minW: 6.2rem, $h: 6.2rem, $minH: 6.2rem);
+        border-radius: 50%;
+        position: absolute;
+        right: 0;
+        bottom: 2rem;
+
+        span {
+            display: none;
+        }
+    }
+
+    @media(max-width: 376px) {
+        right: 0;
+        bottom: 0.5rem;
+        }
 }
