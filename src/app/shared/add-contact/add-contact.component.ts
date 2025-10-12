@@ -1,9 +1,9 @@
-import { Component, ElementRef, inject, OnInit, QueryList, Renderer2, ViewChildren } from '@angular/core';
+import { Component, ElementRef, inject, QueryList, Renderer2, ViewChildren, AfterViewInit } from '@angular/core';
 import { Contact } from '../classes/contact';
 import { FormsModule } from '@angular/forms';
-import { ToastMsgService } from '../services/toast-msg.service';
 import { CommonModule } from '@angular/common';
 import { ContactService } from '../services/contact.service';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -11,17 +11,38 @@ import { Observable } from 'rxjs';
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './add-contact.component.html',
-  styleUrl: './add-contact.component.scss'
+  styleUrl: './add-contact.component.scss',
+  animations: [
+    trigger('slideInOut', [
+      state('open', style({
+        transform: 'translateX(0)',
+        opacity: 1,
+      })),
+      state('closed', style({
+        transform: 'translateX(100vw)',
+        opacity: 0,
+      })),
+      transition('closed => open', [
+        animate('500ms ease-out')
+      ]),
+      transition('open => closed', [
+        animate('400ms ease-in')
+      ])
+    ])
+  ]
 })
-export class AddContactComponent{
+export class AddContactComponent implements AfterViewInit{
 
   cs: ContactService = inject(ContactService);
   defaultContact: Observable<Contact> = this.cs.contactToEdit;
   private renderer: Renderer2 = inject(Renderer2);
-  
   errors: boolean[] = [false, false, false, false];
   @ViewChildren('errEl') errorRefs!: QueryList<ElementRef<HTMLDivElement>>;
-  
+  isOpen = false;
+
+  ngAfterViewInit() {
+    setTimeout(() => this.isOpen = true, 10); // Animation trigger
+  }
 
   getInputElementValue(elementId: string) {
     const inputRef = document.getElementById(elementId) as HTMLInputElement;
@@ -33,7 +54,8 @@ export class AddContactComponent{
   }
 
   closeModal () {
-    this.cs.closeModal();
+    this.isOpen = false;
+    setTimeout(() => this.cs.closeModal(), 400);
   }
 
   async submitForm(e:SubmitEvent) {
@@ -62,7 +84,6 @@ export class AddContactComponent{
 
     const errors:boolean[] = [];
     const name: string = 'Firstname';
-    // const field: string = this.cs.contactToEdit.firstName;
     const errorRef: ElementRef<HTMLDivElement> = this.errorRefs.toArray()[0];
     const pattern: RegExp = /^([A-ZÄÖÜ][a-zäöüß]*\s?-?)*$/g;
     errors.push(this.checkRequired(name, valueToValidate, errorRef));
@@ -83,7 +104,6 @@ export class AddContactComponent{
 
     const errors:boolean[] = [];
     const name: string = 'Lastname';
-    // const field: string = this.contactForm.lastName;
     const errorRef: ElementRef<HTMLDivElement> = this.errorRefs.toArray()[1];
     const pattern: RegExp = /^([A-ZÄÖÜ][a-zäöüß]*\s?-?)*$/g;
     errors.push(this.checkRequired(name, valueToValidate, errorRef))
@@ -104,7 +124,6 @@ export class AddContactComponent{
 
     const errors:boolean[] = [];
     const name: string = 'E-Mail';
-    // const field: string = this.contactForm.email;
     const errorRef: ElementRef<HTMLDivElement> = this.errorRefs.toArray()[2];
     const pattern: RegExp = /^\w*(\.?-?\w*)*?@\w*\.[a-z]{2,3}$/g;
     errors.push(this.checkRequired(name, valueToValidate, errorRef));
@@ -125,7 +144,6 @@ export class AddContactComponent{
 
     const errors:boolean[] = [];
     const name: string = 'Tel-Number';
-    // const field: string = this.contactForm.tel;
     const errorRef: ElementRef<HTMLDivElement> = this.errorRefs.toArray()[3];
     const pattern: RegExp = /^(?:\+49|0049|0)[ \-]?(?:\(?\d{1,5}\)?[ \-]?)?\d{3,11}$/;
     errors.push(this.checkRequired(name, valueToValidate, errorRef));

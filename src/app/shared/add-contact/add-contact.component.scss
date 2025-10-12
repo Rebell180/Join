@@ -1,226 +1,261 @@
 @use '../../../../public/styles/all_styles' as all;
+@forward '../../../../public/styles/component-styles';
 
-#addContactModal {
+.add-contact-modal-container {
+    @include all.size($w: 90dvw, $maxW: 90rem, $h: 50rem);
     @include all.fl($jc: center, $alit: center);
-    @include all.size($w: 100rem, $h: 65dvh);
     background-color: white;
     border-radius: 16px;
-}
+    border: none;
+    box-shadow: 8px 8px 8px rgba(0, 0, 0, 0.2);
 
-.left-panel {
-    @include all.fl($flexdir: column, $jc: center);
-    @include all.size($w: 40%);
-    background-color: #2a3647;
-    padding: 0 2rem;
-    border-radius: 16px 0 0 16px;
-
-    .mobile-close-btn {
-        display: none;
-
-        button {
-            @include all.size($w: 4.8rem, $h: 4.8rem);
-            color: white;
-            border: none;
-            background: transparent;
-        }
+    @include all.notebook {
+        // @include all.size($w: 80dvw, $h: 50rem);
+        box-shadow: 8px 0 8px rgba(0, 0, 0, 0.2), -8px 0 8px rgba(0, 0, 0, 0.2);
     }
-}
-
-.line-close-btn {
-    width: 100%;
-    @include all.fl($jc: end);
-    margin: 2rem 0;
-    display: none;
-}
-
-hr {
-    @include all.size($w: 6rem, $h: 0.3rem);
-    background: rgb(17, 148, 213);
-    border: none
-}
-
-img {
-    @include all.size($w: 4rem, $h: 4rem);
-    margin-bottom: 2rem;
 
     @include all.tablet {
-        display: none;
-    }
-}
-
-h1 {
-    color: white;
-    font-size: clamp(28px, 4vw, 48px); 
-    margin-bottom: 0.5rem;
-    line-height: 1.2;
-}
-
-h2 {
-    width: 100%;
-    color: white;
-    font-size: clamp(16px, 2vw, 24px); 
-    margin-bottom: 1rem;
-}
-
-.right-panel {
-    @include all.size($w: 60%, $h: 100%);
-    // padding: 1rem 2rem;
-    @include all.fl($flexdir: column);
-
-    @include all.tablet {
-        @include all.size($w: 100%, $h: auto);
-        @include all.fl($alit: flex-start); 
-        padding: 0;
+        @include all.size($w: 90dvw, $maxW:90rem, $h: 80dvh);
+        @include all.fl($flexdir: column, $jc: center, $alit: center);
     }
 
-    .line-close-btn { 
-        width: 100%;
-        @include all.fl($jc: end);
-        margin: 2rem 0;
+    .contact-modal-header {
+        @include all.fl($flexdir: column, $jc: center);
+        @include all.size($w: 40%);
+        @include all.marpad($pad: 0 2rem);
+        background-color: #2a3647;
+        border-radius: 16px 0 0 16px;
 
         @include all.tablet {
+            @include all.size($h: 40%);
+            border-radius: 16px;
+        }
+
+        .mobile-close-btn {
             display: none;
+
+            button {
+                @include all.size($w: 4.8rem, $h: 4.8rem);
+                color: white;
+                border: none;
+                background: transparent;
+            }
+
+            @include all.notebook {
+                position: absolute;
+                top: 0;
+                right: 3rem;
+                @include all.fl($jc: end);
+
+                button {
+                    @include all.marpad($mar: 2rem 0 0);
+                    font-size: 20px;
+                }
+            }
+
+            @include all.smart {
+                right: 2rem;
+            }
         }
-    }
 
-    .line-form {
-        @include all.size($w: 100%, $h: auto);
-        padding-top: 9rem;
-        @include all.fl($alit: center, $jc: space-between);
-
-        @include all.tablet {
-            flex-direction: column;
-            padding-top: 9rem;
-            align-items: center; 
-        }
-
-        .single-icon {
-            @include all.size($w: 35%, $h: 180px);
+        img {
+            @include all.size($w: 4rem, $h: 4rem);
+            margin-bottom: 2rem;
 
             @include all.tablet {
-                @include all.size($w: 10rem, $h: 10rem);
-                position: absolute;
-                display: block;
-                transform: translate(-50%,70%);
-                object-fit: contain;
-                border-radius: 50%;
-                background: white;
-                z-index: 1;
+                display: none;
             }
         }
-    }
-    
-    form {
-        @include all.size($h: auto);
-        
-        .form-field {
-            @include all.size($h: auto);
-            @include all.fl($flexdir: column, $alit: center);
-            margin-bottom: 1.5rem;
-            
-            .input-img {
-                @include all.size($w: 70%, $h: 40px);
-                @include all.fl($jc: space-between, $alit: center);
-                padding: 0 10px;
-                border: 1px solid grey;
-                border-radius: 5px;
-                
-                input {
-                    @include all.size();
-                    outline: none;
-                }
-                
-                img {
-                    @include all.size($w: 20px, $h: 20px);
-                    margin: 0; 
-                    display: flex;
-                }
-                
-                @include all.notebook {
-                    width: 90%;
-                    padding: 0 15px;
-                }
-                
-                @include all.tablet {
-                    width: 60%;
-                    padding: 0 15px;
-                }
-                
-                @include all.mobile {
-                    width: 60%;
-                    padding: 0 15px;
-                }
-                
-                @include all.smart {
-                    width: 70%;
-                    padding: 0 15px;
-                }
-            }
-            
-            .errmsg {
-                @include all.size($w: 70%, $h: 1rem);
-                color: #c00000;
-                font-size: 1rem;
-                padding: 4px 16px;
-                
-                @include all.tablet {
-                    padding-left: 40px;
-                }
-            }
-        }
-    }
-}
-    
-.form-btn-container {
-    @include all.size($h: 20%);
-    @include all.fl($jc: center, $flexdir: row);
-    margin-top: 2rem;
-    gap: 1rem;
 
-    @include all.tablet {
-        gap: 0.5rem;
-        flex-direction: row; 
-    }
-
-    input {
-        @include all.size($w: 11rem, $h: 4rem);
-        border: 1px solid lightgrey;
-        border-radius: 5px;
-
-        &:hover {
-            background: #2a3647;
+        h1 {
             color: white;
-        }
+            font-size: clamp(28px, 4vw, 48px);
+            margin-bottom: 0.5rem;
+            line-height: 1.2;
 
-        @include all.tablet {
-            display: none;
-        }
-    }
-
-    #create-contact-btn {
-        
-        @include all.tablet {
-            width: 20%;
-            @include all.fl($jc: center, $alit: center);
-
-            &:hover {
-                background: #2a3647;
-                color: white;
+            @include all.tablet {
+                font-size: 36px;
             }
         }
+
+        h2 {
+            width: 100%;
+            color: white;
+            font-size: clamp(16px, 2vw, 24px);
+            margin-bottom: 1rem;
+        }
+
+        hr {
+            @include all.size($w: 6rem, $h: 0.3rem);
+            background: rgb(17, 148, 213);
+            border: none
+        }
+
     }
-    .delete-btn-mobile {
-        display: none;
+
+    .contact-modal-main {
+        @include all.size($w: 60%);
+        @include all.fl($flexdir: column, $jc: center, $gap: 2dvw);
+        padding-top: 1rem;
 
         @include all.tablet {
-            @include all.size($w: 11rem, $h: 4rem);
-            border: 1px solid lightgrey;
-            border-radius: 5px;
-            @include all.fl($alit: center, $jc: center);
+            @include all.size($h: auto);
+            @include all.fl($alit: flex-start);
+        }
 
-            &:hover {
-                background: #2a3647;
-                color: white;
+        @include all.tablet {
+            @include all.size($h: 60%);
+        }
+
+        .line-close-btn {
+            position: absolute;
+            top: 0;
+            right: 3rem;
+            @include all.fl($jc: end);
+
+            button {
+                @include all.marpad($mar: 2rem 0 0);
+                font-size: 20px;
+
+                &:hover {
+                    color: red;
+                }
+            }
+
+            @include all.tablet {
+                display: none;
+            }
+        }
+
+        .line-form {
+            @include all.size($h: auto);
+            @include all.fl($jc: space-between, $alit: center, $gap: 2rem);
+            @include all.marpad($pad: 0 3rem);
+
+            @include all.notebook {
+                // @include all.marpad($pad: 0 3rem 0 1.5rem);
+            }
+
+            @include all.tablet {
+                @include all.size($h: auto);
+                margin-top: 3rem;
+                // @include all.marpad($pad: 0 5rem);
+                @include all.fl($jc: center, $alit: center);
+            }
+
+            @include all.smart {
+                // @include all.marpad($pad: 0 0.8rem);
+            }
+
+            .single-icon {
+
+                // @include all.notebook {
+                //     display: none;
+                // }
+                @include all.tablet {
+                    display: block; 
+                    @include all.size($w: 12rem, $h: 12rem);
+                    position: absolute;
+                    top: -32%;
+                    left: 50%;
+                    transform: translate(-50%);
+                    border-radius: 50%;
+                    background: white;
+                    z-index: 1;
+                }
+            }
+
+            form {
+                @include all.fl($flexdir: column, $jc: space-between, $alit: end);
+                @include all.size();
+                @include all.tablet {
+                    margin-top: 2rem;
+                }
+
+                .form-field {
+                    // @include all.size($w: 30rem, $h: auto);
+                    @include all.size($h: auto);
+                    @include all.fl($flexdir: column, $alit: end);
+                    margin-bottom: 1.5rem;
+
+                    @include all.notebook {
+                        // @include all.size($w: 40dvw, $h: auto);
+                    }
+
+                    @media (max-width: 900px) {
+                        // @include all.size($w: 40dvw, $h: auto);
+                    }
+
+                    @include all.tablet {
+                        // @include all.size($w: 60dvw);
+                    }
+
+                    @include all.smart {
+                        // @include all.size($w: 70dvw);
+                    }
+
+                    .input-img-container {
+                        @include all.size($w: 100%, $h: 40px);
+                        @include all.fl($jc: space-between, $alit: center);
+                        padding: 0 10px;
+                        border: 1px solid rgba(184, 184, 184);
+                        ;
+                        border-radius: 5px;
+
+                        input {
+                            @include all.size();
+                            outline: none;
+
+                            &::placeholder {
+                                color: rgba(184, 184, 184);
+                            }
+                        }
+
+                        img {
+                            @include all.size($w: 20px, $h: 20px);
+                            margin: 0;
+                            display: flex;
+                        }
+                    }
+
+                    .errmsg {
+                        @include all.size($w: 100%, $h: 1rem);
+                        color: #c00000;
+                        font-size: 1.2rem;
+                        padding: 1px 16px;
+
+                        @include all.tablet {
+                            padding-left: 40px;
+                        }
+                    }
+                }
+
+                .form-btn-container {
+                    @include all.size($h: 4rem);
+                    @include all.fl($jc: start);
+
+                    // position: absolute;
+                    // bottom: -5rem;
+                    // right: 0;
+                    margin-top: 2rem;
+                    gap: 1rem;
+
+                    input {
+                        height: 4rem;
+                        font-size: 16px;
+                    }
+
+                    @include all.tablet {
+                        gap: 0.5rem;
+                        @include all.fl($jc: center, $gap: 2rem);
+                    }
+
+                    @include all.mobile {
+                        #add-contact-cancel-btn {
+                            display: none;
+                        }
+                    }
+                }
             }
         }
     }
