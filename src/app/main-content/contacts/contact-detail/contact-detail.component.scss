@@ -19,6 +19,10 @@
             h1 {
                 font-size: 6.4rem;
                 font-family: 'Interbold', sans-serif;
+
+                @media(max-width: 425px) {
+                    font-size: 4.7rem;
+                }
             }
 
             @media (max-width: 1200px) {
@@ -30,6 +34,10 @@
                 font-size: 2.5rem;
                 font-family: 'InterRegular', sans-serif;
                 letter-spacing: 2px;
+
+                @media(max-width: 425px) {
+                    font-size: 1.8rem;
+                }
             }
 
             hr {
@@ -62,6 +70,7 @@
 
             @include all.notebook {
                 display: block;
+                @include all.marpad($mar: 0 3rem);
             }
         }
     }
@@ -80,7 +89,8 @@
 
             .name-option-container {
                 width: 100%;
-                padding-left: 3dvw;
+                @include all.size($h: auto);
+                padding-left: 3rem;
                 @include all.fl($flexdir: column);
 
                 .name {
@@ -175,14 +185,13 @@
 
     .popup-menu {
         position: absolute;
-        bottom: 17rem;
-        right: 7rem;
+        bottom: 5rem;
+        right: 5rem;
         background-color: white;
         border-radius: 8px 8px 0 8px;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
         padding: 4px 0;
-        width: 110px;
-        height: 80px;
+        @include all.size($w: 11rem, $h: 8rem);
 
         .menuItem {
             @include all.fl($alit: center);

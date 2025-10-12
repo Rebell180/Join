@@ -33,6 +33,11 @@
         @include all.tablet {
             @include all.size($h: 80dvh);
         }
+
+        @media(max-width: 425px) {
+            @include all.size($h: 80dvh);
+            @include all.marpad($pad: 6rem 0 0 2rem);
+        }
     }
 }
 

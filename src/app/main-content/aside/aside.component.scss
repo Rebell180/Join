@@ -4,7 +4,7 @@
 			grid-area: aside;
 			@include all.size();
 			@include all.fl($jc: space-between, $flexdir: column, $alit: center);
-			padding: 3rem 0;
+			@include all.marpad($pad: 3rem 0);
 			background: #2a3647;
 
 			@include all.tablet {
@@ -27,8 +27,7 @@
 
 				@include all.tablet {
 					@include all.size($h: 6rem);
-					@include all.fl($flexdir: row);
-					gap: 2rem;
+					@include all.fl($flexdir: row, $gap: 2rem);
 					}
 
 				@include all.mobile {
@@ -38,9 +37,8 @@
 				button {
 
 					@include all.tablet {
-						width: 12rem;
-						height: 7rem;
-						margin: 0 0.5rem;
+						@include all.size($w: 10rem, $h: 7rem);
+						@include all.marpad($mar: 0 0 0.5rem);
 						@include all.fl($flexdir: column, $jc: center, $alit: center);
 					}
 
@@ -60,8 +58,7 @@
 					}
 
 				li {
-					height: 4dvh;
-					width: 100%;
+					@include all.size($h: 5rem);
 					@include all.fl($jc: center);
 
 					@include all.tablet {
@@ -69,11 +66,10 @@
 					}
 
 					a:link, a:visited {
-						width: 100%;
+						@include all.size($h: auto);
 						color: grey;
 						text-align: center;
-						padding: 5px 0;
-						margin: 5px 0;
+						@include all.marpad($mar: 0.5rem, $pad: 1rem);
 						font-size: clamp(16px, 0.8dvw, 32px);
 
 							&:hover {
