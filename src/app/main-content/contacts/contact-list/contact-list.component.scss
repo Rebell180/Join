@@ -7,14 +7,14 @@
     box-shadow: 5px 0 10px -5px grey;
 
     #add-contact-button {
-        width: 93%;
-        @include all.marpad ($mar: 0 3rem 0 0, $pad: 1rem 0);
+        width: 91%;
+        @include all.marpad ($mar: 1rem 0, $pad: 1rem 0);
 
         @include all.tablet {
             @include all.size($w: 6.2rem, $minW: 6.2rem, $h: 6.2rem, $minH: 6.2rem);
             border-radius: 50%;
             position: absolute;
-            right: 0;
+            right: 1rem;
             bottom: 2rem;
                 
             span {
@@ -23,7 +23,6 @@
         }
 
         @media(max-width: 376px) {
-            right: 0;
             bottom: 0.5rem;
         }
     }

@@ -15,7 +15,8 @@
         <app-contact-icon class="contact-icon {{ contact.iconColor }}" [contact]="contact"></app-contact-icon>
 
         <div class="name-option-container">
-            <p class="name">{{ contact.firstname }} {{ contact.lastname }}</p>
+            <span class="truncate">{{ limit(contact.firstname, 15) }}</span>
+            <span class="truncate">{{ limit(contact.lastname, 15) }}</span>
 
             <div class="option-container">
                 <button (click)="cs.openModal('edit')" type="button">

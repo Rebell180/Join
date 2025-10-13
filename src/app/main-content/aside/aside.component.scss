@@ -66,9 +66,8 @@
 
 					a:link, a:visited {
 						@include all.size($h: auto);
+						@include all.fl($jc: center);
 						color: grey;
-						text-align: center;
-						@include all.marpad($mar: 0.5rem, $pad: 1rem);
 						font-size: clamp(16px, 0.8dvw, 32px);
 
 							&:hover {

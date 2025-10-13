@@ -17,7 +17,8 @@ html {
 
 body {
 	background: rgb(211, 211, 211, 0.4);
-    font-family: 'Roboto', sans-serif;
+    overflow-x: hidden;
+    max-width: 1920px;
 }
 
 button, input {
@@ -52,13 +53,8 @@ body {
     font-size: 19px;
 }
 
-button {
-    cursor: pointer;
-    border: unset;
-}
-
-input {
-    border: unset;
+.d_none {
+    display: none;
 }
 
 @include all.tablet {
@@ -84,23 +80,18 @@ h1 {
     font-family: 'Interbold', sans-serif;
 }
 
-h2 {
-    font-family: 'InterRegular', sans-serif;
+h2, a, p, h3, span {
+    font-family: 'InterLight', sans-serif;
 }
 
 @font-face {
-    font-family: "InterRegular";
+    font-family: "InterLight";
     src: url("/assets/Fonts/Inter_18pt-ExtraLight.ttf") format("truetype");
 }
 
 @font-face {
     font-family: "InterBold";
     src: url("/assets/Fonts/Inter_28pt-Bold.ttf") format("truetype");
-}
-
-@font-face {
-    font-family: "InterBoldReg";
-    src: url("/assets/Fonts/Inter_28pt-Regular.ttf") format("truetype");
 }
 
 .overlay {

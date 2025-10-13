@@ -138,7 +138,8 @@ export class ContactService extends FireService<Contact> implements OnDestroy {
           this.contactToEditBS.next(contactO);
           this.currentContactBS.next(contactO)
           this.classToDisplayBS.next('');
-          this.currentContactSubject.next(contact);
+          console.log('contact.service.ts');
+          
         }
       });
     });

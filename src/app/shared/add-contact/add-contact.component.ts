@@ -67,6 +67,8 @@ export class AddContactComponent implements AfterViewInit{
           await this.cs.addContactToDB(contact);
         } else {
           await this.cs.updateContactInDB(contact);
+          console.log('addContact.component,');
+          
         }
       });
       this.closeModal();

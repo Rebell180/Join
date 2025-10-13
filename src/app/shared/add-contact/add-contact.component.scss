@@ -136,7 +136,7 @@
             .single-icon {
                 @include all.tablet {
                     display: block; 
-                    @include all.size($w: 12rem, $h: 12rem);
+                    @include all.size($w: 12rem, $minW: 12rem, $h: 12rem);
                     @include all.absolute($top: 3.2rem, $left: 5rem);
                     transform: translate(-50%);
                     border-radius: 50%;
@@ -146,7 +146,7 @@
             }
 
             .single-initial-icon {
-                @include all.size($w: 14rem, $h: 12rem);
+                @include all.size($w: 16rem, $h: 12rem);
 
                 @include all.tablet {
                     @include all.size($w: 12rem, $h: 12rem);

@@ -18,7 +18,6 @@
 
             h1 {
                 font-size: 6.4rem;
-                font-family: 'Interbold', sans-serif;
 
                 @media(max-width: 425px) {
                     font-size: 4.7rem;
@@ -32,7 +31,6 @@
             h2 {
                 @include all.size($h: auto);
                 font-size: 2.5rem;
-                font-family: 'InterRegular', sans-serif;
                 letter-spacing: 2px;
 
                 @media(max-width: 425px) {
@@ -76,6 +74,7 @@
     }
 
     .contact-info-container {
+        @include all.slightInFromRightAnimation();
         @include all.size($h: 80%);
         @include all.marpad($mar: 3rem 0 0);
 
@@ -85,6 +84,7 @@
 
             .contact-icon {
                 @include all.size($w: 12rem, $minW: 12rem,  $h: 12rem, $minH: 12rem);
+                font-family: 'InterRegular', sans-serif;
 
                 @media(max-width: 450px) {
                     @include all.size($w: 8rem, $minW: 8rem,  $h: 8rem, $minH: 8rem);
@@ -104,17 +104,23 @@
                         @include all.marpad($pad: 0 0 0 1rem);
                     }
 
-                .name {
-                    @include all.size();
-                    @include all.fl($jc: start);
+                .truncate {
+                    @include all.size($h: 5dvh);
+                    @include all.fl($jc: start, $alit: end);
                     font-size: 3.5rem;
-                    font-weight: bold;
+                    font-family: 'InterBold', sans-serif;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
 
                     @include all.tablet {
+                        @include all.size($h: 4dvh);
+                        @include all.fl($alit: center);
                         font-size: clamp(2.2rem, 3rem, 3.5rem);
                     }
 
                     @include all.smart {
+                        @include all.size($h: 3dvh);
                         font-size: 2.2rem;
                     }
                 }
@@ -156,7 +162,6 @@
             h3 {
                 @include all.marpad($mar: 1.5rem 0);
                 font-size: 2rem;
-                font-family: "InterBold", sans-serif;
             }
 
             a {

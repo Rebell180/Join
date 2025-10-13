@@ -23,4 +23,7 @@ export class ContactDetailComponent {
         this.isMenuVisible = !this.isMenuVisible;
     }
 
+  limit(word: string, maxLength: number): string {
+    return word.length <= maxLength ? word : word.slice(0, maxLength) + '...';
+  }
 }

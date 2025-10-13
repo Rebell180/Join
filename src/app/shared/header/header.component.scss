@@ -41,7 +41,7 @@
             }
             
             .user-icon {
-                @include all.size($w: 7dvh, $h: 7dvh);
+                @include all.size($w: 7rem, $h: 7rem);
                 cursor: pointer;
             }
         }
