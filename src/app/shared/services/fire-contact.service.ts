@@ -1,8 +1,9 @@
 import { inject, Injectable, OnDestroy } from '@angular/core';
-import { addDoc, collection, CollectionReference, deleteDoc, doc, DocumentReference, Firestore, onSnapshot, query, Query, Unsubscribe, updateDoc, where } from '@angular/fire/firestore';
+import { addDoc, collection, collectionData, CollectionReference, deleteDoc, doc, DocumentReference, Firestore, onSnapshot, query, Query, Unsubscribe, updateDoc, where } from '@angular/fire/firestore';
 import { BehaviorSubject, map, Observable } from 'rxjs';
 import { Contact } from '../classes/contact';
 import { ContactGroup } from '../classes/contactGroup';
+import { FireService } from './fire.service';
 
 /**
  * FireContactService is a service to manage communication between firebase database 
@@ -25,7 +26,7 @@ import { ContactGroup } from '../classes/contactGroup';
   providedIn: 'root'
 })
 /** Manges the Firestore-Handling between contacts. */
-export class FireContactService implements OnDestroy {
+export class FireContactService extends FireService<Contact> {
   
   // #region properties
   
@@ -36,11 +37,11 @@ export class FireContactService implements OnDestroy {
   currentContactId$ = this.currentContactIdSubject.asObservable();
   
   private unsubContacts: Unsubscribe;
-  private firestore: Firestore = inject(Firestore);
-
+  
   // #endregion properties
 
   constructor() {
+    super();
     this.unsubContacts = this.subContactsList();
   }
 
@@ -56,7 +57,7 @@ export class FireContactService implements OnDestroy {
    * data updated with the latest snapshot.
    */
   private subContactsList() {
-    const q: Query = query(this.getContactsRef(), where('id', '!=', 'null'));
+    const q: Query = query(this.getCollectionRef('contacts'), where('id', '!=', 'null'));
     return onSnapshot(q, (list) => {
       const contacts: Contact[] = [];
       list.forEach((doc) => {
@@ -140,37 +141,23 @@ export class FireContactService implements OnDestroy {
 
   // #region CRUD
 
-  /**
-   * Adds a new contact to the Firestore collection.
-   * @param contact The contact object to add.
-   */
-  async addContact(contact: Contact): Promise<void> {
-    contact. group = contact.firstname[0];
-    if(contact.firstname === '' || contact.lastname === '' || contact.email === '' || contact.tel === '') {
-      return;
-    }
-    const newContactRef = await addDoc(this.getContactsRef(), contact.toJson());
-    // update is important to get and save the id inside of component.
-    if(newContactRef.id !== ''){
-      await updateDoc(newContactRef, {id: newContactRef.id});
-      this.setCurrentContact(newContactRef.id);
-    }
+  getAll():Observable<Contact[]> {
+    return this.contacts$;
   }
-
   /**
    * Updates an existing contact in firestore collection.
    * @param contact The contact object with data to update.
    */
-  async updateContact(contact: Contact) {
-    await updateDoc(this.getSingleContactRef(contact.id), contact.toJson());
-  }
+  // async updateContact(contact: Contact) {
+  //   await updateDoc(this.getSingleContactRef(contact.id), contact.toJSObject());
+  // }
 
   /**
    * Deletes a contact from firestore collection.
    * @param contact The contact object to remove.
    */
   async deleteContact(contact: Contact) {
-    await deleteDoc(this.getSingleContactRef(contact.id));
+    // await deleteDoc(this.getSingleContactRef(contact.id));
   }
 
   // #endregion
@@ -180,21 +167,7 @@ export class FireContactService implements OnDestroy {
    * Gets the reference of 'contacts' collection.
    * @returns - That reference.
    */
-  private getContactsRef(): CollectionReference {
-    const contactsCollection = collection(this.firestore, 'contacts');
-    return contactsCollection;
-  }
-
   
-  /**
-   * Gets the reference of a single contact.
-   * @param docId Firestore document ID.
-   * @returns - That reference.
-   */
-  private getSingleContactRef(docId: string): DocumentReference {
-    const contactsRef = this.getContactsRef();
-    return doc(contactsRef, `/${docId}`);
-  }
   // #endregion
   // #endregion methods
 }

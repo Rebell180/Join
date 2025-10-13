@@ -1,16 +1,18 @@
 import { inject, Injectable } from '@angular/core';
 import { Contact } from '../classes/contact';
 import { ContactGroup } from '../classes/contactGroup';
-import { collection, CollectionReference, doc, DocumentReference, Firestore } from '@angular/fire/firestore';
+import { addDoc, collection, CollectionReference, doc, DocumentReference, Firestore, updateDoc } from '@angular/fire/firestore';
+import { DatabaseObject } from '../interfaces/database-object';
+import { Observable } from 'rxjs';
 
 type AllowedTypes = Contact | ContactGroup;
 
 @Injectable({
   providedIn: 'root'
 })
-export class FireService<T extends AllowedTypes> {
+export abstract class FireService<T extends AllowedTypes & DatabaseObject> {
 
-  private fs:Firestore = inject(Firestore);
+  protected fs:Firestore = inject(Firestore);
 
   constructor() { }
 
@@ -21,7 +23,7 @@ export class FireService<T extends AllowedTypes> {
    * @param path - Name of collection in database.
    * @returns - Collection of path.
    */
-  private getCollectionRef(path:string): CollectionReference {
+  protected getCollectionRef(path:string): CollectionReference {
     return collection(this.fs, path);
   }
 
@@ -35,5 +37,29 @@ export class FireService<T extends AllowedTypes> {
     return doc(this.getCollectionRef(path), `/${docId}`);
   }
   // #endregion
+  
+  // #region CRUD
+  /**
+   * Instert a DatabaseObject into database.
+   * @param data - Object to add.
+   */
+  async add(data: T) {
+    const path:string = data instanceof Contact ? 'contacts' : '';
+    if (path.length > 0) {
+      const newDocRef = await addDoc(this.getCollectionRef(path), data.toJSObject());
+      if (newDocRef.id.length > 0) {
+        await updateDoc(newDocRef, {id: newDocRef.id});
+      }
+    }
+  }
+
+  /**
+   * Gets all documents of a Collection.
+   * It is nessery to override this method in a subclass
+   * @retuns List of entries as oberbalee.
+   */
+  abstract getAll(): Observable<T[]>
+
+
   // #endregion
 }

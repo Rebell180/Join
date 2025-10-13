@@ -1,8 +1,8 @@
 export interface DatabaseObject {
 
     /**
-     * Converts Objectdata into JSON-String.
-     * @return - JSON-String of Object.
+     * Converts Objectdata into JS-Object.
+     * @return - JSON-Data as JS-Object
      */
-    toJson():string
+    toJSObject():{}
 }
