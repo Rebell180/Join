@@ -1,5 +1,5 @@
 import { Injectable, OnDestroy } from '@angular/core';
-import { onSnapshot, query, Query, Unsubscribe, updateDoc, where } from '@angular/fire/firestore';
+import { onSnapshot, query, Query, Unsubscribe, where } from '@angular/fire/firestore';
 import { BehaviorSubject, map, Observable } from 'rxjs';
 import { Contact } from '../classes/contact';
 import { ContactGroup } from '../classes/contactGroup';
@@ -31,10 +31,7 @@ export class FireContactService extends FireService<Contact> implements OnDestro
   // #region properties
   
   private contactsSubject = new BehaviorSubject<Array<Contact>>([]);
-  contacts$ = this.contactsSubject.asObservable();
-  
-  private currentContactIdSubject = new BehaviorSubject<string | null>(null);
-  currentContactId$ = this.currentContactIdSubject.asObservable();
+  private contacts$ = this.contactsSubject.asObservable();
   
   private unsubContacts: Unsubscribe;
   
@@ -63,19 +60,11 @@ export class FireContactService extends FireService<Contact> implements OnDestro
       list.forEach((doc) => {
         contacts.push(this.mapResponseToContact({ ...doc.data(), id: doc.id }));
       });
+      contacts.sort((a, b) => a.firstname.localeCompare(b.firstname));
       this.contactsSubject.next(contacts);
     });
   }
   
-  /**
-   * Sets the current contact ID.
-   * The id will be used to get everytime the currentContact$ from contacts$.
-   * 
-   * @param id docId of contact
-  */
-  setCurrentContact(id: string | null) {
-    this.currentContactIdSubject.next(id);
-  }
   
   /**
    * Maps a doc object to a contact object.
@@ -84,6 +73,14 @@ export class FireContactService extends FireService<Contact> implements OnDestro
    */
   private mapResponseToContact(obj: any): Contact {
     return new Contact(obj);
+  }
+
+  /**
+   * Leads all contacts from database.
+   * @returns - Contactlist as Obervable.
+   */
+  getAll():Observable<Contact[]> {
+    return this.contacts$;
   }
   // #endregion
 
@@ -136,13 +133,6 @@ export class FireContactService extends FireService<Contact> implements OnDestro
         })
       )
     );
-  }
-  // #endregion
-
-  // #region CRUD
-
-  getAll():Observable<Contact[]> {
-    return this.contacts$;
   }
   // #endregion
   // #endregion methods

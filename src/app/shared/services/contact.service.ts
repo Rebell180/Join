@@ -15,7 +15,7 @@ export class ContactService implements OnDestroy {
 
   private fcs : FireContactService = inject(FireContactService);
   private dss: DisplaySizeService = inject(DisplaySizeService);
-
+  contacts$: Observable<Contact[]> = this.fcs.getAll();
   // add or edit contact modal properties 
 
   private isEditModalOpenBS: BehaviorSubject<boolean> = new BehaviorSubject(false);
@@ -36,11 +36,12 @@ export class ContactService implements OnDestroy {
 
   // fireContactService integration properties
 
-  contactsBS: BehaviorSubject<Array<Contact>> = new BehaviorSubject(new Array<Contact>());
-  contacts: Observable<Array<Contact>> = this.contactsBS.asObservable();
-  contacts$ : Subscription = this.fcs.contacts$.subscribe((contactStream: Array<Contact>) => {
-    this.contactsBS.next(contactStream.sort());
-  });
+  // contactsBS: BehaviorSubject<Array<Contact>> = new BehaviorSubject(new Array<Contact>());
+  // contacts: Observable<Array<Contact>> = this.contactsBS.asObservable();
+  // contacts$ : Subscription = this.fcs.contacts$.subscribe((contactStream: Array<Contact>) => {
+
+  //   this.contactsBS.next(contactStream.sort());
+  // });
 
   contactToEditBS: BehaviorSubject<Contact> = new BehaviorSubject(new Contact({ id: '', firstname: '', lastname: '', group: '', email: '', tel: '', iconColor: '' }));
   contactToEdit: Observable<Contact> = this.contactToEditBS.asObservable();  
@@ -66,7 +67,7 @@ export class ContactService implements OnDestroy {
 
   /** Unsubribes all subcriptionss. */
   ngOnDestroy(): void {
-    this.contacts$.unsubscribe();
+    // this.contacts$.unsubscribe();
     this.contactGroups$.unsubscribe();
     this.curSize$.unsubscribe();
   }
@@ -132,17 +133,7 @@ export class ContactService implements OnDestroy {
    * @param id - Id of contact.
    */
   async setActiveContact(id: string) {
-    await this.contacts.forEach((contactStream) => {
-      contactStream.forEach((contact) => {
-        contact.selected = false;
-        if(contact.id == id) {
-          contact.selected = true;
-          this.contactToEditBS.next(contact);
-          this.selectContact(contact);
-          this.classToDisplayBS.next('');
-        }
-      });
-    });
+    
   }
 
   /**
@@ -150,13 +141,13 @@ export class ContactService implements OnDestroy {
    * @param id - Id of contact.
    */
   unselectCurrentContact(id: string) {
-    this.contacts.forEach((contactStream) => {
-      contactStream.forEach((contact) => {
-        if(contact.id == id) {
-          contact.selected = false;
-        }
-      })
-    })
+    // this.contacts.forEach((contactStream) => {
+      // contactStream.forEach((contact) => {
+        // if(contact.id == id) {
+        //   contact.selected = false;
+        // }
+      // })
+    // })
   }
   // #endregion
 
