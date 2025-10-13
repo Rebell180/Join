@@ -195,7 +195,7 @@ export class ContactService implements OnDestroy {
    * @param contact - Contact to delete
    */
   async deleteContactInDB(contact: Contact) {
-    await this.fcs.deleteContact(contact);
+    await this.fcs.delete(contact);
   }
   // #endregion CRUD methods
   // #endregion methods

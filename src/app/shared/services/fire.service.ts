@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { Contact } from '../classes/contact';
-import { addDoc, collection, CollectionReference, doc, DocumentReference, Firestore, updateDoc } from '@angular/fire/firestore';
+import { addDoc, collection, CollectionReference, deleteDoc, doc, DocumentReference, Firestore, updateDoc } from '@angular/fire/firestore';
 import { DatabaseObject } from '../interfaces/database-object';
 import { Observable } from 'rxjs';
 
@@ -59,12 +59,27 @@ export abstract class FireService<T extends AllowedTypes & DatabaseObject> {
    */
   abstract getAll(): Observable<T[]>
 
-
+  /**
+   * Updates an object in database..
+   * @param data - Object for Upatate.
+   */
   async update(data: T) {
     const path: string = data instanceof Contact ? 'contacts' : '';
     if (path.length > 0) {
       await updateDoc(this.getSingleRef(path, data.id), data.toJSObject());
     }
   }
+
+  /**
+   * Deletes an Object in database.
+   * @param data - Object for delete.
+   */
+  async delete(data: T) {
+    const path: string = data instanceof Contact ? 'contacts' : '';
+    if (path.length > 0) {
+      await deleteDoc(this.getSingleRef(path, data.id));
+    }
+  }
+  // #endregion
   // #endregion
 }

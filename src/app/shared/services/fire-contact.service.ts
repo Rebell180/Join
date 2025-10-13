@@ -144,19 +144,6 @@ export class FireContactService extends FireService<Contact> implements OnDestro
   getAll():Observable<Contact[]> {
     return this.contacts$;
   }
-  /**
-   * Updates an existing contact in firestore collection.
-   * @param contact The contact object with data to update.
-   */
-  
-  /**
-   * Deletes a contact from firestore collection.
-   * @param contact The contact object to remove.
-   */
-  async deleteContact(contact: Contact) {
-    // await deleteDoc(this.getSingleContactRef(contact.id));
-  }
-
   // #endregion
   // #endregion methods
 }
