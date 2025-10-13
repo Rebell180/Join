@@ -1,4 +1,6 @@
 export interface DatabaseObject {
+    
+    id: string;
 
     /**
      * Converts Objectdata into JS-Object.

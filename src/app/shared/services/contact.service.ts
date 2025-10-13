@@ -187,7 +187,7 @@ export class ContactService implements OnDestroy {
    * @param contact - Contact for update in database.
    */
   async updateContactInDB(contact: Contact) {
-    // await this.fcs.updateContact(contact);
+    await this.fcs.update(contact);
   }
 
   /**

@@ -1,11 +1,10 @@
 import { inject, Injectable } from '@angular/core';
 import { Contact } from '../classes/contact';
-import { ContactGroup } from '../classes/contactGroup';
 import { addDoc, collection, CollectionReference, doc, DocumentReference, Firestore, updateDoc } from '@angular/fire/firestore';
 import { DatabaseObject } from '../interfaces/database-object';
 import { Observable } from 'rxjs';
 
-type AllowedTypes = Contact | ContactGroup;
+type AllowedTypes = Contact;
 
 @Injectable({
   providedIn: 'root'
@@ -61,5 +60,11 @@ export abstract class FireService<T extends AllowedTypes & DatabaseObject> {
   abstract getAll(): Observable<T[]>
 
 
+  async update(data: T) {
+    const path: string = data instanceof Contact ? 'contacts' : '';
+    if (path.length > 0) {
+      await updateDoc(this.getSingleRef(path, data.id), data.toJSObject());
+    }
+  }
   // #endregion
 }

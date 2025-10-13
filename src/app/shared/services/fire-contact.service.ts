@@ -1,5 +1,5 @@
-import { inject, Injectable, OnDestroy } from '@angular/core';
-import { addDoc, collection, collectionData, CollectionReference, deleteDoc, doc, DocumentReference, Firestore, onSnapshot, query, Query, Unsubscribe, updateDoc, where } from '@angular/fire/firestore';
+import { Injectable, OnDestroy } from '@angular/core';
+import { onSnapshot, query, Query, Unsubscribe, updateDoc, where } from '@angular/fire/firestore';
 import { BehaviorSubject, map, Observable } from 'rxjs';
 import { Contact } from '../classes/contact';
 import { ContactGroup } from '../classes/contactGroup';
@@ -26,7 +26,7 @@ import { FireService } from './fire.service';
   providedIn: 'root'
 })
 /** Manges the Firestore-Handling between contacts. */
-export class FireContactService extends FireService<Contact> {
+export class FireContactService extends FireService<Contact> implements OnDestroy{
   
   // #region properties
   
@@ -148,10 +148,7 @@ export class FireContactService extends FireService<Contact> {
    * Updates an existing contact in firestore collection.
    * @param contact The contact object with data to update.
    */
-  // async updateContact(contact: Contact) {
-  //   await updateDoc(this.getSingleContactRef(contact.id), contact.toJSObject());
-  // }
-
+  
   /**
    * Deletes a contact from firestore collection.
    * @param contact The contact object to remove.
@@ -160,14 +157,6 @@ export class FireContactService extends FireService<Contact> {
     // await deleteDoc(this.getSingleContactRef(contact.id));
   }
 
-  // #endregion
-
-  // #region references
-  /**
-   * Gets the reference of 'contacts' collection.
-   * @returns - That reference.
-   */
-  
   // #endregion
   // #endregion methods
 }
