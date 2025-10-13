@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { Contact } from '../classes/contact';
 import { ContactGroup } from '../classes/contactGroup';
-import { collection, CollectionReference, Firestore } from '@angular/fire/firestore';
+import { collection, CollectionReference, doc, DocumentReference, Firestore } from '@angular/fire/firestore';
 
 type AllowedTypes = Contact | ContactGroup;
 
@@ -24,5 +24,16 @@ export class FireService<T extends AllowedTypes> {
   private getCollectionRef(path:string): CollectionReference {
     return collection(this.fs, path);
   }
+
+  /**
+   * Get a concret document from database.
+   * @param path - Name of collection in database.
+   * @param docId - Id of document in database.
+   * @returns Document reference of path and docid.
+   */
+  private getSingleRef(path:string, docId:string): DocumentReference {
+    return doc(this.getCollectionRef(path), `/${docId}`);
+  }
+  // #endregion
   // #endregion
 }
