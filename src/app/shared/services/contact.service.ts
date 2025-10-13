@@ -3,8 +3,7 @@ import { Contact } from '../classes/contact';
 import { BehaviorSubject, map, Observable, Subscription } from 'rxjs';
 import { ContactGroup } from '../classes/contactGroup';
 import { DisplaySizeService, DisplayType } from './display-size.service';
-import { collectionData } from '@angular/fire/firestore';
-import { FireService } from './fire.service';
+import { ToastMsgService } from './toast-msg.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +14,7 @@ export class ContactService extends FireService<Contact> implements OnDestroy {
   // #region properties
 
   private dss: DisplaySizeService = inject(DisplaySizeService);
+  private tms: ToastMsgService = inject(ToastMsgService);
 
   // Contact List
   private contacts$!: Observable<Contact[]>;

@@ -10,11 +10,11 @@ import { CommonModule } from '@angular/common';
 })
 export class ToastComponent {
 
-  protected toastMsgService: ToastMsgService = inject(ToastMsgService);
+  protected tms: ToastMsgService = inject(ToastMsgService);
 
   /** Shows the toast. */
   showToast() {
-    this.toastMsgService.add('This is a toast message.');
+    this.tms.add('This is a toast message.');
   }
 
   /**
@@ -22,6 +22,6 @@ export class ToastComponent {
    * @param index - Index in ToastMsgService massge array.
    */
   removeToast(index: number) {
-    this.toastMsgService.remove(index);
+    this.tms.remove(index);
   }
 }

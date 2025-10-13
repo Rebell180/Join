@@ -1,6 +1,6 @@
-<div id="toast-container" *ngFor="let toast of toastMsgService.toasts; let i = index">
-    <div >
-        {{ toast.message }}
-        <button (click)="removeToast(i)">X</button>
-    </div>
+@for (toast of tms.toasts; track $index) {
+<div id="{{'toast-container_' + $index}}" class="toast {{toast.type}}">
+    <span class="toast-msg">{{ toast.message }}</span>
+    <button (click)="removeToast($index)">X</button>
 </div>
+}
