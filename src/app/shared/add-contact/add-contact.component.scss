@@ -41,9 +41,7 @@
             }
 
             @include all.notebook {
-                position: absolute;
-                top: 0;
-                right: 3rem;
+                @include all.absolute($top: 0, $right: 3rem);
                 @include all.fl($jc: end);
 
                 button {
@@ -107,9 +105,7 @@
         }
 
         .line-close-btn {
-            position: absolute;
-            top: 0;
-            right: 3rem;
+            @include all.absolute($top: 0, $right: 3rem);
             @include all.fl($jc: end);
 
             button {
@@ -141,9 +137,7 @@
                 @include all.tablet {
                     display: block; 
                     @include all.size($w: 12rem, $h: 12rem);
-                    position: absolute;
-                    top: -32%;
-                    left: 50%;
+                    @include all.absolute($top: 3.2rem, $left: 5rem);
                     transform: translate(-50%);
                     border-radius: 50%;
                     background: white;
@@ -156,9 +150,7 @@
 
                 @include all.tablet {
                     @include all.size($w: 12rem, $h: 12rem);
-                    position: absolute;
-                    top: -32%;
-                    left: 50%;
+                    @include all.absolute($top: 3.2rem, $left: 5rem);
                     transform: translate(-50%);
                     border-radius: 50%;
                     border: 2px solid white;

@@ -23,3 +23,20 @@
 	max-height: $maxH;
 }
 
+@mixin absolute($pos: absolute, $top: auto, $left: auto, $bottom: auto, $right: auto) {
+	position: $pos;
+	top: $top;
+	left: $left;
+	bottom: $bottom;
+	right: $right;
+}
+
+@mixin borRad($c: white, $radius: 16px, $thick: 1px) {
+    border: $thick solid $c;
+    border-radius: $radius;
+}
+
+@mixin boxSh($right: 2px, $bottom: 4px, $blur: 2px, $all: 0px, $c: white) {
+    // right , bottom, spread, thick around 
+    box-shadow: $right $bottom $blur $all $c ;
+}
