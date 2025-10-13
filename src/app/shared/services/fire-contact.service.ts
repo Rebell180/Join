@@ -86,23 +86,6 @@ export class FireContactService extends FireService<Contact> implements OnDestro
 
   // #region groups
   /**
-   * Returns an observable with all unique groups 
-   * of loaded contacts$.
-   */
-  getAllGroups$() {
-    return this.contacts$.pipe(
-      map(contacts => {
-        const groups: Array<string> = contacts
-          .map(c => c.group.toUpperCase()) // extract group values
-          .filter(g => !!g); // !! remove undefined and null values
-        // the reason for the usage of Array.from is to remove duplicates.
-        // else we could return groups directly with duplicates.
-        return Array.from(new Set(groups)).sort(); 
-      })
-    );
-  }
-
-  /**
    * Returns an observable with all contacts that match to the given group.
    * 
    * @param group The group string to filter contacts by
@@ -117,23 +100,23 @@ export class FireContactService extends FireService<Contact> implements OnDestro
    * Gets the asigned groups of contact.
    * @returns - All groups of contact as obervable.
    */
-  getContactGroups(): Observable<Array<ContactGroup>> {
-    return this.getAllGroups$().pipe(
-      map((groups: Array<string>) =>
-        groups.map((group: string) => {
-          const contactGroup = new ContactGroup();
-          contactGroup.name = group;
+  // getContactGroups(): Observable<Array<ContactGroup>> {
+  //   return this.getAllGroups$().pipe(
+  //     map((groups: Array<string>) =>
+  //       groups.map((group: string) => {
+          // const contactGroup = new ContactGroup();
+          // contactGroup.name = group;
           // Fülle die Kontakte synchron aus dem aktuellen contacts$-Value
-          this.contacts$.pipe(
-            map(contacts => contacts.filter(c => c.group.toUpperCase() === group))
-          ).subscribe(contactsByGroup => {
-            contactGroup.contactsBS.next(contactsByGroup);
-          });
-          return contactGroup;
-        })
-      )
-    );
-  }
+  //         this.contacts$.pipe(
+  //           map(contacts => contacts.filter(c => c.group.toUpperCase() === group))
+  //         ).subscribe(contactsByGroup => {
+  //           contactGroup.contactsBS.next(contactsByGroup);
+  //         });
+  //         return contactGroup;
+  //       })
+  //     )
+  //   );
+  // }
   // #endregion
   // #endregion methods
 }

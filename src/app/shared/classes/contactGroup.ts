@@ -7,4 +7,8 @@ export class ContactGroup {
     name: string = '';
     contactsBS = new BehaviorSubject<Array<Contact>>([]);
     contacts: Observable<Array<Contact>> = this.contactsBS.asObservable();
+
+    constructor(name:string) {
+        this.name = name;
+    }
 }

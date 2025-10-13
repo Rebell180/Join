@@ -1,7 +1,7 @@
 import { inject, Injectable, OnDestroy } from '@angular/core';
 import { FireContactService } from './fire-contact.service';
 import { Contact } from '../classes/contact';
-import { BehaviorSubject, Observable, Subscription } from 'rxjs';
+import { BehaviorSubject, map, Observable, Subscription } from 'rxjs';
 import { ContactGroup } from '../classes/contactGroup';
 import { DisplaySizeService, DisplayType } from './display-size.service';
 
@@ -13,7 +13,7 @@ export class ContactService implements OnDestroy {
 
   // #region properties
 
-  private fcs : FireContactService = inject(FireContactService);
+  private fcs: FireContactService = inject(FireContactService);
   private dss: DisplaySizeService = inject(DisplaySizeService);
   contacts$: Observable<Contact[]> = this.fcs.getAll();
   // add or edit contact modal properties 
@@ -32,7 +32,7 @@ export class ContactService implements OnDestroy {
   private classToDisplayBS: BehaviorSubject<string> = new BehaviorSubject('');
   classToDisplay$: Observable<string> = this.classToDisplayBS.asObservable();
 
-  curSize$ : Subscription;
+  curSize$: Subscription;
 
   // fireContactService integration properties
 
@@ -44,31 +44,31 @@ export class ContactService implements OnDestroy {
   // });
 
   contactToEditBS: BehaviorSubject<Contact> = new BehaviorSubject(new Contact({ id: '', firstname: '', lastname: '', group: '', email: '', tel: '', iconColor: '' }));
-  contactToEdit: Observable<Contact> = this.contactToEditBS.asObservable();  
-  
-  private currentContactBS: BehaviorSubject<Contact | null > = new BehaviorSubject<Contact | null>(null);;
+  contactToEdit: Observable<Contact> = this.contactToEditBS.asObservable();
+
+  private currentContactBS: BehaviorSubject<Contact | null> = new BehaviorSubject<Contact | null>(null);;
   currentContact$: Observable<Contact | null> = this.currentContactBS.asObservable();
 
   contactGroupsBS: BehaviorSubject<Array<string>> = new BehaviorSubject(new Array<string>());
   contactGroups: Observable<Array<string>> = this.contactGroupsBS.asObservable();
-  contactGroups$ = this.fcs.getAllGroups$().subscribe((groups: Array<string>) => {
-    this.contactGroupsBS.next(groups);
-  });
+  // contactGroups$ = this.fcs.getAllGroups$().subscribe((groups: Array<string>) => {
+  //   this.contactGroupsBS.next(groups);
+  // });
 
   contactsByGroupBS: BehaviorSubject<Array<ContactGroup>> = new BehaviorSubject(new Array<ContactGroup>());
   contactsByGroup: Observable<Array<ContactGroup>> = this.contactsByGroupBS.asObservable();
 
   // #endregion properties
 
-  constructor() { 
-    this.contactsByGroup = this.fcs.getContactGroups();
+  constructor() {
+    // this.contactsByGroup = this.fcs.getContactGroups();
     this.curSize$ = this.subscribeWindowSize();
   }
 
   /** Unsubribes all subcriptionss. */
   ngOnDestroy(): void {
     // this.contacts$.unsubscribe();
-    this.contactGroups$.unsubscribe();
+    // this.contactGroups$.unsubscribe();
     this.curSize$.unsubscribe();
   }
 
@@ -77,12 +77,12 @@ export class ContactService implements OnDestroy {
   // detail methods
 
   /** Subscribes the window size form DisplaySizeService. */
-  subscribeWindowSize () {
+  subscribeWindowSize() {
     return this.dss.size().subscribe((size) => {
-      if(size = DisplayType.NOTEBOOK) {
+      if (size = DisplayType.NOTEBOOK) {
         this.classToDisplayBS.next('d_none');
       }
-      else if(size == DisplayType.DESKTOP) {
+      else if (size == DisplayType.DESKTOP) {
         this.classToDisplayBS.next('');
       }
     });
@@ -94,7 +94,7 @@ export class ContactService implements OnDestroy {
    * @param kindOfModal - 'add' or 'edit
    */
   openModal(kindOfModal: string) {
-    if(kindOfModal == 'add') {
+    if (kindOfModal == 'add') {
       this.contactToEditBS.next(new Contact({ id: '', firstname: '', lastname: '', group: '', email: '', tel: '', iconColor: '' }));
       this.isEditModalOpenBS.next(false);
       this.isAddModalOpenBS.next(true);
@@ -124,7 +124,7 @@ export class ContactService implements OnDestroy {
    * Selects a contact.
    * @param contact - Contact to select, null for unselect.
    */
-  selectContact(contact:Contact|null = null) {
+  selectContact(contact: Contact | null = null) {
     this.currentContactBS.next(contact);
   }
 
@@ -133,7 +133,7 @@ export class ContactService implements OnDestroy {
    * @param id - Id of contact.
    */
   async setActiveContact(id: string) {
-    
+
   }
 
   /**
@@ -142,11 +142,11 @@ export class ContactService implements OnDestroy {
    */
   unselectCurrentContact(id: string) {
     // this.contacts.forEach((contactStream) => {
-      // contactStream.forEach((contact) => {
-        // if(contact.id == id) {
-        //   contact.selected = false;
-        // }
-      // })
+    // contactStream.forEach((contact) => {
+    // if(contact.id == id) {
+    //   contact.selected = false;
+    // }
+    // })
     // })
   }
   // #endregion
@@ -158,11 +158,28 @@ export class ContactService implements OnDestroy {
    */
   setDetailVisibility(classname: 'd_none' | '') {
     this.classToDisplayBS.next(classname);
-    if(this.currentContactBS.value) {
+    if (this.currentContactBS.value) {
       this.unselectCurrentContact(this.currentContactBS.value.id);
       this.currentContactBS.next(null);
     }
   }
+
+  // region Groups
+  /**
+   * Gets all groups.
+   * @returns - All group as Observable.
+   */
+  getAllGroups(): Observable<ContactGroup[]> {
+    return this.contacts$.pipe((
+      map(contacts => {
+        const groups = contacts.map(contact => contact.group);
+        const nonEmpty = groups.filter(g => g.length > 0);
+        const letterList = Array.from(new Set(nonEmpty));
+        return letterList.map (letter => new ContactGroup(letter))
+      })
+    ))
+  }
+  // #endregion
 
   // #region CRUD methods
   /**
