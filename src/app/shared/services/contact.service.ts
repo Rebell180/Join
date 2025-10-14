@@ -1,21 +1,23 @@
-import { inject, Injectable, OnDestroy } from '@angular/core';
+import { inject, Injectable, OnDestroy, OnInit } from '@angular/core';
 import { FireContactService } from './fire-contact.service';
 import { Contact } from '../classes/contact';
 import { BehaviorSubject, map, Observable, Subscription } from 'rxjs';
 import { ContactGroup } from '../classes/contactGroup';
 import { DisplaySizeService, DisplayType } from './display-size.service';
+import { collectionData } from '@angular/fire/firestore';
+import { FireService } from './fire.service';
 
 @Injectable({
   providedIn: 'root'
 })
 /** Handles the contact mangegement. */
-export class ContactService implements OnDestroy {
+export class ContactService extends FireService<Contact> implements OnDestroy {
 
   // #region properties
 
   private fcs: FireContactService = inject(FireContactService);
   private dss: DisplaySizeService = inject(DisplaySizeService);
-  contacts$: Observable<Contact[]> = this.fcs.getAll();
+  private contacts$!: Observable<Contact[]>;
   // add or edit contact modal properties 
 
   private isEditModalOpenBS: BehaviorSubject<boolean> = new BehaviorSubject(false);
@@ -61,11 +63,12 @@ export class ContactService implements OnDestroy {
   // #endregion properties
 
   constructor() {
-    // this.contactsByGroup = this.fcs.getContactGroups();
+    super();
+    this.loadContacts();
     this.curSize$ = this.subscribeWindowSize();
   }
 
-  /** Unsubribes all subcriptionss. */
+    /** Unsubribes all subcriptionss. */
   ngOnDestroy(): void {
     // this.contacts$.unsubscribe();
     // this.contactGroups$.unsubscribe();
@@ -73,6 +76,12 @@ export class ContactService implements OnDestroy {
   }
 
   // #region methods
+  /** Loads all contacts. */
+  private loadContacts(): void {
+    this.contacts$ = collectionData(this.getCollectionRef('contacts'),{idField: 'id'}).pipe(
+      map(docs => docs.map(data => new Contact({id: data.id, firstname: data['fristname'], lastname: data['lastname'], group: data['group'], email: data['email'], tel: data['tel'], iconColor: data['iconColor']})))
+    );
+  }
 
   // detail methods
 
@@ -182,12 +191,15 @@ export class ContactService implements OnDestroy {
   // #endregion
 
   // #region CRUD methods
+  getAll(): Observable<Contact[]> {
+    return this.contacts$
+  }
   /**
    * Adds a contact into database.
    * @param contact - Contact for add to database.
    */
   async addContactToDB(contact: Contact) {
-    await this.fcs.add(contact);
+    await this.add(contact);
   }
 
   /**
@@ -195,7 +207,7 @@ export class ContactService implements OnDestroy {
    * @param contact - Contact for update in database.
    */
   async updateContactInDB(contact: Contact) {
-    await this.fcs.update(contact);
+    await this.update(contact);
   }
 
   /**
@@ -203,7 +215,7 @@ export class ContactService implements OnDestroy {
    * @param contact - Contact to delete
    */
   async deleteContactInDB(contact: Contact) {
-    await this.fcs.delete(contact);
+    await this.delete(contact);
   }
   // #endregion CRUD methods
   // #endregion methods
