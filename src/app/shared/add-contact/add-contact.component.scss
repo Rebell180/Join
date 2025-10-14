@@ -155,12 +155,12 @@
             }
 
             .single-initial-icon {
-                @include all.size($w: 16rem, $h: 12rem);
+                @include all.size($w: 15rem, $h: 12rem);
 
                 @include all.tablet {
-                    @include all.size($w: 12rem, $h: 12rem);
-                    @include all.absolute($top: 3.2rem, $left: 5rem);
-                    transform: translate(-50%);
+                    @include all.size($w: 10rem, $h: 10rem);
+                    @include all.absolute($top: 0, $left: 50%);
+                    transform: translate(-50%, -95%);
                     border-radius: 50%;
                     border: 2px solid white;
                 }
