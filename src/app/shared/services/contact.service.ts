@@ -79,7 +79,7 @@ export class ContactService extends FireService<Contact> implements OnDestroy {
   /** Loads all contacts. */
   private loadContacts(): void {
     this.contacts$ = collectionData(this.getCollectionRef('contacts'),{idField: 'id'}).pipe(
-      map(docs => docs.map(data => new Contact({id: data.id, firstname: data['fristname'], lastname: data['lastname'], group: data['group'], email: data['email'], tel: data['tel'], iconColor: data['iconColor']})))
+      map(docs => docs.map(data => new Contact({id: data.id, firstname: data['firstname'], lastname: data['lastname'], group: data['group'], email: data['email'], tel: data['tel'], iconColor: data['iconColor']})))
     );
   }
 
@@ -184,7 +184,7 @@ export class ContactService extends FireService<Contact> implements OnDestroy {
         const groups = contacts.map(contact => contact.group);
         const nonEmpty = groups.filter(g => g.length > 0);
         const letterList = Array.from(new Set(nonEmpty));
-        return letterList.map (letter => new ContactGroup(letter))
+        return letterList.map (letter => new ContactGroup(this, letter))
       })
     ))
   }

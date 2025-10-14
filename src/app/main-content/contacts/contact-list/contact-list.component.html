@@ -4,11 +4,11 @@
 </button>
 
 <div class="contact-groups-container">
-    @for (contactGroup of cs.contactsByGroup| async ; track contactGroup.name || $index) {
-    <div id="{{ 'contact-group_' + contactGroup.name + '_' + $index}}" class="contact-group-container">
-        <h3 class="letter">{{ contactGroup.name }}</h3>
+    @for (group of groups$ | async ; track group.name || $index) {
+    <div id="{{ 'contact-group_' + group.name + '_' + $index}}" class="contact-group-container">
+        <h3 class="letter">{{ group.name }}</h3>
         <hr>
-        @for (contact of contactGroup.contacts| async ; track contact.id || $index) {
+        @for (contact of group.members| async ; track contact.id || $index) {
         <div id="{{ 'contact_' + contact.group + '_' + contact.id + '_' + $index}}" class="single-contact-container"
             [ngClass]="{'active': contact.selected }" (click)="cs.setActiveContact(contact.id)">
             <div class="icon-wrapper">

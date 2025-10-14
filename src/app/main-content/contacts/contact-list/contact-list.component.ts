@@ -4,6 +4,8 @@ import { Contact } from '../../../shared/classes/contact';
 import { FormsModule } from "@angular/forms";
 import { ContactService } from '../../../shared/services/contact.service';
 import { ContactIconComponent } from "../contact-icon/contact-icon.component";
+import { Observable } from 'rxjs';
+import { ContactGroup } from '../../../shared/classes/contactGroup';
 
 @Component({
   selector: 'section[contact-list]',
@@ -17,7 +19,7 @@ import { ContactIconComponent } from "../contact-icon/contact-icon.component";
 })
 export class ContactListComponent {
   cs: ContactService = inject(ContactService);
-
+  groups$: Observable<ContactGroup[]> = this.cs.getAllGroups();
   /**
    * Gets the full name of contact.
    * @returns - Full name of contact.

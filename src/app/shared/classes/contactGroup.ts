@@ -1,14 +1,25 @@
-import { BehaviorSubject, Observable } from "rxjs";
+import { map, Observable } from "rxjs";
 import { Contact } from "./contact";
+import { ContactService } from "../services/contact.service";
 
 /** Represents a group of contact. */
 export class ContactGroup {
 
-    name: string = '';
-    contactsBS = new BehaviorSubject<Array<Contact>>([]);
-    contacts: Observable<Array<Contact>> = this.contactsBS.asObservable();
+    _name: string = '';
+    private members$!: Observable<Contact[]> ;
 
-    constructor(name:string) {
-        this.name = name;
+    constructor (private cs: ContactService, name:string) {
+        this._name = name
+        this.getMenmbers();
     }
+
+    private getMenmbers() {
+        this.members$ = this.cs.getAll().pipe(
+            map( contacts => contacts.filter( contact => contact.group == this.name))
+        );
+    }
+
+    get name():string {return this._name;}
+
+    get members(): Observable<Contact[]> {return this.members$;}
 }
