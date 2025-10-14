@@ -65,13 +65,13 @@
 
                 .contact-data {
                     @include all.fl($flexdir: column, $jc: center);
-                    @include all.size($w: 25rem, $h: 3.8rem);
+                    @include all.size($w: 25rem, $h: 4.8rem);
 
                     .name {
+                        @include all.limiter();
                         margin-bottom: 5px;
-                        font-size: 2.4rem;
+                        font-size: 20px;
                         font-family: 'InterBoldReg', sans-serif;
-                        white-space: nowrap;
 
                         @media(max-width: 376px) {
                             font-size: clamp(16px, 2rem, 32px);
@@ -79,8 +79,9 @@
                     }
 
                     .email {
+                        @include all.limiter();
                         color: #007bed;
-                        font-size: 2rem;
+                        font-size: 16px;
 
                         @media(max-width: 376px) {
                             font-size: clamp(16px, 1.8rem, 32px);

@@ -40,3 +40,11 @@
     // right , bottom, spread, thick around 
     box-shadow: $right $bottom $blur $all $c ;
 }
+
+@mixin limiter() {
+  	display: inline-block;
+  	max-width: 100%;
+  	white-space: nowrap;
+  	overflow: hidden; 
+  	text-overflow: ellipsis;
+}

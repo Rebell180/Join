@@ -16,8 +16,8 @@
                     [contact]="contact"></app-contact-icon>
             </div>
             <div class="contact-data">
-                <p class="name">{{ limit(fullName(contact), 16) }}</p>
-                <p class="email">{{ limit(contact.email, 16) }}</p>
+                <p class="name limiter">{{ fullName(contact) }}</p>
+                <p class="email limiter">{{ contact.email }}</p>
             </div>
         </div>
         }
