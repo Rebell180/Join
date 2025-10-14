@@ -1,5 +1,4 @@
-import { inject, Injectable, OnDestroy, OnInit } from '@angular/core';
-import { FireContactService } from './fire-contact.service';
+import { inject, Injectable, OnDestroy } from '@angular/core';
 import { Contact } from '../classes/contact';
 import { BehaviorSubject, map, Observable, Subscription } from 'rxjs';
 import { ContactGroup } from '../classes/contactGroup';
@@ -15,7 +14,6 @@ export class ContactService extends FireService<Contact> implements OnDestroy {
 
   // #region properties
 
-  private fcs: FireContactService = inject(FireContactService);
   private dss: DisplaySizeService = inject(DisplaySizeService);
 
   // Contact List
@@ -40,9 +38,7 @@ export class ContactService extends FireService<Contact> implements OnDestroy {
 
   curSize$: Subscription;
 
-  // fireContactService integration properties
-
-  //   this.contactsBS.next(contactStream.sort());
+    //   this.contactsBS.next(contactStream.sort());
   // });
 
   contactToEditBS: BehaviorSubject<Contact> = new BehaviorSubject(new Contact({ id: '', firstname: '', lastname: '', group: '', email: '', tel: '', iconColor: '' }));
@@ -143,7 +139,6 @@ export class ContactService extends FireService<Contact> implements OnDestroy {
           this.currentContactBS.next(contactO)
           this.classToDisplayBS.next('');
           this.currentContactSubject.next(contact);
-          this.contacts$.subscribe(contacts => console.log(contacts));
         }
       });
     });
