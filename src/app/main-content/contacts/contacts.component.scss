@@ -17,7 +17,7 @@
         }
 
         @media(max-width: 376px) {
-            @include all.size($w: 100dvw, $h: 80dvh);
+            @include all.size($w: 100%, $h: 80dvh);
         }
     }
 

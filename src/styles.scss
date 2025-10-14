@@ -86,12 +86,12 @@ h2, a, p, h3, span {
 
 @font-face {
     font-family: "InterLight";
-    src: url("/assets/Fonts/Inter_18pt-ExtraLight.ttf") format("truetype");
+    src: url("../public/assets/Fonts/Inter_18pt-ExtraLight.ttf") format("truetype");
 }
 
 @font-face {
     font-family: "InterBold";
-    src: url("/assets/Fonts/Inter_28pt-Bold.ttf") format("truetype");
+    src: url("../public/assets/Fonts/Inter_28pt-Bold.ttf") format("truetype");
 }
 
 .overlay {
