@@ -2,13 +2,13 @@ export class Subtask {
 	id: string;
 	taskId: string;
 	name: string;
-	finished: string;
+	finished: boolean;
 
-	constructor({id = '', taskId = '', name, finished}:{
+	constructor({id = '', taskId = '', name = '', finished = false}:{
 		id: string,
 		taskId: string,
 		name: string,
-		finished: string
+		finished: boolean
 	}) {
 		this.id = id;
 		this.taskId = taskId;
@@ -16,12 +16,12 @@ export class Subtask {
 		this.finished = finished;
 	}
 
-	toJsonSubTask() {
+	toJson() {
 		return {
-		id: this.id || "",
-		taskId: this.taskId || "",
-		name: this.name || "",
-		finished: this.finished || "",
+			id: this.id || "",
+			taskId: this.taskId || "",
+			name: this.name || "",
+			finished: this.finished || false,
 		}
 	}
 }

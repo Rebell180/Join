@@ -4,18 +4,18 @@ export class Task {
 	id: string;
 	title: string;
 	description: string;
-	dueDate: number;
+	dueDate: string;
 	priority: string;
 	category: string;
 	assignedTo: string;
 	subtasks: boolean = true;
 	// #endregion
 
-	constructor({id = '', title, description, dueDate, priority, category, assignedTo, subtasks}:{
+	constructor({ id = '', title, description, dueDate, priority, category, assignedTo, subtasks }: {
 		id: string,
 		title: string,
 		description: string,
-		dueDate: number,
+		dueDate: string,
 		priority: string,
 		category: string,
 		assignedTo: string,
@@ -32,23 +32,22 @@ export class Task {
 	}
 
 	/**
- * Returns a plain JSON-compatible object representing the current Task instance.
- *
- * @returns {Object} An object containing all Task properties.
- *
- * @description
- * - convert the Task into a JSON string.
- * - || operator provides default fallback values if a property is `undefined` or empty.
- * - ?? mullish operator ensures that `false` for `subtasks`
- *   is preserved and not overwritten by the default value.
- */
-
-	toJsonTask() {
+	 * Returns a plain JSON-compatible object representing the current Task instance.
+	 *
+	 * @returns {Object} An object containing all Task properties.
+	 *
+	 * @description
+	 * - convert the Task into a JSON string.
+	 * - || operator provides default fallback values if a property is `undefined` or empty.
+	 * - ?? mullish operator ensures that `false` for `subtasks`
+	 * - is preserved and not overwritten by the default value.
+	 */
+	toJson(): object {
 		return {
 			id: this.id || "",
 			title: this.title || "",
 			description: this.description || "",
-			dueDate: this.dueDate || 0,
+			dueDate: this.dueDate || "",
 			priority: this.priority || "",
 			category: this.category || "",
 			assignedTo: this.assignedTo || "",

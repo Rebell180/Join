@@ -42,9 +42,9 @@
 }
 
 @mixin limiter() {
-  	display: inline-block;
-  	max-width: 100%;
-  	white-space: nowrap;
-  	overflow: hidden; 
-  	text-overflow: ellipsis;
+	display: inline-block;
+	max-width: 100%;
+	white-space: nowrap;
+	overflow: hidden; 
+	text-overflow: ellipsis;
 }
