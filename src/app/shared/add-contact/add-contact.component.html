@@ -1,4 +1,4 @@
-@if( cs.contactToEdit | async; as contact) {
+@if( contactToEditClone; as contact) {
 <div class="modal-overlay" (click)="closeModal()">
 
     <dialog class="add-contact-modal-container" [@slideInOut]="isOpen ? 'open' : 'closed'"

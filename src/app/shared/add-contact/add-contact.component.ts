@@ -1,10 +1,10 @@
-import { Component, ElementRef, inject, QueryList, Renderer2, ViewChildren, AfterViewInit } from '@angular/core';
+import { Component, ElementRef, inject, QueryList, Renderer2, ViewChildren, AfterViewInit, OnInit, OnDestroy } from '@angular/core';
 import { Contact } from '../classes/contact';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ContactService } from '../services/contact.service';
 import { trigger, state, style, transition, animate } from '@angular/animations';
-import { Observable } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { ContactIconComponent } from "../../main-content/contacts/contact-icon/contact-icon.component";
 
 @Component({
@@ -32,63 +32,77 @@ import { ContactIconComponent } from "../../main-content/contacts/contact-icon/c
     ])
   ]
 })
-export class AddContactComponent implements AfterViewInit{
+export class AddContactComponent implements AfterViewInit, OnInit, OnDestroy {
 
-  cs: ContactService = inject(ContactService);
-  defaultContact: Observable<Contact> = this.cs.contactToEdit;
+  // #region properties
+
   private renderer: Renderer2 = inject(Renderer2);
-  errors: boolean[] = [false, false, false, false];
-  @ViewChildren('errEl') errorRefs!: QueryList<ElementRef<HTMLDivElement>>;
+  cs: ContactService = inject(ContactService);
+
+  contactToEditClone!: Contact;
+  contactToEditSub?: Subscription;
+  
   isOpen = false;
 
+  errors: boolean[] = [false, false, false, false];
+  @ViewChildren('errEl') errorRefs!: QueryList<ElementRef<HTMLDivElement>>;
+
+  // #endregion properties
+
+  ngOnInit(): void {
+    this.contactToEditSub = this.cs.contactToEdit.subscribe(contact => {
+      this.contactToEditClone = new Contact(contact); 
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.contactToEditSub?.unsubscribe();
+  }
+  
   ngAfterViewInit() {
     setTimeout(() => this.isOpen = true, 10); // Animation trigger
   }
 
-  getInputElementValue(elementId: string) {
-    const inputRef = document.getElementById(elementId) as HTMLInputElement;
-    if (inputRef) {
-      return inputRef.value;
-    } else {
-      return '';
-    }
-  }
+  // #region methods
 
-  closeModal () {
+  /**
+   * Closes the modal
+   * 
+   * Use a timeout to defer the close function for animation.
+   */
+  closeModal() {
     this.isOpen = false;
     setTimeout(() => this.cs.closeModal(), 400);
   }
 
-  async submitForm(e:SubmitEvent) {
+  /**
+   * Submit the entered data as add or as update after validation
+   *  
+   * @param e event
+   */
+  async submitForm(e: SubmitEvent) {
     e.preventDefault();
     if (this.validateAll()) {
-      this.cs.contactToEdit.forEach(async (contact) => {
-        if(contact.id == '') {
-          await this.cs.addContactToDB(contact);
-        } else {
-          await this.cs.updateContactInDB(contact);
-          console.log('addContact.component,');
-          
-        }
-      });
+      if(this.contactToEditClone.id == '') {
+        await this.cs.addContactToDB(this.contactToEditClone);
+      } else {
+        await this.cs.updateContactInDB(this.contactToEditClone);
+      }
       this.closeModal();
     }
   }
-  
+
+  // #endregion methods
+
   // #region validation 
 
   /** Validates firstname. */
   protected validateFirstName(): void {
-    const contactInForm: Observable<Contact> = this.cs.contactToEdit;
-    let valueToValidate: string = '';
-    contactInForm.forEach((contact: Contact) => {
-      valueToValidate = contact.firstname;
-    });
-
-    const errors:boolean[] = [];
+    const valueToValidate: string = this.contactToEditClone.firstname;
+    const errors: boolean[] = [];
     const name: string = 'Firstname';
     const errorRef: ElementRef<HTMLDivElement> = this.errorRefs.toArray()[0];
-    const pattern: RegExp = /^([A-ZÄÖÜ][a-zäöüß]*\s?-?)*$/g;
+    const pattern: RegExp = /^[A-ZÄÖÜ][a-zäöüß]+(?:[ -][A-ZÄÖÜ][a-zäöüß]+)*$/g;
     errors.push(this.checkRequired(name, valueToValidate, errorRef));
     if (errors.includes(false)) return
     errors.push(this.checkMinLength(name, valueToValidate, 3, errorRef));
@@ -99,16 +113,11 @@ export class AddContactComponent implements AfterViewInit{
 
   /** Validates lastname. */
   protected validateLastName(): void {
-    const contactInForm: Observable<Contact> = this.cs.contactToEdit;
-    let valueToValidate: string = '';
-    contactInForm.forEach((contact: Contact) => {
-      valueToValidate = contact.lastname;
-    });
-
-    const errors:boolean[] = [];
+    const valueToValidate: string = this.contactToEditClone.lastname;
+    const errors: boolean[] = [];
     const name: string = 'Lastname';
     const errorRef: ElementRef<HTMLDivElement> = this.errorRefs.toArray()[1];
-    const pattern: RegExp = /^([A-ZÄÖÜ][a-zäöüß]*\s?-?)*$/g;
+    const pattern: RegExp = /^[A-ZÄÖÜ][a-zäöüß]+(?:[ -][A-ZÄÖÜ][a-zäöüß]+)*$/g;
     errors.push(this.checkRequired(name, valueToValidate, errorRef))
     if (errors.includes(false)) return
     errors.push(this.checkMinLength(name, valueToValidate, 3, errorRef));
@@ -119,13 +128,8 @@ export class AddContactComponent implements AfterViewInit{
 
   /** Validates e-mail. */
   protected validateEmail(): void {
-    const contactInForm: Observable<Contact> = this.cs.contactToEdit;
-    let valueToValidate: string = '';
-    contactInForm.forEach((contact: Contact) => {
-      valueToValidate = contact.email;
-    });
-
-    const errors:boolean[] = [];
+    const valueToValidate: string = this.contactToEditClone.email;
+    const errors: boolean[] = [];
     const name: string = 'E-Mail';
     const errorRef: ElementRef<HTMLDivElement> = this.errorRefs.toArray()[2];
     const pattern: RegExp = /^\w*(\.?-?\w*)*?@\w*\.[a-z]{2,3}$/g;
@@ -139,13 +143,8 @@ export class AddContactComponent implements AfterViewInit{
 
   /** Validates tel-number. */
   protected validateTel(): void {
-    const contactInForm: Observable<Contact> = this.cs.contactToEdit;
-    let valueToValidate: string = '';
-    contactInForm.forEach((contact: Contact) => {
-      valueToValidate = contact.tel;
-    });
-
-    const errors:boolean[] = [];
+    const valueToValidate: string = this.contactToEditClone.tel;
+    const errors: boolean[] = [];
     const name: string = 'Tel-Number';
     const errorRef: ElementRef<HTMLDivElement> = this.errorRefs.toArray()[3];
     const pattern: RegExp = /^(?:\+49|0049|0)[ \-]?(?:\(?\d{1,5}\)?[ \-]?)?\d{3,11}$/;
@@ -172,7 +171,7 @@ export class AddContactComponent implements AfterViewInit{
    * @param errElem - Div for error message.
    * @returns - true, if input exists.
    */
-  private checkRequired(desc:string, field:string, errElem:ElementRef<HTMLDivElement>):boolean {
+  private checkRequired(desc: string, field: string, errElem: ElementRef<HTMLDivElement>): boolean {
     if (field.length == 0) {
       this.renderer.setProperty(errElem.nativeElement, 'innerText', `${desc} is required.`);
       return false;
@@ -189,7 +188,7 @@ export class AddContactComponent implements AfterViewInit{
    * @param errElem - Div for error message.
    * @returns - true, if minmum length is reached.
    */
-  private checkMinLength(desc:string, field:string, min:number, errElem:ElementRef<HTMLDivElement>):boolean {
+  private checkMinLength(desc: string, field: string, min: number, errElem: ElementRef<HTMLDivElement>): boolean {
     if (field.length < min) {
       this.renderer.setProperty(errElem.nativeElement, 'innerText', `${desc} is too short.`);
       return false;
@@ -206,7 +205,7 @@ export class AddContactComponent implements AfterViewInit{
    * @param errElem - Div for error message
    * @returns - true, if name-format is correct.
    */
-  private checkFormat(desc:string, field: string, pattern:RegExp, errElem:ElementRef<HTMLDivElement>): boolean {
+  private checkFormat(desc: string, field: string, pattern: RegExp, errElem: ElementRef<HTMLDivElement>): boolean {
     if (!field.match(pattern)) {
       this.renderer.setProperty(errElem.nativeElement, 'innerText', `${desc}-Format is not correct.`);
       return false;
