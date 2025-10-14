@@ -1,73 +1,78 @@
 @if( cs.contactToEdit | async; as contact) {
+<div class="modal-overlay" (click)="closeModal()">
 
+    <dialog class="add-contact-modal-container" [@slideInOut]="isOpen ? 'open' : 'closed'"
+        (click)="$event.stopPropagation()">
+        <header class="contact-modal-header">
+            <img src="assets/Icons/JoinLogoWhite.png" alt="">
+            <div class="add-contact-header">
+                <h1 id="add-contact-headline">{{ cs.modalHeadlineTxt | async }} Contact</h1>
+                <h2>Tasks are better with a team!</h2>
+                <hr>
+            </div>
+            <div class="mobile-close-btn">
+                <button type="button" (click)="closeModal()">X</button>
+            </div>
+        </header>
 
-<dialog class="add-contact-modal-container" [@slideInOut]="isOpen ? 'open' : 'closed'">
-    <header class="contact-modal-header">
-        <img src="assets/Icons/JoinLogoWhite.png" alt="">
-        <div class="add-contact-header">
-            <h1 id="add-contact-headline">{{ cs.modalHeadlineTxt | async }} Contact</h1>
-            <h2>Tasks are better with a team!</h2>
-            <hr>
-        </div>
-        <div class="mobile-close-btn">
-            <button type="button" (click)="closeModal()">X</button>
-        </div>
-    </header>
-
-    <main class="contact-modal-main">
-        <div class="line-close-btn">
-            <button type="button" (click)="closeModal()">x</button>
-        </div>
-        <div class="line-form">
-            @if(cs.isAddModalOpen | async) {
+        <main class="contact-modal-main">
+            <div class="line-close-btn">
+                <button type="button" (click)="closeModal()">x</button>
+            </div>
+            <div class="line-form">
+                @if(cs.isAddModalOpen | async) {
                 <img class="single-icon" src="assets/Icons/contact_icon_grey.png" alt="">
-            } @else if(cs.isEditModalOpen | async) {
-                <app-contact-icon id="{{ 'contact-modal-icon-' + contact.id}}" class="single-initial-icon {{ contact.iconColor }}" [contact]="contact"></app-contact-icon>
-            }
+                } @else if(cs.isEditModalOpen | async) {
+                <app-contact-icon id="{{ 'contact-modal-icon-' + contact.id}}"
+                    class="single-initial-icon {{ contact.iconColor }}" [contact]="contact"></app-contact-icon>
+                }
 
-            <form method="post" (submit)="submitForm($event)">
-                <div class="form-field">
-                    <div class="input-img-container">
-                        <input type="text" name="firstname" id="firstname" placeholder="fullname"
-                            [(ngModel)]="contact.firstname" (keyup)="validateFirstName()">
-                        <img src="assets/Icons/person.png" alt="">
+                <form method="post" (submit)="submitForm($event)">
+                    <div class="form-field">
+                        <div class="input-img-container">
+                            <input type="text" name="firstname" id="firstname" placeholder="fullname"
+                                [(ngModel)]="contact.firstname" (keyup)="validateFirstName()">
+                            <img src="assets/Icons/person.png" alt="">
+                        </div>
+                        <div #errEl class="errmsg"></div>
                     </div>
-                    <div #errEl class="errmsg"></div>
-                </div>
-                <div class="form-field">
-                    <div class="input-img-container">
-                        <input type="text" name="lastname" id="lastname" placeholder="lastname"
-                            [(ngModel)]="contact.lastname" (keyup)="validateLastName()">
-                        <img src="assets/Icons/person.png" alt="">
+                    <div class="form-field">
+                        <div class="input-img-container">
+                            <input type="text" name="lastname" id="lastname" placeholder="lastname"
+                                [(ngModel)]="contact.lastname" (keyup)="validateLastName()">
+                            <img src="assets/Icons/person.png" alt="">
+                        </div>
+                        <div #errEl class="errmsg"></div>
                     </div>
-                    <div #errEl class="errmsg"></div>
-                </div>
-                <div class="form-field">
-                    <div class="input-img-container">
-                        <input type="text" name="email" id="email" placeholder="email" [(ngModel)]="contact.email"
-                            (keyup)="validateEmail()">
-                        <img src="assets/Icons/mail.png" alt="">
+                    <div class="form-field">
+                        <div class="input-img-container">
+                            <input type="text" name="email" id="email" placeholder="email" [(ngModel)]="contact.email"
+                                (keyup)="validateEmail()">
+                            <img src="assets/Icons/mail.png" alt="">
+                        </div>
+                        <div #errEl class="errmsg"></div>
                     </div>
-                    <div #errEl class="errmsg"></div>
-                </div>
-                <div class="form-field">
-                    <div class="input-img-container">
-                        <input type="text" name="tel" id="tel" placeholder="tel" [(ngModel)]="contact.tel" 
-                        (keyup)="validateTel()">
-                        <img src="assets/Icons/call.png" alt="">
+                    <div class="form-field">
+                        <div class="input-img-container">
+                            <input type="text" name="tel" id="tel" placeholder="tel" [(ngModel)]="contact.tel"
+                                (keyup)="validateTel()">
+                            <img src="assets/Icons/call.png" alt="">
+                        </div>
+                        <div #errEl class="errmsg"></div>
                     </div>
-                    <div #errEl class="errmsg"></div>
-                </div>
-                <div class="form-btn-container">
-                    @if(cs.isAddModalOpen | async) {
-                        <input id="add-contact-cancel-btn" class="btn-default" type="button" (click)="closeModal()" value="Cancel X">
-                    } @else if(cs.isEditModalOpen | async) {
+                    <div class="form-btn-container">
+                        @if(cs.isAddModalOpen | async) {
+                        <input id="add-contact-cancel-btn" class="btn-default" type="button" (click)="closeModal()"
+                            value="Cancel X">
+                        } @else if(cs.isEditModalOpen | async) {
                         <input class="btn-default" type="button" (click)="cs.deleteContactInDB(contact)" value="Delete">
-                    }
-                    <input class="btn-set" type="submit" value="{{ cs.modalSaveBtnTxt | async }}">
-                </div>
-            </form>
-        </div>
-    </main>
-</dialog>
+                        }
+                        <input class="btn-set" type="submit" value="{{ cs.modalSaveBtnTxt | async }}">
+                    </div>
+                </form>
+            </div>
+        </main>
+    </dialog>
+    
+</div>
 }

@@ -1,6 +1,15 @@
 @use '../../../../public/styles/all_styles' as all;
 @forward '../../../../public/styles/component-styles';
 
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .add-contact-modal-container {
     @include all.size($w: 90dvw, $maxW: 90rem, $h: 50rem);
     @include all.fl($jc: center, $alit: center);
