@@ -2,42 +2,90 @@ import { inject, Injectable} from '@angular/core';
 import { Contact } from '../classes/contact';
 import { Task } from '../classes/task';
 import { SubTask } from '../classes/subTask';
-import { collection, CollectionReference, Firestore, addDoc, updateDoc, DocumentReference, doc, deleteDoc, collectionData } from '@angular/fire/firestore';
+import { collection, CollectionReference, Firestore, Unsubscribe, where, Query, query, onSnapshot, addDoc, updateDoc, DocumentReference, doc, deleteDoc } from '@angular/fire/firestore';
 import { DBObject } from '../interfaces/db-object';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { ToastMsgService } from './toast-msg.service';
-import { SubtaskEditState } from '../enums/subtask-edit-state';
-import { ContactObject } from '../interfaces/contact-object';
-import { SubtaskObject } from '../interfaces/subtask-object';
-import { TaskObject } from '../interfaces/task-object';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FirebaseDBService {
+
   // #region properties
 
-  private firestore: Firestore = inject(Firestore);
-  private tms: ToastMsgService = inject(ToastMsgService);
+  firestore: Firestore = inject(Firestore);
 
-  private currentContactBS: BehaviorSubject<Contact> = new BehaviorSubject<Contact>(new Contact());
-  currentContact$: Observable<Contact> = this.currentContactBS.asObservable();
+  contacts: Array<Contact> = [];
+  contactGroups: Array<string> = [];
+  tasks: Array<Task> = [];
+  subTasks: Array<SubTask> = [];
 
-  contacts$(): Observable<ContactObject[]> {
-    return collectionData(collection(this.firestore, 'contacts'), { idField: 'id' }) as Observable<ContactObject[]>;
-  }
-
-  subtasks$(): Observable<SubtaskObject[]> {
-    return collectionData(collection(this.firestore, 'subtasks'), { idField: 'id' }) as Observable<SubtaskObject[]>;
-  }
-
-  tasks$(): Observable<TaskObject[]> {
-    return collectionData(collection(this.firestore, 'tasks'), { idField: 'id' }) as Observable<TaskObject[]>;
-  }
+  unsubContacts: Unsubscribe;
+  unsubTasks: Unsubscribe;
+  unsubSubTasks: Unsubscribe;
 
   // #endregion properties
 
+  constructor() {
+      this.unsubContacts = this.getContactsSnapshot();
+      this.unsubTasks = this.getTasksSnapshot();
+      this.unsubSubTasks = this.getSubTasksSnapshot();
+
+  }
+
   // #region methods
+
+  // #region snapshots
+
+  /**
+   * Opens a two way data stream between code and firebase collection 'contacts'.
+   * 
+   * @returns an @type Unsubscribe.
+   */
+  getContactsSnapshot(): Unsubscribe {
+    const q: Query = query(this.getCollectionRef('contacts'), where('id', '!=', 'null'));
+
+    return onSnapshot(q, (list) => {
+      this.contacts = [];
+      list.forEach((docRef) => {
+        this.contacts.push(this.mapResponseToContact({ ...docRef.data(), id: docRef.id}));
+      });
+      this.setContactGroups();
+    });
+  }
+
+  /**
+   * Opens a two way data stream between code and firebase collection 'tasks'.
+   * 
+   * @returns an @type Unsubscribe.
+   */
+  getTasksSnapshot(): Unsubscribe {
+    const q: Query = query(this.getCollectionRef('tasks'), where('id', '!=', 'null'));
+
+    return onSnapshot(q, (list) => {
+      this.tasks = [];
+      list.forEach((docRef) => {
+        this.tasks.push(this.mapResponseToTask({ ...docRef.data(), id: docRef.id}));
+      });
+    });
+  }
+
+  /**
+   * Opens a two way data stream between code and firebase collection 'subtasks'.
+   * 
+   * @returns an @type Unsubscribe.
+   */
+  getSubTasksSnapshot(): Unsubscribe {
+    const q: Query = query(this.getCollectionRef('subtasks'), where('id', '!=', 'null'));
+
+    return onSnapshot(q, (list) => {
+      this.subTasks = [];
+      list.forEach((docRef) => {
+        this.subTasks.push(this.mapResponseToSubTask({ ...docRef.data(), id: docRef.id}));
+      });
+    });
+  }
+
+  // #endregion snapshots
 
   // #region helpers
 
@@ -46,7 +94,7 @@ export class FirebaseDBService {
    * 
    * @returns - a single reference of a collection.
    */
-  getCollectionRef(collectionName: string): CollectionReference {
+  private getCollectionRef(collectionName: string): CollectionReference {
     let collectionRef!: CollectionReference;
     try {
       collectionRef = collection(this.firestore, collectionName);
@@ -63,7 +111,7 @@ export class FirebaseDBService {
    * 
    * @returns - a single reference of a document by id.
    */
-  getDocRef(collectionName: string, docId: string): DocumentReference  {
+  private getDocRef(collectionName: string, docId: string): DocumentReference  {
     const collectionRef: CollectionReference = this.getCollectionRef(collectionName);
     const docRef: DocumentReference = doc(collectionRef, `/${docId}`);
     return docRef;
@@ -74,7 +122,7 @@ export class FirebaseDBService {
    * @param obj data object of a document as JSON-Format.
    * @returns a single contact instance.
    */
-  mapResponseToContact(obj: any): Contact {
+  private mapResponseToContact(obj: any): Contact {
     return new Contact(obj);
   }
 
@@ -83,7 +131,7 @@ export class FirebaseDBService {
    * @param obj data object of a document as JSON-Format.
    * @returns a single task instance.
    */
-  mapResponseToTask(obj: any): Task {
+  private mapResponseToTask(obj: any): Task {
     return new Task(obj);
   }
 
@@ -92,10 +140,22 @@ export class FirebaseDBService {
    * @param obj data object of a document as JSON-Format.
    * @returns a single subtask instance.
    */
-  mapResponseToSubTask(obj: any): SubTask {
+  private mapResponseToSubTask(obj: any): SubTask {
     return new SubTask(obj);
   }
 
+  /**
+   * Assign all different groups to Array.
+   * This happens in contact snapshot.
+   */
+  private setContactGroups() {
+    this.contactGroups = [];
+    this.contacts.forEach((contact) => {
+      if(!this.contactGroups.includes(contact.group)) {
+        this.contactGroups.push(contact.group);
+      }
+    });
+  }
   // #endregion helpers
 
   // #region CRUD
@@ -111,34 +171,22 @@ export class FirebaseDBService {
   async addToDB(collectionName: string, object: DBObject): Promise<void> {
     if(object instanceof Contact) {
       object.group = object.firstname[0].toUpperCase(); 
+      //TODO Testen, ob es entfernt werden kann
       if(object.firstname === '' || object.lastname === '' || object.email === '' || object.tel === '') {
         return;
       }
     }
-    
+
     try {
       const collectionRef = this.getCollectionRef(collectionName);
       const dbObjRef = await addDoc(collectionRef, object.toJSON());
-      if(dbObjRef !== undefined && dbObjRef.id !== ''){
+
+      if(dbObjRef!== undefined && dbObjRef.id !== ''){
         await updateDoc(dbObjRef, {id: dbObjRef.id});
       }
     } catch(e) {
-      // console.log(e);
+      console.log(e);
     }
-  }
-
-  /**
-   * Adds a task to database and update after add to save id
-   * and adds subtasks to database.
-   * 
-   * @param collectionName name of collection in database.
-   * @param task task to add to database.
-   */
-  async taskAddToDB(collectionName: string, task: Task) {
-    const collectionRef = this.getCollectionRef(collectionName);
-    const dbObjRef = await addDoc(collectionRef, task.toJSON());
-    task.id = dbObjRef.id;
-    await this.taskUpdateInDB(collectionName, task);
   }
 
   /**
@@ -150,87 +198,20 @@ export class FirebaseDBService {
     if( object instanceof Contact ) {
       object.group = object.firstname[0];
     }
+
     const docRef  = this.getDocRef(collectionName, object.id);
     await updateDoc(docRef, object.toJSON());
-  }
-
-  /**
-   * Updates a task with his subtasks in database.
-   * 
-   * @param collectionName name of collection in database.
-   * @param doc task to update in database.
-   */
-  async taskUpdateInDB(collectionName: string, task: Task): Promise<void> {
-    if(task.hasSubtasks) {
-      await this.handleSubtasksInDB(task.subtasks, task.id);
-    }
-    await this.updateInDB(collectionName, task);
   }
 
   /**
    * Deletes a document from firestore collection.
    * @param docId The id to remove.
    */
-  async deleteInDB(collectionName: string, doc: DBObject) {
-    const docRef = this.getDocRef(collectionName, doc.id);
+  async deleteInDB(collectionName: string, docId: string) {
+    const docRef = this.getDocRef(collectionName, docId);
     await deleteDoc(docRef);
   }
 
-  /**
-   * Deletes a single task from database. 
-   * Deletes also existing subtasks.
-   * 
-   * @param collectionName name of collection in database.
-   * @param doc task to delete in database.
-   */
-
-  async deleteTaskInDB(collectionName: string, doc: Task) {
-    if(doc.hasSubtasks) {
-      // hier verwende ich jetzt Promise.all und map, um auf alle asynchronen Löschvorgänge zu warten.
-      const subtaskDeletions = doc.subtasks.map(subTask => 
-          this.deleteInDB('subtasks', subTask)
-      );
-      await Promise.all(subtaskDeletions); // hier warte ich bis alle Subtasks gelöscht sind
-    }
-    
-    await this.deleteInDB(collectionName, doc);
-    this.tms.add('Deleting Task successfully', 3000, 'success');
-  }
   // #endregion CRUD
 
-  /**
-   * Sets the current selected Contact.
-   * 
-   * @param contact the contact which is selected.
-   */
-  setCurrentContact(contact: Contact) {
-    this.currentContactBS.next(contact);
-  }
-
-  /**
-   * Handles subtasks of task in DB 
-   * Adds new, updates subtasks with changes and delete removed subtasks.
-   * 
-   * @param subtasks subtasks to handle 
-   * @param taskId task id of subtasks
-   */
-  async handleSubtasksInDB(subtasks: Array<SubTask>, taskId: string) {
-    subtasks.forEach(async (subTask) => {
-      const colName: string = 'subtasks';
-      switch(subTask.editState) {
-        case SubtaskEditState.NEW:
-          subTask.taskId = taskId;
-          await this.addToDB(colName, subTask);
-          break;
-        case SubtaskEditState.CHANGED:
-          await this.updateInDB(colName, subTask);
-          break;
-        case SubtaskEditState.DELETED:
-          await this.deleteInDB(colName, subTask);
-          break;
-        default:
-          break;
-      }
-    });
-  }
 }

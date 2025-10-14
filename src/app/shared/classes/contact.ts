@@ -1,6 +1,6 @@
-import { DatabaseObject } from "../interfaces/database-object";
+import { DBObject } from "../interfaces/db-object";
 
-export class Contact implements DatabaseObject {
+export class Contact implements DBObject {
 
     // #region Attributes
     id: string;
@@ -58,7 +58,7 @@ export class Contact implements DatabaseObject {
      * Gets a JSON-String from Contact.
      * @returns - Contact as JSON.
     */
-    toJSObject() {
+    toJSON() {
         return {
             id: this.id || "",
             firstname: this.firstname || "",

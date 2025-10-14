@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { Contact } from '../classes/contact';
 import { addDoc, collection, CollectionReference, deleteDoc, doc, DocumentReference, Firestore, updateDoc } from '@angular/fire/firestore';
-import { DatabaseObject } from '../interfaces/database-object';
+import { DBObject } from '../interfaces/db-object';
 import { Observable } from 'rxjs';
 
 type AllowedTypes = Contact;
@@ -9,7 +9,7 @@ type AllowedTypes = Contact;
 @Injectable({
   providedIn: 'root'
 })
-export abstract class FireService<T extends AllowedTypes & DatabaseObject> {
+export abstract class FireService<T extends AllowedTypes & DBObject> {
 
   protected fs:Firestore = inject(Firestore);
 
@@ -45,7 +45,7 @@ export abstract class FireService<T extends AllowedTypes & DatabaseObject> {
   async add(data: T) {
     const path:string = data instanceof Contact ? 'contacts' : '';
     if (path.length > 0) {
-      const newDocRef = await addDoc(this.getCollectionRef(path), data.toJSObject());
+      const newDocRef = await addDoc(this.getCollectionRef(path), data.toJSON());
       if (newDocRef.id.length > 0) {
         await updateDoc(newDocRef, {id: newDocRef.id});
       }
@@ -66,7 +66,7 @@ export abstract class FireService<T extends AllowedTypes & DatabaseObject> {
   async update(data: T) {
     const path: string = data instanceof Contact ? 'contacts' : '';
     if (path.length > 0) {
-      await updateDoc(this.getSingleRef(path, data.id), data.toJSObject());
+      await updateDoc(this.getSingleRef(path, data.id), data.toJSON());
     }
   }
 

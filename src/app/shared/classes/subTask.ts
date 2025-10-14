@@ -1,4 +1,6 @@
-export class Subtask {
+import { DBObject } from "../interfaces/db-object";
+
+export class SubTask implements DBObject{
 	id: string;
 	taskId: string;
 	name: string;
@@ -16,7 +18,7 @@ export class Subtask {
 		this.finished = finished;
 	}
 
-	toJson() {
+	toJSON() {
 		return {
 			id: this.id || "",
 			taskId: this.taskId || "",

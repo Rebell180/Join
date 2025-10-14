@@ -1,4 +1,6 @@
-export class Task {
+import { DBObject } from "../interfaces/db-object";
+
+export class Task implements DBObject{
 
 	// #region Attributes
 	id: string;
@@ -42,7 +44,7 @@ export class Task {
 	 * - ?? mullish operator ensures that `false` for `subtasks`
 	 * - is preserved and not overwritten by the default value.
 	 */
-	toJson(): object {
+	toJSON(): object {
 		return {
 			id: this.id || "",
 			title: this.title || "",
