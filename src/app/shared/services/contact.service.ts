@@ -17,7 +17,11 @@ export class ContactService extends FireService<Contact> implements OnDestroy {
 
   private fcs: FireContactService = inject(FireContactService);
   private dss: DisplaySizeService = inject(DisplaySizeService);
+
+  // Contact List
   private contacts$!: Observable<Contact[]>;
+  private currentContactSubject: BehaviorSubject<Contact | null> = new BehaviorSubject<Contact | null>(null);
+  private currentContact: Observable<Contact | null> = this.currentContactSubject.asObservable();
   // add or edit contact modal properties 
 
   private isEditModalOpenBS: BehaviorSubject<boolean> = new BehaviorSubject(false);
@@ -37,10 +41,6 @@ export class ContactService extends FireService<Contact> implements OnDestroy {
   curSize$: Subscription;
 
   // fireContactService integration properties
-
-  // contactsBS: BehaviorSubject<Array<Contact>> = new BehaviorSubject(new Array<Contact>());
-  // contacts: Observable<Array<Contact>> = this.contactsBS.asObservable();
-  // contacts$ : Subscription = this.fcs.contacts$.subscribe((contactStream: Array<Contact>) => {
 
   //   this.contactsBS.next(contactStream.sort());
   // });
@@ -68,7 +68,7 @@ export class ContactService extends FireService<Contact> implements OnDestroy {
     this.curSize$ = this.subscribeWindowSize();
   }
 
-    /** Unsubribes all subcriptionss. */
+  /** Unsubribes all subcriptionss. */
   ngOnDestroy(): void {
     // this.contacts$.unsubscribe();
     // this.contactGroups$.unsubscribe();
@@ -78,8 +78,8 @@ export class ContactService extends FireService<Contact> implements OnDestroy {
   // #region methods
   /** Loads all contacts. */
   private loadContacts(): void {
-    this.contacts$ = collectionData(this.getCollectionRef('contacts'),{idField: 'id'}).pipe(
-      map(docs => docs.map(data => new Contact({id: data.id, firstname: data['firstname'], lastname: data['lastname'], group: data['group'], email: data['email'], tel: data['tel'], iconColor: data['iconColor']})))
+    this.contacts$ = collectionData(this.getCollectionRef('contacts'), { idField: 'id' }).pipe(
+      map(docs => docs.map(data => new Contact({ id: data.id, firstname: data['firstname'], lastname: data['lastname'], group: data['group'], email: data['email'], tel: data['tel'], iconColor: data['iconColor'] })))
     );
   }
 
@@ -133,16 +133,20 @@ export class ContactService extends FireService<Contact> implements OnDestroy {
    * Selects a contact.
    * @param contact - Contact to select, null for unselect.
    */
-  selectContact(contact: Contact | null = null) {
-    this.currentContactBS.next(contact);
-  }
-
-  /**
-   * Enabels a contact.
-   * @param id - Id of contact.
-   */
-  async setActiveContact(id: string) {
-
+  async selectContact(contact: Contact | null = null) {
+    await this.contacts$.forEach((contactStream) => {
+      contactStream.forEach((contactO) => {
+        contactO.selectedInContactList = false;
+        if (contactO.equals(contact)) {
+          contactO.selectedInContactList = true;
+          this.contactToEditBS.next(contactO);
+          this.currentContactBS.next(contactO)
+          this.classToDisplayBS.next('');
+          this.currentContactSubject.next(contact);
+          this.contacts$.subscribe(contacts => console.log(contacts));
+        }
+      });
+    });
   }
 
   /**
@@ -150,13 +154,13 @@ export class ContactService extends FireService<Contact> implements OnDestroy {
    * @param id - Id of contact.
    */
   unselectCurrentContact(id: string) {
-    // this.contacts.forEach((contactStream) => {
-    // contactStream.forEach((contact) => {
-    // if(contact.id == id) {
-    //   contact.selected = false;
-    // }
-    // })
-    // })
+    this.contacts$.forEach((contactStream) => {
+    contactStream.forEach((contact) => {
+    if(contact.id == id) {
+      contact.selectedInContactList = false;
+    }
+    });
+    });
   }
   // #endregion
 
@@ -184,7 +188,7 @@ export class ContactService extends FireService<Contact> implements OnDestroy {
         const groups = contacts.map(contact => contact.group);
         const nonEmpty = groups.filter(g => g.length > 0);
         const letterList = Array.from(new Set(nonEmpty));
-        return letterList.map (letter => new ContactGroup(this, letter))
+        return letterList.map(letter => new ContactGroup(this, letter))
       })
     ))
   }

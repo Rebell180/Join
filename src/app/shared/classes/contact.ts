@@ -9,9 +9,10 @@ export class Contact implements DatabaseObject {
     group: string;
     email: string;
     tel: string;
-    selected: boolean = false;
     iconColor: string | null;
     active: boolean = false;
+    selectedInContactList: boolean = false; //One Contact Only
+    selectedInTask: boolean = false //More then one Contact can be selected.
     // #endregion
 
     /**
@@ -31,7 +32,8 @@ export class Contact implements DatabaseObject {
         group: string,
         email: string,
         tel: string,
-        iconColor: string | null
+        iconColor: string | null,
+        
     }) {
         this.id = id;
         this.firstname = firstname,
