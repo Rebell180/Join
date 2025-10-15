@@ -139,7 +139,7 @@
                         @include all.fl($alit: center, $gap: 0.7rem);
 
                         .delete-btn {
-                            @include all.size($w: 24px, $h: 24px);
+                            @include all.size($w: 20px, $h: 20px);
                         }
 
                         img {
