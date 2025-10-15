@@ -5,46 +5,93 @@
     @include all.fl($flexdir: column, $alit: center);
     @include all.size();
     padding-top: 8rem;
+    @include all.mobile {
+        @include all.marpad ($pad: 80px 16px 0 16px);
+    }
 }
 
 header {
     @include all.fl($jc: space-between, $alit: center);
     @include all.size ($w: 80%, $h: 7.3rem);
+
     h1 {
         width: 50%;
     }
-    .input-area {
-        @include all.fl($alit:center, $gap: 3.2rem);
-        @include all.size($w: 50%,$h: 65%);
-        form {
-            flex: 1;
-            height: 100%;
-            input[type=text] {
-                display: flex;
-                @include all.size();
-                @include all.marpad($pad: 8px 16px);
-                outline: none;
-                border-radius: 10px;
-                border: 1px solid #a8a8a8;
-            }
-            hr {
-                height: 60%;
-                width: 2px;
-                position: absolute;
-                top: 20%;
-                right: 48px;
-            }
-            input[type=submit] {
-                height: 100%;
-                aspect-ratio: 1 / 1;
-                background: url(../../../../public//assets//Icons//taskBoard/searchDefault.png) no-repeat center / cover;
-                position: absolute;
-                top: 0;
-                right: 0;
-            }
+
+    button {
+        height: 47px;
+        @include all.marpad($pad: 8px 16px);
+        position: absolute;
+        right: 0;
+
+    }
+
+    @include all.mobile {
+        @include all.fl($flexdir: column, $jc:space-between);
+        @include all.size($h: 14.6rem);
+        .input-area {
+            width: 100%;
+            padding: 0;
+        }
+        button {
+            top: 16px;
         }
     }
-    button {
-        @include all.marpad($pad: 8px 16px)
+    @include all.smart {
+        button {
+            top: 0;
+        }
+    }
+}
+
+.input-area {
+    @include all.fl($alit: center, $gap: 3.2rem);
+    @include all.size($w: 50%, $h: 47px);
+    padding-right: 16rem;
+
+    form {
+        @include all.size();
+
+        input[type=text] {
+            display: flex;
+            @include all.size();
+            @include all.marpad($pad: 8px 16px);
+            outline: none;
+            border-radius: 10px;
+            border: 1px solid #a8a8a8;
+            &::placeholder {
+                color: #d1d1d1;
+            }
+            &:focus {
+                border-color: #29abe2;
+            }
+        }
+
+        hr {
+            height: 60%;
+            width: 2px;
+            position: absolute;
+            top: 20%;
+            right: 48px;
+        }
+
+        input[type=submit] {
+            height: 100%;
+            aspect-ratio: 1 / 1;
+            background: url(../../../../public//assets//Icons//taskBoard/searchDefault.png) no-repeat center / cover;
+            position: absolute;
+            top: 0;
+            right: 0;
+        }
+    }
+}
+
+@media (max-width: 975px) {
+    #add-task-label {
+        display: none;
+    }
+
+    .input-area {
+        padding-right: 7rem;
     }
 }
