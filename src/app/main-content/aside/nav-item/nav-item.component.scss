@@ -1,4 +1,4 @@
-@use './../../../../public/styles/all_styles.scss' as all;
+@use '../../../../../public/styles/all_styles' as all;
 
 :host {
 	@include all.size($h: 5rem);
@@ -21,7 +21,7 @@
 	}
 
 	&:hover {
-		background: #2f3f57;
+		background: #2a3d59;
 	}
 
 	img {
@@ -33,4 +33,8 @@
 		@include all.size($w: 2.4rem, $h: 2.4rem);
 	}
 	}
+}
+
+:host(.active) {
+	background: #091931;
 }
