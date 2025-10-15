@@ -6,6 +6,18 @@
     </aside>
     <header app-header></header>
     <main>
-        <section contacts></section>
+        @switch (currentSection) {
+            @case (SectionType.TASK) {
+                <section add-tast></section>
+            }
+
+            @case (SectionType.BOARD) {
+                <section boerd></section>
+            }
+
+            @case (SectionType.CONTACT) {
+                <section contacts></section>
+            }
+        }
     </main>
 </div>
