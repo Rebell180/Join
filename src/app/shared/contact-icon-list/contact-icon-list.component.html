@@ -1,5 +1,7 @@
 <div class="icon-list-item">
-@for (contact of contacts(); track contact.id) {
-	<app-contact-icon [contact]="contact"></app-contact-icon>
+@for (contact of contact(); track contact.id || $index) {
+	<div class="contact-initials">
+		<app-contact-icon id="{{ 'contact_icon_' + contact.id}}" class="{{ contact.iconColor }}" [contact]="contact"></app-contact-icon>
+    </div>
 }
 </div>
