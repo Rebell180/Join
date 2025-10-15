@@ -15,8 +15,4 @@ import { SectionType } from '../shared/enums/section-type';
   styleUrl: './main-content.component.scss'
 })
 export class MainContentComponent {
-  protected readonly SectionType = SectionType
-  protected currentSection: SectionType = SectionType.BOARD;
-
-  changeSection(section: SectionType) {this.currentSection = section}
 }

@@ -1,50 +1,65 @@
 import { DBObject } from "../interfaces/db-object";
 
+/**
+ * Contains a single contact object.
+ */
 export class Contact implements DBObject {
 
-    // #region Attributes
-    id: string;
-    firstname: string;
-    lastname: string;
-    group: string;
-    email: string;
-    tel: string;
-    iconColor: string | null;
-    active: boolean = false;
-    selectedInContactList: boolean = false; //One Contact Only
-    selectedInTask: boolean = false //More then one Contact can be selected.
-    // #endregion
+    // #region properties
+
+    /** id of contact in database, empty, if not exist in database */
+    id: string = '';
+
+    /** firstname of contact */
+    firstname: string = '';
+
+    /** lastname of contact */
+    lastname: string = '';
+    
+    /** roup contains letter for register */
+    group: string = '';
+    
+    /** email of contact */
+    email: string = '';
+    
+    /** phonenumber of contact */
+    tel: string = '';
+    
+    /** background-color of contact-icon */
+    iconColor: string = this.getRandomIconColor();
+    
+    // TODO Marcel => gehört per Logik hier nicht rein. Wissensabhängigkeiten.
+    // vielleicht mit methode selbst lösen, dass klasse über dom hinzugefügt wird.
+    /** indicator for selection in contact-list */
+    selected: boolean = false;
+    
+    // #endregion properties
 
     /**
-     * Creates a contact.
-     * @param id - Id of contact in database, empty, if not exiist in database.
-     * @param firstname - First name of contact.
-     * @param lastname - Last name of contact.
-     * @param group - Group of letter in register.
-     * @param email - E-Mail of contact.
-     * @param tel - Phone number of contact.
-     * @param iconColor - Background-Color of User-Icon, null for new contacts, who doesn't exists in database. 
+     * @param data is optional and from @type object {
+     *      id: string          => id of contact in database, empty, if not exist in database
+     *      firstname: string   => firstname of contact
+     *      lastname: string    => lastname of contact
+     *      group: string       => group contains letter for register
+     *      email: string       => email of contact
+     *      tel: string         => phonenumber of contact
+     *      iconColor: string   => background-color of contact-icon 
+     * }
      */
-    constructor({ id = '', firstname, lastname, group, email, tel, iconColor = null }: {
-        id: string,
-        firstname: string,
-        lastname: string,
-        group: string,
-        email: string,
-        tel: string,
-        iconColor: string | null,
-        
-    }) {
-        this.id = id;
-        this.firstname = firstname,
-        this.lastname = lastname,
-        this.group = group,
-        this.email = email,
-        this.tel = tel,
-        this.iconColor = iconColor ? iconColor : Contact.getRandomIconColor();
+    constructor(data?: { id: string, firstname: string, lastname: string, group: string, email: string, tel: string, iconColor: string }) {   
+        if(data) {
+            this.id = data.id;
+            this.firstname = data.firstname,
+            this.lastname = data.lastname,
+            this.group = data.group,
+            this.email = data.email,
+            this.tel = data.tel,
+            this.iconColor = data.iconColor;
+        }
     }
 
     // #region Methods
+    
     /**
      * Compares this object, with another object
      * @param other - Instance for compare.
@@ -54,28 +69,32 @@ export class Contact implements DBObject {
         if (!(other instanceof Contact)) return false;
         return this.id == other.id;
     }
+    
     /**
-     * Gets a JSON-String from Contact.
-     * @returns - Contact as JSON.
+     * Returns a JSON-string from contact.
+     * 
+     * @returns - the contact data as JSON.
     */
     toJSON() {
         return {
-            id: this.id || "",
-            firstname: this.firstname || "",
-            lastname: this.lastname || "",
-            email: this.email || "",
-            tel: this.tel || "",
-            group: this.group || "",
-            iconColor: this.iconColor || Contact.getRandomIconColor()
-        }
+            id: this.id,
+            firstname: this.firstname,
+            lastname: this.lastname,
+            email: this.email,
+            tel: this.tel,
+            group: this.group,
+            iconColor: this.iconColor
+        };
     }
+
     /**
      * Gets a random color for new Contacts
       * @returns - a random color.
       */
-    static getRandomIconColor(): string {
+    private getRandomIconColor(): string {
         const colors: string[] = ['orange', 'purple', 'blue', 'pink', 'yellow', 'green'];
         return colors[Math.floor(colors.length * Math.random())];
     }
-    // #endregion
+    
+    // #endregion methods
 }

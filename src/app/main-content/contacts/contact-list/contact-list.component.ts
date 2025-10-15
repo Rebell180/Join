@@ -20,6 +20,7 @@ import { ContactGroup } from '../../../shared/classes/contactGroup';
 export class ContactListComponent {
   cs: ContactService = inject(ContactService);
   groups$: Observable<ContactGroup[]> = this.cs.getAllGroups();
+  
   /**
    * Gets the full name of contact.
    * @returns - Full name of contact.
@@ -40,4 +41,5 @@ export class ContactListComponent {
   select(contact: Contact) {
     this.cs.selectContact(contact)
   }
+
 }

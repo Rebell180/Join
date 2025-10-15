@@ -16,6 +16,8 @@ export class FirebaseDBService {
 
   contacts: Array<Contact> = [];
   contactGroups: Array<string> = [];
+  currentContact: Contact = new Contact();
+  
   tasks: Array<Task> = [];
   subTasks: Array<SubTask> = [];
 
@@ -29,7 +31,6 @@ export class FirebaseDBService {
       this.unsubContacts = this.getContactsSnapshot();
       this.unsubTasks = this.getTasksSnapshot();
       this.unsubSubTasks = this.getSubTasksSnapshot();
-
   }
 
   // #region methods
@@ -144,6 +145,7 @@ export class FirebaseDBService {
     return new SubTask(obj);
   }
 
+  // TODO Hat hier eigentlich keinen Platz, wird nur in Liste benötigt.
   /**
    * Assign all different groups to Array.
    * This happens in contact snapshot.

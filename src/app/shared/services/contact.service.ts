@@ -100,7 +100,7 @@ export class ContactService extends FireService<Contact> implements OnDestroy {
    */
   openModal(kindOfModal: string) {
     if (kindOfModal == 'add') {
-      this.contactToEditBS.next(new Contact({ id: '', firstname: '', lastname: '', group: '', email: '', tel: '', iconColor: '' }));
+      this.contactToEditBS.next(new Contact());
       this.isEditModalOpenBS.next(false);
       this.isAddModalOpenBS.next(true);
       this.modalHeadlineTxtBS.next('Add');
@@ -132,9 +132,9 @@ export class ContactService extends FireService<Contact> implements OnDestroy {
   async selectContact(contact: Contact | null = null) {
     await this.contacts$.forEach((contactStream) => {
       contactStream.forEach((contactO) => {
-        contactO.selectedInContactList = false;
+        contactO.selected = false;
         if (contactO.equals(contact)) {
-          contactO.selectedInContactList = true;
+          contactO.selected = true;
           this.contactToEditBS.next(contactO);
           this.currentContactBS.next(contactO)
           this.classToDisplayBS.next('');
@@ -153,7 +153,7 @@ export class ContactService extends FireService<Contact> implements OnDestroy {
     this.contacts$.forEach((contactStream) => {
     contactStream.forEach((contact) => {
     if(contact.id == id) {
-      contact.selectedInContactList = false;
+      contact.selected = false;
     }
     });
     });
