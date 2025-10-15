@@ -1,0 +1,5 @@
+<div class="icon-list-item">
+@for (contact of contacts(); track contact.id) {
+	<app-contact-icon [contact]="contact"></app-contact-icon>
+}
+</div>

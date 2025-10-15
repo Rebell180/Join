@@ -3,7 +3,7 @@
 :host {
 	@include all.size($h: 5rem);
 	@include all.fl($alit: center, $gap: 1rem);
-	@include all.marpad($mar: 1rem 0, $pad: 0 0 0 4rem);
+	@include all.marpad($mar: 1rem 0, $pad: 1rem 0 0 4rem);
 	cursor: pointer;
 	color: white;
 	background: transparent;
