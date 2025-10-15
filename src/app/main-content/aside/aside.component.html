@@ -1,8 +1,8 @@
 <img src="assets/Icons/JoinLogoWhite.png" alt="das Logo von Join">
 
 <div class="nav-btn">
-    @for (navItem of item; track navItem.sectionId) {
-        <button type="button" nav-item [item]="navItem"></button>
+    @for (navItem of items; track navItem.sectionId; let i = $index) {
+        <button type="button" nav-item [item]="navItem" (click)="selectSection(i)"></button>
     }
 
 </div>
