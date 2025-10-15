@@ -1,7 +1,7 @@
 // TODO: Font Roboto muss hier noch eingebunden und herunter geladen werden.
 @use './../public/styles/all_styles.scss' as all;
 
-*{
+* {
     position: relative;
     margin: 0;
     padding: 0;
@@ -16,12 +16,13 @@ html {
 }
 
 body {
-	background: rgb(211, 211, 211, 0.4);
+    background: rgb(211, 211, 211, 0.4);
     overflow-x: hidden;
     max-width: 1920px;
 }
 
-button, input {
+button,
+input {
     border: unset; // Vorgabe in Checkliste
 }
 
@@ -40,7 +41,7 @@ button {
     @include all.tablet {
         grid-template-columns: 1fr;
         grid-template-rows: 10dvh 80dvh 10dvh;
-        grid-template-areas: 
+        grid-template-areas:
             "header"
             "main"
             "aside";
@@ -78,7 +79,13 @@ input {
 
 h1 {
     font-family: 'Interbold', sans-serif;
+    font-size: 6.4rem;
+
+    @media(max-width: 425px) {
+        font-size: 4.7rem;
+    }
 }
+
 
 h2, a, p, h3, span {
     font-family: 'InterLight', sans-serif;
@@ -96,7 +103,8 @@ h2, a, p, h3, span {
 
 .overlay {
     justify-content: center;
-    .content { 
+
+    .content {
         display: flex;
         justify-content: center;
     }

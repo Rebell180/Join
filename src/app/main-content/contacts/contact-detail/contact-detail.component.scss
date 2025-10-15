@@ -18,17 +18,7 @@
 
             @media (max-width: 1200px) {
                 @include all.fl($flexdir: column, $gap: 1rem);
-            }
-
-            h1 {
-                font-size: 6.4rem;
-
-                @media(max-width: 425px) {
-                    font-size: 4.7rem;
-                }
-            }
-
-            
+            }            
 
             h2 {
                 @include all.size($h: auto);
