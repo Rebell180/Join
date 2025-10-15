@@ -64,6 +64,12 @@ body {
     }
 }
 
+@include all.mobile {
+    .smart_none {
+        display: none;
+    }
+}
+
 input {
     border: unset;
 }
