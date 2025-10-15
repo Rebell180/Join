@@ -23,30 +23,22 @@ export class AsideComponent {
       {
       sectionId: 'Summary',
       title: 'Summary',
-      imagePath: 'assets/Icons/Summary.png',
-      section: SectionType.SUMMARY,
-      active: false
+      imagePath: '/assets/Icons/contact/Summary.png'
       },
       {
       sectionId: 'addTask',
       title: 'Add task',
-      imagePath: 'assets/Icons/addTask.png',
-      section: SectionType.TASK,
-      active: false,
+      imagePath: 'assets/Icons/contact/addTask.png'
       },
       {
       sectionId: 'Boards', 
       title: 'Boards',
-      imagePath: 'assets/Icons/Board.png',
-      section: SectionType.BOARD,
-      active: true,
+      imagePath: 'assets/Icons/contact/Board.png'
       },
       {
       sectionId: 'Contacts', 
       title: 'Contacts',
-      imagePath: 'assets/Icons/Contacts.png',
-      section: SectionType.CONTACT,
-      active: false
+      imagePath: 'assets/Icons/contact/Contacts.png'
       }
     ];
     selectedSection: OutputEmitterRef<SectionType> = output<SectionType>();
