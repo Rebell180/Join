@@ -1,4 +1,4 @@
-@use '../../../../../public/styles/all_styles' as all;
+@use './../../../../public/styles/all_styles.scss' as all;
 
 :host {
     @include all.fl($jc: center, $alit: center);

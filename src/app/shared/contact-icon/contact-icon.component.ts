@@ -1,11 +1,11 @@
 import { Component, input, InputSignal } from '@angular/core';
-import { Contact } from './../../../shared/classes/contact';
+import { Contact } from './../classes/contact';
 
 @Component({
   selector: 'app-contact-icon',
   imports: [],
-  templateUrl: './../../../shared/contact-icon/contact-icon.component.html',
-  styleUrl: './../../../shared/contact-icon/contact-icon.component.scss',
+  templateUrl: './contact-icon.component.html',
+  styleUrl: './contact-icon.component.scss'
 })
 export class ContactIconComponent {
   public contact: InputSignal<Contact> = input.required<Contact>();

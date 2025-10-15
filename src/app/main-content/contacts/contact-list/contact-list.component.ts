@@ -2,10 +2,10 @@ import { CommonModule } from '@angular/common';
 import { Component, inject, OnDestroy } from '@angular/core';
 import { Contact } from '../../../shared/classes/contact';
 import { FormsModule } from "@angular/forms";
-import { ContactIconComponent } from "../contact-icon/contact-icon.component";
-import { FirebaseDBService } from '../../../shared/services/firebase-db.service';
-import { Unsubscribe, where, onSnapshot, Query, query } from '@angular/fire/firestore';
-import { ModalService } from '../../../shared/services/modal.service';
+import { ContactService } from '../../../shared/services/contact.service';
+import { ContactIconComponent } from "./../../../shared/contact-icon/contact-icon.component";
+import { Observable } from 'rxjs';
+import { ContactGroup } from '../../../shared/classes/contactGroup';
 
 @Component({
   selector: 'section[contact-list]',

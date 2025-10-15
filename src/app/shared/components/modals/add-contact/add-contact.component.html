@@ -4,6 +4,7 @@
         (click)="$event.stopPropagation()">
         <header class="contact-modal-header">
             <img src="assets/Icons/contact/JoinLogoWhite.png" alt="">
+            <img src="assets/Icons/contact/JoinLogoWhite.png" alt="">
             <div class="add-contact-header">
                 <h1 id="add-contact-headline">{{ headlineTxt() }} Contact</h1>
                 <h2>Tasks are better with a team!</h2>
@@ -19,18 +20,18 @@
                 <button type="button" (click)="closeModal()">x</button>
             </div>
             <div class="line-form">
-                @if(headlineTxt() == 'Add') {
+                @if(cs.isAddModalOpen | async) {
                 <img class="single-icon" src="assets/Icons/contact/contact_icon_grey.png" alt="">
-                } @else if(headlineTxt() == 'Edit') {
-                <app-contact-icon id="{{ 'contact-modal-icon-' + contact().id}}"
-                    class="single-initial-icon {{ contact().iconColor }}" [contact]="contact()"></app-contact-icon>
+                } @else if(cs.isEditModalOpen | async) {
+                <app-contact-icon id="{{ 'contact-modal-icon-' + contact.id}}"
+                    class="single-initial-icon {{ contact.iconColor }}" [contact]="contact"></app-contact-icon>
                 }
 
                 <form method="post" (submit)="submitForm($event)">
                     <div class="form-field">
                         <div class="input-img-container">
                             <input type="text" name="firstname" id="firstname" placeholder="fullname"
-                                [(ngModel)]="contact().firstname" (keyup)="validateFirstName()">
+                                [(ngModel)]="contact.firstname" (keyup)="validateFirstName()">
                             <img src="assets/Icons/contact/person.png" alt="">
                         </div>
                         <div #errEl class="errmsg"></div>
@@ -38,7 +39,7 @@
                     <div class="form-field">
                         <div class="input-img-container">
                             <input type="text" name="lastname" id="lastname" placeholder="lastname"
-                                [(ngModel)]="contact().lastname" (keyup)="validateLastName()">
+                                [(ngModel)]="contact.lastname" (keyup)="validateLastName()">
                             <img src="assets/Icons/contact/person.png" alt="">
                         </div>
                         <div #errEl class="errmsg"></div>
@@ -48,6 +49,7 @@
                             <input type="text" name="email" id="email" placeholder="email" [(ngModel)]="contact().email"
                                 (keyup)="validateEmail()">
                             <img src="assets/Icons/contact/mail.png" alt="">
+                            <img src="assets/Icons/contact/mail.png" alt="">
                         </div>
                         <div #errEl class="errmsg"></div>
                     </div>
@@ -55,6 +57,7 @@
                         <div class="input-img-container">
                             <input type="text" name="tel" id="tel" placeholder="tel" [(ngModel)]="contact().tel"
                                 (keyup)="validateTel()">
+                            <img src="assets/Icons/contact/call.png" alt="">
                             <img src="assets/Icons/contact/call.png" alt="">
                         </div>
                         <div #errEl class="errmsg"></div>
