@@ -66,15 +66,11 @@ export class AddtaskComponent implements OnDestroy {
    * Reset all inputs to default.
    */
   clear() {
-    console.log(this.currentTask.priority);
+
   }
 
-  toggleAddContactToAssignTo(contact: Contact) {
-    if(this.currentTask.assignedTo.includes(contact)){
-      // remove
-    } else {
-      this.currentTask.assignedTo.push(contact);
-    }
+  protected setPriority(prio: Priority){
+    this.currentTask.priority = prio;
   }
 
 }
