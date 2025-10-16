@@ -69,8 +69,6 @@ export class AddtaskComponent implements OnDestroy {
 
   }
 
-  protected setPriority(prio: Priority){
-    this.currentTask.priority = prio;
-  }
+  
 
 }
