@@ -8,11 +8,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 20;
 }
 
 .add-contact-modal-container {
-    @include all.size($w: 85dvw, $h: 80dvh);
+    @include all.size($w: 90dvw, $maxW: 90rem, $h: 50rem);
     @include all.fl($jc: center, $alit: center);
     background-color: white;
     border-radius: 16px;
@@ -24,32 +23,27 @@
     }
 
     @include all.tablet {
-        @include all.size($w: 90dvw, $h: 80dvh);
+        @include all.size($w: 90dvw, $maxW:90rem, $h: 80dvh);
         @include all.fl($flexdir: column, $jc: center, $alit: center);
     }
 
     .contact-modal-header {
         @include all.fl($flexdir: column, $jc: center);
-        @include all.size($w: 40%, $h: 80dvh);
+        @include all.size($w: 40%);
         @include all.marpad($pad: 0 2rem);
         background-color: #2a3647;
         border-radius: 16px 0 0 16px;
 
         @include all.tablet {
-            @include all.size($w: 90dvw, $h: 40%);
+            @include all.size($h: 40%);
             border-radius: 16px;
-        }
-
-        @include all.mobile {
-            height: 30%;
-            justify-content: flex-start;
-            padding-top: 1.6rem;
         }
 
         .mobile-close-btn {
             display: none;
 
             button {
+                @include all.size($w: 4.8rem, $h: 4.8rem);
                 color: white;
                 border: none;
                 background: transparent;
@@ -71,6 +65,7 @@
         }
 
         img {
+            @include all.size($w: 4rem, $h: 4rem);
             margin-bottom: 2rem;
 
             @include all.tablet {
@@ -81,7 +76,6 @@
         h1 {
             color: white;
             font-size: clamp(28px, 4vw, 48px);
-            font-family: 'Inter', sans-serif;
             margin-bottom: 0.5rem;
             line-height: 1.2;
 
@@ -98,158 +92,162 @@
         }
 
         hr {
+            @include all.size($w: 6rem, $h: 0.3rem);
             background: rgb(17, 148, 213);
             border: none
         }
 
     }
-}
 
-main {
-    @include all.fl($jc: center, $alit: center);
-    @include all.size($w: 60%, $h: 100%);
-    padding: 0 3.2rem;
+    .contact-modal-main {
+        @include all.size($w: 60%);
+        @include all.fl($flexdir: column, $jc: center, $gap: 2dvw);
+        padding-top: 1rem;
 
-    @include all.tablet {
-        width: 90dvw;
-        height: 60%;
-    }
-
-    @include all.mobile {
-        align-items: flex-start;
-        height: 70%;
-        padding: 7rem 1.6rem 0 1.6rem;
-        ;
-    }
-
-    .icon-area-mobile {
-        display: none;
-        @include all.mobile {
-            display: flex;
-            @include all.size($w: 12rem, $h: 12rem);
-            position: absolute;
-            top: -6rem;
-            left: calc((90dvw / 2) - 6rem);
-        }
-    }
-
-    form {
-        width: 100%;
-    }
-
-    .form-button-container {
-        @include all.fl($jc: flex-end, $gap: 1.6rem);
-        margin: 1.6rem 3.2rem 0 0;
-
-        input {
-            padding: 1rem 1.6rem;
+        @include all.tablet {
+            @include all.size($h: auto);
+            @include all.fl($alit: flex-start);
         }
 
-        @include all.mobile {
-            width: 80dvw;
-            justify-content: space-between;
-            position: absolute;
-            bottom: -6.4rem;
-            input {
-                padding: 0.5rem;
-                font-size: 1.6rem;
+        @include all.tablet {
+            @include all.size($h: 60%);
+        }
+
+        .line-close-btn {
+            @include all.absolute($top: 0, $right: 3rem);
+            @include all.fl($jc: end);
+
+            button {
+                @include all.marpad($mar: 2rem 0 0);
+                font-size: 20px;
+
+                &:hover {
+                    color: red;
+                }
+            }
+
+            @include all.tablet {
+                display: none;
             }
         }
 
-    }
-}
+        .line-form {
+            @include all.size($h: auto);
+            @include all.fl($jc: space-between, $alit: center, $gap: 2rem);
+            @include all.marpad($pad: 0 3rem);
 
-.form-main-container {
-    @include all.fl($gap: 1.6rem);
-    width: 100%;
+            @include all.tablet {
+                @include all.size($h: auto);
+                margin-top: 3rem;
+                @include all.fl($jc: center, $alit: center);
+            }
 
-    @include all.mobile {
-        height: 32dvh;
-        overflow-y: auto;
-        @include all.scrollbar();
-    }
+            .single-icon {
+                @include all.tablet {
+                    display: block; 
+                    @include all.size($w: 12rem, $minW: 12rem, $h: 12rem);
+                    @include all.absolute($top: 3.2rem, $left: 5rem);
+                    transform: translate(-50%);
+                    border-radius: 50%;
+                    background: white;
+                    z-index: 1;
+                }
+            }
 
-    .icon-area {
-        @include all.fl($jc: center, $alit: center);
-        @include all.size($w: 40%, $h: 30dvh);
-
-        @include all.mobile {
-            display: none;
-        }
-
-        img,
-        app-contact-icon {
-            width: 12rem;
-            height: 12rem;
-            font-size: 6rem;
-        }
-    }
-
-    .input-area {
-        @include all.fl($flexdir: column);
-        width: 60%;
-
-        @include all.mobile {
-            width: 100%;
-            margin-top: 0.5rem;
-        }
-
-        .form-field {
-            @include all.fl($flexdir: column, $jc: center);
-            width: 100%;
-
-            input {
-                width: 27dvw;
-                padding: 1rem 4.8rem 1rem 1.6rem;
-                font-size: 1.6rem;
-                border: 1px solid #d1d1d1;
-                border-radius: 1rem;
+            .single-initial-icon {
+                @include all.size($w: 15rem, $h: 12rem);
 
                 @include all.tablet {
-                    width: 100%;
-                }
-
-                @include all.mobile {
-                    width: 78dvw;
+                    @include all.size($w: 10rem, $h: 10rem);
+                    @include all.absolute($top: 0, $left: 50%);
+                    transform: translate(-50%, -95%);
+                    border-radius: 50%;
+                    border: 2px solid white;
                 }
             }
 
-            img {
-                width: 1.6rem;
-                height: 1.6rem;
-                position: absolute;
-                right: 1.6rem;
-                top: 1rem;
-            }
+            form {
+                @include all.fl($flexdir: column, $jc: space-between, $alit: end);
+                @include all.size();
+                @include all.tablet {
+                    margin-top: 2rem;
+                }
 
-            .errmsg {
-                height: 1.6rem;
-                color: #800000;
-                @include all.marpad ($pad: 0 1.6rem, $mar: 0.5rem 0);
-                text-align: center;
+                .form-field {
+                    @include all.size($h: auto);
+                    @include all.fl($flexdir: column, $alit: end);
+                    margin-bottom: 1.5rem;
+
+                    .input-img-container {
+                        @include all.size($w: 100%, $h: 40px);
+                        @include all.fl($jc: space-between, $alit: center);
+                        padding: 0 10px;
+                        border: 1px solid rgba(184, 184, 184);
+                        ;
+                        border-radius: 5px;
+
+                        input {
+                            @include all.size();
+                            outline: none;
+
+                            &::placeholder {
+                                color: rgba(184, 184, 184);
+                            }
+                        }
+
+                        img {
+                            @include all.size($w: 20px, $h: 20px);
+                            margin: 0;
+                            display: flex;
+                        }
+                    }
+
+                    .errmsg {
+                        @include all.size($w: 100%, $h: 1rem);
+                        color: #c00000;
+                        font-size: 1.2rem;
+                        padding: 1px 16px;
+
+                        @include all.tablet {
+                            padding-left: 40px;
+                        }
+                    }
+                }
+
+                .form-btn-container {
+                    @include all.size($h: 4rem);
+                    @include all.fl($jc: start);
+
+                    margin-top: 2rem;
+                    gap: 1rem;
+
+                    input {
+                        height: 4rem;
+                        font-size: 16px;
+                    }
+
+                    @media(max-width: 840px) {
+                        #add-contact-cancel-btn {
+                            display: none;
+                        }
+                    }
+
+                    @include all.tablet {
+                        gap: 0.5rem;
+                        @include all.fl($jc: center, $gap: 2rem);
+
+                        #add-contact-cancel-btn {
+                            display: flex;
+                        }
+                    }
+
+                    @include all.mobile{
+                        #add-contact-cancel-btn {
+                            display: none;
+                        }
+                    }
+                }
             }
         }
-    }
-}
-
-.close {
-    position: absolute;
-    top: 3.2rem;
-    right: 3.2rem;
-    width: 3.2rem;
-    height: 3.2rem;
-    font-size: 3.2rem;
-    background: transparent;
-
-    @include all.tablet {
-        color: white;
-    }
-
-    @include all.mobile {
-        top: 1.6rem;
-        right: 1.6rem;
-        width: 1.6rem;
-        height: 1.6rem;
-        font-size: 1.6rem;
     }
 }

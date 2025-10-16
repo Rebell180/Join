@@ -2,8 +2,9 @@ import { Component, inject,} from '@angular/core';
 import { Contact } from './../../../shared/classes/contact';
 import { ContactIconComponent } from '../contact-icon/contact-icon.component';
 import { CommonModule } from '@angular/common';
-import { Observable } from 'rxjs';
-import { ContactService } from '../../../shared/services/contact.service';
+import { FirebaseDBService } from '../../../shared/services/firebase-db.service';
+import { ModalService } from '../../../shared/services/modal.service';
+import { ToastMsgService } from '../../../shared/services/toast-msg.service';
 
 @Component({
   selector: 'section[contact-detail]',
@@ -13,17 +14,41 @@ import { ContactService } from '../../../shared/services/contact.service';
 })
 export class ContactDetailComponent {
 
-  protected cs: ContactService = inject(ContactService);
-  protected currentContact$: Observable<Contact | null> = this.cs.currentContact$;
+  // #region properties
+
+  protected fireDB: FirebaseDBService = inject(FirebaseDBService);
+  protected modalService: ModalService = inject(ModalService);
+  private tms: ToastMsgService = inject(ToastMsgService);
 
   isMenuVisible: boolean = false;
 
+  // #endregion properties
+
+  // #region methods
+
   /** Shows and hide the mini menu for mobile devices. */
   toggleMenu(): void {
-        this.isMenuVisible = !this.isMenuVisible;
-    }
-
-  limit(word: string, maxLength: number): string {
-    return word.length <= maxLength ? word : word.slice(0, maxLength) + '...';
+    this.isMenuVisible = !this.isMenuVisible;
   }
+
+  /**
+   * Sets the current contact to a new one, which hides contact information
+   * 
+   * There is a binding in html to id of current contact.
+   */
+  unselectContact() {
+    this.fireDB.setCurrentContact(new Contact);
+  }
+
+  /**
+   * deletes a spezific contact in database. 
+   * @param docId the contact id to delete in database.
+   */
+  async deleteContact(docId: string) {
+    this.fireDB.deleteInDB('contacts', docId);
+    this.fireDB.setCurrentContact(new Contact());
+    this.tms.add('Contact deleted', 3000, 'success');
+  }
+
+  // #endregion methods
 }

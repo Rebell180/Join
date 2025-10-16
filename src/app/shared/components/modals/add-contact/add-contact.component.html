@@ -9,51 +9,68 @@
                 <h2>Tasks are better with a team!</h2>
                 <hr>
             </div>
+            <div class="mobile-close-btn">
+                <button type="button" (click)="closeModal()">X</button>
+            </div>
         </header>
-        <main>
-            <form [formGroup]="contactForm" (ngSubmit)="submitForm()">
-                <div class="form-main-container">
-                    <div class="icon-area">
-                        @if (headlineTxt() == 'Add') {
-                        <img src="assets/Icons/contact/contact_icon_grey.png">
-                        } @else {
-                        <app-contact-icon class="{{ contact().iconColor }}" [contact]="contact()"></app-contact-icon>
-                        }
-                    </div>
-                    <div class="input-area">
-                        @for (field of fields; track field; let i = $index) {
-                            <div class="form-field">
-                            <div class="input-img-container">
-                                <input type="text" formControlName="{{ field.name }}" placeholder="{{ field.placeholder }}" (focus)="focusOnInput(i)">
-                                <img src="assets/Icons/contact/{{ field.img }}">
-                            </div>
-                            <div class="errmsg">
-                                @if (errors[field.name] && showError(i)) {
-                                {{ errors[field.name][0] }}
-                                }
-                            </div>
-                        </div>
-                        }
-                    </div>
-                </div>
-                <div class="form-button-container">
-                    @if(headlineTxt() == 'Add') {
-                    <input id="add-contact-cancel-btn" class="btn-default" type="button" (click)="closeModal()"
-                        value="Cancel X">
-                    } @else if(headlineTxt() == 'Edit') {
-                    <input class="btn-default" type="button" (click)="deleteContact()" value="Delete">
-                    }
-                    <input class="btn-set" type="submit" value="{{ submitBtnTxt() }}">
-                </div>
-            </form>
-            <div class="icon-area-mobile">
-                @if (headlineTxt() == 'Add') {
-                <img src="assets/Icons/contact/contact_icon_grey.png">
-                } @else {
-                <app-contact-icon class="{{ contact().iconColor }}" [contact]="contact()"></app-contact-icon>
+
+        <main class="contact-modal-main">
+            <div class="line-close-btn">
+                <button type="button" (click)="closeModal()">x</button>
+            </div>
+            <div class="line-form">
+                @if(headlineTxt() == 'Add') {
+                <img class="single-icon" src="assets/Icons/contact/contact_icon_grey.png" alt="">
+                } @else if(headlineTxt() == 'Edit') {
+                <app-contact-icon id="{{ 'contact-modal-icon-' + contact().id}}"
+                    class="single-initial-icon {{ contact().iconColor }}" [contact]="contact()"></app-contact-icon>
                 }
+
+                <form method="post" (submit)="submitForm($event)">
+                    <div class="form-field">
+                        <div class="input-img-container">
+                            <input type="text" name="firstname" id="firstname" placeholder="fullname"
+                                [(ngModel)]="contact().firstname" (keyup)="validateFirstName()">
+                            <img src="assets/Icons/contact/person.png" alt="">
+                        </div>
+                        <div #errEl class="errmsg"></div>
+                    </div>
+                    <div class="form-field">
+                        <div class="input-img-container">
+                            <input type="text" name="lastname" id="lastname" placeholder="lastname"
+                                [(ngModel)]="contact().lastname" (keyup)="validateLastName()">
+                            <img src="assets/Icons/contact/person.png" alt="">
+                        </div>
+                        <div #errEl class="errmsg"></div>
+                    </div>
+                    <div class="form-field">
+                        <div class="input-img-container">
+                            <input type="text" name="email" id="email" placeholder="email" [(ngModel)]="contact().email"
+                                (keyup)="validateEmail()">
+                            <img src="assets/Icons/contact/mail.png" alt="">
+                        </div>
+                        <div #errEl class="errmsg"></div>
+                    </div>
+                    <div class="form-field">
+                        <div class="input-img-container">
+                            <input type="text" name="tel" id="tel" placeholder="tel" [(ngModel)]="contact().tel"
+                                (keyup)="validateTel()">
+                            <img src="assets/Icons/contact/call.png" alt="">
+                        </div>
+                        <div #errEl class="errmsg"></div>
+                    </div>
+                    <div class="form-btn-container">
+                        @if(headlineTxt() == 'Add') {
+                        <input id="add-contact-cancel-btn" class="btn-default" type="button" (click)="closeModal()"
+                            value="Cancel X">
+                        } @else if(headlineTxt() == 'Edit') {
+                        <input class="btn-default" type="button" (click)="deleteContact()" value="Delete">
+                        }
+                        <input class="btn-set" type="submit" value="{{ submitBtnTxt() }}">
+                    </div>
+                </form>
             </div>
         </main>
-        <button class="close" type="button" (click)="closeModal()">X</button>
     </dialog>
+    
 </div>

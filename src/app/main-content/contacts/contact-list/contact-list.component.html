@@ -1,10 +1,38 @@
-<button id="add-contact-button" class="btn-set" (click)="cs.openModal('add')" type="button">
+<button id="add-contact-button" class="btn-set" (click)="openModal()" type="button">
     <span>Add new contact</span>
-    <img src="assets/Icons/person_add.png" alt="">
+    <img src="assets/Icons/contact/person_add.png" alt="">
 </button>
 
 <div class="contact-groups-container">
-    @for (group of groups$ | async ; track group.name || $index) {
+
+    @for(group of groups.sort() ; track $index) {
+        <div id="{{ 'contact-group_' + group + '_' + $index}}" class="contact-group-container">
+            <h3 class="letter">{{ group }}</h3>
+            <hr>
+
+            @for(contact of contacts; track contact.id; let index = $index) {
+                @if(contact.group.toUpperCase() == group) {
+                    <div id="{{ 'contact_' + contact.group + '_' + contact.id + '_' + $index}}" class="single-contact-container"
+                        [ngClass]="{'active': contact.selected }" (click)="select(contact)">
+                        <div class="icon-wrapper">
+                            <app-contact-icon id="{{ 'contact_icon_' + contact.id}}" class="{{ contact.iconColor }}"
+                                [contact]="contact"></app-contact-icon>
+                        </div>
+                        <div class="contact-data">
+                            <p class="name limiter">{{ fullName(contact) }}</p>
+                            <p class="email limiter">{{ contact.email }}</p>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    }
+
+
+
+
+
+    <!-- @for (group of groups ; track group.name || $index) {
     <div id="{{ 'contact-group_' + group.name + '_' + $index}}" class="contact-group-container">
         <h3 class="letter">{{ group.name }}</h3>
         <hr>
@@ -23,4 +51,4 @@
         }
     </div>
     }
-</div>
+</div> -->

@@ -5,11 +5,12 @@
         <h2>Better with a team</h2>
         <hr id="bottom-line" />
     </div>
-    <button class="contact-detail-back" (click)="cs.setDetailVisibility('d_none')"><img src="assets/Icons/contact/arrow-left-line.png" alt=""></button>
+    <button class="contact-detail-back" (click)="unselectContact()"><img src="assets/Icons/contact/arrow-left-line.png" alt=""></button>
 </div>
 
-@if (currentContact$ | async; as contact ) {
-
+@if (fireDB.currentContact$ | async; as contact ) {
+@if(contact.id != '') {
+    
 <div class="contact-info-container">
     <div class="contact-detail-header-row">
         <app-contact-icon class="contact-icon {{ contact.iconColor }}" [contact]="contact"></app-contact-icon>
@@ -19,10 +20,10 @@
             <p class="name">{{ contact.lastname }}</p>
 
             <div class="option-container">
-                <button (click)="cs.openModal('edit')" type="button">
+                <button (click)="modalService.openAddContactModal('edit', contact)" type="button">
                     <img src="/assets/Icons/taskBoard/edit.png" alt="" />Edit
                 </button>
-                <button (click)="cs.deleteContactInDB(contact)">
+                <button (click)="deleteContact(contact.id)">
                     <img class="delete-btn" src="/assets/Icons/taskBoard/delete.png" alt="" />Delete
                 </button>
             </div>
@@ -46,13 +47,15 @@
     </button>
 </div>
 <div class="popup-menu" *ngIf="isMenuVisible">
-    <div class="menuItem" (click)="cs.openModal('edit')">
+    <div class="menuItem" (click)="modalService.openAddContactModal('edit', contact)">
         <img src="assets/Icons/digitaler-controller.png" alt="Edit Icon" />
         <span>Edit</span>
     </div>
-    <div class="menuItem deleteItem" (click)="cs.deleteContactInDB(contact)">
+    <div class="menuItem deleteItem" (click)="deleteContact(contact.id)">
         <img src="assets/Icons/—Pngtree—vector trash icon_4152654.png" alt="Delete Icon" />
         <span>Delete</span>
     </div>
 </div>
+}
+
 }

@@ -27,9 +27,7 @@ export class Contact implements DBObject {
     
     /** background-color of contact-icon */
     iconColor: string = this.getRandomIconColor();
-    
-    // TODO Marcel => gehört per Logik hier nicht rein. Wissensabhängigkeiten.
-    // vielleicht mit methode selbst lösen, dass klasse über dom hinzugefügt wird.
+
     /** indicator for selection in contact-list */
     selected: boolean = false;
     
