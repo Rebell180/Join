@@ -10,5 +10,12 @@ import { SearchTaskComponent } from './search-task/search-task.component';
   styleUrl: './board.component.scss'
 })
 export class BoardComponent {
-
+  
+    /**
+     * Filters all Tasks by user input.
+     * @param userSearch - Input from User-Searchbar.
+     */
+    filterTasks(userSearch:string) {
+      console.log(userSearch);
+    }
 }

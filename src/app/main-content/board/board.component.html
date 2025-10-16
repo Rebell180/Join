@@ -1,5 +1,5 @@
 <header>
     <h1>Board</h1>
-    <app-search-task></app-search-task>
+    <app-search-task (seachOut)="filterTasks($event)"></app-search-task>
     <button class="btn-set"><span id="add-task-label">Add Task </span>+</button>
 </header>

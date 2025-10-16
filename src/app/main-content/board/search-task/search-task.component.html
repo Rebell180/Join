@@ -1,5 +1,5 @@
-<form>
-    <input type="text" name="border-header-search" id="board-task-search" placeholder="Find Task">
+<form [formGroup]="form" (submit)="startSearch($event)">
+    <input formControlName="search" type="text" name="border-header-search" id="board-task-search" placeholder="Find Task">
     <input type="submit" src="../../../../public/assets/Icons/taskBoard/searchDefault.png" value="">
     <hr>
 </form>

@@ -39,6 +39,7 @@ form {
         position: absolute;
         top: 0;
         right: 0;
+        cursor: pointer;
         &:hover {
             background: url(../../../../../public/assets//Icons//taskBoard/searchHover.png) no-repeat center / cover;
         }
