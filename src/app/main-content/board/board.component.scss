@@ -14,9 +14,14 @@
 header {
     @include all.fl($jc: space-between, $alit: center);
     @include all.size ($w: 80%, $h: 7.3rem);
+    padding-right: 15rem;
 
     h1 {
         width: 50%;
+    }
+
+    app-search-task {
+        flex: 1;
     }
 
     button {
@@ -24,16 +29,17 @@ header {
         @include all.marpad($pad: 8px 16px);
         position: absolute;
         right: 0;
-
+        
     }
 
     @include all.mobile {
         @include all.fl($flexdir: column, $jc:space-between);
         @include all.size($h: 14.6rem);
-        .input-area {
-            width: 100%;
-            padding: 0;
+
+        app-search-task {
+            flex: 0 0 48px;
         }
+
         button {
             top: 16px;
         }
@@ -45,8 +51,15 @@ header {
     }
 }
 
+
 @media (max-width: 975px) {
     #add-task-label {
         display: none;
+    }
+    header {
+        padding-right: 6rem;
+        @include all.mobile {
+            padding: 0;
+        }
     }
 }
