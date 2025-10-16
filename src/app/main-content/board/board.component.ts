@@ -7,12 +7,10 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'section[board]',
-  imports: [
-    SearchTaskComponent,
-    CommonModule
-  ],
+  standalone: true,
+  imports: [],
   templateUrl: './board.component.html',
-  styleUrl: './board.component.scss'
+  styleUrls: ['./board.component.scss']
 })
 export class BoardComponent implements OnInit{
 

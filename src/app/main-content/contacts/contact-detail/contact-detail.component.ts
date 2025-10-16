@@ -1,4 +1,4 @@
-import { Component, inject,} from '@angular/core';
+import { Component, inject, input, InputSignal,} from '@angular/core';
 import { Contact } from './../../../shared/classes/contact';
 import { ContactIconComponent } from '../../../shared/contact-icon/contact-icon.component';
 import { CommonModule } from '@angular/common';

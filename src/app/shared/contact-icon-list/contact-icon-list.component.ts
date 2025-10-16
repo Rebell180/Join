@@ -1,4 +1,4 @@
-import { Component, input, InputSignal, signal} from '@angular/core';
+import { Component, input, InputSignal} from '@angular/core';
 import { Contact } from '../classes/contact';
 import { ContactIconComponent } from "../contact-icon/contact-icon.component";
 
@@ -10,5 +10,5 @@ import { ContactIconComponent } from "../contact-icon/contact-icon.component";
 })
 export class ContactIconListComponent {
 
-  public contact: InputSignal<Contact[]> = input.required<Contact[]>();
+  public contacts: InputSignal<Contact[]> = input.required<Contact[]>();
 }

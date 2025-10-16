@@ -1,7 +1,9 @@
-<div class="icon-list-item">
-@for (contact of contact(); track contact.id || $index) {
-	<div class="contact-initials">
-		<app-contact-icon id="{{ 'contact_icon_' + contact.id}}" class="{{ contact.iconColor }}" [contact]="contact"></app-contact-icon>
+<div class="icon-list-container">
+	@for (contact of contacts().slice(0,3); track contact.id) {
+		<app-contact-icon id="{{ 'contact_icon_' + contact.id}}" class="{{ contact.iconColor }} icon-list-item" [contact]="contact"></app-contact-icon>
+}
+@if (contacts().length > 3) {
+    <div class="app-contact-icon icon-list-item icon-counter"> +{{ contacts().length - 3 }}
     </div>
 }
 </div>
