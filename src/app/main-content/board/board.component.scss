@@ -45,54 +45,8 @@ header {
     }
 }
 
-.input-area {
-    @include all.fl($alit: center, $gap: 3.2rem);
-    @include all.size($w: 50%, $h: 47px);
-    padding-right: 16rem;
-
-    form {
-        @include all.size();
-
-        input[type=text] {
-            display: flex;
-            @include all.size();
-            @include all.marpad($pad: 8px 16px);
-            outline: none;
-            border-radius: 10px;
-            border: 1px solid #a8a8a8;
-            &::placeholder {
-                color: #d1d1d1;
-            }
-            &:focus {
-                border-color: #29abe2;
-            }
-        }
-
-        hr {
-            height: 60%;
-            width: 2px;
-            position: absolute;
-            top: 20%;
-            right: 48px;
-        }
-
-        input[type=submit] {
-            height: 100%;
-            aspect-ratio: 1 / 1;
-            background: url(../../../../public//assets//Icons//taskBoard/searchDefault.png) no-repeat center / cover;
-            position: absolute;
-            top: 0;
-            right: 0;
-        }
-    }
-}
-
 @media (max-width: 975px) {
     #add-task-label {
         display: none;
-    }
-
-    .input-area {
-        padding-right: 7rem;
     }
 }

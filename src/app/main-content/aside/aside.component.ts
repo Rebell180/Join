@@ -19,29 +19,37 @@ export interface NavItemData{
   styleUrl: './aside.component.scss'
 })
 export class AsideComponent {
-  protected items: NavItemData[] = [ 
-      {
-      sectionId: 'Summary',
-      title: 'Summary',
-      imagePath: '/assets/Icons/contact/Summary.png'
-      },
-      {
-      sectionId: 'addTask',
-      title: 'Add task',
-      imagePath: 'assets/Icons/contact/addTask.png'
-      },
-      {
-      sectionId: 'Boards', 
-      title: 'Boards',
-      imagePath: 'assets/Icons/contact/Board.png'
-      },
-      {
-      sectionId: 'Contacts', 
-      title: 'Contacts',
-      imagePath: 'assets/Icons/contact/Contacts.png'
-      }
-    ];
-    selectedSection: OutputEmitterRef<SectionType> = output<SectionType>();
+      protected items: NavItemData[] = [
+            {
+                  sectionId: 'Summary',
+                  title: 'Summary',
+                  imagePath: '/assets/Icons/contact/Summary.png',
+                  section: SectionType.SUMMARY,
+                  active: false
+            },
+            {
+                  sectionId: 'addTask',
+                  title: 'Add task',
+                  imagePath: 'assets/Icons/contact/addTask.png',
+                  section: SectionType.TASK,
+                  active: false,
+            },
+            {
+                  sectionId: 'Boards',
+                  title: 'Board',
+                  imagePath: 'assets/Icons/contact/Board.png',
+                  section: SectionType.BOARD,
+                  active: true,
+            },
+            {
+                  sectionId: 'Contacts',
+                  title: 'Contacts',
+                  imagePath: 'assets/Icons/contact/Contacts.png',
+                  section: SectionType.CONTACT,
+                  active: false
+            }
+      ];
+      selectedSection: OutputEmitterRef<SectionType> = output<SectionType>();
 
     selectSection(index:number) {
       this.items.forEach((item, i) => {
