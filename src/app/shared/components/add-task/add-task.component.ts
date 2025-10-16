@@ -66,7 +66,7 @@ export class AddtaskComponent implements OnDestroy {
    * Reset all inputs to default.
    */
   clear() {
-
+    console.log(this.currentTask.priority);
   }
 
   
