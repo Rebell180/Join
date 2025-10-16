@@ -3,3 +3,8 @@
     <app-search-task (seachOut)="filterTasks($event)"></app-search-task>
     <button class="btn-set"><span id="add-task-label">Add Task </span>+</button>
 </header>
+<div>
+    @for (task of getTasks(); track task.id) {
+        <h2>{{ task.title }}</h2>
+    } @empty {<h2>Nothing to do.</h2>}
+</div>

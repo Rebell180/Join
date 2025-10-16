@@ -14,7 +14,7 @@
 header {
     @include all.fl($jc: space-between, $alit: center);
     @include all.size ($w: 80%, $h: 7.3rem);
-    padding-right: 15rem;
+    padding-right: 17rem;
 
     h1 {
         width: 50%;
