@@ -1,15 +1,15 @@
 @use './../../../../../public/styles/all_styles.scss' as all;
 
 .task-column-container {
-	@include all.size($w: 25rem, $h: 30rem);
-	@include all.marpad($pad: 1rem);
+	@include all.size($w: 25rem);
+	@include all.marpad($pad: 1.5rem);
 	background: rgb(254, 253, 253);
 	border-radius: 1rem;
 	box-shadow: 0 0 5px lightgrey;
 
 	h2 {
 		@include all.size($w: fit-content, $h: 3rem);
-		@include all.marpad($pad: 0.5rem);
+		@include all.marpad($mar: 0 0 2rem 0, $pad: 0.5rem);
 		@include all.fl($jc: center);
 		background: blue;
 		color: white;
@@ -21,6 +21,7 @@
 		@include all.limiter();
 		white-space: wrap;
 		font-size: 1.5rem;
+		font-family: 'Interbold', sans-serif;
 	}
 
 	.description {
