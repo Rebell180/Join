@@ -33,8 +33,6 @@ export class Task implements DBObject{
 	/** an indicator wether this task has subtasks */
 	subtasks: boolean = false;
 
-	backgroundColor: string = '';
-
 	// #endregion properties
 
 	/**
@@ -49,7 +47,7 @@ export class Task implements DBObject{
 	 * 		subtasks: boolean			=> an indicator wether this task has subtasks
      * }
      */
-	constructor(data?: { id: string, title: string, description: string, dueDate: string, priority: Priority, category: Category, assignedTo: Array<string>, subtasks: boolean, backgroundColor: string }) {
+	constructor(data?: { id: string, title: string, description: string, dueDate: string, priority: Priority, category: Category, assignedTo: Array<string>, subtasks: boolean }) {
 		if(data) {
 			this.id = data.id;
 			this.title = data.title;
@@ -58,8 +56,7 @@ export class Task implements DBObject{
 			this.priority = data.priority;
 			this.category = data.category;
 			this.assignedTo = data.assignedTo;
-			this.subtasks = data.subtasks;
-			this.backgroundColor = data.backgroundColor; 
+			this.subtasks = data.subtasks; 
 		}
 	}
 
@@ -78,7 +75,6 @@ export class Task implements DBObject{
 			category: this.category,
 			assignedTo: this.assignedTo,
 			subtasks: this.subtasks,
-			backgroundColor: this.backgroundColor
 		}
 	}
 }
