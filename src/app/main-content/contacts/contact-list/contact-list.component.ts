@@ -70,8 +70,8 @@ export class ContactListComponent implements OnDestroy {
   protected fullName(contact: Contact):string {
     return `${contact.firstname} ${contact.lastname}`;
   }
-
-  /**
+  
+/**
    * Opens a two way data stream between code and firebase collection 'contacts'.
    * 
    * @returns an @type Unsubscribe.
@@ -100,8 +100,6 @@ export class ContactListComponent implements OnDestroy {
       }
     });
   }
-
-  
 
   // #endregion methods
 }
