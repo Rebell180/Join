@@ -18,10 +18,16 @@
 
 	.title {
 		@include all.size($h: 7rem);
+		@include all.limiter();
+		white-space: wrap;
+		font-size: 1.5rem;
 	}
 
 	.description {
 		@include all.size($h: 10rem);
+		@include all.limiter();
+		white-space: wrap;
+		font-size: 1.5rem;
 	}
 
 
