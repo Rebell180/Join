@@ -30,21 +30,21 @@ export class TaskColumnItemComponent {
   ];
 
   /**
-   * Berechnet die Anzahl der abgeschlossenen Unteraufgaben.
+   * Berechnet die Anzahl der abgeschlossenen Unteraufgaben
    */
   get completedSubtaskCount(): number {
     return this.subtasks.filter(sub => sub.completed).length;
   }
 
   /**
-   * Gibt die Gesamtzahl der Unteraufgaben zurück.
+   * Gibt die Gesamtzahl der Unteraufgaben zurück
    */
   get totalSubtaskCount(): number {
     return this.subtasks.length;
   }
 
   /**
-   * Berechnet den Fortschritt in Prozent (z.B. 33.33).
+   * Berechnet den Fortschritt in Prozent
    */
   get subtaskProgressPercentage(): number {
     if (this.totalSubtaskCount === 0) {
@@ -54,7 +54,7 @@ export class TaskColumnItemComponent {
   }
 
   /**
-   * Steuert die Sichtbarkeit gemäß der Anforderung: Nur sichtbar ab 2 Subtasks.
+   * Steuert die Sichtbarkeit gemäß der Anforderung: Nur sichtbar ab 2 Subtasks
    */
   get isSubtaskProgressVisible(): boolean {
     return this.totalSubtaskCount >= 2;
