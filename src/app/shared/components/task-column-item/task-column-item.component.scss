@@ -11,7 +11,6 @@
 		@include all.size($w: fit-content, $h: auto);
 		@include all.marpad($mar: 0 0 2rem 0, $pad: 0.8rem);
 		@include all.fl($jc: center);
-		background: blue;
 		color: white;
 		border-radius: 1rem;
 	}

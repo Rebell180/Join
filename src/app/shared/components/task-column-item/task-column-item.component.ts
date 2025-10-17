@@ -22,7 +22,7 @@ export class TaskColumnItemComponent {
     new Contact({ id: 'ijkl', firstname: 'Thomas', lastname: 'Müller', group: 'T', email: 'thomas.mueller@t-online.de', tel: '0301234567', iconColor: 'pink', })
   ];
 
-  task: Task = new Task({ id: 'fegt', title: 'headline show the Maininformation from Task', description: 'descriptions must be an informativ text', dueDate: '01.40.2025', priority: Priority.URGENT, category: Category.TESTDUMMY, assignedTo: ['a', 'b'], subtasks: false }) 
+  task: Task = new Task({ id: 'fegt', title: 'headline show the Maininformation from Task', description: 'descriptions must be an informativ text', dueDate: '01.40.2025', priority: Priority.URGENT, category: Category.TESTDUMMY, assignedTo: ['a', 'b'], subtasks: false, backgroundColor: 'turquoise' }) 
 
   subtasks: { title: string, completed: boolean }[] = [
     { title: 'Analyse abschließen', completed: true },
