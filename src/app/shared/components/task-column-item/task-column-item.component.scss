@@ -8,8 +8,8 @@
 	box-shadow: 0 0 5px lightgrey;
 
 	h2 {
-		@include all.size($w: 10rem, $h: 3rem);
-		@include all.marpad($mar: 1rem, $pad: 0.5rem);
+		@include all.size($w: fit-content, $h: 3rem);
+		@include all.marpad($pad: 0.5rem);
 		@include all.fl($jc: center);
 		background: blue;
 		color: white;
