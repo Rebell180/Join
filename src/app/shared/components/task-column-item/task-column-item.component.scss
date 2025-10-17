@@ -1,86 +1,65 @@
-@use '../../../../../public/styles/all_styles.scss' as all;
+@use './../../../../../public/styles/all_styles.scss' as all;
 
-:host {
+.task-column-container {
+	@include all.size($w: 25rem, $h: 30rem);
+	@include all.marpad($pad: 1rem);
+	background: rgb(254, 253, 253);
+	border-radius: 1rem;
+	box-shadow: 0 0 5px lightgrey;
 
-	.task-column-container {
-		@include all.marpad($mar: 0 0 1rem 0, $pad: 1.5rem);
-		background: rgb(254, 253, 253);
-		border-radius: 8px;
-		box-shadow: 0 0 5px lightgrey;
-		cursor: pointer;
+	h2 {
+		@include all.size($w: 10rem, $h: 3rem);
+		@include all.marpad($mar: 1rem, $pad: 0.5rem);
+		@include all.fl($jc: center);
+		background: blue;
+		color: white;
+		border-radius: 0.5rem;
+	}
 
-		h2 {
-			@include all.size($w: fit-content, $h: 3rem);
-			@include all.marpad($mar: 0 0 1rem 0, $pad: 0.5rem);
-			@include all.fl($jc: center);
-			font-size: 1.6rem;
-			color: white;
-			border-radius: 8px;
-			
-			&.blue {
-				background: #0038FF;
-			}
-			
-			&.green {
-				background: #1fd7c1;
-			}
-			
-			&.yellow {
-				background: rgb(0, 128, 64);
-			}
-		}
+	.desc-headline {
+		@include all.size($h: 7rem);
+	}
 
-		.title {
-			@include all.size($w: 100%, $h: 6rem);
-			@include all.limiter($lines: 3);
-			@include all.marpad($mar: 0 0 1rem 0);
-			font-size: 1.6rem;
-			font-weight: bold;
-			white-space: wrap;
-		}
+	.description {
+		@include all.size($h: 10rem);
+	}
 
-		.description {
-			@include all.size($w: 100%, $h: 6rem);
-			@include all.marpad($mar: 0 0 1rem 0);
-			@include all.limiter($lines: 2);
-			max-height: 4rem;
-			font-size: 1.6rem;
-			color: grey;
-		}
 
-		.subtask-progress-box {
-			@include all.marpad($mar: 1rem 0, $pad: 0.6rem 0.8rem);
-		}
+	.subtask-progress-box {
+		@include all.marpad($pad: 0.6rem 0.8rem);
+	}
 
-		.progress-bar-wrapper {
-			@include all.fl($alit: center, $gap: 1rem);
-		}
+	.progress-bar-wrapper {
+		@include all.fl($alit: center, $gap: 1rem);
+	}
 
-		.progress-bar-background {
-			@include all.size($h: 0.8rem);
-			flex-grow: 1;
-			background-color: #dedddd;
-			border-radius: 4px;
-			overflow: hidden;
-		}
+	.progress-bar-background {
+		flex-grow: 1;
+		@include all.size($h: 0.8rem);
+		background-color: #dedddd;
+		border-radius: 4px;
+		overflow: hidden;
+	}
 
-		.progress-bar-fill {
-			@include all.size($w: 100%, $h: 0.8rem);
-			background-color: #3b82f6;
-			transition: width 0.3s ease-in-out;
-		}
+	.progress-bar-fill {
+		height: 100%;
+		background-color: #3b82f6;
+		transition: width 0.3s ease-in-out;
+	}
 
-		.subtask-counter {
-			@include all.font-style($size: 1.5rem);
-			white-space: nowrap;
-		}
+	.subtask-counter {
+		font-size: 1.4rem;
+		font-weight: 600;
+		color: black;
+		white-space: nowrap;
+	}
 
-		.column-bottom-container {
-			@include all.fl($alit: center, $jc: space-between);
+	.column-bottom-container {
+		@include all.fl($alit: center, $jc: space-between);
+		@include all.marpad($pad: 0 1rem);
 
-			img {
-				@include all.size($w: 2rem, $h: 1.2rem);
-			}
+		img {
+			@include all.size($w: 2rem, $h: 1.2rem);
 		}
 	}
 }

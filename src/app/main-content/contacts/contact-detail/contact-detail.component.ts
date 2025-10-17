@@ -1,6 +1,6 @@
 import { Component, inject, input, InputSignal,} from '@angular/core';
 import { Contact } from './../../../shared/classes/contact';
-import { ContactIconComponent } from '../../../shared/contact-icon/contact-icon.component';
+import { ContactIconComponent } from '../../../shared/components/contact-icon/contact-icon.component';
 import { CommonModule } from '@angular/common';
 import { FirebaseDBService } from '../../../shared/services/firebase-db.service';
 import { ModalService } from '../../../shared/services/modal.service';
