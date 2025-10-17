@@ -1,0 +1,38 @@
+@use '../../../../../public//styles/all_styles' as all;
+
+:host {
+    @include all.size();
+}
+
+header {
+    @include all.fl($jc: space-between, $alit: center);
+    width: 100%;
+    margin-bottom: 1.6rem
+}
+
+h3 {
+    font: bold 2.4rem Inter;
+    color: #42526e;
+}
+
+.add-icon-btn {
+    @include all.size($w: 2.4rem, $h: 2.4rem);
+
+    &:hover {
+        content: url(../../../../../public/assets/Icons/taskBoard/addBtnBoardHover.png);
+    }
+
+    &:active {
+        content: url(../../../../../public/assets/Icons/taskBoard/addBtnBoardClick.png);
+    }
+}
+
+.no-task {
+    @include all.fl($jc: center, $alit: center);
+    @include all.size($h: 4.8rem);
+    background: #e7e7e7;
+    border-radius: 10px;
+    border: 1px dotted #a8a8a8;
+    font: 1.6rem OpenSans;
+    color: #a8a8a8;
+}

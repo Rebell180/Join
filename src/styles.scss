@@ -1,6 +1,22 @@
 // TODO: Font Roboto muss hier noch eingebunden und herunter geladen werden.
 @use './../public/styles/all_styles.scss' as all;
 
+@font-face {
+    font-family: Inter;
+    src: url("../public/assets/Fonts/Inter_18pt-ExtraLight.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: Inter;
+    font-weight: bold;
+    src: url("../public/assets/Fonts/Inter_28pt-Bold.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: OpenSans;
+    src: url(../public/assets/Fonts/OpenSans-Regular.ttf);
+}
+
 * {
     position: relative;
     margin: 0;
@@ -84,8 +100,7 @@ input {
 }
 
 h1 {
-    font-family: 'Interbold', sans-serif;
-    font-size: 6.4rem;
+    font: bold 6.4rem Inter;
 
     @media(max-width: 425px) {
         font-size: 4.7rem;
@@ -95,16 +110,6 @@ h1 {
 
 h2, a, p, h3, span {
     font-family: 'InterLight', sans-serif;
-}
-
-@font-face {
-    font-family: "InterLight";
-    src: url("../public/assets/Fonts/Inter_18pt-ExtraLight.ttf") format("truetype");
-}
-
-@font-face {
-    font-family: "InterBold";
-    src: url("../public/assets/Fonts/Inter_28pt-Bold.ttf") format("truetype");
 }
 
 .overlay {
