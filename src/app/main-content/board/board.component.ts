@@ -29,10 +29,9 @@ interface TaskObject {
     TaskListColumnComponent
   ],
   templateUrl: './board.component.html',
-  styleUrls: ['./board.component.scss']
+  styleUrl: './board.component.scss'
 })
-export class BoardComponent implements OnInit, OnDestroy {
-
+export class BoardComponent {
   private tasks: Task[] = [];
   private shownTasks: Task[] = [];
   protected taskLists: {

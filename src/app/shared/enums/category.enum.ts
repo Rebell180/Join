@@ -1,5 +1,6 @@
 export enum Category {
     TASK = 'Task',
     USERSTORY = 'User Story',
-    TECHNICAL = 'Technical'
+    TECHNICAL = 'Technical',
+    TESTDUMMY = 'Testdummy at Work'
 }
