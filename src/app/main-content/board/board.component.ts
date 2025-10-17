@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { Priority } from '../../shared/enums/priority.enum';
 import { Category } from '../../shared/enums/category.enum';
 import { TaskStatusType } from '../../shared/enums/task-status-type';
+import { TaskListColumnComponent } from './task-list-column/task-list-column.component';
 
 interface TaskObject {
   id: string,
@@ -25,15 +26,24 @@ interface TaskObject {
   imports: [
     SearchTaskComponent,
     CommonModule,
-    TaskModalComponent
-],
+    TaskListColumnComponent
+  ],
   templateUrl: './board.component.html',
   styleUrls: ['./board.component.scss']
 })
 export class BoardComponent implements OnInit, OnDestroy {
 
-  tasks: Task[] = [];
-  shownTasks!: Task[];
+  private tasks: Task[] = [];
+  private shownTasks: Task[] = [];
+  protected taskLists: {
+    listName: string,
+    status: TaskStatusType
+  }[] = [
+    {listName: 'To do', status: TaskStatusType.TODO},
+    {listName: 'In progress', status: TaskStatusType.PROGRESS},
+    {listName: 'Await feedback', status: TaskStatusType.REVIEW},
+    {listName: 'Done', status: TaskStatusType.DONE}
+  ]
 
   // Database
   fs: Firestore = inject(Firestore);
@@ -92,5 +102,14 @@ export class BoardComponent implements OnInit, OnDestroy {
    */
   getTasks() {
     return this.shownTasks;
+  }
+
+  /**
+   * Gets tasks from status.
+   * @param status - State of Task
+   * @returns - separete List for status
+   */
+  getTaskForList(status: TaskStatusType): Task[] {
+    return this.shownTasks.filter(task => task.status == status)
   }
 }
