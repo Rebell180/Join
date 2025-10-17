@@ -1,8 +1,8 @@
 <div class="task-column-container">
-	<h2>{{task.category}}</h2>
+	<h2>{{task().category}}</h2>
 
-	<p class="title limiter">{{task.title}}</p>
-	<p class="description limiter">{{task.description}}</p>
+	<p class="title limiter">{{task().title}}</p>
+	<p class="description limiter">{{task().description}}</p>
 
 	@if (isSubtaskProgressVisible) {
 	<div class="subtask-progress-box">
@@ -20,6 +20,6 @@
 	}
 	<div class="column-bottom-container">
 		<app-contact-icon-list [contacts]="contacts"></app-contact-icon-list>
-		<img src="assets/Icons/taskBoard/{{ task.priority | lowercase }}Task.png" alt="Priority Icon">
+		<img src="assets/Icons/taskBoard/{{ task().priority | lowercase }}Task.png" alt="Priority Icon">
 	</div>
 </div>

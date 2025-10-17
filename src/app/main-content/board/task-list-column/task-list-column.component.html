@@ -4,7 +4,7 @@
 </header>
 <main>
     @for (task of tasks(); track task.id) {
-
+        <app-task-column-item [task]="task"></app-task-column-item>
     } @empty {
         <div class="no-task">No Tasks to do</div>
     }

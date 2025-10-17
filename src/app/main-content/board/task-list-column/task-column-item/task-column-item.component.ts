@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
-import { Task } from '../../classes/task';
-import { ContactIconListComponent } from "../contact-icon-list/contact-icon-list.component";
-import { Contact } from '../../classes/contact';
-import { Priority } from '../../enums/priority.enum';
-import { Category } from '../../enums/category.enum';
+import { Component, input, InputSignal } from '@angular/core';
+import { Task } from '../../../../shared/classes/task';
+import { ContactIconListComponent } from "../../../../shared/components/contact-icon-list/contact-icon-list.component";
+import { Contact } from '../../../../shared/classes/contact';
+import { Priority } from '../../../../shared/enums/priority.enum';
+import { Category } from '../../../../shared/enums/category.enum';
 import { CommonModule } from '@angular/common';
+import { TaskStatusType } from '../../../../shared/enums/task-status-type';
 
 @Component({
   selector: 'app-task-column-item',
@@ -22,7 +23,7 @@ export class TaskColumnItemComponent {
     new Contact({ id: 'ijkl', firstname: 'Thomas', lastname: 'Müller', group: 'T', email: 'thomas.mueller@t-online.de', tel: '0301234567', iconColor: 'pink', })
   ];
 
-  task: Task = new Task({ id: 'fegt', title: 'headline show the Maininformation from Task', description: 'descriptions must be an informativ text', dueDate: '01.40.2025', priority: Priority.URGENT, category: Category.TESTDUMMY, assignedTo: ['a', 'b'], subtasks: false }) 
+  task: InputSignal<Task> = input.required<Task>();
 
   subtasks: { title: string, completed: boolean }[] = [
     { title: 'Analyse abschließen', completed: true },
