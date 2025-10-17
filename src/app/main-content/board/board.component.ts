@@ -4,15 +4,13 @@ import { Task } from '../../shared/classes/task';
 import { FirebaseDBService } from '../../shared/services/firebase-db.service';
 import { Unsubscribe } from '@angular/fire/firestore';
 import { CommonModule } from '@angular/common';
-import { TaskColumnItemComponent } from "../../shared/components/task-column-item/task-column-item.component";
 
 @Component({
   selector: 'section[board]',
   standalone: true,
   imports: [
     SearchTaskComponent,
-    CommonModule,
-    TaskColumnItemComponent
+    CommonModule
 ],
   templateUrl: './board.component.html',
   styleUrls: ['./board.component.scss']

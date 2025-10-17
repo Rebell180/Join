@@ -15,6 +15,14 @@
 		border-radius: 1rem;
 	}
 
+	.blue {
+		background: blue;
+	}
+
+	.green {
+		background: green;
+	}
+
 	.title {
 		@include all.size($h: 7rem);
 		@include all.limiter();
