@@ -26,7 +26,7 @@ export class Task implements DBObject{
 	priority: Priority = Priority.MEDIUM;
 
 	/** category of task, defines which category this task belongs */
-	category: Category = Category.TASK;
+	category: Category = Category.USERSTORY;
 
 	/** an array of contact ids which are assigned to task */
 	assignedTo: Array<string> = [];

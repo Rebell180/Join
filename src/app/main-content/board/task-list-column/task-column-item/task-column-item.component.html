@@ -1,5 +1,5 @@
 <div class="task-column-container">
-	<h2>{{task().category}}</h2>
+	<h2 [ngClass]="{blue: task().category == Category.USERSTORY, green: task().category == Category.TECHNICAL}">{{task().category}}</h2>
 
 	<p class="title limiter">{{task().title}}</p>
 	<p class="description limiter">{{task().description}}</p>

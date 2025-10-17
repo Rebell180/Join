@@ -30,6 +30,8 @@ export class TaskColumnItemComponent {
     { title: 'Design-Mockups erstellen', completed: false },
   ];
 
+  Category = Category;
+
   /**
    * Berechnet die Anzahl der abgeschlossenen Unteraufgaben.
    */

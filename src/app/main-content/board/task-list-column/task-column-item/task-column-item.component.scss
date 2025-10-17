@@ -1,7 +1,11 @@
 @use './../../../../../../public/styles/all_styles' as all;
 
+:host {
+	@include all.fl();
+	@include all.size();
+}
 .task-column-container {
-	@include all.size($w: 25rem, $h: 30rem);
+	@include all.size();
 	@include all.marpad($pad: 1rem);
 	background: rgb(254, 253, 253);
 	border-radius: 1rem;
@@ -11,9 +15,16 @@
 		@include all.size($w: fit-content, $h: 3rem);
 		@include all.marpad($pad: 0.5rem);
 		@include all.fl($jc: center);
-		background: blue;
 		color: white;
 		border-radius: 0.5rem;
+	}
+
+	.blue {
+		background: #0038FF;
+	}
+
+	.green {
+		background: #1fd7c1;
 	}
 
 	.title {

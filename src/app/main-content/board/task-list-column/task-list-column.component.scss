@@ -1,6 +1,7 @@
 @use '../../../../../public//styles/all_styles' as all;
 
 :host {
+    @include all.fl($flexdir: column);
     @include all.size();
 }
 
@@ -8,6 +9,11 @@ header {
     @include all.fl($jc: space-between, $alit: center);
     width: 100%;
     margin-bottom: 1.6rem
+}
+
+main {
+    @include all.size();
+    flex: 1;
 }
 
 h3 {

@@ -60,15 +60,14 @@ header {
     gap: 3rem;
     padding: 16px;
     margin-top: 8rem;
+    overflow-y: auto;
 
     @media (max-width: 1230px) {
         grid-template-columns: repeat(2, 1fr);
-        grid-template-rows: repeat(2, 1fr);
     }
 
     @include all.mobile {
         @include all.fl($flexdir: column, $gap: 2.6rem);
-        overflow-y: auto;
     }
 }
 
@@ -76,6 +75,10 @@ header {
     width: 0;
 }
 
+app-task-list-column {
+    flex: 1 1 auto;
+    min-height: 0;
+}
 
 @media (max-width: 975px) {
     #add-task-label {
