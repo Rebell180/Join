@@ -1,10 +1,23 @@
-import { Component, input, InputSignal, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { SearchTaskComponent } from './search-task/search-task.component';
 import { Task } from '../../shared/classes/task';
-import { FirebaseDBService } from '../../shared/services/firebase-db.service';
-import { Unsubscribe } from '@angular/fire/firestore';
+import { collection, CollectionReference, Firestore, onSnapshot, Unsubscribe } from '@angular/fire/firestore';
 import { CommonModule } from '@angular/common';
-import { TaskModalComponent } from "../../shared/components/modals/task-modal/task-modal.component";
+import { Priority } from '../../shared/enums/priority.enum';
+import { Category } from '../../shared/enums/category.enum';
+import { TaskStatusType } from '../../shared/enums/task-status-type';
+
+interface TaskObject {
+  id: string,
+  title: string,
+  category: Category,
+  description: string,
+  priority: Priority,
+  dueDate: string,
+  assignedTo: string[],
+  subtasks: boolean,
+  status: TaskStatusType
+}
 
 @Component({
   selector: 'section[board]',
@@ -17,23 +30,61 @@ import { TaskModalComponent } from "../../shared/components/modals/task-modal/ta
   templateUrl: './board.component.html',
   styleUrls: ['./board.component.scss']
 })
-export class BoardComponent implements OnInit{
+export class BoardComponent implements OnInit, OnDestroy {
 
+  tasks: Task[] = [];
   shownTasks!: Task[];
-  tasksSnapshot!: Unsubscribe
 
-  constructor(private fdb:FirebaseDBService) {}
+  // Database
+  fs: Firestore = inject(Firestore);
+  unsubTasks!: Unsubscribe
 
   ngOnInit(): void {
-    this.shownTasks = this.fdb.tasks;
+    this.unsubTasks = this.subscribeTasks()
   }
+
+  ngOnDestroy(): void {
+    this.unsubTasks();
+  }
+
+  // #region database
+  /**
+   * Subscribes task-collection.
+   *  @returns - Unsubscribe for tasks-collection
+   */
+  private subscribeTasks(): Unsubscribe {
+    return onSnapshot(this.getTaskRef(), list => {
+      list.forEach(element => {
+        this.tasks.push(this.mapTask(element.data() as TaskObject));
+      });
+      this.shownTasks = this.tasks
+    })
+  }
+
+  /**
+   * Gets the task collection reference.
+   * @returns - Collection-Reference for tasks.
+   */
+  private getTaskRef(): CollectionReference {
+    return collection(this.fs, 'tasks');
+  }
+
+  /**
+   * Maps result of database to a instance of task.
+   * @param obj - Object from database.
+   * @returns - Instance of Task.
+   */
+  private mapTask(obj: TaskObject): Task {
+    return new Task(obj)
+  }
+  // #endregion
 
   /**
    * Filters all Tasks by user input.
    * @param userSearch - Input from User-Searchbar.
    */
   filterTasks(userSearch: string) {
-    this.shownTasks = userSearch.length == 0 ? this.fdb.tasks : this.fdb.tasks.filter(task => task.title.includes(userSearch));
+    this.shownTasks = userSearch.length == 0 ? this.tasks : this.tasks.filter(task => task.title.includes(userSearch));
   }
 
   /** Gets all Tasks, which has been searched.
