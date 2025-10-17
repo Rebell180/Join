@@ -146,8 +146,8 @@
                 @include all.tablet {
                     display: block; 
                     @include all.size($w: 12rem, $minW: 12rem, $h: 12rem);
-                    @include all.absolute($top: 3.2rem, $left: 5rem);
-                    transform: translate(-50%);
+                    @include all.absolute($top: 1rem, $left: 50%);
+                    transform: translate(-50%, -100%);
                     border-radius: 50%;
                     background: white;
                     z-index: 1;
@@ -158,6 +158,7 @@
                 @include all.size($w: 15rem, $h: 12rem);
 
                 @include all.tablet {
+                    border: 2px solid red;
                     @include all.size($w: 10rem, $h: 10rem);
                     @include all.absolute($top: 0, $left: 50%);
                     transform: translate(-50%, -95%);
