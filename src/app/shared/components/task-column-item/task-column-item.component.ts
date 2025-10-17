@@ -57,6 +57,6 @@ export class TaskColumnItemComponent {
    * Steuert die Sichtbarkeit gemäß der Anforderung: Nur sichtbar ab 2 Subtasks
    */
   get isSubtaskProgressVisible(): boolean {
-    return this.totalSubtaskCount >= 2;
+    return this.totalSubtaskCount <= 2;
   }
 }
