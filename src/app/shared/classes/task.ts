@@ -2,6 +2,8 @@ import { Category } from "../enums/category.enum";
 import { Priority } from "../enums/priority.enum";
 import { TaskStatusType } from "../enums/task-status-type";
 import { DBObject } from "../interfaces/db-object";
+import { Contact } from "./contact";
+import { SubTask } from "./subTask";
 
 /**
  * Contains a single task object.
@@ -29,10 +31,10 @@ export class Task implements DBObject{
 	category: Category = Category.USERSTORY;
 
 	/** an array of contact ids which are assigned to task */
-	assignedTo: Array<string> = [];
+	assignedTo: Contact[] = [];
 
 	/** an indicator wether this task has subtasks */
-	subtasks: boolean = false;
+	subtasks: SubTask[] = [];
 
 	/** Type in wich litst Task is. */
 	status: TaskStatusType = TaskStatusType.TODO;
@@ -52,7 +54,7 @@ export class Task implements DBObject{
 	 * 		status: TaskStatusType		=> in which List is task
      * }
      */
-	constructor(data?: { id: string, title: string, description: string, dueDate: string, priority: Priority, category: Category, assignedTo: Array<string>, subtasks: boolean, status: TaskStatusType }) {
+	constructor(data?: { id: string, title: string, description: string, dueDate: string, priority: Priority, category: Category, assignedTo: Contact[], subtasks: SubTask[], status: TaskStatusType }) {
 		if(data) {
 			this.id = data.id;
 			this.title = data.title;
@@ -62,7 +64,7 @@ export class Task implements DBObject{
 			this.category = data.category;
 			this.assignedTo = data.assignedTo;
 			this.subtasks = data.subtasks;
-			this.status = data.status
+			this.status = data.status;
 		}
 	}
 

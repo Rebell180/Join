@@ -26,10 +26,9 @@ export class SubTask implements DBObject{
      *      finished: boolean   => current status of subtask , true is finished, false is unfinished 
      * }
      */
-	constructor(data?: {id: string, taskId: string, name: string, finished: boolean}){
+	constructor(data?: {id: string, name: string, finished: boolean}){
 		if(data) {
 			this.id = data.id;
-			this.taskId = data.taskId;
 			this.name = data.name;
 			this.finished = data.finished;
 		}
