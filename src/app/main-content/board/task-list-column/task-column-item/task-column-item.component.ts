@@ -15,14 +15,6 @@ import { TaskStatusType } from '../../../../shared/enums/task-status-type';
 })
 export class TaskColumnItemComponent {
 
-  contacts: Array<Contact> = [
-    new Contact({ id: 'abcd', firstname: 'Marcus', lastname: 'Gühne', group: 'M', email: 'marcu@gmx.de', tel: '015245885', iconColor: 'blue', }),
-    new Contact({ id: 'efgh', firstname: 'Sabine', lastname: 'Schmidt', group: 'S', email: 'sabine.schmidt@web.de', tel: '0171987654', iconColor: 'green', }),
-    new Contact({ id: 'ijkl', firstname: 'Thomas', lastname: 'Müller', group: 'T', email: 'thomas.mueller@t-online.de', tel: '0301234567', iconColor: 'pink', }),
-    new Contact({ id: 'efgh', firstname: 'Sabine', lastname: 'Schmidt', group: 'S', email: 'sabine.schmidt@web.de', tel: '0171987654', iconColor: 'green', }),
-    new Contact({ id: 'ijkl', firstname: 'Thomas', lastname: 'Müller', group: 'T', email: 'thomas.mueller@t-online.de', tel: '0301234567', iconColor: 'pink', })
-  ];
-
   task: InputSignal<Task> = input.required<Task>();
 
   subtasks: { title: string, completed: boolean }[] = [

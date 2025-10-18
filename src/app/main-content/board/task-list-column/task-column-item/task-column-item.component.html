@@ -19,7 +19,7 @@
 	</div>
 	}
 	<div class="column-bottom-container">
-		<app-contact-icon-list [contacts]="contacts"></app-contact-icon-list>
+		<app-contact-icon-list [contacts]="task().assignedTo"></app-contact-icon-list>
 		<img src="assets/Icons/taskBoard/{{ task().priority | lowercase }}Task.png" alt="Priority Icon">
 	</div>
 </div>
