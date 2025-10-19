@@ -75,13 +75,23 @@
             scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
         }
 
-        @include all.notebook {
-            @include all.fl($flexdir: column);
-            @include all.size($maxW: 72dvw);
-        }
-        
-        @include all.tablet {
-            @include all.size($w: 100dvw);
+    @include all.mobile {
+        @include all.fl($flexdir: column, $gap: 2.6rem);
+    }
+}
+
+.task-list-wrapper::-webkit-scrollbar {
+    width: 0;
+}
+
+@media (max-width: 975px) {
+    #add-task-label {
+        display: none;
+    }
+    header {
+        padding-right: 6rem;
+        @include all.mobile {
+            padding: 0;
         }
     }
 }

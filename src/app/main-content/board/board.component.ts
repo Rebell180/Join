@@ -7,7 +7,47 @@ import { TaskStatusType } from '../../shared/enums/task-status-type';
 import { TaskListColumnComponent } from './task-list-column/task-list-column.component';
 import { Contact } from '../../shared/classes/contact';
 import { SubTask } from '../../shared/classes/subTask';
-import { ContactObject, SubTaskObject, TaskObject } from '../../shared/interfaces/database-result';
+import { AddSubtaskComponent } from './add-subtask/add-subtask.component';
+
+interface SimpleTaskObject {
+  id: string,
+  title: string,
+  category: Category,
+  description: string,
+  priority: Priority,
+  dueDate: string,
+  assignedTo: string[],
+  subtasks: string[],
+  status: TaskStatusType
+}
+
+interface ContactObject {
+  id: string,
+  firstname: string,
+  lastname: string,
+  group: string,
+  email: string,
+  tel: string,
+  iconColor: string
+}
+
+interface SubTaskObject {
+  id: string,
+  name: string,
+  finished: boolean
+}
+
+interface TaskObject {
+  id: string,
+  title: string,
+  category: Category,
+  description: string,
+  priority: Priority,
+  dueDate: string,
+  assignedTo: Contact[],
+  subtasks: SubTask[],
+  status: TaskStatusType
+}
 
 @Component({
   selector: 'section[board]',
@@ -15,8 +55,9 @@ import { ContactObject, SubTaskObject, TaskObject } from '../../shared/interface
   imports: [
     SearchTaskComponent,
     CommonModule,
-    TaskListColumnComponent,    
-],
+    TaskListColumnComponent,
+    AddSubtaskComponent
+  ],
   templateUrl: './board.component.html',
   styleUrl: './board.component.scss'
 })

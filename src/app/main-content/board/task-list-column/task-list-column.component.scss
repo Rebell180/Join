@@ -3,12 +3,10 @@
 :host {
     @include all.fl($flexdir: column);
     @include all.size();
-    @include all.marpad($pad: 0 1rem);
-
-    @media (max-width: 1180px) {
-        @include all.marpad($mar: 0.5rem);
-        @include all.size();
+    @include all.mobile {
+        min-height: 45dvh;
     }
+}
 
     @include all.notebook {
         @include all.size($maxW: 75dvw);
