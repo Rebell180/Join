@@ -1,19 +1,49 @@
 <form id="add-subtask-form">
     <label for="add-subtask-input">Subtasks</label>
     <input type="text" id="add-subtask-input" name="add-subtask-input" placeholder="Add new Subtask">
-    <input type="reset" value="">
-    <input type="submit" value="">
+    <div class="control-btns add-ctrl">
+        <input type="reset" id="add-reset">
+        <img class="close-icon" src="/assets/Icons/taskBoard/close.png" id="reset-icon" onclick="document.getElementById('add-reset').click()">
+        <hr class="btn-sep">
+        <input type="image" class="check-icon" id="add-check-icon" src="/assets/Icons/taskBoard/check.png">
+    </div>
 </form>
 <ul>
-    <li>Subtask
-        <button class="edit-contrl"><img src="/assets/Icons/taskBoard/edit.png" alt="edit Subtask"></button>
-        <button class="edit-contrl"><img src="/assets/Icons/taskBoard/delete.png" alt="delete Subtask"></button>
-    </li>
+    <div class="li-wrapper">
+        <li class="regular">Subtask1
+        <div class="control-btns">
+            <button><img class="edit-icon" src="/assets/Icons/taskBoard/edit.png" alt="edit Subtask"></button>
+            <hr class="btn-sep">
+            <button><img class="delete-icon" src="/assets/Icons/taskBoard/delete.png" alt="delete Subtask"></button>
+        </div>
+        </li>
+    </div>
+    <div class="li-wrapper">
+        <li class="regular">Subtask1
+        <div class="control-btns">
+            <button><img class="edit-icon" src="/assets/Icons/taskBoard/edit.png" alt="edit Subtask"></button>
+            <hr class="btn-sep">
+            <button><img class="delete-icon" src="/assets/Icons/taskBoard/delete.png" alt="delete Subtask"></button>
+        </div>
+        </li>
+    </div>
+    <div class="li-wrapper">
+        <li class="regular">Subtask1
+        <div class="control-btns">
+            <button><img class="edit-icon" src="/assets/Icons/taskBoard/edit.png" alt="edit Subtask"></button>
+            <hr class="btn-sep">
+            <button><img class="delete-icon" src="/assets/Icons/taskBoard/delete.png" alt="delete Subtask"></button>
+        </div>
+        </li>
+    </div>
     <li>
         <form id="edit-subtask-form">
             <input type="text" id="edit-subtask-input" name="edit-subtask-input" placeholder="current Subtask">
-            <input type="button">
-            <input type="submit" value="">
+            <div class="control-btns">
+                <button type="button"><img class="delete-icon" src="/assets/Icons/taskBoard/delete.png"></button>
+                <hr class="btn-sep">
+                <input type="image" class="check-icon" src="/assets/Icons/taskBoard/check.png">
+            </div>
         </form>
     </li>
 </ul>
