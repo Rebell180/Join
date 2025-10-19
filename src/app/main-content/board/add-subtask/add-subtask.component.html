@@ -1,1 +1,19 @@
-<p>add-subtask works!</p>
+<form id="add-subtask-form">
+    <label for="add-subtask-input">Subtasks</label>
+    <input type="text" id="add-subtask-input" name="add-subtask-input" placeholder="Add new Subtask">
+    <input type="reset" value="">
+    <input type="submit" value="">
+</form>
+<ul>
+    <li>Subtask
+        <button class="edit-contrl"><img src="/assets/Icons/taskBoard/edit.png" alt="edit Subtask"></button>
+        <button class="edit-contrl"><img src="/assets/Icons/taskBoard/delete.png" alt="delete Subtask"></button>
+    </li>
+    <li>
+        <form id="edit-subtask-form">
+            <input type="text" id="edit-subtask-input" name="edit-subtask-input" placeholder="current Subtask">
+            <input type="button">
+            <input type="submit" value="">
+        </form>
+    </li>
+</ul>
