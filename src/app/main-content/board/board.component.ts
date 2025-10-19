@@ -4,13 +4,15 @@ import { Task } from '../../shared/classes/task';
 import { FirebaseDBService } from '../../shared/services/firebase-db.service';
 import { Unsubscribe } from '@angular/fire/firestore';
 import { CommonModule } from '@angular/common';
+import { TaskModalComponent } from "../../shared/components/modals/task-modal/task-modal.component";
 
 @Component({
   selector: 'section[board]',
   standalone: true,
   imports: [
     SearchTaskComponent,
-    CommonModule
+    CommonModule,
+    TaskModalComponent
 ],
   templateUrl: './board.component.html',
   styleUrls: ['./board.component.scss']
