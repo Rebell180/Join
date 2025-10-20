@@ -31,10 +31,10 @@ export class Task implements DBObject{
 	category: Category = Category.TASK;
 
 	/** an array of contact ids which are assigned to task */
-	assignedTo: Array<Contact> = [];
+	assignedTo: Array<string> = [];
 
 	/** an indicator wether this task has subtasks */
-	subtasks: Array<SubTask> = [];
+	subtasks: boolean = false;
 
 	/** defines the current status of Task */
 	status: TaskStatusType = TaskStatusType.TODO;
