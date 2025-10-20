@@ -1,9 +1,13 @@
 @use './../../../../../../public/styles/all_styles.scss' as all;
 
 :host {
+	border-radius: 1.5rem;
+	width: 40%;
+	z-index: 200;
+	top: -20rem;
 
 	.task-modal-container {
-		@include all.size($w: 25rem, $h: auto);
+		@include all.size($h: 80dvh);
 		@include all.marpad($pad: 1.5rem);
 		background: rgb(254, 253, 253);
 		border-radius: 1rem;
@@ -40,64 +44,84 @@
 			@include all.size($h: auto);
 			@include all.limiter();
 			white-space: wrap;
-			font-size: 2.5rem;
-			font-family: 'Interbold', sans-serif;
+			font-size: 4.5rem;
+			font-family: 'Inter', sans-serif;
+			font-weight: bold;
 		}
 
 		.description {
-			@include all.size($h: 2rem);
+			@include all.size($h: 2rauto);
 			@include all.limiter();
 			white-space: wrap;
-			font-size: 1.5rem;
+			font-size: 2rem;
+			height: 5dvh;
+			display: flex;
+			align-items: center;
 		}
 
 		.task-modal-dueDate-container {
 			display: flex;
 			align-items: center;
 			gap: 2rem;
-
-			p {
-				font-size: 1.2rem;
-			}
+			height: 4dvh;
+			display: flex;
+			align-items: center;
+			font-size: 1.7rem;
 		}
 
 		.task-modal-priority-container {
 			display: flex;
 			align-items: center;
 			gap: 2rem;
-
-			p {
-				font-size: 1.2rem;
-			}
+			height: 5dvh;
+			display: flex;
+			align-items: center;
 
 			.task-modal-priority {
 				display: flex;
 				align-items: center;
+				justify-content: center;
 				gap: 1rem;
+				height: 5dvh;
+				width: 30%;
 
 				p {
-					font-size: 1.2rem;
-					font-family: 'Interbold', sans-serif;
+					font-size: 1.6rem;
 				}
 
 				img {
-					@include all.size($w: 1.5rem, $h: 1rem);
+					@include all.size($w: 2rem, $h: 1.2rem);
 				}
 			}
 		}
 
 		.task-modal-assigned-container {
-
-			p {
-				font-size: 1.2rem;
+			height: 20dvh;
+			gap: 2rem;
+			margin-top: 2rem;
 			}
 
-			.icon-name {
-				border: 2px solid red;
+		.task-modal-subtasks {
+			height: 10dvh;
+			display: flex;
+			flex-direction: column;
+		}
+
+		.task-option-container {
+			display: flex;
+			justify-content: end;
+			gap: 1rem;
+
+			button {
 				display: flex;
 				align-items: center;
-				gap: 2rem;
 			}
+		}
+
+		h3 {
+			font-size: 2rem;
+			font-family: 'Inter', sans-serif;
+			font-weight: 300;
 		}
 	}
 }

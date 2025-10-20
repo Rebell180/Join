@@ -1,39 +1,50 @@
 <div class="task-modal-container">
 	<div class="task-modal-header">
-		<h2 [ngClass]="{blue: task.category == Category.USERSTORY, green: task.category == Category.TECHNICAL}">
-			{{task.category}}</h2>
+		<h2 [ngClass]="{ blue: task.category == Category.USERSTORY, green: task.category == Category.TECHNICAL}">
+			{{ task.category }}
+		</h2>
 
 		<div class="task-modal-close-btn">
-			<button type="button" (click)="closeModal()">X</button>
+			<button tyh3e="button">X</button>
 		</div>
 	</div>
 
-	<div class="title limiter">{{task.title}}</div>
-	<div class="description limiter">{{task.description}}</div>
+	<div class="title limiter">{{ task.title }}</div>
+	<div class="description limiter">{{ task.description }}</div>
 
 	<div class="task-modal-dueDate-container">
-		<p>Due date:</p> {{task.dueDate}}
+		<h3>Due date:</h3>
+		<p>{{ task.dueDate }}</p>
 	</div>
 
 	<div class="task-modal-priority-container">
-		<p>Priority:</p>
+		<h3>Priority:</h3>
 		<div class="task-modal-priority">
-			<p>{{task.priority}}</p>
-			<img src="assets/Icons/taskBoard/{{ task.priority | lowercase }}Task.png" alt="Priority Icon">
+			<p>{{ task.priority }}</p>
+			<img src="assets/Icons/taskBoard/{{ task.priority | lowercase }}Task.png" alt="priority Icon" />
 		</div>
 	</div>
 
 	<div class="task-modal-assigned-container">
-		<p>assignedTo: </p>
-		<div class="icon-name">
+		<h3>assignedTo:</h3>
 			<app-contact-icon-list [contacts]="contacts"></app-contact-icon-list>
 			@for (contact of contacts; track contact.id) {
-			{{contact.firstname}}{{contact.lastname}}
+			{{ contact.firstname }}{{ contact.lastname }}
 			}
-		</div>
 	</div>
 
 	<div class="task-modal-subtasks">
-		{{task.subtasks}}
+		<h3>Subtasks:</h3>
+		{{ task.subtasks }}
+	</div>
+
+	<div class="task-option-container">
+		<button>
+			<img class="delete-btn" src="assets/Icons/taskBoard/delete.png" alt="" />Delete
+		</button>
+		<hr>
+		<button>
+			<img src="assets/Icons/taskBoard/edit.png" alt="" />Edit
+		</button>
 	</div>
 </div>

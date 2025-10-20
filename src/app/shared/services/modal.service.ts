@@ -94,7 +94,5 @@ export class ModalService {
     this.appRef.attachView(componentRef.hostView);
     document.body.appendChild(componentRef.location.nativeElement);
   }
-
-
   // #endregion methods
 }

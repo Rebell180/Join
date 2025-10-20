@@ -56,8 +56,8 @@ interface TaskObject {
   imports: [
     SearchTaskComponent,
     CommonModule,
-    TaskListColumnComponent
-  ],
+    TaskListColumnComponent,
+],
   templateUrl: './board.component.html',
   styleUrl: './board.component.scss'
 })

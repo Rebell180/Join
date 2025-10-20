@@ -1,4 +1,4 @@
-import { Component, input, InputSignal } from '@angular/core';
+import { Component, inject, input, InputSignal } from '@angular/core';
 import { Task } from '../../../shared/classes/task';
 import { CommonModule } from '@angular/common';
 import { TaskColumnItemComponent } from './task-column-item/task-column-item.component';
