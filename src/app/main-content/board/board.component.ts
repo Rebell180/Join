@@ -23,8 +23,11 @@ import { SubTask } from '../../shared/classes/subTask';
 })
 export class BoardComponent implements OnInit, OnDestroy {
   // #region Attrbutes
+  // Primary Data
   private tasks: Task[] = [];
   private shownTasks: Task[] = [];
+  private contacts: Contact[] = [];
+  private subtasks: SubTask[] = [];
   protected taskLists: {
     listName: string,
     status: TaskStatusType
@@ -38,13 +41,12 @@ export class BoardComponent implements OnInit, OnDestroy {
   // Database
   private fs: Firestore = inject(Firestore);
   private unsubTasks!: Unsubscribe;
+  private unsubContacts!: Unsubscribe;
+  private unsubSubtasks!: Unsubscribe;
   // #endregion
 
   ngOnInit(): void {
-    this.unsubTasks = this.subscribeTasks( tasks => {
-      this.tasks = tasks;
-      this.shownTasks = tasks;
-    });
+    this.unsubContacts = this.subscribeContacts();
   }
 
   ngOnDestroy(): void {
@@ -52,24 +54,27 @@ export class BoardComponent implements OnInit, OnDestroy {
   }
 
   // #region methods
-  /**
-   * Subscribes task-collection.
-   *  @returns - Unsubscribe for tasks-collection
-   */
-  private subscribeTasks(callback: (tasks: Task[]) => void): Unsubscribe {
-    const tasks: Task[] = [];
-    return onSnapshot(collection(this.fs, 'tasks'), tasksnap => {
-      tasksnap.docs.map(doc => tasks.push(this.mapTask(doc.data())));
-      callback(tasks);
-    });
-  }
+  // #region database
   
+  private subscribeContacts(): Unsubscribe {
+    return onSnapshot(collection(this.fs, 'contacts'), contactsSnap => {
+      contactsSnap.docs.map( doc => {this.contacts.push(this.mapContact(doc.data()))})
+    })
+  }
+
+  /**
+   * Createte a contact.
+   * @param obj - Object from Database
+   * @returns Instance of contact.
+   */
+  private mapContact(obj: any): Contact {return new Contact(obj);}
   /**
    * Creates a task.
    * @param obj - DataObject to map/
    * @returns - Instance of task.
    */
   private mapTask(obj:any) { return new Task(obj)}
+  // #endregion
 
   // #region taskmgmt
   /**
