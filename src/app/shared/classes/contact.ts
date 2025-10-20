@@ -57,6 +57,14 @@ export class Contact implements DBObject {
     }
 
     // #region Methods
+
+    /**
+     * Returns the complete name containing firstname and lastname.
+     * @returns full name as string
+     */
+    getFullName(): string {
+        return (this.firstname + ' ' + this.lastname);
+    }
     
     /**
      * Compares this object, with another object

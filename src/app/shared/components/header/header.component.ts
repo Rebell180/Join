@@ -1,54 +1,15 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, HostListener, inject, Output, output, OutputEmitterRef } from '@angular/core';
-import { ModalService } from '../../services/modal.service';
-import { SectionType } from '../../enums/section-type';
+import { Component} from '@angular/core';
 
 @Component({
+  /* Wenn der Selector so in eckige Klammern gesceiben wird,
+   * bedeutet das, die Komponente in ein normales Header-Tag eingebunden wird
+   * Der Name der Komponente app-header muss sich dabei vom Tag <header> unterscheien. */
   selector: 'header[app-header]',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule], 
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  styleUrl: './header.component.scss'
 })
 export class HeaderComponent {
-  @Output() selectedSection = new EventEmitter<SectionType>();
-  protected modalService = inject(ModalService);
-
-  isMenuVisible = false;
-
-  toggleMenu(): void {
-    this.isMenuVisible = !this.isMenuVisible;
-  }
-
-  logout(): void {
-    console.log('User logged out');
-    this.closeMenu();
-  }
-
-  closeMenu(): void {
-    this.isMenuVisible = false;
-  }
-
-  openPrivacy() {
-    this.selectedSection.emit(SectionType.PRIVACY);
-    this.closeMenu();
-  }
-
-  openLegal() {
-    this.selectedSection.emit(SectionType.LEGAL);
-    this.closeMenu();
-  }
-
-  openHelpFromMenu() {
-    this.closeMenu(); // Menü zuerst schließen
-    this.modalService.openHelpModal(); // Dann Modal öffnen
-  }
-
-  @HostListener('document:click', ['$event'])
-  onClickOutside(event: Event): void {
-    const target = event.target as HTMLElement;
-    if (!target.closest('.profile-container')) {
-      this.closeMenu();
-    }
-  }
 }

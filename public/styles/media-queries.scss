@@ -28,12 +28,3 @@
         @content;
     }
 }
-
-@mixin tablet-smart() {
-    @include tablet() {
-        @content;
-    }
-    @include smart() {
-        @content;
-    }
-}

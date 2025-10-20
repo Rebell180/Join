@@ -1,11 +1,1 @@
 @use './../../../../public/styles/all_styles.scss' as all;
-
-:host {
-    @include all.size($w: 100%, $h: 100%);
-    @include all.fl($jc: center, $alit: center);
-    padding: 5rem 3% 2rem 3%;
-    
-    #add-task-content{
-        @include all.size($w: 100%, $h: 100%);
-    }
-}

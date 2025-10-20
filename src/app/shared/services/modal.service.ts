@@ -8,7 +8,7 @@ import { Contact } from '../classes/contact';
  * 
  * Explanation :
  * 
- * If you want to add a new modal there are a few things to now. 
+ * If you want to add a new modal there are a few things to know. 
  * At first create a method like 'openAddContactModal()'. Feel free to submit parameters in here. 
  * Inside of your method you can follow these steps: 
  * 
