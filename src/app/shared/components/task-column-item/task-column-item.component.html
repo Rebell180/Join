@@ -1,4 +1,4 @@
-<div class="task-column-container">
+<div class="task-column-container" (click)="modalService.openTaskDetailModal(task())">
 	<h2 [ngClass]="{blue: task().category == Category.USERSTORY, green: task().category == Category.TECHNICAL}">{{task().category}}</h2>
 
 	<p class="title limiter">{{task().title}}</p>

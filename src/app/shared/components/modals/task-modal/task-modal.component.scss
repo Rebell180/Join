@@ -1,22 +1,23 @@
 @use './../../../../../../public/styles/all_styles.scss' as all;
 
 :host {
-	border-radius: 1.5rem;
-	width: 40%;
-	z-index: 200;
-	top: -20rem;
+	@include all.size();
+	@include all.fl($jc: center, $alit: center);
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 30;
 
-	.task-modal-container {
-		@include all.size($h: 80dvh);
-		@include all.marpad($pad: 1.5rem);
+	.task-modal-detail-container {
+		@include all.size($w: 50dvh, $h: 80dvh);
+		@include all.marpad($pad: 2.5rem);
 		background: rgb(254, 253, 253);
 		border-radius: 1rem;
 		box-shadow: 0 0 5px lightgrey;
 		font-family: 'InterRegular', sans-serif;
 
 		.task-modal-header {
-			display: flex;
-			justify-content: space-between;
+			@include all.fl($jc: space-between);
 
 			h2 {
 				@include all.size($w: fit-content, $h: auto);
@@ -35,8 +36,14 @@
 			}
 
 			.task-modal-close-btn {
-				width: 16px;
-				height: 16px;
+				@include all.size($w: 1.6rem, $h: 1.6rem);
+
+				button {
+
+					&:hover {
+						color: #29ABE2;
+					}
+				}
 			}
 		}
 
@@ -50,38 +57,27 @@
 		}
 
 		.description {
+			@include all.fl($alit: center);
 			@include all.size($h: 2rauto);
 			@include all.limiter();
 			white-space: wrap;
 			font-size: 2rem;
 			height: 5dvh;
-			display: flex;
-			align-items: center;
 		}
 
 		.task-modal-dueDate-container {
-			display: flex;
-			align-items: center;
-			gap: 2rem;
+			@include all.fl($alit: center, $gap: 2rem);
 			height: 4dvh;
-			display: flex;
-			align-items: center;
 			font-size: 1.7rem;
 		}
 
 		.task-modal-priority-container {
-			display: flex;
-			align-items: center;
+			@include all.fl($alit: center);
 			gap: 2rem;
 			height: 5dvh;
-			display: flex;
-			align-items: center;
 
 			.task-modal-priority {
-				display: flex;
-				align-items: center;
-				justify-content: center;
-				gap: 1rem;
+				@include all.fl($alit: center, $jc: center, $gap: 1rem);
 				height: 5dvh;
 				width: 30%;
 
@@ -96,25 +92,46 @@
 		}
 
 		.task-modal-assigned-container {
-			height: 20dvh;
-			gap: 2rem;
-			margin-top: 2rem;
+			height: 21dvh;
+			overflow-y: auto;
+			@include all.marpad($mar: 2rem 0 0 0);
+
+			.task-modal-assigned-detail {
+				@include all.fl($flexdir: column, $gap: 1rem);
+				@include all.marpad($pad: 2rem);
+
+				.contact-item {
+					@include all.fl($alit: center, $gap: 2rem);
+
+					.contact-icon {
+						@include all.size($w: 4.2rem, $minW: 4.2rem, $h: 4.2rem, $minH: 4.2rem);
+					}
+
+					.contact-name {
+						font-size: 1.5rem;
+					}
+				}
 			}
+
+		}
 
 		.task-modal-subtasks {
 			height: 10dvh;
-			display: flex;
-			flex-direction: column;
+			@include all.fl($flexdir: column);
+			@include all.marpad($mar: 2rem 0);
+
+			.task-modal-input {
+				@include all.size();
+				@include all.marpad($mar: 2rem);
+				@include all.fl($flexdir: column, $gap: 1rem);
+			}
 		}
 
 		.task-option-container {
-			display: flex;
-			justify-content: end;
-			gap: 1rem;
+			@include all.fl($jc: end, $gap: 1rem);
 
 			button {
-				display: flex;
-				align-items: center;
+				@include all.fl($alit: center);
 			}
 		}
 

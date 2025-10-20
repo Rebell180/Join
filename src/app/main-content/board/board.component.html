@@ -5,6 +5,6 @@
 </header>
 <div class="task-list-wrapper">
     @for (list of taskLists; track list.listName) {
-        <app-task-list-column id="task-list-comumn-{{ list.listName }}" [listName]="list.listName" [tasks]="getTaskForList(list.status)"></app-task-list-column>
+        <app-task-list-column id="task-list-column-{{ list.listName }}" [listName]="list.listName" [tasks]="getTaskForList(list.status)"></app-task-list-column>
     }
 </div>

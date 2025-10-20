@@ -26,7 +26,6 @@
 .add-task-section {
     @include all.size();
     @include all.marpad($pad: 3dvw);
-    border: 2px solid red;
     background: #ededed;
     overflow-y: auto;
 

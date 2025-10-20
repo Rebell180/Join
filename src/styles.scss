@@ -1,22 +1,6 @@
 // TODO: Font Roboto muss hier noch eingebunden und herunter geladen werden.
 @use './../public/styles/all_styles.scss' as all;
 
-@font-face {
-    font-family: Inter;
-    src: url("../public/assets/Fonts/Inter_18pt-ExtraLight.ttf") format("truetype");
-}
-
-@font-face {
-    font-family: Inter;
-    font-weight: bold;
-    src: url("../public/assets/Fonts/Inter_28pt-Bold.ttf") format("truetype");
-}
-
-@font-face {
-    font-family: OpenSans;
-    src: url("../public/assets/Fonts/OpenSans-Regular.ttf");
-}
-
 * {
     position: relative;
     margin: 0;
@@ -90,13 +74,9 @@ input {
     border: unset;
 }
 
-@font-face {
-    font-family: "Roboto";
-    src: url("/assets/Fonts/Roboto/static/Roboto-Medium.ttf") format("truetype");
-}
-
-input {
-    border: unset;
+.d_flex {
+    display: flex;
+    z-index: 1000;
 }
 
 h1 {

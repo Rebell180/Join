@@ -1,10 +1,15 @@
 @font-face {
     font-family: Inter;
-    src: url(../assets/Fonts/Inter_18pt-Regular.ttf) format("truetype");
+    src: url("../public/assets/Fonts/Inter_18pt-ExtraLight.ttf") format("truetype");
 }
 
 @font-face {
     font-family: Interbold;
     font-weight: bold;
-    src: url(../assets/Fonts/Inter_28pt-Bold.ttf) format("truetype");
+    src: url("../public/assets/Fonts/Inter_28pt-Bold.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: OpenSans;
+    src: url(../public/assets/Fonts/OpenSans-Regular.ttf);
 }

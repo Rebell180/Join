@@ -1,11 +1,12 @@
-import { Component, input, InputSignal } from '@angular/core';
-import { Task } from '../../../../shared/classes/task';
-import { ContactIconListComponent } from "../../../../shared/components/contact-icon-list/contact-icon-list.component";
-import { Contact } from '../../../../shared/classes/contact';
-import { Priority } from '../../../../shared/enums/priority.enum';
-import { Category } from '../../../../shared/enums/category.enum';
+import { Component, inject, input, InputSignal } from '@angular/core';
+import { Task } from '../../classes/task';
+import { ContactIconListComponent } from "../contact-icon-list/contact-icon-list.component";
+import { Contact } from '../../classes/contact';
+import { Priority } from '../../enums/priority.enum';
+import { Category } from '../../enums/category.enum';
 import { CommonModule } from '@angular/common';
-import { TaskStatusType } from '../../../../shared/enums/task-status-type';
+import { TaskStatusType } from '../../enums/task-status-type';
+import { ModalService } from '../../services/modal.service';
 
 @Component({
   selector: 'app-task-column-item',
@@ -16,6 +17,7 @@ import { TaskStatusType } from '../../../../shared/enums/task-status-type';
 export class TaskColumnItemComponent {
 
   task: InputSignal<Task> = input.required<Task>();
+  protected modalService: ModalService = inject(ModalService);
 
   subtasks: { title: string, completed: boolean }[] = [
     { title: 'Analyse abschließen', completed: true },
