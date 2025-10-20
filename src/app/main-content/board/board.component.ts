@@ -9,6 +9,7 @@ import { TaskStatusType } from '../../shared/enums/task-status-type';
 import { TaskListColumnComponent } from './task-list-column/task-list-column.component';
 import { Contact } from '../../shared/classes/contact';
 import { SubTask } from '../../shared/classes/subTask';
+import { ContactObject, SubTaskObject } from '../../shared/interfaces/database-result';
 
 @Component({
   selector: 'section[board]',
@@ -47,35 +48,39 @@ export class BoardComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.unsubContacts = this.subscribeContacts();
+    this.unsubSubtasks = this.subscribeSubtasks();
   }
 
   ngOnDestroy(): void {
+    this.unsubContacts();
+    this.unsubSubtasks();
     this.unsubTasks();
   }
 
   // #region methods
   // #region database
-  
+  /**
+   * Subscribes the contacts.
+   * @returns - Unsubscribe of Contacts.
+   */
   private subscribeContacts(): Unsubscribe {
     return onSnapshot(collection(this.fs, 'contacts'), contactsSnap => {
-      contactsSnap.docs.map( doc => {this.contacts.push(this.mapContact(doc.data()))})
-    })
+      contactsSnap.docs.map( doc => {this.contacts.push(new Contact(doc.data() as ContactObject))});
+      this.sortContacts();
+    });
   }
 
   /**
-   * Createte a contact.
-   * @param obj - Object from Database
-   * @returns Instance of contact.
+   * Subscribes the subtasks
+   * @returns - Unsubscribe of Sutasks
    */
-  private mapContact(obj: any): Contact {return new Contact(obj);}
-  /**
-   * Creates a task.
-   * @param obj - DataObject to map/
-   * @returns - Instance of task.
-   */
-  private mapTask(obj:any) { return new Task(obj)}
-  // #endregion
+  private subscribeSubtasks(): Unsubscribe {
+    return onSnapshot(collection(this.fs, 'subtask'), subtasksSnap => {
+      subtasksSnap.docs.map( doc => {this.subtasks.push(new SubTask(doc.data() as SubTaskObject))})
+    })
+  }
 
+  
   // #region taskmgmt
   /**
    * Filters all Tasks by user input.
@@ -100,6 +105,19 @@ export class BoardComponent implements OnInit, OnDestroy {
   getTaskForList(status: TaskStatusType): Task[] {
     return this.shownTasks.filter(task => task.status == status)
   }
+
+  /**Sort contacts by  firstname, lastname. */
+  private sortContacts() {
+    this.contacts.sort((a, b) => {
+      const firstCompare: number = a.firstname.localeCompare(b.firstname, 'de');
+      if (firstCompare == 0) {
+        return a.lastname.localeCompare(b.lastname, 'de');
+      }
+      return firstCompare;
+    })
+  }
+
+
   // #endregion
   // #endregion
 }

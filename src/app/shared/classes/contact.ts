@@ -1,3 +1,4 @@
+import { ContactObject } from "../interfaces/database-result";
 import { DBObject } from "../interfaces/db-object";
 
 /**
@@ -44,7 +45,7 @@ export class Contact implements DBObject {
      *      iconColor: string   => background-color of contact-icon 
      * }
      */
-    constructor(data?: { id: string, firstname: string, lastname: string, group: string, email: string, tel: string, iconColor: string }) {   
+    constructor(data?: ContactObject) {   
         if(data) {
             this.id = data.id;
             this.firstname = data.firstname,
