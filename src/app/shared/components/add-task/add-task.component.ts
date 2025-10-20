@@ -70,10 +70,10 @@ export class AddtaskComponent implements OnDestroy {
   }
 
   toggleAddContactToAssignTo(contact: Contact) {
-    if(this.currentTask.assignedTo.includes(contact)){
+    if(this.currentTask.assignedTo.includes(contact.id)){
       // remove
     } else {
-      this.currentTask.assignedTo.push(contact);
+      this.currentTask.assignedTo.push(contact.id);
     }
   }
 

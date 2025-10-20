@@ -30,8 +30,8 @@ export class Task implements DBObject{
 	/** category of task, defines which category this task belongs */
 	category: Category = Category.TASK;
 
-	/** an array of contact ids which are assigned to task */
-	assignedTo: Array<string> = [];
+	/** ids of contacts, who assigned to this task */
+	assignedTo: string[] = [];
 
 	/** an indicator wether this task has subtasks */
 	subtasks: boolean = false;
@@ -53,7 +53,7 @@ export class Task implements DBObject{
 	 * 		subtasks: Array<SubTask>	=> an indicator wether this task has subtasks
      * }
      */
-	constructor(data?: { id: string, title: string, description: string, dueDate: Date, priority: Priority, category: Category, assignedTo: Array<Contact>, subtasks: Array<SubTask>, status: TaskStatusType }) {
+	constructor(data?: { id: string, title: string, description: string, dueDate: Date, priority: Priority, category: Category, assignedTo: string[], subtasks: boolean, status: TaskStatusType }) {
 		if(data) {
 			this.id = data.id;
 			this.title = data.title;

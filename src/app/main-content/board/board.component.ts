@@ -1,7 +1,7 @@
 import { Component, inject, input, InputSignal, OnDestroy, OnInit } from '@angular/core';
 import { SearchTaskComponent } from './search-task/search-task.component';
 import { Task } from '../../shared/classes/task';
-import { collection, CollectionReference, doc, DocumentReference, Firestore, onSnapshot, Unsubscribe } from '@angular/fire/firestore';
+import { collection, CollectionReference, doc, DocumentData, DocumentReference, Firestore, onSnapshot, Unsubscribe } from '@angular/fire/firestore';
 import { CommonModule } from '@angular/common';
 import { Priority } from '../../shared/enums/priority.enum';
 import { Category } from '../../shared/enums/category.enum';
@@ -38,8 +38,6 @@ export class BoardComponent implements OnInit, OnDestroy {
   // Database
   private fs: Firestore = inject(Firestore);
   private unsubTasks!: Unsubscribe;
-  private contactSubscribers: Unsubscribe[] = [];
-  private subtaskSubscribers: Unsubscribe[] = [];
   // #endregion
 
   ngOnInit(): void {
@@ -51,8 +49,6 @@ export class BoardComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.unsubTasks();
-    this.unsubscribeAll(this.contactSubscribers);
-    this.unsubscribeAll(this.subtaskSubscribers);
   }
 
   // #region methods
@@ -61,9 +57,20 @@ export class BoardComponent implements OnInit, OnDestroy {
    *  @returns - Unsubscribe for tasks-collection
    */
   private subscribeTasks(callback: (tasks: Task[]) => void): Unsubscribe {
-        
+    const tasks: Task[] = [];
+    return onSnapshot(collection(this.fs, 'tasks'), tasksnap => {
+      tasksnap.docs.map(doc => tasks.push(this.mapTask(doc.data())));
+      callback(tasks);
+    });
   }
   
+  /**
+   * Creates a task.
+   * @param obj - DataObject to map/
+   * @returns - Instance of task.
+   */
+  private mapTask(obj:any) { return new Task(obj)}
+
   // #region taskmgmt
   /**
    * Filters all Tasks by user input.
