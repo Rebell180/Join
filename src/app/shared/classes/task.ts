@@ -33,8 +33,14 @@ export class Task implements DBObject{
 	/** ids of contacts, who assigned to this task */
 	assignedTo: string[] = [];
 
+	/** All contacts of  Task */
+	contacts: Contact[] = [];
+
 	/** an indicator wether this task has subtasks */
-	subtasks: boolean = false;
+	hasSubtasks: boolean = false;
+	
+	/** Includs all subtasks. */
+	subtasks: SubTask[] = [];
 
 	/** defines the current status of Task */
 	status: TaskStatusType = TaskStatusType.TODO;
@@ -53,7 +59,7 @@ export class Task implements DBObject{
 	 * 		subtasks: Array<SubTask>	=> an indicator wether this task has subtasks
      * }
      */
-	constructor(data?: { id: string, title: string, description: string, dueDate: Date, priority: Priority, category: Category, assignedTo: string[], subtasks: boolean, status: TaskStatusType }) {
+	constructor(data?: { id: string, title: string, description: string, dueDate: Date, priority: Priority, category: Category, assignedTo: string[], hasSubtasks: boolean, status: TaskStatusType }) {
 		if(data) {
 			this.id = data.id;
 			this.title = data.title;
@@ -62,7 +68,7 @@ export class Task implements DBObject{
 			this.priority = data.priority;
 			this.category = data.category;
 			this.assignedTo = data.assignedTo;
-			this.subtasks = data.subtasks;
+			this.hasSubtasks = data.hasSubtasks;
 			this.status = data.status;
 		}
 	}
