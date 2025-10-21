@@ -1,15 +1,13 @@
 import { Component, inject, input, InputSignal, OnDestroy, OnInit } from '@angular/core';
 import { SearchTaskComponent } from './search-task/search-task.component';
 import { Task } from '../../shared/classes/task';
-import { collection, CollectionReference, doc, DocumentData, DocumentReference, Firestore, onSnapshot, Unsubscribe } from '@angular/fire/firestore';
+import { collection, Firestore, onSnapshot, Unsubscribe } from '@angular/fire/firestore';
 import { CommonModule } from '@angular/common';
-import { Priority } from '../../shared/enums/priority.enum';
-import { Category } from '../../shared/enums/category.enum';
 import { TaskStatusType } from '../../shared/enums/task-status-type';
 import { TaskListColumnComponent } from './task-list-column/task-list-column.component';
 import { Contact } from '../../shared/classes/contact';
 import { SubTask } from '../../shared/classes/subTask';
-import { ContactObject, SubTaskObject } from '../../shared/interfaces/database-result';
+import { ContactObject, SubTaskObject, TaskObject } from '../../shared/interfaces/database-result';
 
 @Component({
   selector: 'section[board]',
@@ -49,6 +47,7 @@ export class BoardComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.unsubContacts = this.subscribeContacts();
     this.unsubSubtasks = this.subscribeSubtasks();
+    this.unsubTasks = this.subscribeTasks();
   }
 
   ngOnDestroy(): void {
@@ -80,6 +79,18 @@ export class BoardComponent implements OnInit, OnDestroy {
     })
   }
 
+  private subscribeTasks(): Unsubscribe {
+    return onSnapshot(collection(this.fs, 'tasks'), taskSnap => {
+      taskSnap.docs.map( doc => {this.tasks.push(new Task(doc.data() as TaskObject))});
+      for (let i = 0; i < this.tasks.length; i++) {
+        this.addContactsToTask(i);
+        this.addSubtasktoTask(i);
+      }
+      this.sortTasks();
+      this.shownTasks = this.tasks;
+    })
+  }
+
   
   // #region taskmgmt
   /**
@@ -106,6 +117,32 @@ export class BoardComponent implements OnInit, OnDestroy {
     return this.shownTasks.filter(task => task.status == status)
   }
 
+  /**
+   * Adds all contacts to a task.
+   * @param index - Positon in Task-Array.
+   */
+  private addContactsToTask(index:number) {
+    for (let i = 0; i < this.tasks[index].assignedTo.length; i++) {
+      for (let j = 0; j < this.contacts.length; j++) {
+        if (this.tasks[index].assignedTo[i] == this.contacts[j].id) {
+          this.tasks[index].contacts.push(this.contacts[j]);
+        }
+      }
+    }
+  }
+
+  /**
+   * Adds all subtasks to a task.
+   * @param index - Position in Task-Array.
+   */
+  private addSubtasktoTask(index: number) {
+    for (let i = 0; i < this.subtasks.length; i++) {
+      if (this.tasks[index].hasSubtasks && this.subtasks[i].taskId == this.tasks[index].id) {
+        this.tasks[index].subtasks.push(this.subtasks[i]);
+      }
+    }
+  }
+
   /**Sort contacts by  firstname, lastname. */
   private sortContacts() {
     this.contacts.sort((a, b) => {
@@ -117,7 +154,10 @@ export class BoardComponent implements OnInit, OnDestroy {
     })
   }
 
-
+  /** Sorts Task-list by Due-Date ascending. */
+  private sortTasks() {
+    this.tasks.sort((a, b) => a.dueDate.seconds - b.dueDate.seconds)
+  }
   // #endregion
   // #endregion
 }
