@@ -1,5 +1,10 @@
 <div class="task-column-container" (click)="modalService.openTaskDetailModal(task())">
-	<h2 [ngClass]="{blue: task().category == Category.USERSTORY, green: task().category == Category.TECHNICAL}">{{task().category}}</h2>
+	<div class="task-column-item-header">
+			<h2
+				[ngClass]="{ blue: task().category == Category.USERSTORY, green: task().category == Category.TECHNICAL}">
+				{{ task().category }}
+			</h2>
+		</div>
 
 	<p class="title limiter">{{task().title}}</p>
 	<p class="description limiter">{{task().description}}</p>
@@ -19,7 +24,7 @@
 	</div>
 	}
 	<div class="column-bottom-container">
-		<app-contact-icon-list [contacts]="contacts"></app-contact-icon-list>
+		<app-contact-icon-list [contacts]="task().contacts"></app-contact-icon-list>
 		<img src="assets/Icons/taskBoard/{{ task().priority | lowercase }}Task.png" alt="Priority Icon">
 	</div>
 </div>

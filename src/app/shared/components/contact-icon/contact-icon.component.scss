@@ -6,7 +6,7 @@
     height: 100%;
     border-radius: 50%;
     color: white;
-    container-type: size;
+    container-type: inline-size;
     span {
         @include all.fl($jc: center, $alit: center);
         @include all.size($w: 75%, $h: 75%);

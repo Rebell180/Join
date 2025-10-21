@@ -13,7 +13,7 @@
 
 	h2 {
 		@include all.size($w: fit-content, $h: 3rem);
-		@include all.marpad($pad: 0.5rem);
+		@include all.marpad($mar: 0 0 2rem 0, $pad: 0.5rem);
 		@include all.fl($jc: center);
 		color: white;
 		border-radius: 0.5rem;

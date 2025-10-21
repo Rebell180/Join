@@ -121,14 +121,15 @@
 		}
 
 		.task-modal-subtasks {
-			height: 10dvh;
+			@include all.size($h: 15dvh);
 			@include all.fl($flexdir: column);
 			@include all.marpad($mar: 2rem 0);
 
 			.task-modal-input {
-				@include all.size();
-				@include all.marpad($mar: 2rem);
-				@include all.fl($gap: 1rem);
+				@include all.size($w: 20dvw, $h: 2rem);
+				@include all.marpad($mar: 2rem 0 0 2rem);
+				@include all.fl($alit: center, $gap: 1rem);
+				font-size: 1.7rem;
 
 				input {
 					@include all.fl($alit: center);
@@ -137,10 +138,16 @@
 		}
 
 		.task-option-container {
-			@include all.fl($jc: end, $gap: 1rem);
+			@include all.fl($jc: end, $gap: 1rem, $alit: center);
+			padding: 1rem;
 
 			button {
 				@include all.fl($alit: center);
+			}
+
+			hr {
+				@include all.size($w: 0.2rem, $h: 3rem);
+				color: lightgrey
 			}
 		}
 

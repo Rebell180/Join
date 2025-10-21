@@ -31,7 +31,7 @@
 		<div class="task-modal-assigned-container">
 			<h3>assignedTo:</h3>
 			<div class="task-modal-assigned-detail">
-				@for (contact of contacts(); track contact.id) {
+				@for (contact of task().contacts; track contact.id) {
 				<div class="contact-item">
 					<app-contact-icon class="contact-icon {{ contact.iconColor }}"
 						[contact]="contact"></app-contact-icon>
@@ -45,16 +45,15 @@
 
 		<div class="task-modal-subtasks">
 			<h3>Subtasks:</h3>
+			@for (subtask of task().subtasks; track subtask.id) {
 			<div class="task-modal-input">
-				<input type="checkbox"> {{ task().subtasks }}
+				<input type="checkbox" [(ngModel)]=subtask.finished (click)="updateSubTaskStatus(subtask)"> {{ subtask.name }}
 			</div>
-			<div class="task-modal-input">
-				<input type="checkbox"> {{ task().subtasks }}
-			</div>
+			}
 		</div>
 
 		<div class="task-option-container">
-			<button>
+			<button (click)="deleteTask(task().id)">
 				<img class="delete-btn" src="assets/Icons/taskBoard/delete.png" alt="" />Delete
 			</button>
 			<hr>
