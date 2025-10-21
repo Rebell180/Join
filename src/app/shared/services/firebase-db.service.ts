@@ -172,6 +172,11 @@ export class FirebaseDBService {
     await updateDoc(docRef, object.toJSON());
   }
 
+  async taskUpdateInDB(collectionName: string, docId: string, data: any): Promise<void> {
+    const docRef = doc(this.firestore, collectionName, docId);
+    await updateDoc(docRef, data);
+  }
+
   /**
    * Deletes a document from firestore collection.
    * @param docId The id to remove.

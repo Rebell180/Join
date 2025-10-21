@@ -2,11 +2,11 @@
 
 :host {
 	@include all.fl();
-	@include all.size();
+	@include all.size($h: auto);
 }
 .task-column-container {
 	@include all.size();
-	@include all.marpad($pad: 1rem);
+	@include all.marpad($pad: 3rem);
 	background: rgb(254, 253, 253);
 	border-radius: 1rem;
 	box-shadow: 0 0 5px lightgrey;

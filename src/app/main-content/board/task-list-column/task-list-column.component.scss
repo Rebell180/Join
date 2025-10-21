@@ -3,6 +3,7 @@
 :host {
     @include all.fl($flexdir: column);
     @include all.size();
+    @include all.marpad($pad: 0 2rem);
 }
 
 header {

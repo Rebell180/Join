@@ -54,12 +54,11 @@ header {
 
 .task-list-wrapper {
     display: grid;
-    width: 100%;
-    height: 100%;
+    @include all.size();
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: 100%;
     gap: 3rem;
-    padding: 16px;
+    padding: 0 5rem;
     margin-top: 8rem;
     overflow-y: auto;
 
