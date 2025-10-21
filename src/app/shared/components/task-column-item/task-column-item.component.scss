@@ -6,7 +6,7 @@
 }
 .task-column-container {
 	@include all.size();
-	@include all.marpad($pad: 3rem);
+	@include all.marpad($mar: 0.5rem 0, $pad: 3rem);
 	background: rgb(254, 253, 253);
 	border-radius: 1rem;
 	box-shadow: 0 0 5px lightgrey;

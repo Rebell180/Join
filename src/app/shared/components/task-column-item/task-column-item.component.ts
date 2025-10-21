@@ -6,6 +6,7 @@ import { Category } from '../../enums/category.enum';
 import { CommonModule } from '@angular/common';
 import { ModalService } from '../../services/modal.service';
 import { Priority } from '../../enums/priority.enum';
+import { FirebaseDBService } from '../../services/firebase-db.service';
 
 @Component({
   selector: 'app-task-column-item',
@@ -15,16 +16,19 @@ import { Priority } from '../../enums/priority.enum';
 })
 export class TaskColumnItemComponent {
 
-  // contacts = [new Contact()];
+  protected fireDB: FirebaseDBService = inject(FirebaseDBService);
+  protected modalService: ModalService = inject(ModalService);
+
+  // contacts: InputSignal<Contact[]> = input.required<Contact[]>();
+  task: InputSignal<Task> = input.required<Task>();
+  // subtasks: InputSignal<SubTask[]> = input.required<SubTask[]>();
 
   contacts: Array<Contact> = [
     new Contact({ id: 'abcd', firstname: 'Marcus', lastname: 'Gühne', group: 'M', email: 'marcu@gmx.de', tel: '015245885', iconColor: 'blue' }),
     new Contact({ id: 'efgh', firstname: 'Sabine', lastname: 'Schmidt', group: 'S', email: 'sabine.schmidt@web.de', tel: '0171987654', iconColor: 'green' }),
-  ]
+  ];
 
   // task: Task = new Task({ id: 'fegt', title: 'headline show the Maininformation from Task', description: 'descriptions must be an informativ text', dueDate: '10.20.2025', priority: Priority.URGENT, category: Category.USERSTORY, assignedTo: ['a', 'b'], subtasks: false })
-  task: InputSignal<Task> = input.required<Task>();
-  protected modalService: ModalService = inject(ModalService);
 
   subtasks: { title: string, completed: boolean }[] = [
     { title: 'Analyse abschließen', completed: true },

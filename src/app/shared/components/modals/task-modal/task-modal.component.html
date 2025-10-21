@@ -31,7 +31,7 @@
 		<div class="task-modal-assigned-container">
 			<h3>assignedTo:</h3>
 			<div class="task-modal-assigned-detail">
-				@for (contact of contacts; track contact.id) {
+				@for (contact of contacts(); track contact.id) {
 				<div class="contact-item">
 					<app-contact-icon class="contact-icon {{ contact.iconColor }}"
 						[contact]="contact"></app-contact-icon>

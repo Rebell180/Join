@@ -10,5 +10,5 @@ import { ContactIconComponent } from "../contact-icon/contact-icon.component";
 })
 export class ContactIconListComponent {
 
-  public contacts: InputSignal<Contact[]> = input.required<Contact[]>();
+  public contacts: InputSignal<Contact[]> = input.required<Contact[]>(); 
 }
