@@ -98,7 +98,7 @@ export class BoardComponent implements OnInit, OnDestroy {
    * @param userSearch - Input from User-Searchbar.
    */
   filterTasks(userSearch: string) {
-    this.shownTasks = userSearch.length == 0 ? this.tasks : this.tasks.filter(task => task.title.includes(userSearch));
+    this.shownTasks = userSearch.length == 0 ? this.tasks : this.tasks.filter(task => task.title.toLowerCase().includes(userSearch.toLowerCase()));
   }
 
   /** Gets all Tasks, which has been searched.
