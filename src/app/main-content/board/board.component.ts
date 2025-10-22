@@ -81,6 +81,7 @@ export class BoardComponent implements OnInit, OnDestroy {
 
   private subscribeTasks(): Unsubscribe {
     return onSnapshot(collection(this.fs, 'tasks'), taskSnap => {
+      this.tasks = [];
       taskSnap.docs.map( doc => {this.tasks.push(new Task(doc.data() as TaskObject))});
       for (let i = 0; i < this.tasks.length; i++) {
         this.addContactsToTask(i);

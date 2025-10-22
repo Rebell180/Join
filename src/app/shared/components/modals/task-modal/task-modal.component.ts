@@ -1,4 +1,4 @@
-import { Component,inject,input, InputSignal, output } from '@angular/core';
+import { Component, inject, input, InputSignal, output } from '@angular/core';
 import { Task } from '../../../classes/task';
 import { Category } from '../../../enums/category.enum';
 import { CommonModule } from '@angular/common';
@@ -6,6 +6,7 @@ import { ContactIconComponent } from "../../contact-icon/contact-icon.component"
 import { FormsModule } from '@angular/forms';
 import { collection, deleteDoc, doc, Firestore, updateDoc } from '@angular/fire/firestore';
 import { SubTask } from '../../../classes/subTask';
+import { FirebaseDBService } from '../../../services/firebase-db.service';
 
 @Component({
   selector: 'app-task-modal',
@@ -21,6 +22,7 @@ export class TaskModalComponent {
 
   /** Firestore instance injected for database operations */
   firestore: Firestore = inject(Firestore);
+  fireDB: FirebaseDBService = inject(FirebaseDBService);
 
   /** Input signal representing the current task (required) */
   task: InputSignal<Task> = input.required<Task>();
@@ -47,22 +49,23 @@ export class TaskModalComponent {
   Category = Category;
 
   /**
-   * Updates the status of a given subtask in Firestore.
-   * @param subtask - The subtask object to update
-   * @returns A promise that resolves when the Firestore update is complete
+   * Updates the completion status of a subtask in the database.
+   *
+   * This function is typically triggered by a checkbox change event.
+   * It reads the `checked` state from the event, updates the `finished` property
+   * of the provided `SubTask` object accordingly, and saves the change asynchronously
+   * to the Firestore database.
+   *
+   * @async
+   * @param {SubTask} subtask - The subtask object whose completion status should be updated.
+   * @param {Event} event - The event triggered by the user interaction (e.g., checkbox toggle).
+   * @returns {Promise<void>} A promise that resolves once the update is complete.
    */
-  async updateSubTaskStatus(subtask: SubTask) {
-    await updateDoc(doc(collection(this.firestore, 'subtask'), subtask.id), subtask.toJSON());
-    console.log(subtask);
+  async updateSubTaskStatus(subtask: SubTask, event: Event) {
+    const checked = (event.target as HTMLInputElement).checked;
+    subtask.finished = checked;
+
+    await this.fireDB.updateInDB('subtask', subtask);
   }
 
-  /**
-   * Deletes a task from Firestore by its ID.
-   * @param taskId - The ID of the task to delete
-   * @returns A promise that resolves when the task is successfully deleted
-   */
-  async deleteTask(taskId: string) {
-  await deleteDoc(doc(collection(this.firestore, 'tasks'), taskId));
-  console.log(`Task mit ID ${taskId} wurde gelöscht.`);
-}
 }

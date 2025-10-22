@@ -47,13 +47,14 @@
 			<h3>Subtasks:</h3>
 			@for (subtask of task().subtasks; track subtask.id) {
 			<div class="task-modal-input">
-				<input type="checkbox" [(ngModel)]=subtask.finished (click)="updateSubTaskStatus(subtask)"> {{ subtask.name }}
+				<input type="checkbox" [checked]="subtask.finished" (change)="updateSubTaskStatus(subtask, $event)" />
+				{{ subtask.name }}
 			</div>
 			}
 		</div>
 
 		<div class="task-option-container">
-			<button (click)="deleteTask(task().id)">
+			<button (click)="fireDB.deleteInDB('tasks', task().id)">
 				<img class="delete-btn" src="assets/Icons/taskBoard/delete.png" alt="" />Delete
 			</button>
 			<hr>
