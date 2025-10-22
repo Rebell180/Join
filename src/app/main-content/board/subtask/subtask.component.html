@@ -14,7 +14,7 @@
         @for (subtask of task().subtasks; track subtask.id) {
             @if (subtask.editMode) {
                 <li>
-                    <form id="edit-subtask-form">
+                    <form id="edit-subtask-form" (submit)="renameSubtask($event,subtask)">
                         <input #editsub type="text" id="edit-subtask-input" name="edit-subtask-input" placeholder="current Subtask" [(ngModel)]="subtask.name">
                         <div class="control-btns">
                             <button type="button"><img class="delete-icon" src="/assets/Icons/taskBoard/delete.png"></button>
@@ -36,4 +36,5 @@
             }
         }
     </ul>
+    <p class="errmsg" #errmsg></p>
 }

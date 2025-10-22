@@ -1,8 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectorRef, Component, ElementRef, inject, input, InputSignal, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, Inject, inject, input, InputSignal, Renderer2, ViewChild } from '@angular/core';
 import { Task } from '../../../shared/classes/task';
 import { SubTask } from '../../../shared/classes/subTask';
 import { FormsModule } from '@angular/forms';
+import { collection, doc, Firestore, updateDoc } from '@angular/fire/firestore';
+import { FirebaseDBService } from '../../../shared/services/firebase-db.service';
 
 @Component({
   selector: 'app-subtask',
@@ -15,8 +17,14 @@ import { FormsModule } from '@angular/forms';
 })
 export class SubtaskComponent {
   task: InputSignal<Task> = input.required<Task>();
+  
   cdr: ChangeDetectorRef = inject(ChangeDetectorRef);
+  rd2: Renderer2 = inject(Renderer2);
+  fsdb: FirebaseDBService = Inject(FirebaseDBService);
+  fs: Firestore = inject(Firestore);
+
   @ViewChild('editsub') editsub!: ElementRef<HTMLInputElement>;
+  @ViewChild('errmsg') errmsg!: ElementRef<HTMLParagraphElement>;
 
   /**
    * Enables the Edit-Mode of Subtask.
@@ -25,10 +33,11 @@ export class SubtaskComponent {
   private endbleEdit(psubtask: SubTask): void {
     let editEnabled: boolean = this.task().subtasks.every(subtask => !subtask.editMode)
     if (editEnabled) {
+      this.sendErrMsg('');
       this.task().subtasks.forEach(subtask => {
         if (subtask.id == psubtask.id) subtask.editMode = true;
       });
-    }
+    } else this.sendErrMsg('Edit another subtask at first.');
   }
 
   /** Sets focus on edit subtask input */
@@ -42,11 +51,49 @@ export class SubtaskComponent {
   }
 
   /**
+   * Sende an error message to UI.
+   * @param msg - Message to send.
+   */
+  private sendErrMsg(msg: string): void {
+    this.rd2.setProperty(this.errmsg.nativeElement, 'innerText', msg)
+  }
+
+  /**
    * Enables SubtaskEdit-Mode and sets focus on input-field.
    * @param subtask - Instance of SubTask.
    */
   protected selectEditInput(subtask: SubTask) {
     this.endbleEdit(subtask);
     this.focusEdit();
+  }
+
+  /**
+   * Renames as subtask.
+   * @param event - Submit-Event.
+   * @param subtask - Subaskt to rename.
+   */
+  protected async renameSubtask(event: Event, subtask:SubTask): Promise<void> {
+    event.preventDefault();
+    if (subtask.name.length == 0) this.sendErrMsg('New name is requrired.');
+    else if (this.countSubtaskName(subtask) > 1) this.sendErrMsg('Subtask allreay exists.')
+    else {
+      this.sendErrMsg('');
+      await updateDoc(doc(this.fs, `subtask/${subtask.id}`), subtask.toJSON());
+      subtask.editMode = false;
+    }
+  }
+
+  /**
+   * Counts name of same subtask.
+   * @param subtask - Instance of Subtask.
+   * @returns - Number of same Subtask.
+   */
+  private countSubtaskName(subtask: SubTask): number {
+    let counter: number = 0;
+    if (!this.task().hasSubtasks) return 0;
+    this.task().subtasks.forEach (cSubtask => {
+      if(cSubtask.name == subtask.name) counter++;
+    });
+    return counter;
   }
 }
