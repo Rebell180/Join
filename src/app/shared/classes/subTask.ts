@@ -18,6 +18,8 @@ export class SubTask implements DBObject{
 	/** current status of subtask , true is finished, false is unfinished */
 	finished: boolean = false;
 
+	/** State, if user wants to edit it. */
+	editMode: boolean = false;
 
 	/**
      * @param data is optional and from @type object {

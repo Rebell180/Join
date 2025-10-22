@@ -3,47 +3,37 @@
     <input type="text" id="add-subtask-input" name="add-subtask-input" placeholder="Add new Subtask">
     <div class="control-btns add-ctrl">
         <input type="reset" id="add-reset">
-        <img class="close-icon" src="/assets/Icons/taskBoard/close.png" id="reset-icon" onclick="document.getElementById('add-reset').click()">
+        <img class="close-icon" src="/assets/Icons/taskBoard/close.png" id="reset-icon"
+            onclick="document.getElementById('add-reset').click()">
         <hr class="btn-sep">
         <input type="image" class="check-icon" id="add-check-icon" src="/assets/Icons/taskBoard/check.png">
     </div>
 </form>
-<ul>
-    <div class="li-wrapper">
-        <li class="regular">Subtask1
-        <div class="control-btns">
-            <button><img class="edit-icon" src="/assets/Icons/taskBoard/edit.png" alt="edit Subtask"></button>
-            <hr class="btn-sep">
-            <button><img class="delete-icon" src="/assets/Icons/taskBoard/delete.png" alt="delete Subtask"></button>
-        </div>
-        </li>
-    </div>
-    <div class="li-wrapper">
-        <li class="regular">Subtask1
-        <div class="control-btns">
-            <button><img class="edit-icon" src="/assets/Icons/taskBoard/edit.png" alt="edit Subtask"></button>
-            <hr class="btn-sep">
-            <button><img class="delete-icon" src="/assets/Icons/taskBoard/delete.png" alt="delete Subtask"></button>
-        </div>
-        </li>
-    </div>
-    <div class="li-wrapper">
-        <li class="regular">Subtask1
-        <div class="control-btns">
-            <button><img class="edit-icon" src="/assets/Icons/taskBoard/edit.png" alt="edit Subtask"></button>
-            <hr class="btn-sep">
-            <button><img class="delete-icon" src="/assets/Icons/taskBoard/delete.png" alt="delete Subtask"></button>
-        </div>
-        </li>
-    </div>
-    <li>
-        <form id="edit-subtask-form">
-            <input type="text" id="edit-subtask-input" name="edit-subtask-input" placeholder="current Subtask">
-            <div class="control-btns">
-                <button type="button"><img class="delete-icon" src="/assets/Icons/taskBoard/delete.png"></button>
-                <hr class="btn-sep">
-                <input type="image" class="check-icon" src="/assets/Icons/taskBoard/check.png">
-            </div>
-        </form>
-    </li>
-</ul>
+@if (task() && task().hasSubtasks) {
+    <ul>
+        @for (subtask of task().subtasks; track subtask.id) {
+            @if (subtask.editMode) {
+                <li>
+                    <form id="edit-subtask-form">
+                        <input #editsub type="text" id="edit-subtask-input" name="edit-subtask-input" placeholder="current Subtask" [(ngModel)]="subtask.name">
+                        <div class="control-btns">
+                            <button type="button"><img class="delete-icon" src="/assets/Icons/taskBoard/delete.png"></button>
+                            <hr class="btn-sep">
+                            <input type="image" class="check-icon" src="/assets/Icons/taskBoard/check.png">
+                        </div>
+                    </form>
+                </li>
+            } @else {
+                <div class="li-wrapper" (dblclick)="endbleEdit(subtask)">
+                    <li class="regular">{{ subtask.name }}
+                        <div class="control-btns">
+                            <button (click)="endbleEdit(subtask)"><img class="edit-icon" src="/assets/Icons/taskBoard/edit.png" alt="edit Subtask"></button>
+                            <hr class="btn-sep">
+                            <button><img class="delete-icon" src="/assets/Icons/taskBoard/delete.png" alt="delete Subtask"></button>
+                        </div>
+                    </li>
+                </div>
+            }
+        }
+    </ul>
+}
