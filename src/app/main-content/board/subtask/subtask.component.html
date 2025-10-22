@@ -24,10 +24,10 @@
                     </form>
                 </li>
             } @else {
-                <div class="li-wrapper" (dblclick)="endbleEdit(subtask)">
+                <div class="li-wrapper" (dblclick)="selectEditSub(subtask)">
                     <li class="regular">{{ subtask.name }}
                         <div class="control-btns">
-                            <button (click)="endbleEdit(subtask)"><img class="edit-icon" src="/assets/Icons/taskBoard/edit.png" alt="edit Subtask"></button>
+                            <button (click)="selectEditSub(subtask)"><img class="edit-icon" src="/assets/Icons/taskBoard/edit.png" alt="edit Subtask"></button>
                             <hr class="btn-sep">
                             <button><img class="delete-icon" src="/assets/Icons/taskBoard/delete.png" alt="delete Subtask"></button>
                         </div>
