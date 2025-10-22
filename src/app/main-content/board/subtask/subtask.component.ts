@@ -3,7 +3,7 @@ import { ChangeDetectorRef, Component, ElementRef, Inject, inject, input, InputS
 import { Task } from '../../../shared/classes/task';
 import { SubTask } from '../../../shared/classes/subTask';
 import { FormsModule } from '@angular/forms';
-import { collection, doc, Firestore, updateDoc } from '@angular/fire/firestore';
+import { collection, deleteDoc, doc, Firestore, updateDoc } from '@angular/fire/firestore';
 import { FirebaseDBService } from '../../../shared/services/firebase-db.service';
 
 @Component({
@@ -84,6 +84,23 @@ export class SubtaskComponent {
   }
 
   /**
+   * Deletes a subtask.
+   * @param subtask - Instance of Subtask.
+   */
+  protected async deleteSubtask(subtask: SubTask): Promise<void> {
+    for (let i = 0; i < this.task().subtasks.length; i++) {
+      if (this.task().subtasks[i].id == subtask.id) {
+        subtask.editMode = false;
+        this.task().subtasks = this.task().subtasks.splice(i, 1);
+      }
+    }
+    await deleteDoc(doc(this.fs, `subtask/${subtask.id}`));
+    if (this.task().subtasks.length == 0) {
+      await updateDoc(doc(this.fs, `tasks/${subtask.id}`), {hasSubtasks: false})
+    }
+  }
+
+  /**
    * Counts name of same subtask.
    * @param subtask - Instance of Subtask.
    * @returns - Number of same Subtask.
@@ -96,4 +113,5 @@ export class SubtaskComponent {
     });
     return counter;
   }
+
 }

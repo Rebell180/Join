@@ -17,7 +17,7 @@
                     <form id="edit-subtask-form" (submit)="renameSubtask($event,subtask)">
                         <input #editsub type="text" id="edit-subtask-input" name="edit-subtask-input" placeholder="current Subtask" [(ngModel)]="subtask.name">
                         <div class="control-btns">
-                            <button type="button"><img class="delete-icon" src="/assets/Icons/taskBoard/delete.png"></button>
+                            <button type="button" (click)="deleteSubtask(subtask)"><img class="delete-icon" src="/assets/Icons/taskBoard/delete.png"></button>
                             <hr class="btn-sep">
                             <input type="image" class="check-icon" src="/assets/Icons/taskBoard/check.png">
                         </div>
@@ -29,7 +29,7 @@
                         <div class="control-btns">
                             <button (click)="selectEditInput(subtask)"><img class="edit-icon" src="/assets/Icons/taskBoard/edit.png" alt="edit Subtask"></button>
                             <hr class="btn-sep">
-                            <button><img class="delete-icon" src="/assets/Icons/taskBoard/delete.png" alt="delete Subtask"></button>
+                            <button (click)="deleteSubtask(subtask)"><img class="delete-icon" src="/assets/Icons/taskBoard/delete.png" alt="delete Subtask"></button>
                         </div>
                     </li>
                 </div>
