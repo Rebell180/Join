@@ -4,13 +4,12 @@ import { Category } from '../../../enums/category.enum';
 import { CommonModule } from '@angular/common';
 import { ContactIconComponent } from "../../contact-icon/contact-icon.component";
 import { FormsModule } from '@angular/forms';
-import { collection, deleteDoc, doc, Firestore, updateDoc } from '@angular/fire/firestore';
 import { SubTask } from '../../../classes/subTask';
 import { FirebaseDBService } from '../../../services/firebase-db.service';
 
 @Component({
   selector: 'app-task-modal',
-  imports: [CommonModule, ContactIconComponent, FormsModule],
+  imports: [CommonModule, FormsModule, ContactIconComponent],
   templateUrl: './task-modal.component.html',
   styleUrl: './task-modal.component.scss'
 })
@@ -20,8 +19,7 @@ import { FirebaseDBService } from '../../../services/firebase-db.service';
  */
 export class TaskModalComponent {
 
-  /** Firestore instance injected for database operations */
-  firestore: Firestore = inject(Firestore);
+  /** FirebaseDBService instance injected for database operations */
   fireDB: FirebaseDBService = inject(FirebaseDBService);
 
   /** Input signal representing the current task (required) */

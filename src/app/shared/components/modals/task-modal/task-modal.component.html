@@ -17,7 +17,7 @@
 
 		<div class="task-modal-dueDate-container">
 			<h3>Due date:</h3>
-			<p>{{ task().dueDate }}</p>
+			<p>{{ task().dueDate.toDate() | date:'dd.MM.yyyy' }}</p>
 		</div>
 
 		<div class="task-modal-priority-container">
