@@ -4,43 +4,52 @@
     @include all.fl($flexdir: column);
     @include all.size();
     @include all.marpad($pad: 0 2rem);
-}
 
-header {
-    @include all.fl($jc: space-between, $alit: center);
-    width: 100%;
-    margin-bottom: 1.6rem
-}
+    header {
+        @include all.size($h: 5rem);
+        @include all.fl($alit: center, $jc: space-between);
+        @include all.marpad($pad: 0 1rem);
 
-main {
-    @include all.size();
-    flex: 1;
-}
+        h3 {
+            font-size: 1.5cqw;
+        }
 
-h3 {
-    font-size: 2.4rem;
-    font-family: 'Inter', sans-serif;
-    color: #42526e;
-}
+        .add-icon-btn {
+            
+            &:hover {
+                content: url(../../../../../public/assets/Icons/taskBoard/addBtnBoardHover.png);
+            }
 
-.add-icon-btn {
-    @include all.size($w: 2.4rem, $h: 2.4rem);
-
-    &:hover {
-        content: url(../../../../../public/assets/Icons/taskBoard/addBtnBoardHover.png);
+            &:active {
+                content: url(../../../../../public/assets/Icons/taskBoard/addBtnBoardClick.png);
+            }
+        }
     }
 
-    &:active {
-        content: url(../../../../../public/assets/Icons/taskBoard/addBtnBoardClick.png);
+    .no-task {
+        @include all.fl($jc: center, $alit: center);
+        @include all.size($h: 4.8rem);
+        background: #e7e7e7;
+        border-radius: 1rem;
+        border: 1px dotted #a8a8a8;
+        font: 1.6rem OpenSans;
+        color: #a8a8a8;
     }
-}
 
-.no-task {
-    @include all.fl($jc: center, $alit: center);
-    @include all.size($h: 4.8rem);
-    background: #e7e7e7;
-    border-radius: 10px;
-    border: 1px dotted #a8a8a8;
-    font: 1.6rem OpenSans;
-    color: #a8a8a8;
+    main {
+        @include all.size($h: auto);
+        overflow-y: auto;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
+
+        @media(max-width: 1230px) {
+            @include all.fl();
+            overflow: hidden;
+            gap: 0.5rem;
+        }
+    }
 }

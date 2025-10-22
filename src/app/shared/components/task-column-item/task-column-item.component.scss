@@ -11,12 +11,20 @@
 	border-radius: 1rem;
 	box-shadow: 0 0 5px lightgrey;
 
+	@media(max-width: 1230px) {
+		@include all.marpad($mar: 0.5rem 0, $pad: 1rem);
+	}
+
 	h2 {
 		@include all.size($w: fit-content, $h: 3rem);
 		@include all.marpad($mar: 0 0 2rem 0, $pad: 0.5rem);
 		@include all.fl($jc: center);
 		color: white;
 		border-radius: 0.5rem;
+
+		@media(max-width: 1230px) {
+		@include all.marpad($mar: 0 0 1rem 0, $pad: 0.5rem);
+	}
 	}
 
 	.blue {
@@ -27,15 +35,19 @@
 		background: #1fd7c1;
 	}
 
+	.yellow {
+		background: rgb(62, 248, 52);
+	}
+
 	.title {
-		@include all.size($h: 7rem);
+		@include all.size($h: auto);
 		@include all.limiter();
 		white-space: wrap;
 		font-size: 1.5rem;
 	}
 
 	.description {
-		@include all.size($h: 10rem);
+		@include all.size($h: auto);
 		@include all.limiter();
 		white-space: wrap;
 		font-size: 1.5rem;

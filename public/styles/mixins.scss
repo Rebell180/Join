@@ -14,7 +14,7 @@
 	gap: $gap;
 }
 
-@mixin size($w: 100%, $h: 100%, $minW: 0, $minH: 0, $maxW: none, $maxH: none) {
+@mixin size($w: 100%, $h: 100%, $minW: 0, $minH: auto, $maxW: none, $maxH: none) {
 	width: $w;
 	min-width: $minW;
 	max-width: $maxW;

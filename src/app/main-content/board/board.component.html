@@ -1,10 +1,13 @@
 <header>
     <h1>Board</h1>
-    <app-search-task (seachOut)="filterTasks($event)"></app-search-task>
-    <button class="btn-set"><span id="add-task-label">Add Task </span>+</button>
+    <div class="search-task-container">
+        <app-search-task class="search-task" (seachOut)="filterTasks($event)"></app-search-task>
+        <button class="btn-set"><span id="add-task-label">Add Task </span>+</button>
+    </div>
 </header>
 <div class="task-list-wrapper">
     @for (list of taskLists; track list.listName) {
-        <app-task-list-column id="task-list-column-{{ list.listName }}" [listName]="list.listName" [tasks]="getTaskForList(list.status)"></app-task-list-column>
+    <app-task-list-column id="task-list-column-{{ list.listName }}" [listName]="list.listName"
+        [tasks]="getTaskForList(list.status)"></app-task-list-column>
     }
 </div>
