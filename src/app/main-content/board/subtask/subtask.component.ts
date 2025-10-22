@@ -21,28 +21,10 @@ export class SubtaskComponent {
    * Enables the Edit-Mode of Subtask.
    * @param psubtask - Instance of SubTask.
    */
-  private endbleEdit(psubtask: SubTask) {
+  endbleEdit(psubtask: SubTask) {
     this.task().subtasks.forEach(subtask => {
       subtask.editMode = false;
       if (subtask.id == psubtask.id) subtask.editMode = true;
     });
-  }
-
-  private focusOnEdit() {
-    if (this.editsub?.nativeElement) {
-      const edsubEl = this.editsub.nativeElement;
-      setTimeout(() => {
-        edsubEl.focus();
-        edsubEl.select();
-        console.log('selected')
-      }, 1000);
-    } else {
-      console.log('not exists');
-    }
-  }
-
-  protected selectEditSub(subtask: SubTask) {
-    this.endbleEdit(subtask);
-    this.focusOnEdit();
   }
 }
