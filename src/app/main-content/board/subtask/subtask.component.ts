@@ -1,8 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectorRef, Component, ElementRef, inject, input, InputSignal, OnInit, output, OutputEmitterRef, Renderer2, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, inject, input, InputSignal, output, OutputEmitterRef, Renderer2, ViewChild } from '@angular/core';
 import { SubTask } from '../../../shared/classes/subTask';
 import { FormsModule } from '@angular/forms';
-import { Task } from '../../../shared/classes/task';
 import { SubtaskEditState } from '../../../shared/enums/subtask-edit-state';
 
 @Component({
@@ -15,6 +14,7 @@ import { SubtaskEditState } from '../../../shared/enums/subtask-edit-state';
   styleUrl: './subtask.component.scss'
 })
 export class SubtaskComponent {
+  // #region Attributes
   subtasks: InputSignal<SubTask[]> = input.required<SubTask[]>();
   outSubtasks: OutputEmitterRef<SubTask[]> = output<SubTask[]>()
   protected newSubtask = new SubTask();
@@ -25,6 +25,7 @@ export class SubtaskComponent {
 
   @ViewChild('editsub') editsub!: ElementRef<HTMLInputElement>;
   @ViewChild('errmsg') errmsg!: ElementRef<HTMLParagraphElement>;
+  // #endregion
 
   // #region Methods
   // #region Form
@@ -125,6 +126,6 @@ export class SubtaskComponent {
     this.subtasks()[index].editState = SubtaskEditState.DELETED;
     this.outSubtasks.emit(this.subtasks());
   }
-  // #endrgion
+  // #endregion
   // #endregion
 }
