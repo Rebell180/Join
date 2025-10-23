@@ -1,3 +1,4 @@
+import { SubtaskEditState } from "../enums/subtask-edit-state";
 import { DBObject } from "../interfaces/db-object";
 import { SubtaskObject } from "../interfaces/subtask-object";
 
@@ -20,6 +21,9 @@ export class SubTask implements DBObject{
 
 	/** State, if user wants to edit it. */
 	editMode: boolean = false;
+
+	/** Edit-State, which has a subtask afer user interaction. */
+	editState: SubtaskEditState = SubtaskEditState.NONE;
 
 	/**
      * @param data is optional and from @type object {
