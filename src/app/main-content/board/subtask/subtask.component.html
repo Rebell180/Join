@@ -1,6 +1,6 @@
-<form id="add-subtask-form">
+<form id="add-subtask-form" (submit)="createSubtask($event)">
     <label for="add-subtask-input">Subtasks</label>
-    <input type="text" id="add-subtask-input" name="add-subtask-input" placeholder="Add new Subtask">
+    <input type="text" id="add-subtask-input" name="add-subtask-input" placeholder="Add new Subtask" [(ngModel)]="newSubtask.name">
     <div class="control-btns add-ctrl">
         <input type="reset" id="add-reset">
         <img class="close-icon" src="/assets/Icons/taskBoard/close.png" id="reset-icon"
