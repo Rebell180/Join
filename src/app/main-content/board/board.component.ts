@@ -92,7 +92,7 @@ export class BoardComponent implements OnInit, OnDestroy {
     this.unsubContacts = this.subscribeContacts();
     this.unsubSubtasks = this.subscribeSubtasks();
     this.unsubTasks = this.subscribeTasks();
-    setTimeout(() => {console.log(this.tasks)}, 3000)
+    setTimeout(() => {console.log(this.tasks[0].subtasks)}, 3000)
   }
 
   ngOnDestroy(): void {
@@ -207,5 +207,9 @@ export class BoardComponent implements OnInit, OnDestroy {
     this.tasks.sort((a, b) => a.dueDate.seconds - b.dueDate.seconds)
   }
   // #endregion
+
+  getChangedSubtasks(subtasks: SubTask[]) {
+    if (subtasks) console.log(subtasks);
+  }
   // #endregion
 }

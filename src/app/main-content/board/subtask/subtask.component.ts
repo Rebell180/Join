@@ -1,7 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectorRef, Component, ElementRef, inject, input, InputSignal, output, OutputEmitterRef, Renderer2, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, inject, input, InputSignal, OnInit, output, OutputEmitterRef, Renderer2, ViewChild } from '@angular/core';
 import { SubTask } from '../../../shared/classes/subTask';
 import { FormsModule } from '@angular/forms';
+import { Task } from '../../../shared/classes/task';
+import { SubtaskEditState } from '../../../shared/enums/subtask-edit-state';
 
 @Component({
   selector: 'app-subtask',
@@ -23,6 +25,8 @@ export class SubtaskComponent {
   @ViewChild('editsub') editsub!: ElementRef<HTMLInputElement>;
   @ViewChild('errmsg') errmsg!: ElementRef<HTMLParagraphElement>;
 
+  // #region Methods
+  // #region Form
   /**
    * Enables the Edit-Mode of Subtask.
    * @param psubtask - Instance of SubTask.
@@ -76,5 +80,25 @@ export class SubtaskComponent {
     });
     return counter;
   }
+  // #endregion
 
+  // #region CRUD
+  /**
+   * Adds a Subtaksk.
+   * @param e - Submit-Event from form.
+   */
+  add(e: Event): void {
+    e.preventDefault();
+    this.newSubtask.editState = SubtaskEditState.NEW;
+    if (this.newSubtask.name.length == 0) this.sendErrMsg('Name is required.');
+    else if (this.countSubtaskName(this.newSubtask) > 0) this.sendErrMsg('Subtask already exists.');
+    else {
+      this.subtasks().push(this.newSubtask);
+      this.newSubtask = new SubTask();
+      if (this.subtasks().length < 2) this.sendErrMsg('Add another Subtask.');
+      else this.outSubtasks.emit(this.subtasks());
+    }
+  }
+  // #endrgion
+  // #endregion
 }

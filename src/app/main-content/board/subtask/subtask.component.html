@@ -1,4 +1,4 @@
-<form id="add-subtask-form">
+<form id="add-subtask-form" (submit)="add($event)">
     <label for="add-subtask-input">Subtasks</label>
     <input type="text" id="add-subtask-input" name="add-subtask-input" placeholder="Add new Subtask" [(ngModel)]="newSubtask.name">
     <div class="control-btns add-ctrl">
@@ -9,6 +9,7 @@
         <input type="image" class="check-icon" id="add-check-icon" src="/assets/Icons/taskBoard/check.png">
     </div>
 </form>
+@if (subtasks() && subtasks().length > 0) {
     <ul>
         @for (subtask of subtasks(); track subtask.id) {
             @if (subtask.editMode) {
@@ -35,4 +36,5 @@
             }
         }
     </ul>
-    <p class="errmsg" #errmsg></p>
+}
+<p class="errmsg" #errmsg></p>
