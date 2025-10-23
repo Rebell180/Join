@@ -2,10 +2,10 @@ import { Timestamp } from "@angular/fire/firestore";
 import { Category } from "../enums/category.enum";
 import { Priority } from "../enums/priority.enum";
 import { TaskStatusType } from "../enums/task-status-type";
-import { TaskObject } from "../interfaces/database-result";
 import { DBObject } from "../interfaces/db-object";
 import { Contact } from "./contact";
 import { SubTask } from "./subTask";
+import { TaskObject } from "../interfaces/task-object";
 
 /**
  * Contains a single task object.

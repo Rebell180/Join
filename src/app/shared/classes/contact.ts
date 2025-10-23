@@ -1,4 +1,4 @@
-import { ContactObject } from "../interfaces/database-result";
+import { ContactObject } from "../interfaces/contact-object";
 import { DBObject } from "../interfaces/db-object";
 
 /**
