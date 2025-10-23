@@ -6,6 +6,7 @@
     @include all.size();
     background: #ededed;
     padding-top: 6rem;
+    border: 2px solid red;
 
     header {
         @include all.size($h: 10rem);
@@ -25,7 +26,7 @@
             }
 
             .btn-set {
-                @include all.size($w: 10rem, $h: 4.8rem);
+                @include all.size($w: 15rem, $h: 4.8rem);
             }
         }
     }

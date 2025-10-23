@@ -10,12 +10,16 @@
         @include all.fl($alit: center, $jc: space-between);
         @include all.marpad($pad: 0 1rem);
 
+        @media(max-width: 1230px) {
+                @include all.size($h: 5rem, $maxW: 80dvw);
+            }
+
         h3 {
             font-size: 1.5cqw;
         }
 
         .add-icon-btn {
-            
+
             &:hover {
                 content: url(../../../../../public/assets/Icons/taskBoard/addBtnBoardHover.png);
             }
@@ -37,7 +41,7 @@
     }
 
     main {
-        @include all.size($h: auto);
+        @include all.size($h: 67dvh);
         overflow-y: auto;
         scrollbar-width: none;
         -ms-overflow-style: none;
@@ -48,6 +52,7 @@
 
         @media(max-width: 1230px) {
             @include all.fl();
+            @include all.size($maxW: 80dvw);
             overflow: hidden;
             gap: 0.5rem;
         }

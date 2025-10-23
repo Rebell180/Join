@@ -44,6 +44,8 @@
 		@include all.limiter();
 		white-space: wrap;
 		font-size: 1.5rem;
+		font-family: 'Inter', sans-serif;
+		font-weight: bold;
 	}
 
 	.description {
