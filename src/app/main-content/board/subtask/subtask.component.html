@@ -12,12 +12,14 @@
 @if (subtasks() && subtasks().length > 0) {
     <ul>
         @for (subtask of subtasks(); track subtask.id; let i = $index) {
-            @if (subtask.editMode) {
-                <li>
+            @if (subtask.editState != SubtastEditState.DELETED) {
+
+                @if (subtask.editMode) {
+                    <li>
                     <form id="edit-subtask-form" (submit)="changeName($event, i)">
                         <input #editsub type="text" id="edit-subtask-input" name="edit-subtask-input" placeholder="current Subtask" [(ngModel)]="subtask.name">
                         <div class="control-btns">
-                            <button type="button"><img class="delete-icon" src="/assets/Icons/taskBoard/delete.png"></button>
+                            <button type="button" (click)="deleteSub(i)"><img class="delete-icon" src="/assets/Icons/taskBoard/delete.png"></button>
                             <hr class="btn-sep">
                             <input type="image" class="check-icon" src="/assets/Icons/taskBoard/check.png">
                         </div>
@@ -29,12 +31,13 @@
                         <div class="control-btns">
                             <button (click)="selectEditInput(subtask)"><img class="edit-icon" src="/assets/Icons/taskBoard/edit.png" alt="edit Subtask"></button>
                             <hr class="btn-sep">
-                            <button><img class="delete-icon" src="/assets/Icons/taskBoard/delete.png" alt="delete Subtask"></button>
+                            <button (click)="deleteSub(i)"><img class="delete-icon" src="/assets/Icons/taskBoard/delete.png" alt="delete Subtask"></button>
                         </div>
                     </li>
                 </div>
             }
         }
+    }
     </ul>
 }
 <p class="errmsg" #errmsg></p>

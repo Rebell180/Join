@@ -18,6 +18,7 @@ export class SubtaskComponent {
   subtasks: InputSignal<SubTask[]> = input.required<SubTask[]>();
   outSubtasks: OutputEmitterRef<SubTask[]> = output<SubTask[]>()
   protected newSubtask = new SubTask();
+  protected SubtastEditState = SubtaskEditState;
 
   cdr: ChangeDetectorRef = inject(ChangeDetectorRef);
   rd2: Renderer2 = inject(Renderer2);
@@ -105,7 +106,7 @@ export class SubtaskComponent {
    * @param e - Submit-Event from form.
    * @param index - Indes of subtask-aray.
    */
-  changeName(e: Event, index:number) {
+  changeName(e: Event, index:number): void {
     e.preventDefault();
     if (this.subtasks()[index].name.length == 0) this.sendErrMsg('New name required.');
     else if (this.countSubtaskName(this.subtasks()[index]) > 1) this.sendErrMsg('Subtask allready exists.');
@@ -114,6 +115,15 @@ export class SubtaskComponent {
       this.subtasks()[index].editMode = false;
       this.outSubtasks.emit(this.subtasks())
     }
+  }
+
+  /**
+   * Deletes a subtask.
+   * @param index - Index of subtask array.
+   */
+  deleteSub(index:number):void {
+    this.subtasks()[index].editState = SubtaskEditState.DELETED;
+    this.outSubtasks.emit(this.subtasks());
   }
   // #endrgion
   // #endregion
