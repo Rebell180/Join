@@ -11,10 +11,10 @@
 </form>
 @if (subtasks() && subtasks().length > 0) {
     <ul>
-        @for (subtask of subtasks(); track subtask.id) {
+        @for (subtask of subtasks(); track subtask.id; let i = $index) {
             @if (subtask.editMode) {
                 <li>
-                    <form id="edit-subtask-form">
+                    <form id="edit-subtask-form" (submit)="changeName($event, i)">
                         <input #editsub type="text" id="edit-subtask-input" name="edit-subtask-input" placeholder="current Subtask" [(ngModel)]="subtask.name">
                         <div class="control-btns">
                             <button type="button"><img class="delete-icon" src="/assets/Icons/taskBoard/delete.png"></button>

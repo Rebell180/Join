@@ -99,6 +99,22 @@ export class SubtaskComponent {
       else this.outSubtasks.emit(this.subtasks());
     }
   }
+
+  /**
+   * Chenge the name of subtask.
+   * @param e - Submit-Event from form.
+   * @param index - Indes of subtask-aray.
+   */
+  changeName(e: Event, index:number) {
+    e.preventDefault();
+    if (this.subtasks()[index].name.length == 0) this.sendErrMsg('New name required.');
+    else if (this.countSubtaskName(this.subtasks()[index]) > 1) this.sendErrMsg('Subtask allready exists.');
+    else {
+      if (this.subtasks()[index].editState == SubtaskEditState.NONE) this.subtasks()[index].editState = SubtaskEditState.CHANGED;
+      this.subtasks()[index].editMode = false;
+      this.outSubtasks.emit(this.subtasks())
+    }
+  }
   // #endrgion
   // #endregion
 }
