@@ -2,49 +2,64 @@
 @forward '../../../../../../public/styles/component-styles';
 
 .modal-overlay {
-    border: 2px solid;
     position: fixed;
     inset: 0;
     background: rgba(0, 0, 0, 0.5);
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 10;
+    z-index: 12;
 }
 
 #help-close-btn{
     position: absolute;
     top: 2rem;
     right: 2rem;
-    font-size: 20px;
-    z-index: 1;
+    z-index: 2;
+    font-size: 24px;
 }
 
 .help-modal-container {
-    @include all.size($w: 80%, $h: 80%);
+    @include all.size($w: 90dvw, $maxW: 120rem, $h: 80dvh);
     @include all.fl($flexdir: column, $jc: center, $alit: start, $gap: 1rem);
     background-color: white;
     border-radius: 16px;
+    border: none;
     box-shadow: 8px 8px 8px rgba(0, 0, 0, 0.2);
     padding: 5rem;
+    
+    @include all.notebook {
+        box-shadow: 8px 0 8px rgba(0, 0, 0, 0.2), -8px 0 8px rgba(0, 0, 0, 0.2);
+        padding: 5rem 3rem;
+    }
+    
+    @include all.tablet {
+        @include all.size($w: 90dvw, $maxW:90rem, $h: 80dvh);
+        @include all.fl($flexdir: column, $jc: center, $alit: center);
+        padding: 5rem 1.5rem;
+    }
 
     @include all.mobile {
-        @include all.size($w: 90%, $h: 80%);
-        padding: 1rem;
+        @include all.size($w: 90dvw, $maxW: 60rem, $h: 80dvh);
+        padding: 5rem 1rem;
     }
     
     .help-modal-content {
         @include all.fl($flexdir: column);
-        @include all.size();
-        @include all.scrollbar();
+        @include all.size($h: auto);
         overflow-y: auto;
-        
 
         .help-header {
+            @include all.size($h: auto);
             margin-bottom: 4rem;
+
+            h1{
+                font-size: 48px;
+            }
         }
 
         .help-main-content {
+            @include all.size($h: auto);
             padding-right: 4rem;
             
             h2 {

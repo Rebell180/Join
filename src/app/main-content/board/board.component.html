@@ -1,9 +1,7 @@
 <header>
     <h1>Board</h1>
-    <!-- <div class="search-task-container"> -->
-        <app-search-task class="search-task" (seachOut)="filterTasks($event)"></app-search-task>
-    <!-- </div> -->
-    <button class="btn-set"><span id="add-task-label">Add Task </span>+</button>
+    <app-search-task (seachOut)="filterTasks($event)"></app-search-task>
+    <button class="btn-set" (click)="modalService.openAddTaskModal()"><span id="add-task-label">Add Task </span>+</button>
 </header>
 <div class="search-task-container-mobile">
     <app-search-task class="search-task" (seachOut)="filterTasks($event)"></app-search-task>

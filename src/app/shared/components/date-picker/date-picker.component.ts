@@ -1,170 +1,136 @@
+import {
+  Component,
+  signal,
+  computed,
+  input,
+  output,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Component, computed, HostListener, input, output, signal } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { Timestamp } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-date-picker',
-  imports: [CommonModule],
+  standalone: true,
+  imports: [CommonModule, FormsModule],
   templateUrl: './date-picker.component.html',
-  styleUrl: './date-picker.component.scss'
+  styleUrls: ['./date-picker.component.scss'],
 })
 export class DatePickerComponent {
+  /** Eingehender Wert vom Parent */
+  selectedTimestamp = input.required<Timestamp>();
 
-  // #region properties 
-  selectedDate = input<Date>(new Date());
-  dateChange = output<Date>();
+  /** Gibt das neu gewählte Datum zurück */
+  dateSelected = output<Timestamp>();
 
-  showCalendar = signal(false);
-  inputValue = signal('');
-  errorMessage = signal<string | null>(null);
+  /** Zeigt oder versteckt den Kalender */
+  protected showCalendar = signal(false);
 
-  today = new Date();
-  currentMonth = signal(this.today.getMonth());
-  currentYear = signal(this.today.getFullYear());
+  /** interner aktueller Monat und Jahr */
+  protected activeMonth = signal<number>(Timestamp.now().toDate().getMonth());
+  protected activeYear = signal<number>(Timestamp.now().toDate().getFullYear());
 
-  months = [
+  /** Dropdown-Werte */
+  protected months = [
     'January', 'February', 'March', 'April', 'May', 'June',
     'July', 'August', 'September', 'October', 'November', 'December'
   ];
-  years = Array.from({ length: 15 }, (_, i) => this.today.getFullYear() - 5 + i);
 
-  // #endregion properties
+  protected years = Array.from({ length: 50 }, (_, i) => 2000 + i);
 
-  ngOnInit() {
-    this.updateInputValue(this.selectedDate());
-  }
+  /** Computed Label für Inputfeld */
+  protected inputValue = computed(() => {
+    const d = this.selectedTimestamp().toDate();
+    return `${String(d.getMonth() + 1).padStart(2, '0')}/${String(d.getDate()).padStart(2, '0')}/${d.getFullYear()}`;
+  });
 
-  /** Klick außerhalb → Popup schließen */
-  @HostListener('document:click', ['$event'])
-  clickOutside(event: Event) {
-    const target = event.target as HTMLElement;
-    if (!target.closest('.date-picker-container')) {
-      this.showCalendar.set(false);
+  /** Berechnung der Tage für den Grid */
+  readonly days = computed(() => {
+    const month = this.activeMonth();
+    const year = this.activeYear();
+
+    const first = new Date(year, month, 1);
+    const startDay = first.getDay();
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+    const prevMonthDays = new Date(year, month, 0).getDate();
+
+    const grid: { date: Timestamp; isCurrentMonth: boolean }[] = [];
+
+    // vorherige Tage
+    for (let i = startDay - 1; i >= 0; i--) {
+      const day = new Date(year, month - 1, prevMonthDays - i);
+      grid.push({ date: Timestamp.fromDate(day), isCurrentMonth: false });
     }
-  }
 
+    // aktuelle Tage
+    for (let i = 1; i <= daysInMonth; i++) {
+      const day = new Date(year, month, i);
+      grid.push({ date: Timestamp.fromDate(day), isCurrentMonth: true });
+    }
+
+    // nächste Tage bis 42 (6 Wochen)
+    while (grid.length < 42) {
+      const last = grid[grid.length - 1].date.toDate();
+      const next = new Date(last);
+      next.setDate(last.getDate() + 1);
+      grid.push({ date: Timestamp.fromDate(next), isCurrentMonth: false });
+    }
+
+    return grid;
+  });
+
+  /** Öffnen/Schließen */
   toggleCalendar(event: Event) {
     event.stopPropagation();
-    this.showCalendar.update(v => !v);
+    this.showCalendar.update((v) => !v);
   }
 
-  /** Tage-Matrix für den Kalender */
-  days = computed(() => this.generateCalendarDays(this.currentYear(), this.currentMonth()));
-
-  private generateCalendarDays(year: number, month: number) {
-    const days: { date: Date; isCurrentMonth: boolean }[] = [];
-    const firstDay = new Date(year, month, 1);
-    const startDayOfWeek = firstDay.getDay();
-    const lastDayOfMonth = new Date(year, month + 1, 0).getDate();
-    const lastDayPrevMonth = new Date(year, month, 0).getDate();
-
-    for (let i = startDayOfWeek - 1; i >= 0; i--) {
-      const day = lastDayPrevMonth - i;
-      days.push({ date: new Date(year, month - 1, day), isCurrentMonth: false });
-    }
-    for (let d = 1; d <= lastDayOfMonth; d++) {
-      days.push({ date: new Date(year, month, d), isCurrentMonth: true });
-    }
-    let nextMonthDay = 1;
-    while (days.length < 42) {
-      days.push({ date: new Date(year, month + 1, nextMonthDay++), isCurrentMonth: false });
-    }
-    return days;
-  }
-
-  selectDate(day: { date: Date; isCurrentMonth: boolean }) {
-    const date = day.date;
-    if (!day.isCurrentMonth) {
-      this.currentMonth.set(date.getMonth());
-      this.currentYear.set(date.getFullYear());
-    }
-    this.setDate(date);
+  /** Auswahl eines Tages */
+  selectDate(day: { date: Timestamp; isCurrentMonth: boolean }) {
+    this.dateSelected.emit(day.date);
     this.showCalendar.set(false);
   }
 
-  /** Pfeile / Dropdowns */
+  /** Navigationsmethoden */
   nextMonth() {
-    const m = this.currentMonth();
-    const y = this.currentYear();
-    if (m === 11) {
-      this.currentMonth.set(0);
-      this.currentYear.set(y + 1);
+    const month = this.activeMonth();
+    const year = this.activeYear();
+    if (month === 11) {
+      this.activeMonth.set(0);
+      this.activeYear.set(year + 1);
     } else {
-      this.currentMonth.set(m + 1);
+      this.activeMonth.set(month + 1);
     }
   }
 
   prevMonth() {
-    const m = this.currentMonth();
-    const y = this.currentYear();
-    if (m === 0) {
-      this.currentMonth.set(11);
-      this.currentYear.set(y - 1);
+    const month = this.activeMonth();
+    const year = this.activeYear();
+    if (month === 0) {
+      this.activeMonth.set(11);
+      this.activeYear.set(year - 1);
     } else {
-      this.currentMonth.set(m - 1);
+      this.activeMonth.set(month - 1);
     }
   }
 
-  onMonthChange(event: Event) {
-    this.currentMonth.set(Number((event.target as HTMLSelectElement).value));
+  onMonthChange(monthIndex: number) {
+    this.activeMonth.set(+monthIndex);
   }
 
-  onYearChange(event: Event) {
-    this.currentYear.set(Number((event.target as HTMLSelectElement).value));
+  onYearChange(year: number) {
+    this.activeYear.set(+year);
   }
 
-  /** Manuelle Eingabe validieren */
-  onInputChange(event: Event) {
-    const value = (event.target as HTMLInputElement).value.trim();
-    this.inputValue.set(value);
-    this.validateManualInput(value);
-  }
-
-  private validateManualInput(value: string) {
-    const regex = /^(0[1-9]|1[0-2])\/(0[1-9]|[12]\d|3[01])\/\d{4}$/;
-    if (!regex.test(value)) {
-      this.errorMessage.set('Invalid date format. Use MM/DD/YYYY.');
-      return;
-    }
-
-    const [month, day, year] = value.split('/').map(Number);
-    const parsed = new Date(year, month - 1, day);
-
-    if (parsed.getMonth() !== month - 1 || parsed.getDate() !== day) {
-      this.errorMessage.set('Invalid date.');
-      return;
-    }
-
-    const today = new Date();
-    if (parsed < new Date(today.getFullYear(), today.getMonth(), today.getDate())) {
-      this.errorMessage.set('Date cannot be in the past.');
-      return;
-    }
-
-    this.errorMessage.set(null);
-    this.setDate(parsed);
-  }
-
-  private setDate(date: Date) {
-    this.selectedDate.apply(date);
-    this.updateInputValue(date);
-    this.dateChange.emit(date);
-  }
-
-  private updateInputValue(date: Date) {
-    const mm = String(date.getMonth() + 1).padStart(2, '0');
-    const dd = String(date.getDate()).padStart(2, '0');
-    const yyyy = date.getFullYear();
-    this.inputValue.set(`${mm}/${dd}/${yyyy}`);
-  }
-
-  isSelected(date: Date): boolean {
-    const selected = this.selectedDate();
+  /** Markierung des selektierten Datums */
+  isSelected(day: Timestamp): boolean {
+    const sel = this.selectedTimestamp().toDate();
+    const d = day.toDate();
     return (
-      selected &&
-      selected.getFullYear() === date.getFullYear() &&
-      selected.getMonth() === date.getMonth() &&
-      selected.getDate() === date.getDate()
+      d.getDate() === sel.getDate() &&
+      d.getMonth() === sel.getMonth() &&
+      d.getFullYear() === sel.getFullYear()
     );
   }
 }
-

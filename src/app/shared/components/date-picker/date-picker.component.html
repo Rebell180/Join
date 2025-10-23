@@ -1,19 +1,18 @@
 <div class="date-picker-container">
-    <div class="input-wrapper" (click)="toggleCalendar($event)">
-        <input type="text" [value]="inputValue()" placeholder="MM/DD/YYYY" (input)="onInputChange($event)" />
+    <div class="date-picker-wrapper" (click)="toggleCalendar($event)">
+        <input type="text" [value]="inputValue()" readonly />
         <img src="assets/Icons/taskBoard/date_picker.png" alt="Calendar" class="calendar-icon" />
     </div>
-
-    <div *ngIf="errorMessage()" class="error-message">{{ errorMessage() }}</div>
 
     @if (showCalendar()) {
     <div class="calendar-popup" (click)="$event.stopPropagation()">
         <div class="calendar-header">
-            <select [value]="currentMonth()" (change)="onMonthChange($event)">
+            <select [ngModel]="activeMonth()" (ngModelChange)="onMonthChange($event)">
                 <option *ngFor="let m of months; index as i" [value]="i">{{ m }}</option>
             </select>
-            <select [value]="currentYear()" (change)="onYearChange($event)">
-                <option *ngFor="let y of years" [value]="y">{{ y }}</option>
+
+            <select [ngModel]="activeYear()" (ngModelChange)="onYearChange($event)">
+                <option *ngFor="let y of years" [ngValue]="y">{{ y }}</option>
             </select>
         </div>
 
@@ -21,9 +20,10 @@
             <div class="weekday" *ngFor="let d of ['Su','Mo','Tu','We','Th','Fr','Sa']">
                 {{ d }}
             </div>
+
             <div *ngFor="let day of days()" class="day" [class.other-month]="!day.isCurrentMonth"
                 [class.selected]="isSelected(day.date)" (click)="selectDate(day)">
-                {{ day.date.getDate() }}
+                {{ day.date.toDate().getDate() }}
             </div>
         </div>
 

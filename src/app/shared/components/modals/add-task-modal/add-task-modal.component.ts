@@ -1,7 +1,6 @@
-import { AfterViewInit, Component, input, InputSignal } from '@angular/core';
+import { AfterViewInit, Component } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { AddtaskComponent } from "../../add-task/add-task.component";
-import { Task } from '../../../classes/task';
 
 @Component({
   selector: 'app-add-task-modal',
@@ -29,9 +28,6 @@ import { Task } from '../../../classes/task';
 })
 export class AddTaskModalComponent implements AfterViewInit{
 
-  /** InputSignal for currentTask. */
-  currentTask: InputSignal<Task> = input<Task>(new Task());
-  kindOf: InputSignal<'add' | 'edit'> = input.required<'add' | 'edit'>();
 
   /** callback function on close => remove from DOM => will be set in ModalService */
   dissolve?: () => void;

@@ -20,6 +20,8 @@ import { DatePickerComponent } from "../date-picker/date-picker.component";
 })
 export class AddtaskComponent implements OnDestroy {
 
+  // #region properties
+
   fireDB: FirebaseDBService = inject(FirebaseDBService);
   Priority = Priority;
   Category = Category;
@@ -29,6 +31,8 @@ export class AddtaskComponent implements OnDestroy {
 
   unsubContacts: Unsubscribe;
 
+  // #endregion properties
+  
   constructor() {
     this.unsubContacts = this.getContactsSnapshot();
   }
@@ -66,7 +70,7 @@ export class AddtaskComponent implements OnDestroy {
    * Reset all inputs to default.
    */
   clear() {
-    console.log(this.currentTask.priority);
+    this.currentTask = new Task();
   }
 
   toggleAddContactToAssignTo(contact: Contact) {

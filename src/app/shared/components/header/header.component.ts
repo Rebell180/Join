@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component} from '@angular/core';
+import { Component, inject} from '@angular/core';
+import { ModalService } from '../../services/modal.service';
 
 @Component({
   /* Wenn der Selector so in eckige Klammern gesceiben wird,
@@ -12,4 +13,5 @@ import { Component} from '@angular/core';
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent {
+  protected modalService: ModalService = inject(ModalService);
 }

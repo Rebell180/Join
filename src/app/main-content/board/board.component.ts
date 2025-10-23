@@ -7,49 +7,8 @@ import { TaskStatusType } from '../../shared/enums/task-status-type';
 import { TaskListColumnComponent } from './task-list-column/task-list-column.component';
 import { Contact } from '../../shared/classes/contact';
 import { SubTask } from '../../shared/classes/subTask';
-import { ContactObject } from '../../shared/interfaces/contact-object';
-import { SubtaskObject } from '../../shared/interfaces/subtask-object';
-import { TaskObject } from '../../shared/interfaces/task-object';
-
-interface SimpleTaskObject {
-  id: string,
-  title: string,
-  category: Category,
-  description: string,
-  priority: Priority,
-  dueDate: string,
-  assignedTo: string[],
-  subtasks: string[],
-  status: TaskStatusType
-}
-
-interface ContactObject {
-  id: string,
-  firstname: string,
-  lastname: string,
-  group: string,
-  email: string,
-  tel: string,
-  iconColor: string
-}
-
-interface SubTaskObject {
-  id: string,
-  name: string,
-  finished: boolean
-}
-
-interface TaskObject {
-  id: string,
-  title: string,
-  category: Category,
-  description: string,
-  priority: Priority,
-  dueDate: string,
-  assignedTo: Contact[],
-  subtasks: SubTask[],
-  status: TaskStatusType
-}
+import { ContactObject, SubTaskObject, TaskObject } from '../../shared/interfaces/database-result';
+import { ModalService } from '../../shared/services/modal.service';
 
 @Component({
   selector: 'section[board]',
@@ -64,6 +23,8 @@ interface TaskObject {
 })
 export class BoardComponent implements OnInit, OnDestroy {
   // #region Attrbutes
+  protected modalService: ModalService = inject(ModalService);
+
   // Primary Data
   tasks: Task[] = [];
   private shownTasks: Task[] = [];

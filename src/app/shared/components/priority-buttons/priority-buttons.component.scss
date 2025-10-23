@@ -1,12 +1,21 @@
 @use '../../../../../public/styles/all_styles' as all;
 
-.add-task-priority-btn-container {
-    @include all.fl($gap: 1rem);
-    
+:host {
+    width: 100%
+}
 
+.add-task-priority-btn-container {
+    @include all.size();
+    @include all.fl($jc: space-between, $gap: 1rem);
+
+    @include all.mobile{
+        @include all.fl($flexdir: column, $gap:1rem);
+        @include all.marpad($pad: 0 2rem 0 2rem);
+    }
+    
     .priority-btn {
         @include all.fl($jc: center, $alit: center, $gap: 1rem);
-        @include all.size($w: 15rem, $h: 4rem);
+        @include all.size($minW: 12rem, $h: 4rem);
         @include all.borRad($radius: 8px, $thick: 2px, $c: rgba(0, 0, 0, 0.1));
 
         &:hover {

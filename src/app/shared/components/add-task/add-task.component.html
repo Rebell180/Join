@@ -12,21 +12,21 @@
             <div class="add-task-info-block1">
 
                 <div class="input-wrapper">
-                    <label class="add-task-input-lbl" for="title">Title</label>
+                    <label class="add-task-input-lbl" for="title">Title <b>*</b></label>
                     <input class="add-task-input" type="text" name="title" id="add-task-info-title" 
                         placeholder="Enter a title" [(ngModel)]="currentTask.title" required>
                 </div>
 
                 <div class="input-wrapper">
                     <label class="add-task-input-lbl" for="descr">Description</label>
-                    <textarea name="descr" id="add-task-info-description" 
+                    <textarea name="descr" id="add-task-info-description" class="add-task-input" 
                         placeholder="Enter a Description ..." [(ngModel)]="currentTask.description"></textarea>
                 </div>
 
                 <div class="input-wrapper">
-                    <label class="add-task-input-lbl" for="due-date-picker">Due Date</label>
-                    <app-date-picker name="due-date-picker" 
-                        [selectedDate]="currentTask.dueDate.toDate()" (dateChange)="setDate($event)">
+                    <label class="add-task-input-lbl" for="due-date-picker">Due Date <b>*</b></label>
+                    <app-date-picker name="due-date-picker"
+                        [selectedTimestamp]="currentTask.dueDate" (dateSelected)="currentTask.dueDate = $event">
                     </app-date-picker>
                 </div>
             </div>
@@ -42,7 +42,7 @@
                 <div class="input-wrapper add-task-assigned-to-container">
                     <label class="add-task-input-lbl" for="add-task-assigned-to">Assigned to</label>
                     <select name="add-task-assigned-to" id="add-task-assigned-to" 
-                        class="add-task-assigned-to" [(ngModel)]="currentTask.assignedTo">
+                        class="add-task-input add-task-assigned-to" [(ngModel)]="currentTask.assignedTo">
                         @for(contact of contacts; track contact.id; let index = $index){
                             <!-- TODO Marcel mixin Limiter -->
                             <option id="('add-task-assigned-to_' + contact.id)" class="add-task-assign-to-option" [value]="contact.getFullName()">
@@ -55,9 +55,9 @@
                 </div>
 
                 <div class="input-wrapper add-task-category-container">
-                    <label class="add-task-input-lbl" for="add-task-category">Category</label>
+                    <label class="add-task-input-lbl" for="add-task-category">Category <b>*</b></label>
                     <select name="add-task-category" id="add-task-category" 
-                        class="add-task-category" [(ngModel)]="currentTask.category">
+                        class="add-task-input add-task-category" [(ngModel)]="currentTask.category">
                         @for(category of ( Category | keyvalue ); track $index){
                             <option id="('add-task-category_' + $index)" class="add-task-category-option" [value]="category.value">{{ category.value }}</option>
                         }
@@ -73,7 +73,7 @@
         </main>
         
         <footer class="add-task-footer">
-            <span class="required-info-txt">* this field is required</span>
+            <span class="required-info-txt"><b>*</b> this field is required</span>
             <div class="add-task-btn-container">
                 <input class="btn-default" type="button" (click)="clear()" value="Clear">
                 <input class="btn-set" type="submit" value="Create Task ">
