@@ -33,9 +33,6 @@ input[type=text] {
     &:focus {
         cursor: auto;
     }
-    // &::placeholder {
-    //     color: #d1d1d1;
-    // }
 }
 
 input[type=reset] {
@@ -56,10 +53,11 @@ li {
 
 .li-wrapper {
     @include all.fl($alit: center);
-    height: 3.6rem;
+    height: 3.2rem;
+    border-radius: 10px;
     cursor: pointer;
     &:hover {
-        background: #eeeeee;
+        background: #dddddd;
     }
 }
 
@@ -67,6 +65,8 @@ li {
     list-style: disc;
     margin-left: 5rem;
     padding-right: 5rem;
+    height: auto;
+    font-size: 1.6rem;
 }
 
 .control-btns {
@@ -83,11 +83,26 @@ li {
 .add-ctrl {
     height: 2.4rem;
     right: 1.6rem;
-    opacity: 0;
     position: absolute;
     top: 3.3rem;
+    opacity: 0;
     cursor: pointer;
     transition: opacity 300ms ease;
+}
+
+.edit-ctrl {
+    top: -2px;
+    opacity: 0;
+    transition: opacity 300ms ease;
+}
+
+form>.edit-ctrl {
+    top: 2px;
+    opacity: 1;
+}
+
+.li-wrapper:hover .edit-ctrl {
+    opacity: 1;
 }
 
 .close-icon:hover {
@@ -105,6 +120,7 @@ li {
 .delete-icon:hover {
     content: url(../../../../../public/assets/Icons/taskBoard/deleteHover.png);
 }
+
 
 .errmsg {
     color: #800000;
@@ -128,5 +144,5 @@ li {
     border: none;
     border-bottom: 1pt solid #29abe2;
     height: 3.2rem;
-    font-size: 2rem;
+    font-size: 1.6rem;
 }
