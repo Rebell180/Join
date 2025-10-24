@@ -4,10 +4,11 @@
 :host {
     @include all.fl($flexdir: column, $alit: center);
     @include all.size();
-    background: #f6f7f8;
-    padding-top: 8rem;
-    @include all.mobile {
-        @include all.marpad ($pad: 80px 16px 0 16px);
+    padding-top: 4rem;
+
+    @media(max-width: 1280px) {
+        @include all.fl($flexdir: column, $alit: center);
+        @include all.size();
     }
 
 // #region header

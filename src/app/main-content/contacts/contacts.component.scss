@@ -3,7 +3,6 @@
 :host {
     @include all.fl();
     @include all.size();
-    background: white;
     .contact-list {
         @include all.size($w: 37.5rem, $minW: 37.5rem, $maxW:37.5rem, $h: 90dvh);
         @include all.marpad ($pad: 2rem 0 0 3rem);

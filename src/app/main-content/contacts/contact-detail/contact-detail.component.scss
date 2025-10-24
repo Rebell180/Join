@@ -2,7 +2,6 @@
 
 :host {
     @include all.size();
-    background: #ededed;
 
 // #region detail-header
     .contact-detail-header {
@@ -36,7 +35,6 @@
             }
 
             hr {
-                @include all.size($w: 1rem, $h: 30rem);
                 background: rgb(17, 148, 213);
             }
 
@@ -51,11 +49,10 @@
 
             #bottom-line {
                 display: none;
-                @include all.size($w: 50%, $h: 10%);
+                @include all.size($w: 12rem, $h: 0.6rem);
 
                 @media (max-width: 1200px) {
-                    @include all.marpad(0 0 2rem 0);
-                    display: block;
+                    display: flex;
                 }
             }
         }
