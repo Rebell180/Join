@@ -98,7 +98,10 @@ export class SubtaskComponent {
       this.subtasks().push(this.newSubtask);
       this.newSubtask = new SubTask();
       if (this.subtasks().length < 2) this.sendErrMsg('Add another Subtask.');
-      else this.outSubtasks.emit(this.subtasks());
+      else {
+        this.sendErrMsg('');
+        this.outSubtasks.emit(this.subtasks());
+      }
     }
   }
 

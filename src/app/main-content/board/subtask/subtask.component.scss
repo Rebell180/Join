@@ -13,7 +13,7 @@ form {
 }
 
 label {
-    font: 2rem Inter;
+    font: 1.8rem 'InterRegular', sans-serif;
     margin-bottom: 0.4rem;
 }
 
@@ -22,26 +22,20 @@ input {
     outline: none;
 }
 
-// .add-control {
-//     opacity: 0;
-//     width: 2.4rem;
-//     height: 2.4rem;
-//     position: absolute;
-//     top: 4rem;
-//     cursor: pointer;
-//     transition: opacity 300ms ease;
-// }
 
 input[type=text] {
     width: 100%;
-    height: 4.8rem;
-    font: 2.4rem Inter;
+    height: 4rem;
+    font: 1.6rem 'InterRegular', sans-serif;
     border: 1px solid #d1d1d1;
     background: white;
-    padding: 12px 6.4rem 12px 16px;
-    &::placeholder {
-        color: #d1d1d1;
+    padding: 1rem 6.4rem 1rem 1rem;
+    &:focus {
+        cursor: auto;
     }
+    // &::placeholder {
+    //     color: #d1d1d1;
+    // }
 }
 
 input[type=reset] {
@@ -86,8 +80,13 @@ li {
 }
 
 .add-ctrl {
-    top: 4rem;
+    height: 2.4rem;
     right: 1.6rem;
+    opacity: 0;
+    position: absolute;
+    top: 3.3rem;
+    cursor: pointer;
+    transition: opacity 300ms ease;
 }
 
 .close-icon:hover {
@@ -120,9 +119,9 @@ li {
     }
 }
 
-// #add-subtask-input:focus~.add-control {
-//     opacity: 1;
-// }
+#add-subtask-input:focus~.add-ctrl {
+    opacity: 1;
+}
 
 #edit-subtask-input {
     border: none;
