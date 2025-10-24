@@ -3,7 +3,7 @@
 	<div class="task-modal-detail-container" (click)="$event.stopPropagation()">
 		<div class="task-modal-header">
 			<h2
-				[ngClass]="{ blue: task().category == Category.USERSTORY, green: task().category == Category.TECHNICAL}">
+				[ngClass]="{ blue: task().category == Category.USERSTORY, green: task().category == Category.TECHNICAL, yellow: task().category == Category.TASK}">
 				{{ task().category }}
 			</h2>
 

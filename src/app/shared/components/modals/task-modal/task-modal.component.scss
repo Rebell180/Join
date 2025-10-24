@@ -43,11 +43,15 @@
 			}
 
 			.blue {
-				background: blue;
+				background: #0038FF;
 			}
 
 			.green {
-				background: rgb(16, 249, 249);
+				background: #1fd7c1;
+			}
+
+			.yellow {
+				background: teal;
 			}
 
 			.task-modal-close-btn {
@@ -112,61 +116,61 @@
 				overflow-y: auto;
 				scrollbar-width: thin;
 				scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
-				}
+			}
 
-				.task-modal-assigned-detail {
-					@include all.fl($flexdir: column, $gap: 1rem);
-					@include all.marpad($pad: 2rem);
+			.task-modal-assigned-detail {
+				@include all.fl($flexdir: column, $gap: 1rem);
+				@include all.marpad($pad: 2rem);
 
-					.contact-item {
-						@include all.fl($alit: center, $gap: 2rem);
+				.contact-item {
+					@include all.fl($alit: center, $gap: 2rem);
 
-						.contact-icon {
-							@include all.size($w: 4.2rem, $minW: 4.2rem, $h: 4.2rem, $minH: 4.2rem);
-						}
+					.contact-icon {
+						@include all.size($w: 4.2rem, $minW: 4.2rem, $h: 4.2rem, $minH: 4.2rem);
+					}
 
-						.contact-name {
-							size: 1.5rem;
-						}
+					.contact-name {
+						size: 1.5rem;
 					}
 				}
 			}
 		}
+	}
 
-		.task-modal-subtasks {
-			@include all.size($h: 8dvh);
-			@include all.fl($flexdir: column);
-			@include all.marpad($mar: 2rem 0 0 0);
+	.task-modal-subtasks {
+		@include all.size($h: 8dvh);
+		@include all.fl($flexdir: column);
+		@include all.marpad($mar: 2rem 0 0 0);
 
-			.task-modal-input {
-				@include all.limiter();
-				@include all.size($w: auto, $h: 2rem);
-				@include all.marpad($mar: 0.5rem 0 0 1rem);
-				@include all.fl($alit: center, $gap: 1rem);
-				@include all.font-style($size: 1.7rem);
+		.task-modal-input {
+			@include all.limiter();
+			@include all.size($w: auto, $h: 2rem);
+			@include all.marpad($mar: 0.5rem 0 0 1rem);
+			@include all.fl($alit: center, $gap: 1rem);
+			@include all.font-style($size: 1.7rem);
 
-				input {
-					@include all.fl($alit: center);
-				}
-			}
-		}
-
-		.task-option-container {
-			@include all.size($h: 3rem);
-			@include all.fl($jc: end, $gap: 1rem, $alit: center);
-			@include all.marpad($pad: 1rem);
-
-			button {
+			input {
 				@include all.fl($alit: center);
 			}
-
-			hr {
-				@include all.size($w: 0.2rem, $h: 3rem);
-				color: lightgrey
-			}
-		}
-
-		h3 {
-			@include all.font-style($size: 1.5rem, $weight: 300);
 		}
 	}
+
+	.task-option-container {
+		@include all.size($h: 3rem);
+		@include all.fl($jc: end, $gap: 1rem, $alit: center);
+		@include all.marpad($pad: 1rem);
+
+		button {
+			@include all.fl($alit: center);
+		}
+
+		hr {
+			@include all.size($w: 0.2rem, $h: 3rem);
+			color: lightgrey
+		}
+	}
+
+	h3 {
+		@include all.font-style($size: 1.5rem, $weight: 300);
+	}
+}
