@@ -1,13 +1,21 @@
 <!-- Das header-Tag habe ich hier rausgenommen, weil es jetzt in der mein-content.component.html ist. -->
 
-    <!-- Keine weitere Kontentbegrenzung, Contentbegrenzung erfolgt uber MainContentComponent -->
-    <!-- Hier kommt <app-aside> nicht hin, sondern in main-content.component.html -->
-    
-    <div class="small-header">
-        <img class="join-logo" src="assets/Icons/contact/JoinLogo.png" alt="">
-        <h1>Kanban Project Management Tool</h1>
-        <div class="header-icon-container">
-            <img class="help-icon" src="assets/Icons/contact/help.png" alt="" (click)="modalService.openHelpModal()">
-            <img class="user-icon" src="assets/Icons/contact/User profile initials.png" alt="">
+<!-- Keine weitere Kontentbegrenzung, Contentbegrenzung erfolgt uber MainContentComponent -->
+<!-- Hier kommt <app-aside> nicht hin, sondern in main-content.component.html -->
+
+<div class="small-header">
+    <img class="join-logo" src="assets/Icons/contact/JoinLogo.png" alt="">
+    <h1>Kanban Project Management Tool</h1>
+    <div class="header-icon-container">
+        <img class="help-icon" src="assets/Icons/contact/help.png" alt="" (click)="modalService.openHelpModal()">
+        <div class="profile-container">
+            <div class="profile-img" (click)="toggleMenu()"><span>SM</span></div>
+
+            <div class="dropdown" *ngIf="isMenuVisible">
+                <a routerLink="/legal-notice">Legal Notice</a>
+                <a routerLink="/privacy-policy">Privacy Policy</a>
+                <a (click)="logout()">Log out</a>
+            </div>
         </div>
     </div>
+</div>

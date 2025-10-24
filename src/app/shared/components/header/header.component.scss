@@ -32,17 +32,52 @@
         .header-icon-container {
             @include all.fl($alit: center);
             gap: 10px;
-            
+
             .help-icon {
                 cursor: pointer;
+
                 @include all.tablet {
                     display: none;
                 }
             }
-            
-            .user-icon {
-                @include all.size($w: 7rem, $h: 7rem);
+
+            .profile-container {
+                position: relative;
+                display: inline-block;
+            }
+
+            .profile-img {
+                @include all.size($w: 6.5rem, $h: 6.5rem);
+                @include all.font-style($size: 2.5rem, $weight: 600);
+                @include all.fl($alit: center, $jc: center);
+                border-radius: 50%;
+                color: #29abe3;
+                border: 0.3rem solid #1f2a3a;
                 cursor: pointer;
+            }
+
+            .dropdown {
+                @include all.absolute($top: 7.8rem, $right: 0);
+                @include all.marpad($pad: 1rem);
+                @include all.size($minW: 15rem, $h: 13rem);
+                background-color: #1f2a3a;
+                border-radius: 8px 0 8px 8px;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+                overflow: hidden;
+                z-index: 1;
+
+                a {
+                    @include all.marpad($pad: 1rem 1.6rem);
+                    @include all.font-style($size: 1.4rem);
+                    color: #ffffff;
+                    text-decoration: none;
+                    display: block;
+
+                    &:hover {
+                        background-color: #2c3b52;
+                        border-radius: 0.5rem;
+                    }
+                }
             }
         }
     }
