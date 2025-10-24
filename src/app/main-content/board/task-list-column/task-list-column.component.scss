@@ -3,7 +3,7 @@
 :host {
     @include all.fl($flexdir: column);
     @include all.size();
-    @include all.marpad($pad: 0 2rem);
+    @include all.marpad($pad: 0 1rem);
 
     @media (max-width: 1180px) {
         @include all.marpad($mar: 0.5rem);
@@ -25,7 +25,7 @@
         @include all.marpad($pad: 0 1rem);
 
         @media (max-width: 1280px) {
-            @include all.size($h: 5rem, $maxW: 75dvw);
+            @include all.size($h: 5rem);
             padding: 0 2rem;
         }
 
@@ -59,6 +59,7 @@
 
 // #region main
     main {
+        
         @include all.size($h: 70dvh);
         @include all.fl($alit: center, $flexdir: column);
         overflow-y: auto;
@@ -67,7 +68,7 @@
 
         @media (max-width: 1280px) {
             @include all.fl($flexdir: row);
-            @include all.size($w: 75dvw, $h: auto);
+            @include all.size($h: auto);
             overflow-x: auto;
         }
 

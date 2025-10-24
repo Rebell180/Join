@@ -14,12 +14,13 @@
 
 // #region header
     header {
+        border: 2px solid red;
         @include all.size($h: 10rem);
         @include all.fl($alit: center, $jc: space-between);
         padding: 0 3rem;
 
         @include all.notebook {
-            @include all.size($w: 70dvw, $h: 10rem);
+            @include all.size($h: 10rem);
             @include all.marpad($pad: 0 1rem);
         }
 
@@ -67,7 +68,7 @@
 
         @media(max-width: 1280px) {
             @include all.fl($flexdir: column);
-            @include all.size($maxW: 78dvw);
+            @include all.size();
             overflow-y: auto;
             overflow-x: hidden;
             scrollbar-width: thin;
