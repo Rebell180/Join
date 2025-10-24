@@ -31,15 +31,13 @@ export class SubtaskComponent {
   // #region Form
   /**
    * Enables the Edit-Mode of Subtask.
-   * @param psubtask - Instance of SubTask.
+   * @param index - Index for subtask-array.
    */
-  private endbleEdit(psubtask: SubTask): void {
+  private endbleEdit(index: number): void {
     let editEnabled: boolean = this.subtasks().every(subtask => !subtask.editMode)
     if (editEnabled) {
       this.sendErrMsg('');
-      this.subtasks().forEach(subtask => {
-        if (subtask.id == psubtask.id) subtask.editMode = true;
-      });
+      this.subtasks()[index].editMode = true;
     } else this.sendErrMsg('Edit another subtask at first.');
   }
 
@@ -63,10 +61,10 @@ export class SubtaskComponent {
 
   /**
    * Enables SubtaskEdit-Mode and sets focus on input-field.
-   * @param subtask - Instance of SubTask.
+   * @param index - Index of subtaskarray
    */
-  protected selectEditInput(subtask: SubTask) {
-    this.endbleEdit(subtask);
+  protected selectEditInput(index: number) {
+    this.endbleEdit(index);
     this.focusEdit();
   }
 
@@ -115,6 +113,7 @@ export class SubtaskComponent {
     if (this.subtasks()[index].name.length == 0) this.sendErrMsg('New name required.');
     else if (this.countSubtaskName(this.subtasks()[index]) > 1) this.sendErrMsg('Subtask allready exists.');
     else {
+      this.sendErrMsg('');
       if (this.subtasks()[index].editState == SubtaskEditState.NONE) this.subtasks()[index].editState = SubtaskEditState.CHANGED;
       this.subtasks()[index].editMode = false;
       this.outSubtasks.emit(this.subtasks())
