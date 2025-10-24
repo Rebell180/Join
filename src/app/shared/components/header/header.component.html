@@ -12,6 +12,7 @@
             <div class="profile-img" (click)="toggleMenu()"><span>SM</span></div>
 
             <div class="dropdown" *ngIf="isMenuVisible">
+                <a class="help-mobile" routerLink="/help">Help</a>
                 <a routerLink="/legal-notice">Legal Notice</a>
                 <a routerLink="/privacy-policy">Privacy Policy</a>
                 <a (click)="logout()">Log out</a>
