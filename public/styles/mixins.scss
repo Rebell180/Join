@@ -48,3 +48,9 @@
 	overflow: hidden; 
 	text-overflow: ellipsis;
 }
+
+@mixin font-style($size: 1.6rem, $family: unquote("Inter, sans-serif"), $weight: none) {
+	font-size: $size;
+	font-family: $family;
+	font-weight: $weight;
+}

@@ -3,28 +3,31 @@
 :host {
 	@include all.fl();
 	@include all.size($h: auto);
+
+	@media(max-width: 1280px) {
+		@include all.marpad($mar: 0.5rem 0, $pad: 0.5rem);
+		@include all.size($h: auto);
+	}
 }
+
 .task-column-container {
-	@include all.size();
-	@include all.marpad($mar: 0.5rem 0, $pad: 3rem);
+	@include all.size($h: auto);
+	@include all.marpad($mar: 0 0 0.5rem 0, $pad: 1rem);
 	background: rgb(254, 253, 253);
-	border-radius: 1rem;
+	border-radius: 1.6rem;
 	box-shadow: 0 0 5px lightgrey;
 
-	@media(max-width: 1230px) {
-		@include all.marpad($mar: 0.5rem 0, $pad: 1rem);
-	}
-
 	h2 {
-		@include all.size($w: fit-content, $h: 3rem);
+		@include all.size($w: fit-content, $minW: 10rem, $h: 3rem);
 		@include all.marpad($mar: 0 0 2rem 0, $pad: 0.5rem);
 		@include all.fl($jc: center);
+		@include all.font-style($size: 1.8rem, $weight: lighter);
 		color: white;
-		border-radius: 0.5rem;
+		border-radius: 0.8rem;
 
 		@media(max-width: 1230px) {
-		@include all.marpad($mar: 0 0 1rem 0, $pad: 0.5rem);
-	}
+			@include all.marpad($mar: 0 0 1rem 0, $pad: 0.5rem);
+		}
 	}
 
 	.blue {
@@ -42,22 +45,23 @@
 	.title {
 		@include all.size($h: auto);
 		@include all.limiter();
+		@include all.font-style($size: 1.8rem, $weight: bold);
+		margin-bottom: 1rem;
 		white-space: wrap;
-		font-size: 1.5rem;
-		font-family: 'Inter', sans-serif;
-		font-weight: bold;
 	}
 
 	.description {
 		@include all.size($h: auto);
 		@include all.limiter();
+		@include all.font-style($size: 1.8rem);
+		@include all.marpad($mar: 0 0 1rem 0);
 		white-space: wrap;
-		font-size: 1.5rem;
+		color: grey;
 	}
 
 
 	.subtask-progress-box {
-		@include all.marpad($pad: 0.6rem 0.8rem);
+		@include all.marpad($mar: 1rem 0, $pad: 0.6rem 0.8rem);
 	}
 
 	.progress-bar-wrapper {
@@ -73,15 +77,13 @@
 	}
 
 	.progress-bar-fill {
-		height: 100%;
+		@include all.size();
 		background-color: #3b82f6;
 		transition: width 0.3s ease-in-out;
 	}
 
 	.subtask-counter {
-		font-size: 1.4rem;
-		font-weight: 600;
-		color: black;
+		@include all.font-style($size: 1.5rem);
 		white-space: nowrap;
 	}
 

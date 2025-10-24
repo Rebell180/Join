@@ -1,25 +1,38 @@
-@use '../../../../../public//styles/all_styles' as all;
+@use "../../../../../public//styles/all_styles" as all;
 
 :host {
     @include all.fl($flexdir: column);
     @include all.size();
     @include all.marpad($pad: 0 2rem);
 
+    @media (max-width: 1180px) {
+        @include all.marpad($mar: 0.5rem);
+        @include all.size();
+    }
+
+    @include all.notebook {
+        @include all.size($maxW: 75dvw);
+    }
+
+    @include all.tablet {
+        @include all.size();
+    }
+
+// #region header
     header {
         @include all.size($h: 5rem);
         @include all.fl($alit: center, $jc: space-between);
         @include all.marpad($pad: 0 1rem);
 
-        @media(max-width: 1230px) {
-                @include all.size($h: 5rem, $maxW: 80dvw);
-            }
+        @media (max-width: 1280px) {
+            @include all.size($h: 5rem, $maxW: 100dvw);
+        }
 
         h3 {
-            font-size: 1.5cqw;
+            font-size: 2.4rem;
         }
 
         .add-icon-btn {
-
             &:hover {
                 content: url(../../../../../public/assets/Icons/taskBoard/addBtnBoardHover.png);
             }
@@ -29,7 +42,9 @@
             }
         }
     }
+//#endregion
 
+//#region no-task
     .no-task {
         @include all.fl($jc: center, $alit: center);
         @include all.size($h: 4.8rem);
@@ -39,22 +54,25 @@
         font: 1.6rem OpenSans;
         color: #a8a8a8;
     }
+//#endregion
 
+// #region main
     main {
-        @include all.size($h: 67dvh);
+        @include all.size($h: 70dvh);
+        @include all.fl($alit: center, $flexdir: column);
         overflow-y: auto;
         scrollbar-width: none;
-        -ms-overflow-style: none;
 
-        &::-webkit-scrollbar {
-            display: none;
-        }
+        @media (max-width: 1280px) {
+            @include all.fl($flexdir: row);
+            @include all.size($h: auto);
+            overflow-x: auto;
 
-        @media(max-width: 1230px) {
-            @include all.fl();
-            @include all.size($maxW: 80dvw);
-            overflow: hidden;
-            gap: 0.5rem;
+            >* {
+                flex: 0 0 auto;
+                width: 28rem;
+            }
         }
     }
 }
+// #endregion

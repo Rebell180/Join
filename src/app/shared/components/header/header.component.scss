@@ -21,8 +21,7 @@
         }
 
         h1 {
-            font-size: 20px;
-            font-family: 'InterRegular', sans-serif;
+            @include all.font-style($size: 2rem);
 
             @include all.tablet {
                 display: none;

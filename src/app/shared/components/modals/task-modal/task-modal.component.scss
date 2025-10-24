@@ -6,7 +6,7 @@
 	position: absolute;
 	top: 0;
 	left: 0;
-	z-index: 30;
+	z-index: 10;
 
 	.task-modal-overlay {
 		@include all.size();
@@ -14,12 +14,21 @@
 	}
 
 	.task-modal-detail-container {
-		@include all.size($w: 50dvh, $h: 80dvh);
-		@include all.marpad($pad: 2.5rem);
+		@include all.size($w: 40dvh, $h: auto);
+		@include all.marpad($pad: 1rem);
 		background: rgb(254, 253, 253);
 		border-radius: 1rem;
 		box-shadow: 0 0 5px lightgrey;
-		font-family: 'InterRegular', sans-serif;
+		@include all.font-style($family: unquote("InterRegular, sans-serif"));
+
+		@include all.mobile {
+			@include all.size($w: 40dvh, $h: auto, $maxH: 75dvh);
+		}
+
+		@media(max-width: 390px) {
+			@include all.size($maxW: 32dvh, $h: auto, $maxH: 70dvh);
+			border-radius: 1.8rem;
+		}
 
 		.task-modal-header {
 			@include all.fl($jc: space-between);
@@ -29,7 +38,8 @@
 				@include all.marpad($mar: 0 0 2rem 0, $pad: 0.8rem);
 				@include all.fl($jc: center);
 				color: white;
-				border-radius: 1rem;
+				border-radius: 1.2rem;
+				@include all.font-style($size: 1.8rem, $weight: lighter);
 			}
 
 			.blue {
@@ -55,39 +65,36 @@
 		.title {
 			@include all.size($h: auto);
 			@include all.limiter();
+			@include all.font-style($size: 4rem, $weight: bold);
 			white-space: wrap;
-			font-size: 4.5rem;
-			font-family: 'Inter', sans-serif;
-			font-weight: bold;
 		}
 
 		.description {
 			@include all.fl($alit: center);
-			@include all.size($h: 2rauto);
+			@include all.size($h: auto);
 			@include all.limiter();
+			@include all.marpad($mar: 1.5rem 0 0.6rem 0);
+			@include all.font-style($size: 1.7rem);
 			white-space: wrap;
-			font-size: 2rem;
-			height: 5dvh;
+
 		}
 
 		.task-modal-dueDate-container {
 			@include all.fl($alit: center, $gap: 2rem);
-			height: 4dvh;
-			font-size: 1.7rem;
+			@include all.size($h: 4dvh);
+			@include all.font-style($size: 1.5rem);
 		}
 
 		.task-modal-priority-container {
-			@include all.fl($alit: center);
-			gap: 2rem;
-			height: 5dvh;
+			@include all.fl($alit: center, $gap: 2rem);
+			@include all.size($h: 4dvh);
 
 			.task-modal-priority {
 				@include all.fl($alit: center, $jc: center, $gap: 1rem);
-				height: 5dvh;
-				width: 30%;
+				@include all.size($w: 30%, $h: 4dvh);
 
 				p {
-					font-size: 1.6rem;
+					@include all.font-style($size: 1.5rem);
 				}
 
 				img {
@@ -97,39 +104,48 @@
 		}
 
 		.task-modal-assigned-container {
-			height: 21dvh;
-			overflow-y: auto;
-			@include all.marpad($mar: 2rem 0 0 0);
+			@include all.marpad($mar: 0.8rem 0 0 0);
 
-			.task-modal-assigned-detail {
-				@include all.fl($flexdir: column, $gap: 1rem);
-				@include all.marpad($pad: 2rem);
+			.task-modal-assigned {
+				@include all.size($h: 18.5dvh);
+				overflow-y: auto;
+				// scrollbar-width: none;
+				// -ms-overflow-style: none;
 
-				.contact-item {
-					@include all.fl($alit: center, $gap: 2rem);
+				// &::-webkit-scrollbar {
+				// 	display: none;
+				// }
 
-					.contact-icon {
-						@include all.size($w: 4.2rem, $minW: 4.2rem, $h: 4.2rem, $minH: 4.2rem);
-					}
+				.task-modal-assigned-detail {
+					@include all.fl($flexdir: column, $gap: 1rem);
+					@include all.marpad($pad: 2rem);
 
-					.contact-name {
-						font-size: 1.5rem;
+					.contact-item {
+						@include all.fl($alit: center, $gap: 2rem);
+
+						.contact-icon {
+							@include all.size($w: 4.2rem, $minW: 4.2rem, $h: 4.2rem, $minH: 4.2rem);
+						}
+
+						.contact-name {
+							size: 1.5rem;
+						}
 					}
 				}
 			}
-
 		}
 
 		.task-modal-subtasks {
-			@include all.size($h: 15dvh);
+			@include all.size($h: 8dvh);
 			@include all.fl($flexdir: column);
-			@include all.marpad($mar: 2rem 0);
+			@include all.marpad($mar: 2rem 0 0 0);
 
 			.task-modal-input {
-				@include all.size($w: 20dvw, $h: 2rem);
-				@include all.marpad($mar: 2rem 0 0 2rem);
+				@include all.limiter();
+				@include all.size($w: auto, $h: 2rem);
+				@include all.marpad($mar: 0.5rem 0 0 1rem);
 				@include all.fl($alit: center, $gap: 1rem);
-				font-size: 1.7rem;
+				@include all.font-style($size: 1.7rem);
 
 				input {
 					@include all.fl($alit: center);
@@ -138,8 +154,9 @@
 		}
 
 		.task-option-container {
+			@include all.size($h: 3rem);
 			@include all.fl($jc: end, $gap: 1rem, $alit: center);
-			padding: 1rem;
+			@include all.marpad($pad: 1rem);
 
 			button {
 				@include all.fl($alit: center);
@@ -152,9 +169,7 @@
 		}
 
 		h3 {
-			font-size: 2rem;
-			font-family: 'Inter', sans-serif;
-			font-weight: 300;
+			@include all.font-style($size: 1.5rem, $weight: 300);
 		}
 	}
 }

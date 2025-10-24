@@ -5,39 +5,67 @@
     @include all.fl($flexdir: column, $alit: center);
     @include all.size();
     background: #ededed;
-    padding-top: 6rem;
-    border: 2px solid red;
+    padding-top: 4rem;
 
+    @media(max-width: 1280px) {
+        @include all.fl($flexdir: column, $alit: center);
+        @include all.size();
+    }
+
+// #region header
     header {
         @include all.size($h: 10rem);
         @include all.fl($alit: center, $jc: space-between);
         padding: 0 3rem;
 
+        @include all.notebook {
+            padding: 0 5rem;
+        }
+
         h1 {
             font-family: 'Inter', sans-serif;
         }
 
-        .search-task-container {
-            @include all.size();
-            @include all.fl($alit: center, $jc: end, $gap: 3rem);
+        .search-task {
+            @include all.size($w: 40%, $h: 4.8rem);
 
-            .search-task {
-                @include all.size($w: 40%, $h: 4.8rem);
+            @include all.tablet {
+                display: none;
             }
+        }
 
-            .btn-set {
-                @include all.size($w: 15rem, $h: 4.8rem);
+        .btn-set {
+            @include all.size($w: 15rem, $h: 4.8rem);
+
+            @include all.notebook {
+                #add-task-label {
+                    display: none;
+                }
+                @include all.size($w: 4.8rem, $h: 4.8rem);
             }
         }
     }
+// #endregion
 
+// #region search-task-container-mobile
+    .search-task-container-mobile {
+        display: none;
+
+        @include all.tablet {
+            display: flex;
+            padding: 1rem;
+        }
+    }
+// #endregion
+
+// #region task-list-container
     .task-list-wrapper {
         @include all.size();
         @include all.fl();
 
-        @media(max-width: 1230px) {
+        @media(max-width: 1280px) {
             @include all.fl($flexdir: column);
-            width: 100rem;
+            @include all.size($maxW: 80dvw);
             overflow-y: auto;
             scrollbar-width: none;
             -ms-overflow-style: none;
@@ -46,5 +74,15 @@
                 display: none;
             }
         }
+
+        @include all.notebook {
+            @include all.fl($flexdir: column, $alit: center);
+            @include all.size($maxW: 70dvw);
+        }
+        
+        @include all.tablet {
+            @include all.size($w: 100dvw);
+        }
     }
 }
+// #endregion

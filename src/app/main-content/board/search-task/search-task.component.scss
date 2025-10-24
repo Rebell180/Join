@@ -8,7 +8,7 @@ form {
     @include all.size();
 
     input[type=text] {
-        display: flex;
+        @include all.fl();
         @include all.size($h: 4.8rem);
         @include all.marpad($pad: 8px 16px);
         outline: none;
@@ -25,20 +25,15 @@ form {
     }
 
     hr {
-        height: 60%;
-        width: 2px;
-        position: absolute;
-        top: 20%;
-        right: 48px;
+        @include all.size($w: 0.2rem, $h: 60%);
+        @include all.absolute($top: 20%, $right: 4.8rem);
     }
 
     input[type=submit] {
+        @include all.absolute($top: 0, $right: 0);
         height: 4.8rem;
         aspect-ratio: 1 / 1;
         background: url(../../../../../public/assets//Icons//taskBoard/searchDefault.png) no-repeat center / cover;
-        position: absolute;
-        top: 0;
-        right: 0;
         cursor: pointer;
         &:hover {
             background: url(../../../../../public/assets//Icons//taskBoard/searchHover.png) no-repeat center / cover;

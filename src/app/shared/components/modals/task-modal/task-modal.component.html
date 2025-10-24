@@ -27,22 +27,22 @@
 				<img src="assets/Icons/taskBoard/{{ task().priority | lowercase }}Task.png" alt="priority Icon" />
 			</div>
 		</div>
-
 		<div class="task-modal-assigned-container">
-			<h3>assignedTo:</h3>
-			<div class="task-modal-assigned-detail">
-				@for (contact of task().contacts; track contact.id) {
-				<div class="contact-item">
-					<app-contact-icon class="contact-icon {{ contact.iconColor }}"
-						[contact]="contact"></app-contact-icon>
-					<span class="contact-name">
-						{{ contact.firstname }}
-					</span>
+			<h3>AssignedTo:</h3>
+			<div class="task-modal-assigned">
+				<div class="task-modal-assigned-detail">
+					@for (contact of task().contacts; track contact.id) {
+					<div class="contact-item">
+						<app-contact-icon class="contact-icon {{ contact.iconColor }}"
+							[contact]="contact"></app-contact-icon>
+						<span class="contact-name">
+							{{ contact.getFullName() }}
+						</span>
+					</div>
+					}
 				</div>
-				}
 			</div>
 		</div>
-
 		<div class="task-modal-subtasks">
 			<h3>Subtasks:</h3>
 			@for (subtask of task().subtasks; track subtask.id) {

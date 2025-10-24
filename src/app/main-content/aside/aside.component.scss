@@ -1,79 +1,85 @@
 @use './../../../../public/styles/all_styles.scss' as all;
 
-:host {		
-			grid-area: aside;
+// #region host
+:host {
+	@include all.size();
+	@include all.fl($jc: space-between, $flexdir: column, $alit: center);
+	@include all.marpad($pad: 3rem 0);
+	grid-area: aside;
+	background: #2a3647;
+
+	@include all.tablet {
+		@include all.size($h: 10dvh);
+		@include all.fl($jc: center, $alit: center);
+		@include all.marpad($pad: 0.5rem)
+	}
+
+	img {
+		@include all.size($w: 10rem, $h: 10rem);
+
+		@include all.tablet {
+			display: none;
+		}
+	}
+
+	// #endregion
+
+	// #region nav-btn
+	.nav-btn {
+		width: 100%;
+		@include all.fl($flexdir: column, $alit: center, $jc: center);
+
+		@include all.tablet {
 			@include all.size();
-			@include all.fl($jc: space-between, $flexdir: column, $alit: center);
-			@include all.marpad($pad: 3rem 0);
-			background: #2a3647;
+			@include all.fl($gap: 2rem, $jc: space-evenly);
+		}
+
+		button {
 
 			@include all.tablet {
-				@include all.size($h: 10dvh);
-				@include all.fl($jc: center, $alit: center);
-				@include all.marpad($pad: 0.5rem)
+				@include all.size($w: 10rem, $h: 8rem);
+				@include all.fl($flexdir: column, $jc: center, $alit: center);
 			}
 
-			img {
-				@include all.size($w: 10rem, $h: 10rem);
+			&:hover {
+				background: #091930;
+			}
+		}
+	}
+}
 
-				@include all.tablet {
-					display: none;
-					}
+// #endregion
+
+// #region nav
+nav {
+	ul {
+		@include all.size($h: 12dvh);
+
+		@include all.tablet {
+			display: none;
+		}
+
+		li {
+			@include all.size($h: 5rem);
+			@include all.fl($jc: center);
+
+			@include all.tablet {
+				display: none;
 			}
 
-			.nav-btn {
-				width: 100%;
-				@include all.fl($flexdir: column, $alit: center, $jc: center);
+			a:link,
+			a:visited {
+				@include all.size($h: auto);
+				@include all.fl($jc: center);
+				color: grey;
+				@include all.font-style($size: 1.6rem);
 
-				@include all.tablet {
-					@include all.size();
-					@include all.fl($flexdir: row, $gap: 2rem, $jc: space-evenly);
-					}
-
-				@include all.mobile {
-					gap: 0.8rem;
-				}
-
-				button {
-
-					@include all.tablet {
-						@include all.size($w: 10rem, $h: 8rem);
-						@include all.fl($flexdir: column, $jc: center, $alit: center);
-					}
-
-					&:hover {
-						background: #091930;
-					}
+				&:hover {
+					color: rgb(17, 119, 227);
 				}
 			}
 		}
+	}
+}
 
-	nav {
-		ul {
-			@include all.size($h: 12dvh);
-
-				@include all.tablet {
-						display: none;
-					}
-
-				li {
-					@include all.size($h: 5rem);
-					@include all.fl($jc: center);
-
-					@include all.tablet {
-						display: none;
-					}
-
-					a:link, a:visited {
-						@include all.size($h: auto);
-						@include all.fl($jc: center);
-						color: grey;
-						font-size: clamp(16px, 0.8dvw, 32px);
-
-							&:hover {
-							color: rgb(17, 119, 227);
-						}
-					}
-				}
-			}
-		}
+// #endregion
