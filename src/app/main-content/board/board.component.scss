@@ -15,7 +15,7 @@
     header {
         @include all.size($h: 10rem);
         @include all.fl($alit: center, $jc: space-between);
-        padding: 0 3rem;
+        padding: 0 5rem;
 
         @include all.notebook {
             @include all.size($h: 10rem);
