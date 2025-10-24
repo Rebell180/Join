@@ -15,7 +15,7 @@
 
 	.task-modal-detail-container {
 		@include all.size($w: 40dvh, $h: auto);
-		@include all.marpad($pad: 1rem);
+		@include all.marpad($pad: 2rem);
 		background: rgb(254, 253, 253);
 		border-radius: 1rem;
 		box-shadow: 0 0 5px lightgrey;
@@ -107,7 +107,7 @@
 			@include all.marpad($mar: 0.8rem 0 0 0);
 
 			.task-modal-assigned {
-				@include all.size($h: 18.5dvh);
+				@include all.size($h: auto, $maxH: 18.5dvh);
 				overflow-y: auto;
 				// scrollbar-width: none;
 				// -ms-overflow-style: none;

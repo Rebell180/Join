@@ -74,7 +74,7 @@
 // #region contact-info
     .contact-info-container {
         @include all.slightInFromRightAnimation();
-        @include all.size($h: 80%);
+        @include all.size($w: 40dvw, $h: 80%);
         @include all.marpad($mar: 3rem 0 0);
 
         .contact-detail-header-row {

@@ -19,17 +19,18 @@
         padding: 0 3rem;
 
         @include all.notebook {
-            padding: 0 5rem;
+            @include all.size($h: 10rem);
+            @include all.marpad($pad: 0 1rem);
         }
 
         h1 {
-            font-family: 'Inter', sans-serif;
+            @include all.font-style($size: 6rem);
         }
 
         .search-task {
             @include all.size($w: 40%, $h: 4.8rem);
 
-            @include all.tablet {
+            @include all.mobile {
                 display: none;
             }
         }
@@ -51,9 +52,10 @@
     .search-task-container-mobile {
         display: none;
 
-        @include all.tablet {
+        @include all.mobile {
             display: flex;
-            padding: 1rem;
+            padding: 0 1rem;
+            @include all.size($h: 6rem);
         }
     }
 // #endregion
@@ -65,19 +67,16 @@
 
         @media(max-width: 1280px) {
             @include all.fl($flexdir: column);
-            @include all.size($maxW: 80dvw);
+            @include all.size($maxW: 78dvw);
             overflow-y: auto;
-            scrollbar-width: none;
-            -ms-overflow-style: none;
-
-            &::-webkit-scrollbar {
-                display: none;
-            }
+            overflow-x: hidden;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
         }
 
         @include all.notebook {
-            @include all.fl($flexdir: column, $alit: center);
-            @include all.size($maxW: 70dvw);
+            @include all.fl($flexdir: column);
+            @include all.size($maxW: 75dvw);
         }
         
         @include all.tablet {
