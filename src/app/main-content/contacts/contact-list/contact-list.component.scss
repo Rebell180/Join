@@ -39,6 +39,7 @@
                 vertical-align: center;
                 @include all.marpad($mar: 2rem 0, $pad: 0 3rem);
                 cursor: default;
+                @include all.font-style($size: 2.5rem, $weight: 100);
             }
 
             hr {

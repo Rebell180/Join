@@ -9,6 +9,7 @@
         @include all.marpad($pad: 0 3rem);
         grid-area: header;
         background: white;
+        box-shadow: 0 1px 6px -2px grey;
 
         .join-logo {
             display: none;

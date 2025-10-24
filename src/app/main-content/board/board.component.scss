@@ -12,7 +12,6 @@
 
 // #region header
     header {
-        border: 2px solid red;
         @include all.size($h: 10rem);
         @include all.fl($alit: center, $jc: space-between);
         padding: 0 3rem;
@@ -63,10 +62,11 @@
     .task-list-wrapper {
         @include all.size();
         @include all.fl();
+        gap: 0;
 
         @media(max-width: 1280px) {
             @include all.fl($flexdir: column);
-            @include all.size();
+            @include all.size($w: 78dvw);
             overflow-y: auto;
             overflow-x: hidden;
             scrollbar-width: thin;

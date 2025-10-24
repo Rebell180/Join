@@ -19,7 +19,7 @@
 		background: rgb(254, 253, 253);
 		border-radius: 1rem;
 		box-shadow: 0 0 5px lightgrey;
-		@include all.font-style($family: unquote("InterRegular, sans-serif"));
+		@include all.font-style($family: ("InterRegular, sans-serif"));
 
 		@include all.mobile {
 			@include all.size($w: 40dvh, $h: auto, $maxH: 75dvh);
@@ -52,6 +52,7 @@
 
 			.task-modal-close-btn {
 				@include all.size($w: 1.6rem, $h: 1.6rem);
+				padding-top: 1rem;
 
 				button {
 
@@ -109,12 +110,9 @@
 			.task-modal-assigned {
 				@include all.size($h: auto, $maxH: 18.5dvh);
 				overflow-y: auto;
-				// scrollbar-width: none;
-				// -ms-overflow-style: none;
-
-				// &::-webkit-scrollbar {
-				// 	display: none;
-				// }
+				scrollbar-width: thin;
+				scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+				}
 
 				.task-modal-assigned-detail {
 					@include all.fl($flexdir: column, $gap: 1rem);
@@ -172,4 +170,3 @@
 			@include all.font-style($size: 1.5rem, $weight: 300);
 		}
 	}
-}

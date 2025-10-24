@@ -20,15 +20,14 @@
     header {
         @include all.size($h: 5rem);
         @include all.fl($alit: center, $jc: space-between);
-        @include all.marpad($pad: 0 1rem);
+        @include all.marpad($pad: 0 4rem 0 3.2rem);
 
         @media (max-width: 1280px) {
             @include all.size($h: 5rem);
-            padding: 0 2rem;
         }
 
         h3 {
-            font-size: 2.4rem;
+            font-size: 2.1rem;
         }
 
         .add-icon-btn {
@@ -57,8 +56,7 @@
 
 // #region main
     main {
-        
-        @include all.size($h: 70dvh);
+        @include all.size($h: 69dvh);
         @include all.fl($alit: center, $flexdir: column);
         overflow-y: auto;
         scrollbar-width: thin;
@@ -66,7 +64,7 @@
 
         @media (max-width: 1280px) {
             @include all.fl($flexdir: row);
-            @include all.size($h: auto);
+            @include all.size($w: 78dvw, $h: auto);
             overflow-x: auto;
         }
 
@@ -76,7 +74,8 @@
 
             >* {
                 flex: 0 0 auto;
-                width: 28rem;
+                width: 100%;
+                max-width: 28rem;
             }
         }
     }
