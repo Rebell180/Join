@@ -19,7 +19,7 @@
         padding: 0 3rem;
 
         @include all.notebook {
-            @include all.size($h: 10rem);
+            @include all.size($w: 70dvw, $h: 10rem);
             @include all.marpad($pad: 0 1rem);
         }
 
@@ -76,7 +76,7 @@
 
         @include all.notebook {
             @include all.fl($flexdir: column);
-            @include all.size($maxW: 75dvw);
+            @include all.size($maxW: 72dvw);
         }
         
         @include all.tablet {

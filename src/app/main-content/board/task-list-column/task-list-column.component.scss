@@ -69,6 +69,7 @@
             @include all.fl($flexdir: row);
             @include all.size($w: 75dvw, $h: auto);
             overflow-x: auto;
+        }
 
         @include all.tablet {
             @include all.size($h: auto);
@@ -80,5 +81,4 @@
             }
         }
     }
-}
 // #endregion
