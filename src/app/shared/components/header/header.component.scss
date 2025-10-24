@@ -47,42 +47,31 @@
             }
 
             .profile-img {
-                width: 60px;
-                height: 60px;
+                @include all.size($w: 6.5rem, $h: 6.5rem);
+                @include all.font-style($size: 2.3rem, $weight: 600);
+                @include all.fl($alit: center, $jc: center);
+                color: #29abe3;
                 border-radius: 50%;
-                background-color: #f0f6ff;
-                color: #1f2a3a;
-                border: 2px solid #1f2a3a;
-                font-weight: 600;
-                font-size: 14px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
+                border: 3px solid #1f2a3a;
                 cursor: pointer;
-
-                span {
-                    font-size: 2rem;
-                }
             }
 
             .dropdown {
-                position: absolute;
-                top: 7.5rem;
-                right: 0;
+                @include all.absolute($top: 7.8rem, $right: 0);
+                @include all.marpad($pad: 1rem);
+                @include all.size($minW: 15rem, $h: 13rem);
                 background-color: #1f2a3a;
                 border-radius: 8px 0 8px 8px;
                 box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
                 overflow: hidden;
-                min-width: 160px;
-                z-index: 100;
-                padding: 1rem;
+                z-index: 10;
 
                 a {
+                    @include all.font-style($size: 1.4rem);
+                    @include all.marpad($pad: 1rem 1.6rem);
                     color: #ffffff;
-                    padding: 10px 16px;
                     text-decoration: none;
                     display: block;
-                    font-size: 14px;
                     cursor: pointer;
 
                     &:hover {

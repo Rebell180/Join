@@ -1,3 +1,5 @@
+@use "sass:string";
+
 @mixin marpad($pad: 0, $mar: 0) {
 	padding: $pad;
 	margin: $mar;
@@ -49,7 +51,7 @@
 	text-overflow: ellipsis;
 }
 
-@mixin font-style($size: 1.6rem, $family: unquote("Inter, sans-serif"), $weight: none) {
+@mixin font-style($size: 1.6rem, $family: string.unquote("Inter, sans-serif"), $weight: none) {
 	font-size: $size;
 	font-family: $family;
 	font-weight: $weight;
