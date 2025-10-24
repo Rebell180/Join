@@ -23,7 +23,7 @@ export class AsideComponent {
             {
                   sectionId: 'Summary',
                   title: 'Summary',
-                  imagePath: '/assets/Icons/contact/Summary.png',
+                  imagePath: 'assets/Icons/contact/Summary.png',
                   section: SectionType.SUMMARY,
                   active: false
             },
