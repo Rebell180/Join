@@ -7,8 +7,5 @@
     <app-search-task class="search-task" (seachOut)="filterTasks($event)"></app-search-task>
 </div>
 <div class="task-list-wrapper">
-    @for (list of taskLists; track list.listName) {
-    <app-task-list-column id="task-list-column-{{ list.listName }}" [listName]="list.listName"
-        [tasks]="getTaskForList(list.status)"></app-task-list-column>
-    }
+    
 </div>
