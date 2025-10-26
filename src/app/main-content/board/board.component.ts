@@ -24,10 +24,8 @@ export class BoardComponent implements OnInit, OnDestroy {
   protected modalService: ModalService = inject(ModalService);
 
   // Primary Data
-  tasks: Task[] = [];
+  private tasks: Task[] = [];
   private shownTasks: Task[] = [];
-  private contacts: Contact[] = [];
-  private subtasks: SubTask[] = [];
   protected taskLists: {
     listName: string,
     status: TaskStatusType
@@ -37,8 +35,11 @@ export class BoardComponent implements OnInit, OnDestroy {
       { listName: 'Await feedback', status: TaskStatusType.REVIEW },
       { listName: 'Done', status: TaskStatusType.DONE }
     ]
+  protected taskItems: Task[][] = [[],[],[],[]];
 
   // Database
+  private contacts: Contact[] = [];
+  private subtasks: SubTask[] = []
   private fs: Firestore = inject(Firestore);
   private unsubTasks!: Unsubscribe;
   private unsubContacts!: Unsubscribe;
@@ -90,9 +91,9 @@ export class BoardComponent implements OnInit, OnDestroy {
         this.addContactsToTask(i);
         this.addSubtasktoTask(i);
       }
-      this.sortTasks();
       this.shownTasks = this.tasks;
-    })
+      this.splitTasks();
+    });
   }
 
   
@@ -103,6 +104,26 @@ export class BoardComponent implements OnInit, OnDestroy {
    */
   filterTasks(userSearch: string) {
     this.shownTasks = userSearch.length == 0 ? this.tasks : this.tasks.filter(task => task.title.toLowerCase().includes(userSearch.toLowerCase()));
+    this.splitTasks();
+  }
+
+  /** Divides all shwohn Tasks in their lists */
+  private splitTasks() {
+    for (let i = 0; i < this.shownTasks.length; i++) {
+      switch(this.shownTasks[i].status) {
+        case TaskStatusType.TODO:
+          this.taskItems[0].push(this.shownTasks[i]);
+          break;
+        case TaskStatusType.PROGRESS:
+          this.taskItems[1].push(this.shownTasks[i]);
+          break;
+        case TaskStatusType.REVIEW:
+          this.taskItems[2].push(this.shownTasks[i]);
+          break;
+        case TaskStatusType.DONE:
+          this.taskItems[3].push(this.shownTasks[i]);
+      }
+    }
   }
 
   /** Gets all Tasks, which has been searched.
