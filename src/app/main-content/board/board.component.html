@@ -8,17 +8,48 @@
     <app-search-task class="search-task" (seachOut)="filterTasks($event)"></app-search-task>
 </div>
 <div class="task-list-wrapper">
-    @for (list of taskLists; track i; let i = $index) {
         <section class="task-list">
             <header>
-                <h3>{{ list.listName }}</h3>
+                <h3>{{ taskLists[0].listName }}</h3>
                 <button><img class="add-icon-btn" src="/assets/Icons/taskBoard/addBtnBoard.png"></button>
             </header>
-            <main>
-                @for (task of taskItems[i]; let j = $index; track j) {
-                    <app-task-column-item [task]="taskItems[i][j]"></app-task-column-item>
+            <main cdkDropList #todo="cdkDropList" [cdkDropListData]="taskItems[0]" [cdkDropListConnectedTo]="[progress, review, done]" (cdkDropListDropped)="drop($event)">
+                @for (task of taskItems[0]; let j = $index; track j) {
+                    <app-task-column-item [task]="taskItems[0][j]" cdkDrag [cdkDragData]="taskItems[0][j]"></app-task-column-item>
                 }
             </main>
         </section>
-    }
+        <section class="task-list">
+            <header>
+                <h3>{{ taskLists[1].listName }}</h3>
+                <button><img class="add-icon-btn" src="/assets/Icons/taskBoard/addBtnBoard.png"></button>
+            </header>
+            <main cdkDropList #progress="cdkDropList" [cdkDropListData]="taskItems[1]" [cdkDropListConnectedTo]="[todo, review, done]" (cdkDropListDropped)="drop($event)">
+                @for (task of taskItems[1]; let j = $index; track j) {
+                    <app-task-column-item [task]="taskItems[1][j]" cdkDrag [cdkDragData]="taskItems[1][j]"></app-task-column-item>
+                }
+            </main>
+        </section>
+        <section class="task-list">
+            <header>
+                <h3>{{ taskLists[2].listName }}</h3>
+                <button><img class="add-icon-btn" src="/assets/Icons/taskBoard/addBtnBoard.png"></button>
+            </header>
+            <main cdkDropList #review="cdkDropList" [cdkDropListData]="taskItems[2]" [cdkDropListConnectedTo]="[todo, progress, done]" (cdkDropListDropped)="drop($event)">
+                @for (task of taskItems[2]; let j = $index; track j) {
+                    <app-task-column-item [task]="taskItems[2][j]" cdkDrag [cdkDragData]="taskItems[2][j]"></app-task-column-item>
+                }
+            </main>
+        </section>
+        <section class="task-list">
+            <header>
+                <h3>{{ taskLists[3].listName }}</h3>
+                <button><img class="add-icon-btn" src="/assets/Icons/taskBoard/addBtnBoard.png"></button>
+            </header>
+            <main cdkDropList #done="cdkDropList" [cdkDropListData]="taskItems[3]" [cdkDropListConnectedTo]="[todo, progress, review]" (cdkDropListDropped)="drop($event)">
+                @for (task of taskItems[3]; let j = $index; track j) {
+                    <app-task-column-item [task]="taskItems[3][j]" cdkDrag [cdkDragData]="taskItems[0][j]"></app-task-column-item>
+                }
+            </main>
+        </section>
 </div>
