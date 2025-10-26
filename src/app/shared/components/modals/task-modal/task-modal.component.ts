@@ -6,12 +6,31 @@ import { ContactIconComponent } from "../../contact-icon/contact-icon.component"
 import { FormsModule } from '@angular/forms';
 import { SubTask } from '../../../classes/subTask';
 import { FirebaseDBService } from '../../../services/firebase-db.service';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'app-task-modal',
   imports: [CommonModule, FormsModule, ContactIconComponent],
   templateUrl: './task-modal.component.html',
-  styleUrl: './task-modal.component.scss'
+  styleUrl: './task-modal.component.scss',
+  animations: [
+    trigger('slideInOut', [
+      state('open', style({
+        transform: 'translateX(0)',
+        opacity: 1,
+      })),
+      state('closed', style({
+        transform: 'translateX(100vw)',
+        opacity: 0,
+      })),
+      transition('closed => open', [
+        animate('500ms ease-out')
+      ]),
+      transition('open => closed', [
+        animate('400ms ease-in')
+      ])
+    ])
+  ]
 })
 /**
  * Component representing a modal for managing a task.
@@ -34,13 +53,16 @@ export class TaskModalComponent {
   /** Output event triggered when a task is deleted, emits the task ID */
   taskDeleted = output<string>();
 
+  ngAfterViewInit() {
+    setTimeout(() => this.isOpen = true, 10); // Animation trigger
+  }
   /**
    * Closes the task modal.
    * Sets `isOpen` to false and calls `dissolve` callback after 200ms, if provided.
    */
   closeTaskModal() {
     this.isOpen = false;
-    setTimeout(() => this.dissolve?.(), 200);
+    setTimeout(() => this.dissolve?.(), 400);
   }
 
   /** Enum or constant representing categories of tasks */
@@ -65,5 +87,4 @@ export class TaskModalComponent {
 
     await this.fireDB.updateInDB('subtask', subtask);
   }
-
 }

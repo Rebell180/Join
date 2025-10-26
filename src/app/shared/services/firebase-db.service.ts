@@ -5,6 +5,7 @@ import { SubTask } from '../classes/subTask';
 import { collection, CollectionReference, Firestore, Unsubscribe, where, Query, query, onSnapshot, addDoc, updateDoc, DocumentReference, doc, deleteDoc } from '@angular/fire/firestore';
 import { DBObject } from '../interfaces/db-object';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { ToastMsgService } from './toast-msg.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +18,8 @@ export class FirebaseDBService {
 
   private currentContactBS: BehaviorSubject<Contact> = new BehaviorSubject<Contact>(new Contact());
   currentContact$: Observable<Contact> = this.currentContactBS.asObservable();
+
+  private tms: ToastMsgService = inject(ToastMsgService);
   
   tasks: Array<Task> = [];
   subTasks: Array<SubTask> = [];
@@ -184,6 +187,12 @@ export class FirebaseDBService {
   async deleteInDB(collectionName: string, docId: string) {
     const docRef = this.getDocRef(collectionName, docId);
     await deleteDoc(docRef);
+  }
+
+  async deleteTaskInDB(collectionName: string, docId: string) {
+    const docRef = this.getDocRef(collectionName, docId);
+    await deleteDoc(docRef);
+    this.tms.add('Deleting Task successfully', 3000, 'success');
   }
 
   // #endregion CRUD
