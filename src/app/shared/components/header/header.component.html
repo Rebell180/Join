@@ -1,8 +1,3 @@
-<!-- Das header-Tag habe ich hier rausgenommen, weil es jetzt in der mein-content.component.html ist. -->
-
-<!-- Keine weitere Kontentbegrenzung, Contentbegrenzung erfolgt uber MainContentComponent -->
-<!-- Hier kommt <app-aside> nicht hin, sondern in main-content.component.html -->
-
 <div class="small-header">
     <img class="join-logo" src="assets/Icons/contact/JoinLogo.png" alt="">
     <h1>Kanban Project Management Tool</h1>
@@ -13,8 +8,8 @@
 
             <div class="dropdown" *ngIf="isMenuVisible">
                 <a class="help-mobile" routerLink="/help"  (click)="modalService.openHelpModal()">Help</a>
-                <a routerLink="/legal-notice">Legal Notice</a>
                 <a routerLink="/privacy-policy" (click)="modalService.openPrivacyPolicyModal()">Privacy Policy</a>
+                <a routerLink="/legal-notice" (click)="modalService.openLegalNoticeModal()">Legal Notice</a>
                 <a (click)="logout()">Log out</a>
             </div>
         </div>

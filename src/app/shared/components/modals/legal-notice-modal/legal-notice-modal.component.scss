@@ -1,0 +1,121 @@
+@use '../../../../../../public/styles/all_styles' as all;
+@forward '../../../../../../public/styles/component-styles';
+
+.modal-overlay {
+    @include all.fl($alit: center, $jc: center);
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 12;
+}
+
+#legal-notice-close-btn {
+    @include all.absolute($top: 2rem, $right: 2rem);
+    @include all.font-style($size: 2rem);
+    z-index: 2;
+}
+
+.legal-notice-modal-container {
+    @include all.size($w: 90dvw, $maxW: 120rem, $h: 80dvh);
+    @include all.fl($flexdir: column, $jc: center, $alit: start, $gap: 1rem);
+    @include all.marpad($pad: 5rem);
+    background-color: white;
+    border-radius: 16px;
+    border: none;
+    box-shadow: 8px 8px 8px rgba(0, 0, 0, 0.2);
+
+    @include all.notebook {
+        @include all.marpad($pad: 5rem 3rem);
+        box-shadow: 8px 0 8px rgba(0, 0, 0, 0.2), -8px 0 8px rgba(0, 0, 0, 0.2);
+    }
+
+    @include all.tablet {
+        @include all.size($w: 90dvw, $maxW: 90rem, $h: 80dvh);
+        @include all.fl($flexdir: column, $jc: center, $alit: center);
+        @include all.marpad($pad: 5rem 1.5rem);
+    }
+
+    @include all.mobile {
+        @include all.size($w: 90dvw, $maxW: 60rem, $h: 80dvh);
+        @include all.marpad($pad: 5rem 1rem);
+    }
+
+    .legal-notice-modal-content {
+        @include all.fl($flexdir: column);
+        @include all.size($h: auto);
+        overflow-y: auto;
+        scrollbar-width: thin;
+        scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+
+        .legal-notice-header {
+            @include all.size($h: auto);
+            @include all.marpad($mar: 0 0 4rem 0);
+
+            h1 {
+                @include all.font-style($size: 4.8rem);
+            }
+        }
+
+        .legal-notice-main-content {
+            @include all.size($h: auto);
+            @include all.marpad($pad: 0 4rem 0 0);
+
+            h2 {
+                @include all.marpad($mar: 0 0 2rem 0);
+                @include all.font-style($size: 3.2rem);
+
+                @include all.mobile {
+                    @include all.font-style($size: 2.4rem);
+                }
+            }
+
+            h3 {
+                @include all.font-style($size: 2.4rem);
+                @include all.marpad($mar: 0 0 2rem 0);
+
+                @include all.mobile {
+                    @include all.font-style($size: 2rem);
+                }
+            }
+
+            h4 {
+                @include all.font-style($size: 2rem);
+            }
+
+            p {
+                @include all.font-style($size: 1.8rem);
+                @include all.marpad($mar: 0 0 1rem 0);
+
+                @include all.mobile {
+                    @include all.font-style($size: 1.6rem);
+                }
+            }
+
+            span {
+                @include all.font-style($weight: bold);
+            }
+
+            .legal-notice-list {
+                display: block;
+                @include all.marpad($mar: 0 0 4rem 0, $pad: 0 3rem 0 0);
+                @include all.font-style($size: 1.8rem);
+
+                @include all.mobile {
+                    @include all.font-style($size: 1.8rem);
+                    @include all.marpad($pad: 0 0 0 3rem);
+                    padding-left: 2rem;
+                }
+            }
+
+            a {
+                color: #29ABE2;
+                cursor: pointer;
+
+                @include all.mobile {
+                    word-wrap: break-word;
+                    text-wrap: true;
+                }
+            }
+        }
+    }
+}
