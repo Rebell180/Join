@@ -93,6 +93,9 @@ export class BoardComponent implements OnInit, OnDestroy {
       }
       this.shownTasks = this.tasks;
       this.splitTasks();
+      for (let i = 0; i < this.taskLists.length; i++) {
+        this.sortTasks(i);
+      }
     });
   }
 
@@ -169,7 +172,7 @@ export class BoardComponent implements OnInit, OnDestroy {
   }
 
   /**Sort contacts by  firstname, lastname. */
-  private sortContacts() {
+  private sortContacts(): void {
     this.contacts.sort((a, b) => {
       const firstCompare: number = a.firstname.localeCompare(b.firstname, 'de');
       if (firstCompare == 0) {
@@ -179,9 +182,12 @@ export class BoardComponent implements OnInit, OnDestroy {
     })
   }
 
-  /** Sorts Task-list by Due-Date ascending. */
-  private sortTasks() {
-    this.tasks.sort((a, b) => a.dueDate.seconds - b.dueDate.seconds)
+  /**
+   * Sort task of a task-list by dueDate ascending.
+   * @param index - Index of task-list
+   */
+  private sortTasks(index: number): void {
+    this.taskItems[index].sort((a, b) => a.dueDate.seconds - b.dueDate.seconds);
   }
   // #endregion
   // #endregion
