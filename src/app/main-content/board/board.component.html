@@ -1,11 +1,22 @@
 <header>
     <h1>Board</h1>
     <app-search-task class="search-task" (seachOut)="filterTasks($event)"></app-search-task>
-    <button class="btn-set" (click)="modalService.openAddTaskModal()"><span id="add-task-label">Add Task </span>+</button>
+    <button class="btn-set" (click)="modalService.openAddTaskModal()"><span id="add-task-label">Add Task
+        </span>+</button>
 </header>
 <div class="search-task-container-mobile">
     <app-search-task class="search-task" (seachOut)="filterTasks($event)"></app-search-task>
 </div>
 <div class="task-list-wrapper">
-    
+    @for (list of taskLists; track list.listName; let i = $index) {
+    <section class="task-list">
+        <header>
+            <h3>{{ list.listName }}</h3>
+            <button><img class="add-icon-btn" src="/assets/Icons/taskBoard/addBtnBoard.png"></button>
+        </header>
+        <main>
+            
+        </main>
+    </section>
+    }
 </div>

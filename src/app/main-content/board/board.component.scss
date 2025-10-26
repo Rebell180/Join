@@ -11,10 +11,6 @@
         @include all.size();
     }
 
-    @include all.mobile {
-        padding: 6rem 0;
-    }
-
     // #region header
     header {
         @include all.size($h: 10rem);
@@ -94,3 +90,33 @@
 }
 
 // #endregion
+
+.task-list {
+    @include all.fl($flexdir: column);
+    @include all.size($w: 25%);
+    @include all.marpad($pad: 0 1rem);
+
+    header {
+        @include all.size($h: 5rem);
+        @include all.fl($alit: center, $jc: space-between);
+        @include all.marpad($pad: 0 4rem 0 4.2rem);
+
+        @media (max-width: 1280px) {
+            @include all.size($h: 5rem);
+        }
+
+        h3 {
+            font-size: 2.1rem;
+        }
+
+        .add-icon-btn {
+            &:hover {
+                content: url(../../../../public/assets/Icons/taskBoard/addBtnBoardHover.png);
+            }
+
+            &:active {
+                content: url(../../../../public/assets/Icons/taskBoard/addBtnBoardClick.png);
+            }
+        }
+    }
+}
