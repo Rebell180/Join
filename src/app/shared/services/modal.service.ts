@@ -177,7 +177,8 @@ export class ModalService {
     document.body.appendChild(componentRef.location.nativeElement);
   }
 
-openPrivatePolicyModal() {
+
+openPrivacyPolicyModal() {
   // creates a component
   const componentRef = createComponent(PrivacyPoliceModalComponent, {
     environmentInjector: this.appRef.injector,
