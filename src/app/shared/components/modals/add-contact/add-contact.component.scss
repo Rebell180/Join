@@ -8,16 +8,17 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    z-index: 20;
 }
 
 .add-contact-modal-container {
+    border: 2px solid green;
     @include all.size($w: 90dvw, $maxW: 90rem, $h: 50rem);
     @include all.fl($jc: center, $alit: center);
     background-color: white;
     border-radius: 16px;
     border: none;
     box-shadow: 8px 8px 8px rgba(0, 0, 0, 0.2);
-    z-index: 1000;
 
     @include all.notebook {
         box-shadow: 8px 0 8px rgba(0, 0, 0, 0.2), -8px 0 8px rgba(0, 0, 0, 0.2);
@@ -77,6 +78,7 @@
         h1 {
             color: white;
             font-size: clamp(28px, 4vw, 48px);
+            font-family: 'Inter', sans-serif;
             margin-bottom: 0.5rem;
             line-height: 1.2;
 
