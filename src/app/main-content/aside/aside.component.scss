@@ -67,7 +67,8 @@ nav {
 				display: none;
 			}
 
-			button {
+			a:link,
+			a:visited {
 				@include all.size($h: auto);
 				@include all.fl($jc: center);
 				color: grey;

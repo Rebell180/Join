@@ -32,7 +32,7 @@
         overflow-y: auto;
         scrollbar-width: thin;
         scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
-        @include all.size($h: 100%);
+        @include all.size($h: 90%);
 
         .contact-group-container {
             @include all.fl($flexdir: column);
@@ -42,6 +42,7 @@
                 vertical-align: center;
                 @include all.marpad($mar: 2rem 0, $pad: 0 3rem);
                 cursor: default;
+                @include all.font-style($size: 2.5rem, $weight: 100);
                 @include all.font-style($size: 2.5rem, $weight: 100);
             }
 

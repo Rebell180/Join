@@ -1,4 +1,4 @@
-import { Component, inject, OnDestroy, OnInit } from '@angular/core';
+import { Component, inject, input, InputSignal, OnDestroy, OnInit } from '@angular/core';
 import { SearchTaskComponent } from './search-task/search-task.component';
 import { Task } from '../../shared/classes/task';
 import { collection, doc, DocumentReference, Firestore, onSnapshot, Unsubscribe, updateDoc } from '@angular/fire/firestore';
@@ -6,7 +6,9 @@ import { CommonModule } from '@angular/common';
 import { TaskStatusType } from '../../shared/enums/task-status-type';
 import { Contact } from '../../shared/classes/contact';
 import { SubTask } from '../../shared/classes/subTask';
-import { ContactObject, SubTaskObject, TaskObject } from '../../shared/interfaces/database-result';
+import { ContactObject } from '../../shared/interfaces/contact-object';
+import { SubtaskObject } from '../../shared/interfaces/subtask-object';
+import { TaskObject } from '../../shared/interfaces/task-object';
 import { ModalService } from '../../shared/services/modal.service';
 import { TaskColumnItemComponent } from '../../shared/components/task-column-item/task-column-item.component';
 import { CdkDragDrop, DragDropModule, transferArrayItem }from '@angular/cdk/drag-drop';
@@ -17,8 +19,7 @@ import { CdkDragDrop, DragDropModule, transferArrayItem }from '@angular/cdk/drag
   imports: [
     SearchTaskComponent,
     CommonModule,
-    TaskColumnItemComponent,
-    DragDropModule
+    TaskListColumnComponent,    
 ],
   templateUrl: './board.component.html',
   styleUrl: './board.component.scss'
@@ -28,7 +29,7 @@ export class BoardComponent implements OnInit, OnDestroy {
   protected modalService: ModalService = inject(ModalService);
 
   // Primary Data
-  private tasks: Task[] = [];
+  tasks: Task[] = [];
   private shownTasks: Task[] = [];
   protected taskLists: {
     listName: string,
@@ -94,8 +95,6 @@ export class BoardComponent implements OnInit, OnDestroy {
   private subscribeTasks(): Unsubscribe {
     return onSnapshot(collection(this.fs, 'tasks'), taskSnap => {
       this.tasks = [];
-      this.shownTasks = [];
-      this.taskItems = [[],[],[],[]];
       taskSnap.docs.map( doc => {this.tasks.push(new Task(doc.data() as TaskObject))});
       for (let i = 0; i < this.tasks.length; i++) {
         this.addContactsToTask(i);

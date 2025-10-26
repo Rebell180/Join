@@ -11,12 +11,13 @@ import { Contact } from '../../classes/contact';
 import { DatePickerComponent } from "../date-picker/date-picker.component";
 import { AssignContactsComponent } from "../assign-contacts/assign-contacts.component";
 import { ToastMsgService } from '../../services/toast-msg.service';
+import { SubtaskComponent } from '../../../main-content/board/subtask/subtask.component';
 
 
 @Component({
   selector: 'app-add-task',
   standalone: true,
-  imports: [CommonModule, FormsModule, PriorityButtonsComponent, DatePickerComponent, AssignContactsComponent],
+  imports: [CommonModule, FormsModule, PriorityButtonsComponent, DatePickerComponent, AssignContactsComponent, SubtaskComponent],
   templateUrl: './add-task.component.html',
   styleUrl: './add-task.component.scss'
 })
