@@ -71,7 +71,7 @@
 
         @media(max-width: 1280px) {
             @include all.fl($flexdir: column);
-            @include all.size($w: 78dvw);
+            @include all.size($w: 78dvw, $h: 90dvh);
             overflow-y: auto;
             overflow-x: hidden;
             scrollbar-width: thin;
@@ -94,15 +94,20 @@
 .task-list {
     @include all.fl($flexdir: column);
     @include all.size($w: 25%);
-    @include all.marpad($pad: 0 1rem);
+    @include all.marpad($pad: 1.6rem 1rem);
+    @media (max-width: 1280px) {
+        @include all.size($w: 100%, $h: auto, $maxW: 675px);
+    }
 
     header {
         @include all.size($h: 5rem);
         @include all.fl($alit: center, $jc: space-between);
         @include all.marpad($pad: 0 4rem 0 4.2rem);
+        margin-bottom: 1.6rem;
 
         @media (max-width: 1280px) {
             @include all.size($h: 5rem);
+            margin-bottom: 0;
         }
 
         h3 {
@@ -118,5 +123,10 @@
                 content: url(../../../../public/assets/Icons/taskBoard/addBtnBoardClick.png);
             }
         }
+    }
+
+    main {
+        @include all.fl($flexdir: column);
+        @include all.size();
     }
 }

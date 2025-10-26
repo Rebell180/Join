@@ -8,13 +8,15 @@ import { Contact } from '../../shared/classes/contact';
 import { SubTask } from '../../shared/classes/subTask';
 import { ContactObject, SubTaskObject, TaskObject } from '../../shared/interfaces/database-result';
 import { ModalService } from '../../shared/services/modal.service';
+import { TaskColumnItemComponent } from '../../shared/components/task-column-item/task-column-item.component';
 
 @Component({
   selector: 'section[board]',
   standalone: true,
   imports: [
     SearchTaskComponent,
-    CommonModule
+    CommonModule,
+    TaskColumnItemComponent
 ],
   templateUrl: './board.component.html',
   styleUrl: './board.component.scss'
@@ -83,6 +85,10 @@ export class BoardComponent implements OnInit, OnDestroy {
     })
   }
 
+  /**
+   * Subscribes the tasks.
+   * @returns - Unsubscribe for Task
+   */
   private subscribeTasks(): Unsubscribe {
     return onSnapshot(collection(this.fs, 'tasks'), taskSnap => {
       this.tasks = [];
@@ -127,6 +133,10 @@ export class BoardComponent implements OnInit, OnDestroy {
           this.taskItems[3].push(this.shownTasks[i]);
       }
     }
+  }
+
+  protected makeTrackBy(i:number) {
+    return (_:number, __:unknown, j:number) => `${i}-${j}`;
   }
 
   /** Gets all Tasks, which has been searched.
