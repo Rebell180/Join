@@ -1,7 +1,8 @@
-import { Component, output, OutputEmitterRef } from '@angular/core';
+import { Component, inject, output, OutputEmitterRef } from '@angular/core';
 import { SectionType } from '../../shared/enums/section-type';
 import { CommonModule } from '@angular/common';
 import { NavItemComponent } from './nav-item/nav-item.component';
+import { ModalService } from '../../shared/services/modal.service';
 
 
 export interface NavItemData{
@@ -50,6 +51,7 @@ export class AsideComponent {
             }
       ];
       selectedSection: OutputEmitterRef<SectionType> = output<SectionType>();
+      protected modalService: ModalService = inject(ModalService);
 
     selectSection(index:number) {
       this.items.forEach((item, i) => {

@@ -54,11 +54,15 @@
 				background: teal;
 			}
 
-			.task-modal-close-btn {
+			#task-modal-close-btn {
 				@include all.size($w: 1.6rem, $h: 1.6rem);
-				padding-top: 1rem;
+				@include all.absolute($top: 0, $right: 0);
+				position: absolute;
+				z-index: 2;
+				
 
 				button {
+					font-size: 2rem;
 
 					&:hover {
 						color: #29ABE2;

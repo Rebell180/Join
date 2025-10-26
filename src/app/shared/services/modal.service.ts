@@ -4,6 +4,9 @@ import { Contact } from '../classes/contact';
 import { AddtaskComponent } from '../components/add-task/add-task.component';
 import { AddTaskModalComponent } from '../components/modals/add-task-modal/add-task-modal.component';
 import { HelpModalComponent } from '../components/modals/help-modal/help-modal.component';
+import { Task } from '../classes/task';
+import { TaskModalComponent } from '../components/modals/task-modal/task-modal.component';
+import { PrivacyPoliceModalComponent } from '../components/modals/privacy-police-modal/privacy-police-modal.component';
 
 /**
  * ModalService is a modal factory service. 
@@ -77,11 +80,11 @@ export class ModalService {
     });
 
     // (2) set the @Inputs for component
-    if(kindOf === 'add') {
-      componentRef.setInput('headlineTxt','Add');
+    if (kindOf === 'add') {
+      componentRef.setInput('headlineTxt', 'Add');
       componentRef.setInput('submitBtnTxt', 'Create contact ✓');
     } else {
-      componentRef.setInput('headlineTxt','Edit');
+      componentRef.setInput('headlineTxt', 'Edit');
       componentRef.setInput('submitBtnTxt', 'Save ✓');
     }
     componentRef.setInput('contact', contact);
@@ -104,7 +107,7 @@ export class ModalService {
    * @param kindOf kind of modal ('task')
    * @param task the task object to display.
    */
-  openTaskDetailModal( task: Task) {
+  openTaskDetailModal(task: Task) {
     // (1) creates a modal component reference
     const componentRef = createComponent(TaskModalComponent, {
       environmentInjector: this.appRef.injector,
@@ -167,13 +170,32 @@ export class ModalService {
     componentRef.instance.dissolve = () => {
       this.appRef.detachView(componentRef.hostView);
       componentRef.destroy();
-    }
+    };
 
     // add component to body
     this.appRef.attachView(componentRef.hostView);
     document.body.appendChild(componentRef.location.nativeElement);
   }
 
-  // #endregion methods
+openPrivatePolicyModal() {
+  // creates a component
+  const componentRef = createComponent(PrivacyPoliceModalComponent, {
+    environmentInjector: this.appRef.injector,
+    elementInjector: this.injector
+  });
+
+  // set the @Inputs for component
+
+  // callback function if call close modal
+  componentRef.instance.dissolve = () => {
+    this.appRef.detachView(componentRef.hostView);
+    componentRef.destroy();
+};
+
+    // add component to body
+    this.appRef.attachView(componentRef.hostView);
+    document.body.appendChild(componentRef.location.nativeElement);
+  }
 }
 
+  // #endregion method
