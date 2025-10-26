@@ -31,6 +31,9 @@ export class Contact implements DBObject {
 
     /** indicator for selection in contact-list */
     selected: boolean = false;
+
+    /** indicator of assignTo checkbox */
+    isChecked: boolean = false;
     
     // #endregion properties
 

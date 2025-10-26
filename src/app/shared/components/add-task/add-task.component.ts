@@ -9,12 +9,14 @@ import { Category } from '../../enums/category.enum';
 import { query, Unsubscribe, where, Query, onSnapshot, Timestamp } from '@angular/fire/firestore';
 import { Contact } from '../../classes/contact';
 import { DatePickerComponent } from "../date-picker/date-picker.component";
+import { AssignContactsComponent } from "../assign-contacts/assign-contacts.component";
+import { ToastMsgService } from '../../services/toast-msg.service';
 
 
 @Component({
   selector: 'app-add-task',
   standalone: true,
-  imports: [CommonModule, FormsModule, PriorityButtonsComponent, DatePickerComponent],
+  imports: [CommonModule, FormsModule, PriorityButtonsComponent, DatePickerComponent, AssignContactsComponent],
   templateUrl: './add-task.component.html',
   styleUrl: './add-task.component.scss'
 })
@@ -23,6 +25,7 @@ export class AddtaskComponent implements OnDestroy {
   // #region properties
 
   fireDB: FirebaseDBService = inject(FirebaseDBService);
+  tms: ToastMsgService = inject(ToastMsgService);
   Priority = Priority;
   Category = Category;
 
@@ -40,6 +43,8 @@ export class AddtaskComponent implements OnDestroy {
   ngOnDestroy() {
     this.unsubContacts();
   }
+
+  // #region methods
 
   /**
    * Opens a two way data stream between code and firebase collection 'contacts'.
@@ -64,6 +69,8 @@ export class AddtaskComponent implements OnDestroy {
    */
   async submitForm(e: SubmitEvent) {
     this.fireDB.addToDB('tasks', this.currentTask);
+    this.clear();
+    this.tms.add('Task was created', 3000, 'success');
   }
 
   /**
@@ -71,8 +78,17 @@ export class AddtaskComponent implements OnDestroy {
    */
   clear() {
     this.currentTask = new Task();
+    this.contacts.forEach(contact => {
+      contact.isChecked = false;
+    });
+    this.setChosenContacts([]);
   }
 
+  /**
+   * Toggles a single contact option between selected and not selected.
+   * 
+   * @param contact the option to toggle. 
+   */
   toggleAddContactToAssignTo(contact: Contact) {
     if(this.currentTask.assignedTo.includes(contact.id)){
       // remove
@@ -81,7 +97,27 @@ export class AddtaskComponent implements OnDestroy {
     }
   }
 
+  /**
+   * Sets the due date of task. 
+   * 
+   * @param date selected date from date-picker
+   */
   setDate(date: Date) {
     this.currentTask.dueDate = Timestamp.fromDate(date)
   }
+
+  /**
+   * Sets the chosen contacts to task contacts.
+   * 
+   * @param chosenContacts Array<Contact> with selected contacts
+   */
+  setChosenContacts(chosenContacts: Array<Contact>) {
+    this.currentTask.contacts = chosenContacts;
+    this.currentTask.assignedTo = [];
+    chosenContacts.forEach((contact) => {
+      this.currentTask.assignedTo.push(contact.id);
+    })
+  }
+
+  // #endregion methods
 }

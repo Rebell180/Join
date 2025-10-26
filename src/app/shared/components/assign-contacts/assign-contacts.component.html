@@ -1,15 +1,13 @@
 <div class="assign-to-container">
-    <div class="assign-to-input" [ngClass]="{'active': isOpen == true}" (click)="toggleDropdown()">
-        @if (selectedValues().length) {
+    <div class="assign-to-input" (click)="toggleDropdown()">
+        @if (selectedValuesLocal.length) {
             <span class="selection-presenter-txt">
-                @if (selectedValues()[0]) {
-                    {{ selectedValues()[0].getFullName() }}
-                }
-                @if(selectedValues()[1]) { 
-                    , {{ selectedValues()[1].getFullName() }}
-                } 
-                @if(selectedValues()[2]) {
-                    , ...
+                @for(value of selectedValuesLocal; track $index) {
+                    @if(selectedValues.length > 1) { 
+                        {{ value.getFullName() }},
+                    } @else {
+                        {{ value.getFullName() }}
+                    }
                 }
             </span>
         } @else {

@@ -1,6 +1,4 @@
-
 <section class="add-task-section">
-
     <form id="add-task-form" method="post" (submit)="submitForm($event)">
         
         <header class="add-task-header">
@@ -8,21 +6,17 @@
         </header>
         
         <main class="add-task-main-container">
-
             <div class="add-task-info-block1">
-
                 <div class="input-wrapper">
                     <label class="add-task-input-lbl" for="title">Title <b>*</b></label>
                     <input class="add-task-input" type="text" name="title" id="add-task-info-title" 
                         placeholder="Enter a title" [(ngModel)]="currentTask.title" required>
                 </div>
-
                 <div class="input-wrapper">
                     <label class="add-task-input-lbl" for="descr">Description</label>
                     <textarea name="descr" id="add-task-info-description" class="add-task-input" 
                         placeholder="Enter a Description ..." [(ngModel)]="currentTask.description"></textarea>
                 </div>
-
                 <div class="input-wrapper">
                     <label class="add-task-input-lbl" for="due-date-picker">Due Date <b>*</b></label>
                     <app-date-picker name="due-date-picker"
@@ -38,22 +32,10 @@
                     <label class="add-task-input-lbl" for="add-task-priority">Priority</label>
                     <app-priority-buttons [task]="currentTask" ></app-priority-buttons>
                 </div>
-
                 <div class="input-wrapper add-task-assigned-to-container">
                     <label class="add-task-input-lbl" for="add-task-assigned-to">Assigned to</label>
-                    <select name="add-task-assigned-to" id="add-task-assigned-to" 
-                        class="add-task-input add-task-assigned-to" [(ngModel)]="currentTask.assignedTo">
-                        @for(contact of contacts; track contact.id; let index = $index){
-                            <!-- TODO Marcel mixin Limiter -->
-                            <option id="('add-task-assigned-to_' + contact.id)" class="add-task-assign-to-option" [value]="contact.getFullName()">
-                                {{ contact.getFullName() }}
-                                <input type="checkbox" name="add-task-contact-assign-checkbox" 
-                                    id="add-task-contact-assign-checkbox" (click)="toggleAddContactToAssignTo(contact)">
-                            </option>
-                        }
-                    </select>
+                    <app-assign-contacts [options]="contacts" [selectedValues]="currentTask.contacts" (selectionChange)="setChosenContacts($event)"></app-assign-contacts>
                 </div>
-
                 <div class="input-wrapper add-task-category-container">
                     <label class="add-task-input-lbl" for="add-task-category">Category <b>*</b></label>
                     <select name="add-task-category" id="add-task-category" 
@@ -70,7 +52,6 @@
                 </div>
                 <span class="required-info-txt-mobile"><b>*</b> this field is required</span>
             </div>
-
         </main>
         
         <footer class="add-task-footer">
