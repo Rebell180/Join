@@ -93,8 +93,11 @@
 
             .privacy-police-list {
                 display: block;
-                @include all.marpad($mar: 0 0 4rem 0, $pad: 0 3rem 0 0);
-                @include all.font-style($size: 1.8rem);
+                list-style: decimal;
+                padding-left: 3rem;
+                margin-bottom: 4rem;
+                font-size: 1.8rem;
+                font-family: 'Inter', sans-serif;
 
                 @include all.mobile {
                     @include all.font-style($size: 1.8rem);
