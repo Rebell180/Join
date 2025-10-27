@@ -186,6 +186,10 @@
 		}
 	}
 
+	app-add-task {
+		@include all.size($h: auto);
+	}
+
 	h3 {
 		@include all.font-style($size: 1.5rem, $weight: 300);
 	}

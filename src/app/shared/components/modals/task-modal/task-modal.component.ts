@@ -7,6 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { SubTask } from '../../../classes/subTask';
 import { FirebaseDBService } from '../../../services/firebase-db.service';
 import { animate, state, style, transition, trigger } from '@angular/animations';
+import { ModalService } from '../../../services/modal.service';
 
 @Component({
   selector: 'app-task-modal',
@@ -41,6 +42,9 @@ export class TaskModalComponent {
   /** FirebaseDBService instance injected for database operations */
   fireDB: FirebaseDBService = inject(FirebaseDBService);
 
+  /** ModalService instance injected for modal handling */
+  modalService: ModalService = inject(ModalService);
+
   /** Input signal representing the current task (required) */
   task: InputSignal<Task> = input.required<Task>();
 
@@ -56,6 +60,7 @@ export class TaskModalComponent {
   ngAfterViewInit() {
     setTimeout(() => this.isOpen = true, 10); // Animation trigger
   }
+
   /**
    * Closes the task modal.
    * Sets `isOpen` to false and calls `dissolve` callback after 200ms, if provided.

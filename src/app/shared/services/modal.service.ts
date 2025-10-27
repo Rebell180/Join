@@ -128,13 +128,11 @@ export class ModalService {
     document.body.appendChild(componentRef.location.nativeElement);
   }
 
-
-
   /**
    * Opens the add task modal. 
    * 
    */
-  openAddTaskModal() {
+  openAddTaskModal(task: Task = new Task()) {
     // creates a component
     const componentRef = createComponent(AddTaskModalComponent, {
       environmentInjector: this.appRef.injector,
@@ -142,6 +140,7 @@ export class ModalService {
     });
 
     // set the @Inputs for component
+    componentRef.setInput('currentTask', task);
 
     // callback function if call close modal
     componentRef.instance.dissolve = () => {

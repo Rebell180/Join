@@ -14,7 +14,7 @@
 .add-task-modal-container {
     @include all.size($w: 90dvw, $maxW: 120rem, $h: 80dvh);
     @include all.fl($jc: center, $alit: center);
-    background-color: #ededed;
+    background-color: white;
     border-radius: 16px;
     border: none;
     box-shadow: 8px 8px 8px rgba(0, 0, 0, 0.2);

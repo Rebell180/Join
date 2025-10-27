@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AddtaskComponent } from "../../shared/components/add-task/add-task.component";
+import { Task } from '../../shared/classes/task';
 
 @Component({
   selector: 'app-add-task-container',
@@ -8,5 +9,5 @@ import { AddtaskComponent } from "../../shared/components/add-task/add-task.comp
   styleUrl: './add-task-container.component.scss'
 })
 export class AddTaskContainerComponent {
-
+  newTask = new Task();
 }
