@@ -95,6 +95,7 @@ export class BoardComponent implements OnInit, OnDestroy {
     return onSnapshot(collection(this.fs, 'tasks'), taskSnap => {
       this.tasks = [];
       this.shownTasks = [];
+      this.taskItems = [[],[],[],[]];
       taskSnap.docs.map( doc => {this.tasks.push(new Task(doc.data() as TaskObject))});
       for (let i = 0; i < this.tasks.length; i++) {
         this.addContactsToTask(i);
@@ -215,9 +216,9 @@ export class BoardComponent implements OnInit, OnDestroy {
     if (e.previousContainer != e.container) {
       transferArrayItem(previousList, currentList, e.previousIndex, e.currentIndex);
       currentList.sort((a, b) => a.dueDate.seconds - b.dueDate.seconds);
-      if (this.taskItems[0].includes(e.item.data)) e.item.data.status = TaskStatusType.TODO;
-      else if (this.taskItems[1].includes(e.item.data)) e.item.data.status = TaskStatusType.PROGRESS;
-      else if (this.taskItems[2].includes(e.item.data)) e.item.data.status = TaskStatusType.REVIEW;
+      if (this.taskItems[0].some(task => task.id == e.item.data.id)) e.item.data.status = TaskStatusType.TODO;
+      else if (this.taskItems[1].some(task => task.id == e.item.data.id)) e.item.data.status = TaskStatusType.PROGRESS;
+      else if (this.taskItems[2].some(task => task.id == e.item.data.id)) e.item.data.status = TaskStatusType.REVIEW;
       else e.item.data.status = TaskStatusType.DONE;
       this.updateTask(e.item.data);
     }

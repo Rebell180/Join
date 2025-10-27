@@ -95,6 +95,7 @@
     @include all.fl($flexdir: column);
     @include all.size($w: 25%);
     @include all.marpad($pad: 1.6rem 1rem);
+
     @media (max-width: 1280px) {
         @include all.size($w: 100%, $h: auto, $maxW: 675px);
     }
@@ -127,6 +128,28 @@
 
     main {
         @include all.fl($flexdir: column);
-        @include all.size();
+        @include all.size($maxH: 45rem);
+        overflow-y: auto;
+        scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
     }
 }
+
+// #region CDK-Drag-Drop
+.cdk-drop-list-dragging {
+    border: 3px dotted #800000;
+}
+
+.cdk-drag-preview {
+    border-radius: 1.6rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+
+.cdk-drag-placeholder {
+    opacity: 0;
+}
+
+.cdk-drag-preview app-task-column-item {
+    transform: rotate(15deg);
+}
+// #endregion
