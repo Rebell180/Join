@@ -3,4 +3,5 @@ export enum SectionType {
     TASK = 'task',
     BOARD = 'board',
     CONTACT = 'contact',
+    PRIVACY = 'privacy'
 }

@@ -5,12 +5,19 @@ import { NavItemComponent } from './nav-item/nav-item.component';
 import { ModalService } from '../../shared/services/modal.service';
 
 
-export interface NavItemData{
-    sectionId: string,
-    title: string,
-    imagePath: string,
-    section: SectionType,
-    active: boolean
+export interface NavItemData {
+      sectionId: string,
+      title: string,
+      imagePath: string,
+      section: SectionType,
+      active: boolean
+}
+
+export interface LegalLinks {
+      sectionId: string,
+      title: string,
+      section: SectionType,
+      active: boolean
 }
 
 @Component({
@@ -50,14 +57,39 @@ export class AsideComponent {
                   active: false
             },
       ];
+
+      protected itemLegal: LegalLinks[] = [
+            {
+                  sectionId: 'Privacy',
+                  title: 'privacy',
+                  section: SectionType.CONTACT,
+                  active: false
+            },
+      ]
       selectedSection: OutputEmitterRef<SectionType> = output<SectionType>();
       protected modalService: ModalService = inject(ModalService);
 
-    selectSection(index:number) {
-      this.items.forEach((item, i) => {
-        item.active = false;
-        if (i == index) item.active = true;
-      });
-      this.selectedSection.emit(this.items[index].section)
-    }
+      selectSection(index: number) {
+            this.itemLegal.forEach((itemLegal) => {
+                  itemLegal.active = false;
+            });
+            this.items.forEach((item, i) => {
+                  item.active = false;
+                  if (i == index) item.active = true;
+            });
+            this.selectedSection.emit(this.items[index].section)
+      }
+
+      selectLegal(index: number) {
+            this.items.forEach((item) => {
+                  item.active = false;
+            });
+            this.itemLegal.forEach((itemLegal, i) => {
+                  itemLegal.active = false;
+                  if (i == index) {
+                        itemLegal.active = true;
+                  }
+            });
+            this.selectedSection.emit(this.itemLegal[index].section)
+      }
 }

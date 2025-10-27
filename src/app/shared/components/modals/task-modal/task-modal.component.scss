@@ -29,15 +29,15 @@
 		}
 
 		@include all.notebook {
-			@include all.size($w: 45dvw, $h: 80dvh);
-		}
-
-		@include all.tablet {
 			@include all.size($w: 50dvw, $h: 80dvh);
 		}
 
+		@include all.tablet {
+			@include all.size($w: 60dvw, $h: 80dvh);
+		}
+
 		@include all.mobile {
-			@include all.size($w: 45dvh, $h: 75dvh);
+			@include all.size($w: 40dvh, $h: 75dvh);
 		}
 
 		.task-modal-header {

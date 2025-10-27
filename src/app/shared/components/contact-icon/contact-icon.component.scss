@@ -9,7 +9,6 @@
     container-type: inline-size;
     span {
         @include all.fl($jc: center, $alit: center);
-        @include all.size($w: 75%, $h: 75%);
         font-size: 45cqw;
     }
 }

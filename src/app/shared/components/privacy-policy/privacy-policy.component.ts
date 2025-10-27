@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-privacy-policy',
+  selector: 'section[privacy-policy]',
   standalone: true,
   imports: [],
   templateUrl: './privacy-policy.component.html',
