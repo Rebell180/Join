@@ -5,21 +5,26 @@
     <header app-header></header>
     <main>
         @switch (currentSection) {
-            @case (SectionType.TASK) {
-                <app-add-task-container></app-add-task-container>
-            }
+        @case (SectionType.TASK) {
+        <app-add-task-container></app-add-task-container>
+        }
 
-            @case (SectionType.BOARD) {
-                <section board></section>
-            }
+        @case (SectionType.BOARD) {
+        <section board></section>
+        }
 
-            @case (SectionType.CONTACT) {
-                <section contacts></section>
-            }
+        @case (SectionType.CONTACT) {
+        <section contacts></section>
+        }
 
-            @case (SectionType.PRIVACY) {
-                <section privacy-policy></section>
-            }
+        @case (SectionType.PRIVACY) {
+        <section privacy-policy (back)="changeSection(SectionType.CONTACT)">
+        </section>
+        }
+
+        @case (SectionType.LEGAL) {
+        <section legal-notice (back)="changeSection(SectionType.CONTACT)"></section>
+        }
         }
     </main>
 </div>

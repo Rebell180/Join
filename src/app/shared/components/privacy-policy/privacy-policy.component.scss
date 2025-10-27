@@ -1,49 +1,57 @@
 @use '../../../../../public/styles/all_styles.scss' as all;
 
-.privacy-policy-container {
-    @include all.size($w: 90dvw, $maxW: 120rem, $h: 80dvh);
-    @include all.fl($flexdir: column, $jc: center, $alit: start, $gap: 1rem);
-    @include all.marpad($pad: 5rem);
-    background-color: white;
-    border-radius: 16px;
-    border: none;
-    box-shadow: 8px 8px 8px rgba(0, 0, 0, 0.2);
-
-    @include all.notebook {
-        @include all.marpad($pad: 5rem 3rem);
-        box-shadow: 8px 0 8px rgba(0, 0, 0, 0.2), -8px 0 8px rgba(0, 0, 0, 0.2);
-    }
+:host {
+    @include all.size($h: 90dvh);
+    @include all.marpad($pad: 8rem 5rem 0 5rem);
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
 
     @include all.tablet {
-        @include all.size($w: 90dvw, $maxW: 90rem, $h: 80dvh);
-        @include all.fl($flexdir: column, $jc: center, $alit: center);
-        @include all.marpad($pad: 5rem 1.5rem);
-    }
+            @include all.size($h: 80dvh)
+        }
 
-    @include all.mobile {
-        @include all.size($w: 90dvw, $maxW: 60rem, $h: 80dvh);
-        @include all.marpad($pad: 5rem 1rem);
-    }
+        @include all.mobile {
+            @include all.size($w: 100dvw, $h: 80dvh);
+        }
 
-    .privacy-policy-content {
-        @include all.fl($flexdir: column);
-        @include all.size($h: auto);
-        overflow-y: auto;
-        scrollbar-width: thin;
-        scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+        @media(max-width: 530px) {
+            @include all.marpad($pad: 0);
+        }
+
+    .privacy-policy-container {
+
+        .privacy-policy-back {
+            @include all.fl($display: none);
+
+            @include all.tablet {
+                @include all.fl($jc: end);
+            }
+        }
 
         .privacy-policy-header {
-            @include all.size($h: auto);
-            @include all.marpad($mar: 0 0 4rem 0);
 
             h1 {
-                @include all.font-style($size: 4.8rem);
+                @include all.font-style($size: 6rem);
+                @include all.marpad($mar: 0 0 3rem 0);
+
+                @include all.mobile {
+                    @include all.font-style($size: 4.5rem);
+                }
             }
         }
 
         .privacy-policy-main-content {
-            @include all.size($h: auto);
-            @include all.marpad($pad: 0 4rem 0 0);
+            @include all.size($h: 75dvh);
+
+            @include all.tablet {
+                @include all.size($h: 65dvh);
+            }
+
+            @media(max-width: 530px) {
+                @include all.size($h: 74dvh);
+                @include all.marpad($pad: 1rem);
+            }
 
             h2 {
                 @include all.marpad($mar: 0 0 2rem 0);
@@ -64,11 +72,11 @@
             }
 
             h4 {
-                @include all.font-style($size: 2rem);
+                @include all.font-style($size: 1.8rem);
             }
 
             p {
-                @include all.font-style($size: 1.8rem);
+                @include all.font-style($size: 1.6rem);
                 @include all.marpad($mar: 0 0 1rem 0);
 
                 @include all.mobile {
@@ -79,15 +87,12 @@
             .privacy-policy-list {
                 display: block;
                 list-style: decimal;
-                padding-left: 3rem;
-                margin-bottom: 4rem;
-                font-size: 1.8rem;
-                font-family: 'Inter', sans-serif;
+                @include all.marpad($pad: 0 3rem 0 0);
+                @include all.font-style($size: 1.6rem);
 
                 @include all.mobile {
-                    @include all.font-style($size: 1.8rem);
-                    @include all.marpad($pad: 0 0 0 3rem);
-                    padding-left: 2rem;
+                    @include all.font-style($size: 1.6rem);
+                    @include all.marpad($pad: 2rem 3rem);
                 }
             }
 
