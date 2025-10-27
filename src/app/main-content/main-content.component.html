@@ -2,7 +2,7 @@
     <!-- Hier wird die Header-Komponente aus Angular als normals HTML-Tage eingebunden -->
     <!-- app-heder ist dabei der Name der Kopoenente. Der Name muss sich von den normalen Tag untersccheiden. -->
     <aside app-aside (selectedSection)="changeSection($event)"></aside>
-    <header app-header></header>
+    <header app-header (selectedSection)="changeSection($event)"></header>
     <main>
         @switch (currentSection) {
         @case (SectionType.TASK) {

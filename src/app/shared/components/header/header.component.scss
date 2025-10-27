@@ -23,6 +23,12 @@
 
         h1 {
             @include all.font-style($size: 2rem);
+            width: 100%;
+            padding: 10rem;
+
+            @include all.notebook {
+                padding: 5rem;
+            }
 
             @include all.tablet {
                 display: none;

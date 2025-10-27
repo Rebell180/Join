@@ -1,17 +1,21 @@
 @use '../../../../../public/styles/all_styles' as all;
 @forward '../../../../../public/styles/component-styles';
 
-input, select, textarea, app-date-picker {
+input,
+select,
+textarea,
+app-date-picker {
     width: 100%;
 }
 
 b {
     color: red;
+
 }
 
 .input-wrapper {
     width: 100%;
-    @include all.fl($flexdir: column, $gap:0.5rem);
+    @include all.fl($flexdir: column, $gap: 0.5rem);
 }
 
 .add-task-input-lbl {
@@ -20,7 +24,7 @@ b {
 }
 
 .add-task-input {
-    @include all.borRad($c: rgba(0,0,0,0.2), $radius: 8px);
+    @include all.borRad($c: rgba(0, 0, 0, 0.2), $radius: 8px);
     @include all.marpad($pad: 1rem);
     font-family: 'InterRegular', sans-serif;
     font-size: 16px;
@@ -33,9 +37,12 @@ b {
 }
 
 .add-task-section {
-    height: 100%;
-    // border: 2px solid red;
-    background: #ededed;
+    @include all.size();
+    @include all.marpad($pad: 3dvw);
+
+    @include all.mobile {
+        padding: 1dvw;
+    }
 
     #add-task-form {
         height: 100%;
@@ -51,8 +58,8 @@ b {
         .add-task-main-container {
             @include all.fl($jc: space-between, $alit: start, $gap: 1rem);
 
-            
-            @include all.notebook{
+
+            @include all.notebook {
                 overflow-y: auto;
                 scrollbar-width: thin;
                 scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
@@ -61,11 +68,16 @@ b {
             }
 
             .add-task-info-block1 {
+
                 width: 50%;
                 @include all.fl($flexdir: column, $gap: 2rem);
 
-                @include all.notebook{
-                    width: 90%;    
+                @include all.notebook {
+                    width: 90%;
+                }
+
+                @include all.mobile {
+                    width: 85dvw;
                 }
 
                 #add-task-info-description {
@@ -91,9 +103,13 @@ b {
                 width: 50%;
                 @include all.fl($flexdir: column, $gap: 2rem);
 
-                @include all.notebook{
-                    width: 90%;    
+                @include all.notebook {
+                    width: 90%;
                     margin: 2rem 0 5rem 0;
+                }
+
+                @include all.mobile {
+                    width: 85dvw;
                 }
 
                 .add-task-assigned-to {
@@ -119,19 +135,22 @@ b {
         .add-task-footer {
             @include all.fl($jc: space-between, $alit: end);
 
-            @include all.tablet{
-                @include all.fl($flexdir: column);
+            .required-info-txt {
+                font-size: 1.5rem;
 
-                .required-info-txt{
-                    padding-left: 2rem;
-                    margin-bottom: 2rem;
+                @include all.tablet {
+                    display: none;
                 }
+            }
+
+            @include all.tablet {
+                @include all.fl($flexdir: column);
             }
 
             .add-task-btn-container {
                 @include all.fl($jc: end, $gap: 2rem);
 
-                @include all.tablet{
+                @include all.tablet {
                     width: 100%;
                     padding-left: 6rem;
                 }
@@ -139,12 +158,17 @@ b {
                 .btn-default,
                 .btn-set {
                     padding: 1rem;
-
                 }
+            }
+        }
+
+        .required-info-txt-mobile {
+            display: none;
+
+            @include all.tablet {
+                display: flex;
+                font-size: 1.2rem;
             }
         }
     }
 }
-
-
-

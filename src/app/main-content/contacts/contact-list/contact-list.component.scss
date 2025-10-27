@@ -9,6 +9,7 @@
     #add-contact-button {
         width: 91%;
         @include all.marpad ($mar: 1rem 0, $pad: 1rem 0);
+        z-index: 20;
 
         @include all.tablet {
             @include all.size($w: 6.2rem, $minW: 6.2rem, $h: 6.2rem, $minH: 6.2rem);
@@ -31,7 +32,7 @@
         overflow-y: auto;
         scrollbar-width: thin;
         scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
-        @include all.size($h: 90%);
+        @include all.size($h: 100%);
 
         .contact-group-container {
             @include all.fl($flexdir: column);

@@ -26,6 +26,10 @@
             @include all.size($h: 5rem);
         }
 
+        @include all.mobile {
+            @include all.marpad($pad: 0 1rem 0 1.2rem);
+        }
+
         h3 {
             font-size: 2.1rem;
         }

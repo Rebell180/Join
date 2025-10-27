@@ -2,13 +2,14 @@
 
 :host {
     @include all.size($h: 90dvh);
-    @include all.marpad($pad: 8rem 5rem 0 5rem);
+    @include all.marpad($pad: 8rem 8rem 0 8rem);
     overflow-y: auto;
     scrollbar-width: thin;
     scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
 
     @include all.tablet {
-            @include all.size($h: 80dvh)
+            @include all.size($h: 80dvh);
+            padding: 2rem;
         }
 
         @include all.mobile {
@@ -37,6 +38,7 @@
 
                 @include all.mobile {
                     @include all.font-style($size: 4.5rem);
+                    @include all.marpad($pad: 0 0 0 1rem);
                 }
             }
         }
