@@ -3,7 +3,7 @@
 :host {
     @include all.size();
 
-// #region detail-header
+    // #region detail-header
     .contact-detail-header {
         @include all.fl($jc: space-between, $alit: center);
         @include all.size($h: 8rem);
@@ -18,10 +18,14 @@
 
             @media (max-width: 1200px) {
                 @include all.fl($flexdir: column, $gap: 1rem);
-            }     
-            
+            }
+
             h1 {
                 @include all.font-style($size: 6rem, $weight: bold);
+
+                @include all.mobile {
+                    @include all.font-style($size: 5rem, $weight: bold);
+                }
             }
 
             h2 {
@@ -68,7 +72,9 @@
     }
 // #endregion
 
-// #region contact-info
+    // #endregion
+
+    // #region contact-info
     .contact-info-container {
         @include all.slightInFromRightAnimation();
         @include all.size($w: 80%, $h: 75%);
@@ -79,7 +85,7 @@
             @include all.size($h: auto);
 
             .contact-icon {
-                @include all.size($w: 12rem, $minW: 12rem,  $h: 12rem, $minH: 12rem);
+                @include all.size($w: 12rem, $minW: 12rem, $h: 12rem, $minH: 12rem);
                 @include all.font-style();
 
                 @media(max-width: 450px) {
@@ -164,7 +170,8 @@
             }
         }
     }
-// #endregion
+
+    // #endregion
 
 
     .mobile-options-container {

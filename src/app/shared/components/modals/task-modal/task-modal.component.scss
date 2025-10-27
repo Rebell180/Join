@@ -8,26 +8,36 @@
 	left: 0;
 	z-index: 10;
 
-	.task-modal-overlay {
-		@include all.size();
-		@include all.fl($jc: center, $alit: center);
+	.modal-overlay {
+		@include all.fl($alit: center, $jc: center);
+		position: fixed;
+		inset: 0;
+		background: rgba(0, 0, 0, 0.5);
+		z-index: 12;
 	}
 
 	.task-modal-detail-container {
-		@include all.size($w: 40dvh, $h: auto);
+		@include all.size($w: 30%, $h: 80dvh);
 		@include all.marpad($pad: 2rem);
 		background: rgb(254, 253, 253);
-		border-radius: 1rem;
+		border-radius: 2rem;
 		box-shadow: 0 0 5px lightgrey;
 		@include all.font-style($family: ("InterRegular, sans-serif"));
 
-		@include all.mobile {
-			@include all.size($w: 40dvh, $h: auto, $maxH: 75dvh);
+		@media(max-width: 1300px) {
+			width: 40dvw;
 		}
 
-		@media(max-width: 390px) {
-			@include all.size($maxW: 32dvh, $h: auto, $maxH: 70dvh);
-			border-radius: 1.8rem;
+		@include all.notebook {
+			@include all.size($w: 50dvw, $h: 80dvh);
+		}
+
+		@include all.tablet {
+			@include all.size($w: 60dvw, $h: 80dvh);
+		}
+
+		@include all.mobile {
+			@include all.size($w: 40dvh, $h: 75dvh);
 		}
 
 		.task-modal-header {
@@ -59,7 +69,7 @@
 				@include all.absolute($top: 0, $right: 0);
 				position: absolute;
 				z-index: 2;
-				
+
 
 				button {
 					font-size: 2rem;
@@ -116,7 +126,7 @@
 			@include all.marpad($mar: 0.8rem 0 0 0);
 
 			.task-modal-assigned {
-				@include all.size($h: auto, $maxH: 18.5dvh);
+				@include all.size($h: 18.5dvh);
 				overflow-y: auto;
 				scrollbar-width: thin;
 				scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
@@ -142,7 +152,7 @@
 	}
 
 	.task-modal-subtasks {
-		@include all.size($h: 8dvh);
+		@include all.size($h: 15dvh);
 		@include all.fl($flexdir: column);
 		@include all.marpad($mar: 2rem 0 0 0);
 
@@ -160,7 +170,9 @@
 	}
 
 	.task-option-container {
-		@include all.size($h: 3rem);
+		position: fixed;
+		bottom: 2rem;
+		@include all.size($w: 90%, $h: 3rem);
 		@include all.fl($jc: end, $gap: 1rem, $alit: center);
 		@include all.marpad($pad: 1rem);
 

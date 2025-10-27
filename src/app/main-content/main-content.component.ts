@@ -17,6 +17,8 @@ import { LegalNoticeComponent } from '../shared/components/legal-notice/legal-no
     ContactsComponent,
     BoardComponent,
     AddTaskContainerComponent,
+    PrivacyPolicyComponent,
+    LegalNoticeComponent
 ],
   templateUrl: './main-content.component.html',
   styleUrl: './main-content.component.scss'
@@ -25,6 +27,7 @@ export class MainContentComponent {
   protected readonly SectionType = SectionType;
   protected currentSection: SectionType = SectionType.BOARD;
 
-  changeSection(section: SectionType) {this.currentSection = section}
-
+  changeSection(section: SectionType) {
+    this.currentSection = section;
+  }
 }

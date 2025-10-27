@@ -19,7 +19,8 @@ import { CdkDragDrop, DragDropModule, transferArrayItem }from '@angular/cdk/drag
   imports: [
     SearchTaskComponent,
     CommonModule,
-    TaskListColumnComponent,    
+    TaskColumnItemComponent,
+    DragDropModule
 ],
   templateUrl: './board.component.html',
   styleUrl: './board.component.scss'
@@ -95,6 +96,8 @@ export class BoardComponent implements OnInit, OnDestroy {
   private subscribeTasks(): Unsubscribe {
     return onSnapshot(collection(this.fs, 'tasks'), taskSnap => {
       this.tasks = [];
+      this.shownTasks = [];
+      this.taskItems = [[],[],[],[]];
       taskSnap.docs.map( doc => {this.tasks.push(new Task(doc.data() as TaskObject))});
       for (let i = 0; i < this.tasks.length; i++) {
         this.addContactsToTask(i);

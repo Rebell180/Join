@@ -8,8 +8,8 @@
 
             <div class="dropdown" *ngIf="isMenuVisible">
                 <a class="help-mobile" routerLink="/help"  (click)="modalService.openHelpModal()">Help</a>
-                <a routerLink="/privacy-policy" (click)="modalService.openPrivacyPolicyModal()">Privacy Policy</a>
-                <a routerLink="/legal-notice" (click)="modalService.openLegalNoticeModal()">Legal Notice</a>
+                <a (click)="openPrivacy()">Privacy Policy</a>
+                <a (click)="openLegal()">Legal Notice</a>
                 <a (click)="logout()">Log out</a>
             </div>
         </div>

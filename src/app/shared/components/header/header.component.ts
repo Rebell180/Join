@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, HostListener, inject } from '@angular/core';
+import { Component, HostListener, inject, output, OutputEmitterRef } from '@angular/core';
 import { ModalService } from '../../services/modal.service';
 import { SectionType } from '../../enums/section-type';
 
@@ -35,5 +35,13 @@ export class HeaderComponent {
     if (!target.closest('.profile-container')) {
       this.isMenuVisible = false;
     }
+  }
+
+  openPrivacy() {
+    this.selectedSection.emit(SectionType.PRIVACY);
+  }
+
+  openLegal() {
+    this.selectedSection.emit(SectionType.LEGAL);
   }
 }

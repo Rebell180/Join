@@ -9,7 +9,7 @@
 
 <nav>
     <ul>
-        <li><a href="#" (click)="modalService.openPrivacyPolicyModal()">Privacy Policy</a></li>
-        <li><a href="#" (click)="modalService.openLegalNoticeModal()">Legal notice</a></li>
+        <li><button type="button" (click)="selectLegal(0)">Privacy Policy</button></li>
+        <li><button type="button" (click)="selectLegal(1)">Legal notice</button></li>
     </ul>
 </nav>

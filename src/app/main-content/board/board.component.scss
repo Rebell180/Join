@@ -4,18 +4,17 @@
 :host {
     @include all.fl($flexdir: column, $alit: center);
     @include all.size();
-    padding-top: 4rem;
+    padding-top: 6rem;
 
     @media(max-width: 1280px) {
         @include all.fl($flexdir: column, $alit: center);
         @include all.size();
     }
 
-// #region header
+    // #region header
     header {
-        @include all.size($h: 10rem);
+        @include all.size($w: 80dvw, $h: 10rem);
         @include all.fl($alit: center, $jc: space-between);
-        padding: 0 5rem;
 
         @include all.notebook {
             @include all.size($h: 10rem);
@@ -41,25 +40,29 @@
                 #add-task-label {
                     display: none;
                 }
+
                 @include all.size($w: 4.8rem, $h: 4.8rem);
             }
         }
     }
-// #endregion
 
-// #region search-task-container-mobile
+    // #endregion
+
+    // #region search-task-container-mobile
     .search-task-container-mobile {
         display: none;
 
         @include all.mobile {
             display: flex;
             padding: 0 1rem;
+            margin-top: 1rem;
             @include all.size($h: 6rem);
         }
     }
-// #endregion
 
-// #region task-list-container
+    // #endregion
+
+    // #region task-list-container
     .task-list-wrapper {
         @include all.size();
         @include all.fl();
@@ -67,7 +70,7 @@
 
         @media(max-width: 1280px) {
             @include all.fl($flexdir: column);
-            @include all.size($w: 78dvw);
+            @include all.size($w: 78dvw, $h: 90dvh);
             overflow-y: auto;
             overflow-x: hidden;
             scrollbar-width: thin;
@@ -76,12 +79,93 @@
 
         @include all.notebook {
             @include all.fl($flexdir: column);
-            @include all.size($maxW: 72dvw);
+            @include all.size($maxW: 75dvw);
         }
-        
+
         @include all.tablet {
             @include all.size($w: 100dvw);
         }
     }
+}
+
+// #endregion
+
+.task-list {
+    @include all.fl($flexdir: column);
+    @include all.size($w: 25%);
+    @include all.marpad($pad: 1.6rem 1rem);
+
+    @media (max-width: 1280px) {
+        @include all.size($w: 100%, $h: auto, $maxW: 675px);
+    }
+
+    header {
+        @include all.size($w: 21dvw, $h: 5rem);
+        @include all.fl($alit: center, $jc: space-between);
+        @include all.marpad($pad: 0 4rem 0 4.2rem);
+        margin-bottom: 1.6rem;
+
+        @media (max-width: 1280px) {
+            @include all.size($h: 5rem);
+            margin-bottom: 0;
+        }
+
+        h3 {
+            font-size: 2.1rem;
+        }
+
+        .add-icon-btn {
+            &:hover {
+                content: url(../../../../public/assets/Icons/taskBoard/addBtnBoardHover.png);
+            }
+
+            &:active {
+                content: url(../../../../public/assets/Icons/taskBoard/addBtnBoardClick.png);
+            }
+        }
+    }
+
+    main {
+        @include all.size($h: 69dvh);
+        @include all.fl($alit: center, $flexdir: column);
+        overflow-y: auto;
+        scrollbar-width: thin;
+        scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+
+        @media (max-width: 1280px) {
+            @include all.fl($flexdir: row);
+            @include all.size($w: 75dvw, $h: auto);
+            overflow-x: auto;
+        }
+
+        @include all.tablet {
+            @include all.size($h: auto);
+        }
+
+            >* {
+                flex: 0 0 auto;
+                width: 100%;
+                max-width: 28rem;
+            }
+        }
+    }
+
+// #region CDK-Drag-Drop
+.cdk-drop-list-dragging {
+    border: 3px dotted #800000;
+}
+
+.cdk-drag-preview {
+    border-radius: 1.6rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+
+.cdk-drag-placeholder {
+    opacity: 0;
+}
+
+.cdk-drag-preview app-task-column-item {
+    transform: rotate(15deg);
 }
 // #endregion

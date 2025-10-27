@@ -1,6 +1,7 @@
-<div class="task-modal-overlay" (click)="closeTaskModal()">
+<div class="modal-overlay" (click)="closeTaskModal()">
 
-	<div class="task-modal-detail-container" (click)="$event.stopPropagation()">
+	<div class="task-modal-detail-container" [@slideInOut]="isOpen ? 'open' : 'closed'"
+		(click)="$event.stopPropagation()">
 		<div class="task-modal-header">
 			<h2
 				[ngClass]="{ blue: task().category == Category.USERSTORY, green: task().category == Category.TECHNICAL, yellow: task().category == Category.TASK}">
@@ -54,7 +55,7 @@
 		</div>
 
 		<div class="task-option-container">
-			<button (click)="fireDB.deleteInDB('tasks', task().id)">
+			<button (click)="fireDB.deleteTaskInDB('tasks', task().id); closeTaskModal()">
 				<img class="delete-btn" src="assets/Icons/taskBoard/delete.png" alt="" />Delete
 			</button>
 			<hr>

@@ -6,8 +6,7 @@ import { AddTaskModalComponent } from '../components/modals/add-task-modal/add-t
 import { HelpModalComponent } from '../components/modals/help-modal/help-modal.component';
 import { Task } from '../classes/task';
 import { TaskModalComponent } from '../components/modals/task-modal/task-modal.component';
-import { PrivacyPoliceModalComponent } from '../components/modals/privacy-police-modal/privacy-police-modal.component';
-import { LegalNoticeModalComponent } from '../components/modals/legal-notice-modal/legal-notice-modal.component';
+
 
 /**
  * ModalService is a modal factory service. 
@@ -173,47 +172,6 @@ export class ModalService {
       this.appRef.detachView(componentRef.hostView);
       componentRef.destroy();
     };
-
-    // add component to body
-    this.appRef.attachView(componentRef.hostView);
-    document.body.appendChild(componentRef.location.nativeElement);
-  }
-
-
-openPrivacyPolicyModal() {
-  // creates a component
-  const componentRef = createComponent(PrivacyPoliceModalComponent, {
-    environmentInjector: this.appRef.injector,
-    elementInjector: this.injector
-  });
-
-  // set the @Inputs for component
-
-  // callback function if call close modal
-  componentRef.instance.dissolve = () => {
-    this.appRef.detachView(componentRef.hostView);
-    componentRef.destroy();
-};
-
-    // add component to body
-    this.appRef.attachView(componentRef.hostView);
-    document.body.appendChild(componentRef.location.nativeElement);
-  }
-
-  openLegalNoticeModal() {
-  // creates a component
-  const componentRef = createComponent(LegalNoticeModalComponent, {
-    environmentInjector: this.appRef.injector,
-    elementInjector: this.injector
-  });
-
-  // set the @Inputs for component
-
-  // callback function if call close modal
-  componentRef.instance.dissolve = () => {
-    this.appRef.detachView(componentRef.hostView);
-    componentRef.destroy();
-};
 
     // add component to body
     this.appRef.attachView(componentRef.hostView);
