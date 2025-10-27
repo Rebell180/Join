@@ -1,7 +1,7 @@
-import { Component, inject, input, InputSignal, OnDestroy, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { SearchTaskComponent } from './search-task/search-task.component';
 import { Task } from '../../shared/classes/task';
-import { collection, Firestore, onSnapshot, Unsubscribe } from '@angular/fire/firestore';
+import { collection, doc, DocumentReference, Firestore, onSnapshot, Unsubscribe, updateDoc } from '@angular/fire/firestore';
 import { CommonModule } from '@angular/common';
 import { TaskStatusType } from '../../shared/enums/task-status-type';
 import { Contact } from '../../shared/classes/contact';
@@ -94,6 +94,7 @@ export class BoardComponent implements OnInit, OnDestroy {
   private subscribeTasks(): Unsubscribe {
     return onSnapshot(collection(this.fs, 'tasks'), taskSnap => {
       this.tasks = [];
+      this.shownTasks = [];
       taskSnap.docs.map( doc => {this.tasks.push(new Task(doc.data() as TaskObject))});
       for (let i = 0; i < this.tasks.length; i++) {
         this.addContactsToTask(i);
@@ -107,6 +108,14 @@ export class BoardComponent implements OnInit, OnDestroy {
     });
   }
 
+  /**
+   * Updates a task.
+   * @param task - Task for update.
+   */
+  private async updateTask(task:Task) {
+    const ref: DocumentReference = doc(this.fs, `tasks/${task.id}`);
+    await updateDoc(ref, task.toJSON());
+  }
   
   // #region taskmgmt
   /**
@@ -206,6 +215,11 @@ export class BoardComponent implements OnInit, OnDestroy {
     if (e.previousContainer != e.container) {
       transferArrayItem(previousList, currentList, e.previousIndex, e.currentIndex);
       currentList.sort((a, b) => a.dueDate.seconds - b.dueDate.seconds);
+      if (this.taskItems[0].includes(e.item.data)) e.item.data.status = TaskStatusType.TODO;
+      else if (this.taskItems[1].includes(e.item.data)) e.item.data.status = TaskStatusType.PROGRESS;
+      else if (this.taskItems[2].includes(e.item.data)) e.item.data.status = TaskStatusType.REVIEW;
+      else e.item.data.status = TaskStatusType.DONE;
+      this.updateTask(e.item.data);
     }
   }
   // #endregion
