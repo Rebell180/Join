@@ -4,7 +4,7 @@
 :host {
     @include all.fl($flexdir: column, $alit: center);
     @include all.size();
-    padding: 6rem;
+    padding-top: 6rem;
 
     @media(max-width: 1280px) {
         @include all.fl($flexdir: column, $alit: center);
@@ -15,7 +15,6 @@
     header {
         @include all.size($h: 10rem);
         @include all.fl($alit: center, $jc: space-between);
-        padding: 0 5rem;
 
         @include all.notebook {
             @include all.size($h: 10rem);
@@ -80,7 +79,7 @@
 
         @include all.notebook {
             @include all.fl($flexdir: column);
-            @include all.size($maxW: 72dvw);
+            @include all.size($maxW: 75dvw);
         }
 
         @include all.tablet {
@@ -135,7 +134,7 @@
 
         @media (max-width: 1280px) {
             @include all.fl($flexdir: row);
-            @include all.size($w: 78dvw, $h: auto);
+            @include all.size($w: 75dvw, $h: auto);
             overflow-x: auto;
         }
 
