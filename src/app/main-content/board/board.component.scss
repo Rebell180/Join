@@ -13,7 +13,7 @@
 
     // #region header
     header {
-        @include all.size($h: 10rem);
+        @include all.size($w: 80dvw, $h: 10rem);
         @include all.fl($alit: center, $jc: space-between);
 
         @include all.notebook {
@@ -100,7 +100,7 @@
     }
 
     header {
-        @include all.size($h: 5rem);
+        @include all.size($w: 21dvw, $h: 5rem);
         @include all.fl($alit: center, $jc: space-between);
         @include all.marpad($pad: 0 4rem 0 4.2rem);
         margin-bottom: 1.6rem;
