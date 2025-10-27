@@ -127,12 +127,29 @@
     }
 
     main {
-        @include all.fl($flexdir: column);
-        @include all.size($maxH: 45rem);
+        @include all.size($h: 69dvh);
+        @include all.fl($alit: center, $flexdir: column);
         overflow-y: auto;
+        scrollbar-width: thin;
         scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+
+        @media (max-width: 1280px) {
+            @include all.fl($flexdir: row);
+            @include all.size($w: 78dvw, $h: auto);
+            overflow-x: auto;
+        }
+
+        @include all.tablet {
+            @include all.size($h: auto);
+        }
+
+            >* {
+                flex: 0 0 auto;
+                width: 100%;
+                max-width: 28rem;
+            }
+        }
     }
-}
 
 // #region CDK-Drag-Drop
 .cdk-drop-list-dragging {
