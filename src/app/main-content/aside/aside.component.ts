@@ -48,7 +48,7 @@ export class AsideComponent {
                   imagePath: 'assets/Icons/contact/Contacts.png',
                   section: SectionType.CONTACT,
                   active: false
-            }
+            },
       ];
       selectedSection: OutputEmitterRef<SectionType> = output<SectionType>();
       protected modalService: ModalService = inject(ModalService);

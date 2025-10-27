@@ -1,21 +1,6 @@
-@use '../../../../../../public/styles/all_styles' as all;
-@forward '../../../../../../public/styles/component-styles';
+@use '../../../../../public/styles/all_styles.scss' as all;
 
-.modal-overlay {
-    @include all.fl($alit: center, $jc: center);
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 12;
-}
-
-#privacy-police-close-btn {
-    @include all.absolute($top: 2rem, $right: 2rem);
-    @include all.font-style($size: 2rem);
-    z-index: 2;
-}
-
-.privacy-police-modal-container {
+.privacy-policy-container {
     @include all.size($w: 90dvw, $maxW: 120rem, $h: 80dvh);
     @include all.fl($flexdir: column, $jc: center, $alit: start, $gap: 1rem);
     @include all.marpad($pad: 5rem);
@@ -40,14 +25,14 @@
         @include all.marpad($pad: 5rem 1rem);
     }
 
-    .privacy-police-modal-content {
+    .privacy-policy-content {
         @include all.fl($flexdir: column);
         @include all.size($h: auto);
         overflow-y: auto;
         scrollbar-width: thin;
         scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
 
-        .privacy-police-header {
+        .privacy-policy-header {
             @include all.size($h: auto);
             @include all.marpad($mar: 0 0 4rem 0);
 
@@ -56,7 +41,7 @@
             }
         }
 
-        .privacy-police-main-content {
+        .privacy-policy-main-content {
             @include all.size($h: auto);
             @include all.marpad($pad: 0 4rem 0 0);
 
@@ -91,7 +76,7 @@
                 }
             }
 
-            .privacy-police-list {
+            .privacy-policy-list {
                 display: block;
                 list-style: decimal;
                 padding-left: 3rem;

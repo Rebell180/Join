@@ -1,21 +1,6 @@
-@use '../../../../../../public/styles/all_styles' as all;
-@forward '../../../../../../public/styles/component-styles';
+@use '../../../../../public/styles/all_styles.scss' as all;
 
-.modal-overlay {
-    @include all.fl($alit: center, $jc: center);
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 12;
-}
-
-#legal-notice-close-btn {
-    @include all.absolute($top: 2rem, $right: 2rem);
-    @include all.font-style($size: 2rem);
-    z-index: 2;
-}
-
-.legal-notice-modal-container {
+.legal-notice-container {
     @include all.size($w: 90dvw, $maxW: 120rem, $h: 80dvh);
     @include all.fl($flexdir: column, $jc: center, $alit: start, $gap: 1rem);
     @include all.marpad($pad: 5rem);
@@ -40,7 +25,7 @@
         @include all.marpad($pad: 5rem 1rem);
     }
 
-    .legal-notice-modal-content {
+    .legal-notice-content {
         @include all.fl($flexdir: column);
         @include all.size($h: auto);
         overflow-y: auto;
