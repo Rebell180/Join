@@ -226,20 +226,4 @@ export class BoardComponent implements OnInit, OnDestroy {
     }
   }
   // #endregion
-
-  protected drop(e: CdkDragDrop<Task[]>): void {
-    const previousList = e.previousContainer.data || [];
-    const currentList = e.container.data || [];
-
-    if (e.previousContainer != e.container) {
-      transferArrayItem(previousList, currentList, e.previousIndex, e.currentIndex);
-      currentList.sort((a, b) => a.dueDate.seconds - b.dueDate.seconds);
-      if (this.taskItems[0].some(task => task.id == e.item.data.id)) e.item.data.status = TaskStatusType.TODO;
-      else if (this.taskItems[1].some(task => task.id == e.item.data.id)) e.item.data.status = TaskStatusType.PROGRESS;
-      else if (this.taskItems[2].some(task => task.id == e.item.data.id)) e.item.data.status = TaskStatusType.REVIEW;
-      else e.item.data.status = TaskStatusType.DONE;
-      this.updateTask(e.item.data);
-    }
-  }
-  // #endregion
 }
