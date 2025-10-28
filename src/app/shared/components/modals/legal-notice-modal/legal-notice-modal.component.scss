@@ -43,9 +43,8 @@
     .legal-notice-modal-content {
         @include all.fl($flexdir: column);
         @include all.size($h: auto);
+        @include all.scrollbar();
         overflow-y: auto;
-        scrollbar-width: thin;
-        scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
 
         .legal-notice-header {
             @include all.size($h: auto);

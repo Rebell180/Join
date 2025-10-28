@@ -64,10 +64,9 @@
                     </div>
                     <div class="form-btn-container">
                         @if(headlineTxt() == 'Add') {
-                        <input id="add-contact-cancel-btn" class="btn-default" type="button" (click)="closeModal()"
-                            value="Cancel X">
+                            <input id="add-contact-cancel-btn" class="btn-default" type="button" (click)="closeModal()" value="Cancel X">
                         } @else if(headlineTxt() == 'Edit') {
-                        <input class="btn-default" type="button" (click)="deleteContact()" value="Delete">
+                            <input class="btn-default" type="button" (click)="deleteContact()" value="Delete">
                         }
                         <input class="btn-set" type="submit" value="{{ submitBtnTxt() }}">
                     </div>

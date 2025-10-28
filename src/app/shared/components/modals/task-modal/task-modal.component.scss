@@ -127,9 +127,8 @@
 
 			.task-modal-assigned {
 				@include all.size($h: 18.5dvh);
+				@include all.scrollbar();
 				overflow-y: auto;
-				scrollbar-width: thin;
-				scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
 			}
 
 			.task-modal-assigned-detail {

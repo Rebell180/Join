@@ -4,7 +4,7 @@
         (click)="$event.stopPropagation()">
     
         <button id="add-task-close-btn" type="button" (click)="closeModal()">X</button>
-        <app-add-task id="add-task-modal-content" [currentTask]="currentTask()"></app-add-task>
+        <app-add-task id="add-task-modal-content" [currentTask]="currentTask()" (close)="closeModal()"></app-add-task>
     
     </dialog>
 

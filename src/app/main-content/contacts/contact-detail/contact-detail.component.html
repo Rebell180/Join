@@ -23,7 +23,7 @@
                 <button (click)="modalService.openAddContactModal('edit', contact)" type="button">
                     <img src="assets/Icons/taskBoard/edit.png" alt="" />Edit
                 </button>
-                <button (click)="deleteContact(contact.id)">
+                <button (click)="deleteContact(contact)">
                     <img class="delete-btn" src="assets/Icons/taskBoard/delete.png" alt="" />Delete
                 </button>
             </div>
@@ -52,7 +52,7 @@
         <img src="assets/Icons/taskBoard/edit.png" alt="Edit Icon" />
         <span>Edit</span>
     </div>
-    <div class="menuItem deleteItem" (click)="deleteContact(contact.id)">
+    <div class="menuItem deleteItem" (click)="deleteContact(contact)">
         <img src="assets/Icons/taskBoard/delete.png" alt="Delete Icon" />
         <span>Delete</span>
     </div>

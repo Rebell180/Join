@@ -86,10 +86,10 @@ export class TaskModalComponent {
    * @param {Event} event - The event triggered by the user interaction (e.g., checkbox toggle).
    * @returns {Promise<void>} A promise that resolves once the update is complete.
    */
-  async updateSubTaskStatus(subtask: SubTask, event: Event) {
+  async updateSubTaskStatus(subtask: SubTask, event: Event): Promise<void> {
     const checked = (event.target as HTMLInputElement).checked;
     subtask.finished = checked;
 
-    await this.fireDB.updateInDB('subtask', subtask);
+    await this.fireDB.updateInDB('subtasks', subtask);
   }
 }

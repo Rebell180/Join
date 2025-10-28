@@ -6,6 +6,7 @@ import { collection, CollectionReference, Firestore, Unsubscribe, where, Query, 
 import { DBObject } from '../interfaces/db-object';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { ToastMsgService } from './toast-msg.service';
+import { SubtaskEditState } from '../enums/subtask-edit-state';
 
 @Injectable({
   providedIn: 'root'
@@ -148,16 +149,31 @@ export class FirebaseDBService {
         return;
       }
     }
-
+    
     try {
       const collectionRef = this.getCollectionRef(collectionName);
       const dbObjRef = await addDoc(collectionRef, object.toJSON());
-
-      if(dbObjRef!== undefined && dbObjRef.id !== ''){
+      if(dbObjRef !== undefined && dbObjRef.id !== ''){
         await updateDoc(dbObjRef, {id: dbObjRef.id});
       }
     } catch(e) {
-      console.log(e);
+      // console.log(e);
+    }
+  }
+
+  /**
+   * Adds a task to database and update after add to save id
+   * and adds subtasks to database.
+   * 
+   * @param collectionName name of collection in database.
+   * @param task task to add to database.
+   */
+  async taskAddToDB(collectionName: string, task: Task) {
+    const collectionRef = this.getCollectionRef(collectionName);
+    const dbObjRef = await addDoc(collectionRef, task.toJSON());
+    task.id = dbObjRef.id;
+    if(task.hasSubtasks) {
+      await this.taskUpdateInDB(collectionName, task);
     }
   }
 
@@ -170,28 +186,46 @@ export class FirebaseDBService {
     if( object instanceof Contact ) {
       object.group = object.firstname[0];
     }
-
     const docRef  = this.getDocRef(collectionName, object.id);
     await updateDoc(docRef, object.toJSON());
   }
 
-  async taskUpdateInDB(collectionName: string, docId: string, data: any): Promise<void> {
-    const docRef = doc(this.firestore, collectionName, docId);
-    await updateDoc(docRef, data);
+  /**
+   * Updates a task with his subtasks in database.
+   * 
+   * @param collectionName name of collection in database.
+   * @param doc task to update in database.
+   */
+  async taskUpdateInDB(collectionName: string, doc: Task): Promise<void> {
+    if(doc.hasSubtasks) {
+      await this.handleSubtasksInDB(doc.subtasks, doc.id);
+    }
+    await this.updateInDB(collectionName, doc);
   }
 
   /**
    * Deletes a document from firestore collection.
    * @param docId The id to remove.
    */
-  async deleteInDB(collectionName: string, docId: string) {
-    const docRef = this.getDocRef(collectionName, docId);
+  async deleteInDB(collectionName: string, doc: DBObject) {
+    const docRef = this.getDocRef(collectionName, doc.id);
     await deleteDoc(docRef);
   }
 
-  async deleteTaskInDB(collectionName: string, docId: string) {
-    const docRef = this.getDocRef(collectionName, docId);
-    await deleteDoc(docRef);
+  /**
+   * Deletes a single task from database. 
+   * Deletes also existing subtasks.
+   * 
+   * @param collectionName name of collection in database.
+   * @param doc task to delete in database.
+   */
+  async deleteTaskInDB(collectionName: string, doc: Task) {
+    if(doc.hasSubtasks) {
+      doc.subtasks.forEach(async (subTask) => {
+        await this.deleteInDB('subtasks', subTask);
+      })
+    }
+    await this.deleteInDB(collectionName, doc);
     this.tms.add('Deleting Task successfully', 3000, 'success');
   }
 
@@ -206,6 +240,26 @@ export class FirebaseDBService {
    */
   setCurrentContact(contact: Contact) {
     this.currentContactBS.next(contact);
+  }
+
+  async handleSubtasksInDB(subtasks: Array<SubTask>, taskId: string) {
+    subtasks.forEach(async (subTask) => {
+      const colName: string = 'subtasks';
+      switch(subTask.editState) {
+        case SubtaskEditState.NEW:
+          subTask.taskId = taskId;
+          await this.addToDB(colName, subTask);
+          break;
+        case SubtaskEditState.CHANGED:
+          this.updateInDB(colName, subTask);
+          break;
+        case SubtaskEditState.DELETED:
+          this.deleteInDB(colName, subTask);
+          break;
+        default:
+          break;
+      }
+    });
   }
 
   // #enregion contact helper

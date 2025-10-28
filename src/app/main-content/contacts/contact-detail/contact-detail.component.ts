@@ -44,8 +44,8 @@ export class ContactDetailComponent {
    * deletes a spezific contact in database. 
    * @param docId the contact id to delete in database.
    */
-  async deleteContact(docId: string) {
-    this.fireDB.deleteInDB('contacts', docId);
+  async deleteContact(doc: Contact) {
+    this.fireDB.deleteInDB('contacts', doc);
     this.fireDB.setCurrentContact(new Contact());
     this.tms.add('Contact deleted', 3000, 'success');
   }

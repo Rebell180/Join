@@ -60,11 +60,10 @@ b {
 
 
             @include all.notebook {
-                overflow-y: auto;
-                scrollbar-width: thin;
-                scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
-                margin: 2rem 0;
                 @include all.fl($flexdir: column, $alit: center);
+                @include all.scrollbar();
+                overflow-y: auto;
+                margin: 2rem 0;
             }
 
             .add-task-info-block1 {
@@ -81,6 +80,7 @@ b {
                 }
 
                 #add-task-info-description {
+                    @include all.scrollbar();
                     height: 14dvh;
                     font-family: 'InterRegular', sans-serif;
                     overflow-y: auto;

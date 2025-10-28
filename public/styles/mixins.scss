@@ -33,8 +33,8 @@
 	right: $right;
 }
 
-@mixin borRad($c: white, $radius: 16px, $thick: 1px) {
-    border: $thick solid $c;
+@mixin borRad($c: white, $radius: 16px, $thick: 1px, $design: solid) {
+    border: $thick $design $c;
     border-radius: $radius;
 }
 
@@ -55,4 +55,9 @@
 	font-size: $size;
 	font-family: $family;
 	font-weight: $weight;
+}
+
+@mixin scrollbar() {
+	scrollbar-width: thin;
+    scrollbar-color: rgba(0, 0, 0, 0.1) transparent;
 }

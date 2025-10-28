@@ -95,7 +95,7 @@ export class AddContactComponent implements AfterViewInit {
    * Deletes a single entry in database.
    */
   async deleteContact() {
-    await this.fireDB.deleteInDB('contacts', this.contact().id);
+    await this.fireDB.deleteInDB('contacts', this.contact());
     this.tms.add('Contect deleted', 3000, 'success');
   }
 

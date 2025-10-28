@@ -41,6 +41,7 @@
     }
 
     .options {
+      @include all.scrollbar();
       position: absolute;
       top: 4rem;
       left: 0;
@@ -52,6 +53,7 @@
       z-index: 20;
       max-height: 220px;
       overflow-y: auto;
+
 
       .search{
         width: 100%;

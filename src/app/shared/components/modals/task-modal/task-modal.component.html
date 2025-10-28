@@ -54,7 +54,7 @@
 			</div>
 		
 			<div class="task-option-container">
-				<button (click)="fireDB.deleteTaskInDB('tasks', task().id); closeTaskModal()">
+				<button (click)="fireDB.deleteTaskInDB('tasks', task()); closeTaskModal()">
 					<img class="delete-btn" src="assets/Icons/taskBoard/delete.png" alt="" />Delete
 				</button>
 				<hr>

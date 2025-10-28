@@ -39,7 +39,7 @@
                 </div>
                 <div class="input-wrapper add-task-assigned-to-container">
                     <label class="add-task-input-lbl" for="add-task-assigned-to">Assigned to</label>
-                    <app-assign-contacts [options]="contacts" [selectedValues]="currentTask().contacts" (selectionChange)="setChosenContacts($event)"></app-assign-contacts>
+                    <app-assign-contacts [options]="contacts" [selectedValues]="currentTask().contacts" (selectionChange)="updateContacts($event)"></app-assign-contacts>
                 </div>
                 <div class="input-wrapper add-task-category-container">
                     <label class="add-task-input-lbl" for="add-task-category">Category <b>*</b></label>
@@ -51,7 +51,7 @@
                     </select>
                 </div>
                 <div class="input-wrapper add-task-subtask-container">
-                    <app-subtask [subtasks]="currentTask().subtasks"></app-subtask>
+                    <app-subtask [subtasks]="currentTask().subtasks" (outSubtasks)="updateSubtasks($event)"></app-subtask>
                 </div>
                 <span class="required-info-txt-mobile"><b>*</b> this field is required</span>
             </div>

@@ -2,27 +2,21 @@
 @forward '../../../../public/styles/component-styles';
 
 :host {
-    @include all.size();
-    padding-top: 4rem;
+    @include all.size($w: 100%, $h: 85dvh);
+    padding: 5rem 1rem 1rem 1rem;
 
-    @media(max-width: 1280px) {
-        @include all.fl($flexdir: column, $alit: center);
-        @include all.size();
-    }
 
     // #region header
     header {
-        @include all.size($w: 85dvw, $h: 10rem);
-        @include all.fl($alit: center, $jc: space-between);
-        padding: 0 5rem;
-
-        @include all.notebook {
-            @include all.size($h: 10rem);
-            @include all.marpad($pad: 0 1rem);
-        }
+        @include all.fl($jc: space-between);
+        padding: 2rem 2rem;
 
         h1 {
-            @include all.font-style($size: 6rem);
+            @include all.font-style($size: 48px);
+
+            @include all.mobile{
+                @include all.font-style($size: 36px);
+            }
         }
 
         .search-task {
@@ -34,7 +28,7 @@
         }
 
         .btn-set {
-            @include all.size($w: 15rem, $h: 4.8rem);
+            @include all.size($w: 25%, $h: 4.8rem);
 
             @include all.notebook {
                 #add-task-label {
@@ -54,7 +48,7 @@
 
         @include all.mobile {
             display: flex;
-            padding: 0 1rem;
+            padding: 0 2rem;
             @include all.size($h: 6rem);
         }
     }
@@ -63,93 +57,95 @@
 
     // #region task-list-container
     .task-list-wrapper {
-        @include all.size($w: 85dvw);
-        @include all.fl();
-        overflow-y: auto;
-        overflow-x: hidden;
-        scrollbar-width: thin;
-        scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
-        gap: 0;
-
+        width: 100%;
+        @include all.fl($jc: space-around, $gap: 1rem);
+        @include all.scrollbar();
+        
         @media(max-width: 1280px) {
             @include all.fl($flexdir: column);
-            @include all.size($w: 78dvw);
+            overflow-y: auto;
+            height: 74dvh;
+            width: calc(100dvw - 22rem);
         }
 
-        @include all.notebook {
+        @include all.tablet {
+            width: calc(100dvw - 2rem);
+            height: 64dvh;
+        }
+
+        @include all.mobile {
+            height: 58dvh;
+        }
+
+        .task-list {
+            width: 25%;
+            height: 74dvh;
             @include all.fl($flexdir: column);
-            @include all.size($maxW: 72dvw);
-        }
+            padding: 1rem;
 
-        @include all.tablet {
-            @include all.size($w: 100dvw);
-        }
-    }
-}
-
-// #endregion
-
-.task-list {
-    @include all.fl($flexdir: column);
-    @include all.size($w: 25%);
-    @include all.marpad($pad: 1.6rem 1rem);
-
-    @media (max-width: 1280px) {
-        @include all.size($w: 100dvw, $h: auto, $maxW: 675px);
-    }
-
-    header {
-        @include all.size($w: 21dvw, $h: 5rem);
-        @include all.fl($alit: center, $jc: space-between);
-        @include all.marpad($pad: 0 4rem 0 4.2rem);
-        margin-bottom: 1.6rem;
-
-        @media (max-width: 1280px) {
-            @include all.size($h: 5rem);
-            margin-bottom: 0;
-        }
-
-        h3 {
-            font-size: 2.1rem;
-        }
-
-        .add-icon-btn {
-            &:hover {
-                content: url(../../../../public/assets/Icons/taskBoard/addBtnBoardHover.png);
+            @media(max-width: 1280px) {
+                width: calc(100dvw - 24rem);
+                height: 78dvh;
             }
 
-            &:active {
-                content: url(../../../../public/assets/Icons/taskBoard/addBtnBoardClick.png);
+            @include all.tablet {
+                width: calc(100dvw - 4rem);
+            }
+
+            header {
+                width: 100%;
+                @include all.fl($jc: space-between);
+
+                h3 {
+                    font-size: 2.1rem;
+                }
+
+                .add-icon-btn {
+                    &:hover {
+                        content: url(../../../../public/assets/Icons/taskBoard/addBtnBoardHover.png);
+                    }
+
+                    &:active {
+                        content: url(../../../../public/assets/Icons/taskBoard/addBtnBoardClick.png);
+                    }
+                }
+            }
+
+            main {
+                // width: 100%;
+                // height: 100%;
+                @include all.size();
+                @include all.fl($flexdir: column);
+                @include all.scrollbar();
+                overflow-y: auto;
+
+                @media(max-width: 1280px) {
+                    @include all.fl();
+                    max-width: fit-content;
+                    overflow-x: auto;
+                }
+
+                .drag-content {
+                    @include all.size($maxW: 28rem, $minW: 20rem, $h: auto);
+                }
+
+                .no-entry-container {
+                    @include all.size($maxW: 28rem, $minW: 20rem, $h: auto);
+                    @include all.borRad($c: rgba(0, 0, 0, 0.2), $radius: 16px, $thick: 2px, $design: dotted);
+                    @include all.font-style($size: 18px, $weight: 600);
+                    @include all.marpad($pad: 1rem);
+                    background: rgba(0, 0, 0, 0.1);
+                    text-align: center;
+                    align-content: center;
+                }
             }
         }
     }
-
-    main {
-        @include all.size($h: 69dvh);
-        @include all.fl($alit: center, $flexdir: column);
-        overflow-y: auto;
-        scrollbar-width: thin;
-        scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
-
-        @media (max-width: 1280px) {
-            @include all.fl($flexdir: row);
-            @include all.size($w: 75dvw, $h: auto);
-            overflow-x: auto;
-        }
-
-        @include all.tablet {
-            @include all.size($h: auto);
-        }
-
-        >* {
-            flex: 0 0 auto;
-            width: 100%;
-            max-width: 28rem;
-        }
-    }
+    // #endregion
 }
 
 // #region CDK-Drag-Drop
+
 .cdk-drop-list-dragging {
     border: 3px dotted #800000;
 }
@@ -157,15 +153,15 @@
 .cdk-drag-preview {
     border-radius: 1.6rem;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-}
+    transform: translate(rotate(15deg));
 
+    app-task-column-item {
+        width: 100%;
+    }
+}
 
 .cdk-drag-placeholder {
     opacity: 0;
-}
-
-.cdk-drag-preview app-task-column-item {
-    transform: rotate(15deg);
 }
 
 // #endregion

@@ -1,4 +1,4 @@
-import { Component, inject, input, InputSignal, OnDestroy } from '@angular/core';
+import { Component, inject, input, InputSignal, OnDestroy, output, OutputEmitterRef } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { FirebaseDBService } from '../../services/firebase-db.service';
 import { Priority } from '../../enums/priority.enum';
@@ -11,7 +11,9 @@ import { Contact } from '../../classes/contact';
 import { DatePickerComponent } from "../date-picker/date-picker.component";
 import { AssignContactsComponent } from "../assign-contacts/assign-contacts.component";
 import { ToastMsgService } from '../../services/toast-msg.service';
-import { SubtaskComponent } from '../../../main-content/board/subtask/subtask.component';
+import { SubtaskComponent } from '../subtask/subtask.component';
+import { SubtaskEditState } from '../../enums/subtask-edit-state';
+import { SubTask } from '../../classes/subTask';
 
 
 @Component({
@@ -31,6 +33,7 @@ export class AddtaskComponent implements OnDestroy {
   Category = Category;
 
   currentTask: InputSignal<Task> = input.required<Task>();
+  close: OutputEmitterRef<boolean> = output<boolean>();
   contacts: Array<Contact> = []
 
   unsubContacts: Unsubscribe;
@@ -70,38 +73,39 @@ export class AddtaskComponent implements OnDestroy {
    */
   async submitForm(e: SubmitEvent) {
     if(this.currentTask().id == '') {
-      this.fireDB.addToDB('tasks', this.currentTask());
+      await this.fireDB.taskAddToDB('tasks', this.currentTask());
       this.clear();
       this.tms.add('Task was created', 3000, 'success');
     } else {
-      this.fireDB.updateInDB('tasks', this.currentTask());
-      this.tms.add('Task was updated', 3000, 'success');
+      await this.updateTask();
     }
+    this.closeModal();
+  }
+  
+  /**
+   * Updates existing task in DB
+   */
+  async updateTask() {
+    await this.fireDB.taskUpdateInDB('tasks', this.currentTask());
+    this.closeModal();
+    this.tms.add('Task was updated', 3000, 'success');
   }
 
   /**
    * Reset all inputs to default.
    */
   clear() {
-    this.currentTask.apply(new Task());
-
+    this.currentTask().title = '';
+    this.currentTask().description = '';
+    this.currentTask().category = Category.TASK;
+    this.currentTask().priority = Priority.MEDIUM;
+    this.currentTask().dueDate = Timestamp.now();
+    this.currentTask().subtasks = []
+    this.currentTask().hasSubtasks = false;
+    this.updateContacts([]);
     this.contacts.forEach(contact => {
       contact.isChecked = false;
     });
-    this.setChosenContacts([]);
-  }
-
-  /**
-   * Toggles a single contact option between selected and not selected.
-   * 
-   * @param contact the option to toggle. 
-   */
-  toggleAddContactToAssignTo(contact: Contact) {
-    if(this.currentTask().assignedTo.includes(contact.id)){
-      // remove
-    } else {
-      this.currentTask().assignedTo.push(contact.id);
-    }
   }
 
   /**
@@ -118,7 +122,7 @@ export class AddtaskComponent implements OnDestroy {
    * 
    * @param chosenContacts Array<Contact> with selected contacts
    */
-  setChosenContacts(chosenContacts: Array<Contact>) {
+  updateContacts(chosenContacts: Array<Contact>) {
     this.currentTask().contacts = chosenContacts;
     this.currentTask().assignedTo = [];
     chosenContacts.forEach((contact) => {
@@ -126,5 +130,22 @@ export class AddtaskComponent implements OnDestroy {
     })
   }
 
+  /**
+   * Sets the submitted subtasks to task subTasks.
+   * @param subtasks 
+   */
+  updateSubtasks(subtasks: Array<SubTask>) {
+    subtasks.forEach((subtask) => {
+      if(subtask.taskId == ''){
+        subtask.taskId = this.currentTask().id;
+      }
+    });
+    this.currentTask().subtasks = subtasks;
+    this.currentTask().hasSubtasks = this.currentTask().subtasks.length >= 1;
+  }
+
+  closeModal() {
+    this.close.emit(true);
+  }
   // #endregion methods
 }

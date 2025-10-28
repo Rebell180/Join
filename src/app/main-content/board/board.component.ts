@@ -1,7 +1,7 @@
-import { Component, inject, input, InputSignal, OnDestroy, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { SearchTaskComponent } from './search-task/search-task.component';
 import { Task } from '../../shared/classes/task';
-import { collection, doc, DocumentReference, Firestore, onSnapshot, Unsubscribe, updateDoc } from '@angular/fire/firestore';
+import { onSnapshot, Unsubscribe } from '@angular/fire/firestore';
 import { CommonModule } from '@angular/common';
 import { TaskStatusType } from '../../shared/enums/task-status-type';
 import { Contact } from '../../shared/classes/contact';
@@ -12,6 +12,8 @@ import { TaskObject } from '../../shared/interfaces/task-object';
 import { ModalService } from '../../shared/services/modal.service';
 import { TaskColumnItemComponent } from '../../shared/components/task-column-item/task-column-item.component';
 import { CdkDragDrop, DragDropModule, transferArrayItem }from '@angular/cdk/drag-drop';
+import { FirebaseDBService } from '../../shared/services/firebase-db.service';
+import { ToastMsgService } from '../../shared/services/toast-msg.service';
 
 @Component({
   selector: 'section[board]',
@@ -25,9 +27,11 @@ import { CdkDragDrop, DragDropModule, transferArrayItem }from '@angular/cdk/drag
   templateUrl: './board.component.html',
   styleUrl: './board.component.scss'
 })
-export class BoardComponent implements OnInit, OnDestroy {
+export class BoardComponent implements  OnDestroy, OnInit {
   // #region Attrbutes
   protected modalService: ModalService = inject(ModalService);
+  private fireDB: FirebaseDBService = inject(FirebaseDBService);
+  private tms: ToastMsgService = inject(ToastMsgService);
 
   // Primary Data
   tasks: Task[] = [];
@@ -46,7 +50,6 @@ export class BoardComponent implements OnInit, OnDestroy {
   // Database
   private contacts: Contact[] = [];
   private subtasks: SubTask[] = []
-  private fs: Firestore = inject(Firestore);
   private unsubTasks!: Unsubscribe;
   private unsubContacts!: Unsubscribe;
   private unsubSubtasks!: Unsubscribe;
@@ -71,7 +74,7 @@ export class BoardComponent implements OnInit, OnDestroy {
    * @returns - Unsubscribe of Contacts.
    */
   private subscribeContacts(): Unsubscribe {
-    return onSnapshot(collection(this.fs, 'contacts'), contactsSnap => {
+    return onSnapshot(this.fireDB.getCollectionRef('contacts'), contactsSnap => {
       this.contacts = [];
       contactsSnap.docs.map( doc => {this.contacts.push(new Contact(doc.data() as ContactObject))});
       this.sortContacts();
@@ -83,7 +86,7 @@ export class BoardComponent implements OnInit, OnDestroy {
    * @returns - Unsubscribe of Sutasks
    */
   private subscribeSubtasks(): Unsubscribe {
-    return onSnapshot(collection(this.fs, 'subtask'), subtasksSnap => {
+    return onSnapshot(this.fireDB.getCollectionRef('subtasks'), subtasksSnap => {
       this.subtasks = [];
       subtasksSnap.docs.map( doc => {this.subtasks.push(new SubTask(doc.data() as SubtaskObject))})
     })
@@ -94,10 +97,9 @@ export class BoardComponent implements OnInit, OnDestroy {
    * @returns - Unsubscribe for Task
    */
   private subscribeTasks(): Unsubscribe {
-    return onSnapshot(collection(this.fs, 'tasks'), taskSnap => {
+    return onSnapshot(this.fireDB.getCollectionRef('tasks'), taskSnap => {
       this.tasks = [];
       this.shownTasks = [];
-      this.taskItems = [[],[],[],[]];
       taskSnap.docs.map( doc => {this.tasks.push(new Task(doc.data() as TaskObject))});
       for (let i = 0; i < this.tasks.length; i++) {
         this.addContactsToTask(i);
@@ -115,9 +117,9 @@ export class BoardComponent implements OnInit, OnDestroy {
    * Updates a task.
    * @param task - Task for update.
    */
-  private async updateTask(task:Task) {
-    const ref: DocumentReference = doc(this.fs, `tasks/${task.id}`);
-    await updateDoc(ref, task.toJSON());
+  private async updateTask(task: Task) {
+    await this.fireDB.taskUpdateInDB('tasks', task);
+    this.tms.add('Task was updated', 3000, 'success');
   }
   // #endregion
   // #region taskmgmt
@@ -132,6 +134,7 @@ export class BoardComponent implements OnInit, OnDestroy {
 
   /** Divides all shwohn Tasks in their lists */
   private splitTasks() {
+    this.taskItems = [[], [], [], []];
     for (let i = 0; i < this.shownTasks.length; i++) {
       switch(this.shownTasks[i].status) {
         case TaskStatusType.TODO:
@@ -170,6 +173,7 @@ export class BoardComponent implements OnInit, OnDestroy {
    * @param index - Positon in Task-Array.
    */
   private addContactsToTask(index:number) {
+    this.tasks[index].contacts = [];
     for (let i = 0; i < this.tasks[index].assignedTo.length; i++) {
       for (let j = 0; j < this.contacts.length; j++) {
         if (this.tasks[index].assignedTo[i] == this.contacts[j].id) {
@@ -186,7 +190,9 @@ export class BoardComponent implements OnInit, OnDestroy {
   private addSubtasktoTask(index: number) {
     for (let i = 0; i < this.subtasks.length; i++) {
       if (this.tasks[index].hasSubtasks && this.subtasks[i].taskId == this.tasks[index].id) {
-        this.tasks[index].subtasks.push(this.subtasks[i]);
+        if(!this.tasks[index].subtasks.includes(this.subtasks[i])) {
+          this.tasks[index].subtasks.push(this.subtasks[i]);
+        }
       }
     }
   }
@@ -225,6 +231,5 @@ export class BoardComponent implements OnInit, OnDestroy {
       this.updateTask(e.item.data);
     }
   }
-  // #endregion
   // #endregion
 }
