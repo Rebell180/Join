@@ -2,9 +2,8 @@
 @forward '../../../../public/styles/component-styles';
 
 :host {
-    @include all.fl($flexdir: column, $alit: center);
     @include all.size();
-    padding-top: 6rem;
+    padding-top: 4rem;
 
     @media(max-width: 1280px) {
         @include all.fl($flexdir: column, $alit: center);
@@ -13,8 +12,9 @@
 
     // #region header
     header {
-        @include all.size($w: 80dvw, $h: 10rem);
+        @include all.size($h: 10rem);
         @include all.fl($alit: center, $jc: space-between);
+        padding: 0 5rem;
 
         @include all.notebook {
             @include all.size($h: 10rem);
@@ -55,7 +55,6 @@
         @include all.mobile {
             display: flex;
             padding: 0 1rem;
-            margin-top: 1rem;
             @include all.size($h: 6rem);
         }
     }
@@ -64,22 +63,22 @@
 
     // #region task-list-container
     .task-list-wrapper {
-        @include all.size();
+        @include all.size($w: 85dvw);
         @include all.fl();
+        overflow-y: auto;
+        overflow-x: hidden;
+        scrollbar-width: thin;
+        scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
         gap: 0;
 
         @media(max-width: 1280px) {
             @include all.fl($flexdir: column);
-            @include all.size($w: 78dvw, $h: 90dvh);
-            overflow-y: auto;
-            overflow-x: hidden;
-            scrollbar-width: thin;
-            scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+            @include all.size($w: 78dvw);
         }
 
         @include all.notebook {
             @include all.fl($flexdir: column);
-            @include all.size($maxW: 75dvw);
+            @include all.size($maxW: 72dvw);
         }
 
         @include all.tablet {
@@ -96,7 +95,7 @@
     @include all.marpad($pad: 1.6rem 1rem);
 
     @media (max-width: 1280px) {
-        @include all.size($w: 100%, $h: auto, $maxW: 675px);
+        @include all.size($w: 100dvw, $h: auto, $maxW: 675px);
     }
 
     header {
@@ -142,13 +141,13 @@
             @include all.size($h: auto);
         }
 
-            >* {
-                flex: 0 0 auto;
-                width: 100%;
-                max-width: 28rem;
-            }
+        >* {
+            flex: 0 0 auto;
+            width: 100%;
+            max-width: 28rem;
         }
     }
+}
 
 // #region CDK-Drag-Drop
 .cdk-drop-list-dragging {
@@ -168,4 +167,5 @@
 .cdk-drag-preview app-task-column-item {
     transform: rotate(15deg);
 }
+
 // #endregion
