@@ -12,13 +12,9 @@
 
     // #region header
     header {
-        @include all.size($w: 90dvw, $h: 10rem);
+        @include all.size($w: 85dvw, $h: 10rem);
         @include all.fl($alit: center, $jc: space-between);
         padding: 0 5rem;
-
-        @media(max-width: 1380px) {
-        @include all.size($w: 80dvw, $h: 10rem);
-    }
 
         @include all.notebook {
             @include all.size($h: 10rem);
