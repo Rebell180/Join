@@ -9,8 +9,8 @@ import { Priority } from '../../shared/enums/priority.enum';
 import { SectionType } from '../../shared/enums/section-type';
 
 @Component({
-  selector: 'section[summary]',
-  imports: [CommonModule],
+  selector: 'section[summmary]',
+  imports: [],
   templateUrl: './summmary.component.html',
   styleUrls: ['./summmary.component.scss']
 })

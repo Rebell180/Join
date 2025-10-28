@@ -9,6 +9,10 @@
         <app-add-task-container></app-add-task-container>
         }
 
+        @case (SectionType.SUMMARY) {
+        <section summmary></section>
+        }
+
         @case (SectionType.BOARD) {
         <section board></section>
         }

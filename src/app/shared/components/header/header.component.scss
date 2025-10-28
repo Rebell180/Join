@@ -41,6 +41,8 @@
 
             .help-icon {
                 cursor: pointer;
+                z-index: 20;
+                filter: drop-shadow(#29abe3 0.1rem 0.1rem 1rem);
 
                 @include all.tablet {
                     display: none;

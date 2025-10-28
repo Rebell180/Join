@@ -33,7 +33,7 @@ export class AsideComponent {
                   title: 'Summary',
                   imagePath: 'assets/Icons/contact/Summary.png',
                   section: SectionType.SUMMARY,
-                  active: false
+                  active: true
             },
             {
                   sectionId: 'add-task-section',
@@ -47,7 +47,7 @@ export class AsideComponent {
                   title: 'Boards',
                   imagePath: 'assets/Icons/contact/Board.png',
                   section: SectionType.BOARD,
-                  active: true,
+                  active: false,
             },
             {
                   sectionId: 'Contacts',
