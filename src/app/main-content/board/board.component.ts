@@ -1,4 +1,4 @@
-import { Component, inject, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { SearchTaskComponent } from './search-task/search-task.component';
 import { Task } from '../../shared/classes/task';
 import { onSnapshot, Unsubscribe } from '@angular/fire/firestore';
@@ -32,6 +32,7 @@ export class BoardComponent implements  OnDestroy, OnInit {
   protected modalService: ModalService = inject(ModalService);
   private fireDB: FirebaseDBService = inject(FirebaseDBService);
   private tms: ToastMsgService = inject(ToastMsgService);
+  private cdr: ChangeDetectorRef = inject(ChangeDetectorRef);
 
   // Primary Data
   tasks: Task[] = [];
@@ -59,6 +60,9 @@ export class BoardComponent implements  OnDestroy, OnInit {
     this.unsubContacts = this.subscribeContacts();
     this.unsubSubtasks = this.subscribeSubtasks();
     this.unsubTasks = this.subscribeTasks();
+    setTimeout(() => {
+      this.cdr.detectChanges();
+    }, 500);
   }
 
   ngOnDestroy(): void {
