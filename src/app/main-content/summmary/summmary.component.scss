@@ -2,9 +2,17 @@
 
 :host {
 	@include all.size();
-	padding: 8rem;
+	@include all.marpad($pad: 8rem);
 
-// #region summary-header
+	@include all.notebook {
+		@include all.marpad($pad: 6rem);
+	}
+
+	@include all.tablet {
+		@include all.marpad($pad: 2rem);
+	}
+
+	// #region summary-header
 	.summary-header {
 		@include all.fl($jc: start, $alit: center);
 		@include all.size($h: 8rem);
@@ -12,6 +20,10 @@
 		@include all.notebook {
 			@include all.fl($jc: space-between, $alit: start);
 			@include all.size($w: 30dvw, $h: 12rem);
+		}
+
+		@include all.mobile {
+			@include all.size($w: 90dvw, $h: 12rem);
 		}
 
 		.summary-header-info {
@@ -30,18 +42,27 @@
 			}
 
 			h2 {
-				@include all.size($w:40dvw, $h: auto);
-				@include all.font-style($size: 2.5rem);
+				@include all.size($w: 35dvw, $h: 3rem);
+				@include all.font-style($size: 2.5rem, $weight: 100);
 				letter-spacing: 2px;
-				font-weight: 100;
 
-				@media(max-width: 425px) {
+				@media(max-width: 1150px) {
+					@include all.size();
+					@include all.font-style($size: 2.1rem);
+				}
+
+				@include all.notebook {
+					@include all.size($w: 50dvw);
+				}
+
+				@include all.mobile {
+					@include all.size();
 					@include all.font-style($size: 1.8rem);
 				}
 			}
 
 			hr {
-				background: rgb(17, 148, 213);
+				background: #29abe3;
 			}
 
 			#middle-line {
@@ -63,6 +84,186 @@
 			}
 		}
 	}
+
+	.dashboard-main-container {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		width: 70dvw;
+		height: 100%;
+		padding: 0 5rem;
+
+		@media(max-width: 1100px) {
+			padding: 0;
+			width: 60dvw;
+		}
+
+		@include all.tablet {
+			height: 55dvh;
+			width: 100%;
+			// width: 80dvw;
+		}
+
+		.dashboard {
+			@include all.size($w: 100%, $h: 90%);
+			display: flex;
+			flex-direction: column;
+			margin-top: 3rem;
+
+			.first-dashboard-row-container {
+				height: 33%;
+				display: flex;
+				flex-direction: row;
+				gap: 2rem;
+
+				.first-dashboard-row {
+					width: 100%;
+					height: 80%;
+					background: white;
+					border-radius: 3rem;
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					gap: 3rem;
+					cursor: pointer;
+
+					&:hover {
+						background: #2a3647;
+						scale: 1.1;
+						transition: all 0.8s;
+						color: white;
+					}
+
+					img {
+						width: 48px;
+						height: 48px;
+					}
+
+					.done-count {
+						display: flex;
+						align-items: center;
+						flex-direction: column;
+
+						span {
+							font-size: 5rem;
+							font-weight: 500;
+						}
+
+						p {
+							font-size: 2rem;
+						}
+					}
+				}
+			}
+
+			.middle-dashboard-row-container {
+				height: 33%;
+
+				.middle-dashboard-row {
+					background: white;
+					height: 80%;
+					border-radius: 3rem;
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					gap: 5rem;
+					cursor: pointer;
+
+					&:hover {
+						background: #2a3647;
+						scale: 1.1;
+						transition: all 0.8s;
+						color: white;
+					}
+
+					.dashboard-priority {
+						width: 10%;
+						font-size: 1.5rem;
+					}
+
+					hr {
+						width: 0.5rem;
+						height: 5rem;
+						background: grey;
+					}
+
+					.dashboard-date {
+
+						span {
+							font-size: 1.7rem;
+							font-family: 'Inter', sans-serif;
+							font-weight: bold;
+						}
+
+						p {
+							font-size: 1.2rem;
+							margin-top: 0.3rem;
+						}
+					}
+				}
+			}
+
+			.end-dashboard-row-container {
+				height: 33%;
+				display: flex;
+				flex-direction: row;
+				gap: 2rem;
+
+				.end-dashboard-row {
+					width: 33%;
+					height: 80%;
+					background: white;
+					border-radius: 3rem;
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					flex-direction: column;
+					cursor: pointer;
+
+					&:hover {
+						background: #2a3647;
+						scale: 1.1;
+						transition: all 0.8s;
+						color: white;
+					}
+
+					span {
+						font-size: 5rem;
+						font-weight: 500;
+					}
+
+					p {
+						font-size: 2.5rem;
+						text-align: center;
+					}
+				}
+			}
+		}
+
+		.greed-user {
+			height: 100%;
+			width: 50%;
+			display: flex;
+			justify-content: center;
+			align-items: start;
+			padding-left: 10rem;
+			flex-direction: column;
+
+			@media(max-width: 1100px) {
+				display: none;
+			}
+
+			h1 {
+				font-family: 'Inter', sans-serif;
+				color: #29abe3;
+			}
+
+			h2 {
+				font-size: 2.8rem;
+				font-weight: 100;
+			}
+		}
+	}
 }
 
-// #endregion
+// #endregion..

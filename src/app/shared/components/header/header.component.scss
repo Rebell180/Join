@@ -42,7 +42,6 @@
             .help-icon {
                 cursor: pointer;
                 z-index: 20;
-                filter: drop-shadow(#29abe3 0.1rem 0.1rem 1rem);
 
                 @include all.tablet {
                     display: none;
@@ -62,6 +61,10 @@
                 border-radius: 50%;
                 border: 3px solid #1f2a3a;
                 cursor: pointer;
+
+                @include all.tablet {
+                    z-index: 20;
+                }
             }
 
             .dropdown {
@@ -76,6 +79,7 @@
 
                 @include all.tablet {
                     @include all.size($minW: 15rem, $h: 17rem);
+                    z-index: 20;
                 }
 
                 .help-mobile {
