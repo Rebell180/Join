@@ -5,6 +5,8 @@
     @include all.marpad($pad: 8rem 8rem 0 8rem);
     @include all.scrollbar();
     overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
 
     @include all.tablet {
             @include all.size($h: 80dvh);
@@ -20,6 +22,10 @@
         }
 
     .privacy-policy-container {
+
+        @include all.mobile {
+            @include all.size($w: 100dvw);
+        }
 
         .privacy-policy-back {
             @include all.fl($display: none);
