@@ -86,45 +86,32 @@
 	}
 
 	.dashboard-main-container {
-		display: flex;
-		flex-direction: row;
-		align-items: center;
-		width: 70dvw;
-		height: 100%;
-		padding: 0 5rem;
+		@include all.fl($alit: center);
+		@include all.size($w: 70dvw);
+		@include all.marpad($pad: 0 3rem);
 
 		@media(max-width: 1100px) {
-			padding: 0;
-			width: 60dvw;
+			@include all.size($w: 50dvw);
+			@include all.marpad($pad: 0);
 		}
 
 		@include all.tablet {
-			height: 55dvh;
-			width: 100%;
-			// width: 80dvw;
+			@include all.size($h: 55dvw);
 		}
 
 		.dashboard {
-			@include all.size($w: 100%, $h: 90%);
-			display: flex;
-			flex-direction: column;
-			margin-top: 3rem;
+			@include all.size($h: 90%);
+			@include all.marpad($mar: 3rem 0 0 0);
 
 			.first-dashboard-row-container {
-				height: 33%;
-				display: flex;
-				flex-direction: row;
-				gap: 2rem;
+				@include all.size($h: 33%);
+				@include all.fl($gap: 2rem);
 
 				.first-dashboard-row {
-					width: 100%;
-					height: 80%;
+					@include all.size($h: 80%);
+					@include all.fl($jc: center, $alit: center, $gap: 3rem);
 					background: white;
 					border-radius: 3rem;
-					display: flex;
-					justify-content: center;
-					align-items: center;
-					gap: 3rem;
 					cursor: pointer;
 
 					&:hover {
@@ -135,38 +122,31 @@
 					}
 
 					img {
-						width: 48px;
-						height: 48px;
+						@include all.size($w: 4.5rem, $h: 4.5rem);
 					}
 
 					.done-count {
-						display: flex;
-						align-items: center;
-						flex-direction: column;
+						@include all.fl($alit: center, $flexdir: column);
 
 						span {
-							font-size: 5rem;
-							font-weight: 500;
+							@include all.font-style($size: 5rem, $weight: 500);
 						}
 
 						p {
-							font-size: 2rem;
+							@include all.font-style($size: 2rem);
 						}
 					}
 				}
 			}
 
 			.middle-dashboard-row-container {
-				height: 33%;
+				@include all.size($h: 33%);
 
 				.middle-dashboard-row {
+					@include all.size($h: 80%);
+					@include all.fl($jc: center, $alit: center, $gap: 5rem);
 					background: white;
-					height: 80%;
 					border-radius: 3rem;
-					display: flex;
-					justify-content: center;
-					align-items: center;
-					gap: 5rem;
 					cursor: pointer;
 
 					&:hover {
@@ -177,47 +157,39 @@
 					}
 
 					.dashboard-priority {
-						width: 10%;
-						font-size: 1.5rem;
+						@include all.size($w: 8rem);
+						@include all.fl($alit: center);
+						@include all.font-style($size: 1.5rem);
 					}
 
 					hr {
-						width: 0.5rem;
-						height: 5rem;
+						@include all.size($w: 0.5rem, $h: 5rem);
 						background: grey;
 					}
 
 					.dashboard-date {
 
 						span {
-							font-size: 1.7rem;
-							font-family: 'Inter', sans-serif;
-							font-weight: bold;
+							@include all.font-style($size: 1.7rem, $weight: bold);
 						}
 
 						p {
-							font-size: 1.2rem;
-							margin-top: 0.3rem;
+							@include all.font-style($size: 1.2rem);
+							@include all.marpad($mar: 0.3rem 0 0 0);
 						}
 					}
 				}
 			}
 
 			.end-dashboard-row-container {
-				height: 33%;
-				display: flex;
-				flex-direction: row;
-				gap: 2rem;
+				@include all.size($h: 33%);
+				@include all.fl($gap: 2rem);
 
 				.end-dashboard-row {
-					width: 33%;
-					height: 80%;
+					@include all.size($h: 80%);
+					@include all.fl($alit: center, $jc: center, $flexdir: column);
 					background: white;
 					border-radius: 3rem;
-					display: flex;
-					justify-content: center;
-					align-items: center;
-					flex-direction: column;
 					cursor: pointer;
 
 					&:hover {
@@ -228,12 +200,11 @@
 					}
 
 					span {
-						font-size: 5rem;
-						font-weight: 500;
+						@include all.font-style($size: 5rem, $weight: 500);
 					}
 
 					p {
-						font-size: 2.5rem;
+						@include all.font-style($size: 2.5rem);
 						text-align: center;
 					}
 				}
@@ -241,26 +212,21 @@
 		}
 
 		.greed-user {
-			height: 100%;
-			width: 50%;
-			display: flex;
-			justify-content: center;
-			align-items: start;
-			padding-left: 10rem;
-			flex-direction: column;
+			@include all.size($w: 40dvw);
+			@include all.fl($jc: center, $alit: start, $flexdir: column);
+			@include all.marpad($pad: 0 0 0 10rem);
 
 			@media(max-width: 1100px) {
 				display: none;
 			}
 
 			h1 {
-				font-family: 'Inter', sans-serif;
+				@include all.font-style($size: 6rem);
 				color: #29abe3;
 			}
 
 			h2 {
-				font-size: 2.8rem;
-				font-weight: 100;
+				@include all.font-style($size: 2.8rem, $weight: 100);
 			}
 		}
 	}
