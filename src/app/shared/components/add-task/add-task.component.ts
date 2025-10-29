@@ -1,4 +1,4 @@
-import { Component, inject, input, InputSignal, OnDestroy, output, OutputEmitterRef } from '@angular/core';
+import { ChangeDetectorRef, Component, inject, input, InputSignal, OnDestroy, output, OutputEmitterRef } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { FirebaseDBService } from '../../services/firebase-db.service';
 import { Priority } from '../../enums/priority.enum';
@@ -6,7 +6,7 @@ import { Task } from '../../classes/task';
 import { CommonModule } from '@angular/common';
 import { PriorityButtonsComponent } from "../priority-buttons/priority-buttons.component";
 import { Category } from '../../enums/category.enum';
-import { query, Unsubscribe, where, Query, onSnapshot, Timestamp } from '@angular/fire/firestore';
+import { query, Unsubscribe, where, Query, onSnapshot, Timestamp, Firestore, collection, CollectionReference, addDoc, updateDoc } from '@angular/fire/firestore';
 import { Contact } from '../../classes/contact';
 import { DatePickerComponent } from "../date-picker/date-picker.component";
 import { AssignContactsComponent } from "../assign-contacts/assign-contacts.component";
@@ -28,7 +28,9 @@ export class AddtaskComponent implements OnDestroy {
   // #region properties
 
   fireDB: FirebaseDBService = inject(FirebaseDBService);
+  fs: Firestore = inject(Firestore);
   tms: ToastMsgService = inject(ToastMsgService);
+  cdr: ChangeDetectorRef = inject(ChangeDetectorRef);
   Priority = Priority;
   Category = Category;
 
@@ -73,7 +75,7 @@ export class AddtaskComponent implements OnDestroy {
    */
   async submitForm(e: SubmitEvent) {
     if(this.currentTask().id == '') {
-      await this.fireDB.taskAddToDB('tasks', this.currentTask());
+      await this.addTask();
       this.clear();
       this.tms.add('Task was created', 3000, 'success');
     } else {
@@ -82,6 +84,28 @@ export class AddtaskComponent implements OnDestroy {
     this.closeModal();
   }
   
+  /** Adds a task into Database. */
+  private async addTask(): Promise<void> {
+    const refTask: CollectionReference = collection(this.fs, 'tasks');
+    const taskDocRef = await addDoc(refTask, this.currentTask().toJSON());
+    await updateDoc(taskDocRef, {id: taskDocRef.id});
+    for (let i = 0; i < this.currentTask().subtasks.length; i++) {
+      this.currentTask().subtasks[i].taskId = taskDocRef.id;
+      await this.addSubtask(this.currentTask().subtasks[i]);
+    }
+    this.cdr.detectChanges();
+  }
+  
+  /**
+   * Adds Subtask in Database.
+   * @param subtask - Instance of Subtask.
+   */
+  private async addSubtask(subtask: SubTask): Promise<void> {
+    const refSubtask: CollectionReference = collection(this.fs, 'subtasks');
+    const subtaskDocRef = await addDoc(refSubtask, subtask.toJSON());
+    await updateDoc(subtaskDocRef, {id: subtaskDocRef.id});
+  }
+
   /**
    * Updates existing task in DB
    */
