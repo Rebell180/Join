@@ -113,16 +113,29 @@
 					background: white;
 					border-radius: 3rem;
 					cursor: pointer;
+					position: relative;
+
+					img {
+						@include all.size($w: 4.5rem, $h: 4.5rem);
+					}
+
+					img.hover {
+						display: none;
+					}
 
 					&:hover {
 						background: #2a3647;
 						scale: 1.1;
 						transition: all 0.8s;
 						color: white;
-					}
 
-					img {
-						@include all.size($w: 4.5rem, $h: 4.5rem);
+						img.default {
+							display: none;
+						}
+
+						img.hover {
+							display: inline;
+						}
 					}
 
 					.done-count {
@@ -139,95 +152,96 @@
 				}
 			}
 
-			.middle-dashboard-row-container {
-				@include all.size($h: 33%);
+		}
 
-				.middle-dashboard-row {
-					@include all.size($h: 80%);
-					@include all.fl($jc: center, $alit: center, $gap: 5rem);
-					background: white;
-					border-radius: 3rem;
-					cursor: pointer;
+		.middle-dashboard-row-container {
+			@include all.size($h: 33%);
 
-					&:hover {
-						background: #2a3647;
-						scale: 1.1;
-						transition: all 0.8s;
-						color: white;
-					}
+			.middle-dashboard-row {
+				@include all.size($h: 80%);
+				@include all.fl($jc: center, $alit: center, $gap: 5rem);
+				background: white;
+				border-radius: 3rem;
+				cursor: pointer;
 
-					.dashboard-priority {
-						@include all.size($w: 8rem);
-						@include all.fl($alit: center);
-						@include all.font-style($size: 1.5rem);
-					}
-
-					hr {
-						@include all.size($w: 0.5rem, $h: 5rem);
-						background: grey;
-					}
-
-					.dashboard-date {
-
-						span {
-							@include all.font-style($size: 1.7rem, $weight: bold);
-						}
-
-						p {
-							@include all.font-style($size: 1.2rem);
-							@include all.marpad($mar: 0.3rem 0 0 0);
-						}
-					}
+				&:hover {
+					background: #2a3647;
+					scale: 1.1;
+					transition: all 0.8s;
+					color: white;
 				}
-			}
 
-			.end-dashboard-row-container {
-				@include all.size($h: 33%);
-				@include all.fl($gap: 2rem);
+				.dashboard-priority {
+					@include all.size($w: 8rem);
+					@include all.fl($alit: center);
+					@include all.font-style($size: 1.5rem);
+				}
 
-				.end-dashboard-row {
-					@include all.size($h: 80%);
-					@include all.fl($alit: center, $jc: center, $flexdir: column);
-					background: white;
-					border-radius: 3rem;
-					cursor: pointer;
+				hr {
+					@include all.size($w: 0.5rem, $h: 5rem);
+					background: grey;
+				}
 
-					&:hover {
-						background: #2a3647;
-						scale: 1.1;
-						transition: all 0.8s;
-						color: white;
-					}
+				.dashboard-date {
 
 					span {
-						@include all.font-style($size: 5rem, $weight: 500);
+						@include all.font-style($size: 1.7rem, $weight: bold);
 					}
 
 					p {
-						@include all.font-style($size: 2.5rem);
-						text-align: center;
+						@include all.font-style($size: 1.2rem);
+						@include all.marpad($mar: 0.3rem 0 0 0);
 					}
 				}
 			}
 		}
 
-		.greed-user {
-			@include all.size($w: 40dvw);
-			@include all.fl($jc: center, $alit: start, $flexdir: column);
-			@include all.marpad($pad: 0 0 0 10rem);
+		.end-dashboard-row-container {
+			@include all.size($h: 33%);
+			@include all.fl($gap: 2rem);
 
-			@media(max-width: 1100px) {
-				display: none;
-			}
+			.end-dashboard-row {
+				@include all.size($h: 80%);
+				@include all.fl($alit: center, $jc: center, $flexdir: column);
+				background: white;
+				border-radius: 3rem;
+				cursor: pointer;
 
-			h1 {
-				@include all.font-style($size: 6rem);
-				color: #29abe3;
-			}
+				&:hover {
+					background: #2a3647;
+					scale: 1.1;
+					transition: all 0.8s;
+					color: white;
+				}
 
-			h2 {
-				@include all.font-style($size: 2.8rem, $weight: 100);
+				span {
+					@include all.font-style($size: 5rem, $weight: 500);
+				}
+
+				p {
+					@include all.font-style($size: 2.5rem);
+					text-align: center;
+				}
 			}
+		}
+	}
+
+	.greed-user {
+		@include all.size($w: 40dvw);
+		@include all.fl($jc: center, $alit: start, $flexdir: column);
+		@include all.marpad($pad: 0 0 0 10rem);
+
+		@media(max-width: 1100px) {
+			display: none;
+		}
+
+		h1 {
+			@include all.font-style($size: 6rem);
+			color: #29abe3;
+		}
+
+		h2 {
+			@include all.font-style($size: 2.8rem, $weight: 100);
 		}
 	}
 }

@@ -75,10 +75,6 @@ b {
                     width: 90%;
                 }
 
-                @include all.mobile {
-                    width: 85dvw;
-                }
-
                 #add-task-info-description {
                     @include all.scrollbar();
                     height: 14dvh;
@@ -106,10 +102,6 @@ b {
                 @include all.notebook {
                     width: 90%;
                     margin: 2rem 0 5rem 0;
-                }
-
-                @include all.mobile {
-                    width: 85dvw;
                 }
 
                 .add-task-assigned-to {

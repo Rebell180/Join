@@ -219,16 +219,19 @@ export class FirebaseDBService {
    * @param collectionName name of collection in database.
    * @param doc task to delete in database.
    */
+
   async deleteTaskInDB(collectionName: string, doc: Task) {
     if(doc.hasSubtasks) {
-      doc.subtasks.forEach(async (subTask) => {
-        await this.deleteInDB('subtasks', subTask);
-      })
+      // hier verwende ich jetzt Promise.all und map, um auf alle asynchronen Löschvorgänge zu warten.
+      const subtaskDeletions = doc.subtasks.map(subTask => 
+          this.deleteInDB('subtasks', subTask)
+      );
+      await Promise.all(subtaskDeletions); // hier warte ich bis alle Subtasks gelöscht sind
     }
+    
     await this.deleteInDB(collectionName, doc);
     this.tms.add('Deleting Task successfully', 3000, 'success');
   }
-
   // #endregion CRUD
 
   // #region contact helper

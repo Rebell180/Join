@@ -39,7 +39,6 @@
     #add-task-modal-content {
         @include all.size();
         @include all.marpad($pad: 2rem);
-        // background: white;
     }
     
 }
