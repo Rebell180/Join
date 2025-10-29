@@ -6,8 +6,8 @@
         <div class="profile-container">
             <div class="profile-img" (click)="toggleMenu()"><span>SM</span></div>
 
-            <div class="dropdown" *ngIf="isMenuVisible">
-                <a class="help-mobile" routerLink="/help"  (click)="modalService.openHelpModal()">Help</a>
+            <div class="dropdown" *ngIf="isMenuVisible" (click)="$event.stopPropagation()">
+                <a class="help-mobile" (click)="openHelpFromMenu()">Help</a>
                 <a (click)="openPrivacy()">Privacy Policy</a>
                 <a (click)="openLegal()">Legal Notice</a>
                 <a (click)="logout()">Log out</a>
