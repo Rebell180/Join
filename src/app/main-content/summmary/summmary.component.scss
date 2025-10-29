@@ -88,15 +88,15 @@
 	.dashboard-main-container {
 		@include all.fl($alit: center);
 		@include all.size($w: 70dvw);
-		@include all.marpad($pad: 0 3rem);
+		@include all.marpad($pad: 3rem);
 
 		@media(max-width: 1100px) {
-			@include all.size($w: 50dvw);
+			@include all.size($w: 60dvw);
 			@include all.marpad($pad: 0);
 		}
 
 		@include all.tablet {
-			@include all.size($h: 55dvw);
+			@include all.size($h: 80%);
 		}
 
 		.dashboard {
