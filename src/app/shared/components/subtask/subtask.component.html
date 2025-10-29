@@ -29,9 +29,9 @@
                 <div class="li-wrapper" (dblclick)="selectEditInput(i)">
                     <li class="regular">{{ subtask.name }}
                         <div class="control-btns edit-ctrl">
-                            <button (click)="selectEditInput(i)"><img class="edit-icon" src="/assets/Icons/taskBoard/edit.png" alt="edit Subtask"></button>
+                            <button type="button" (click)="selectEditInput(i)"><img class="edit-icon" src="/assets/Icons/taskBoard/edit.png" alt="edit Subtask"></button>
                             <hr class="btn-sep">
-                            <button (click)="deleteSub(i)"><img class="delete-icon" src="/assets/Icons/taskBoard/delete.png" alt="delete Subtask"></button>
+                            <button type="button" (click)="deleteSub(i)"><img class="delete-icon" src="/assets/Icons/taskBoard/delete.png" alt="delete Subtask"></button>
                         </div>
                     </li>
                 </div>

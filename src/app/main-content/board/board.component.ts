@@ -62,7 +62,7 @@ export class BoardComponent implements  OnDestroy, OnInit {
     this.unsubTasks = this.subscribeTasks();
     setTimeout(() => {
       this.cdr.detectChanges();
-    }, 500);
+    }, 1000);
   }
 
   ngOnDestroy(): void {
