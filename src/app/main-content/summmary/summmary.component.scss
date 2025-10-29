@@ -87,16 +87,19 @@
 
 	.dashboard-main-container {
 		@include all.fl($alit: center);
-		@include all.size($w: 70dvw);
-		@include all.marpad($pad: 3rem);
+		@include all.size($w: 90%);
 
-		@media(max-width: 1100px) {
-			@include all.size($w: 60dvw);
+		@media(max-width: 1280px) {
+			@include all.size($w: 70dvw);
 			@include all.marpad($pad: 0);
 		}
 
-		@include all.tablet {
+		@include all.notebook {
 			@include all.size($h: 80%);
+		}
+
+		@include all.mobile {
+			@include all.size($h: 70%);
 		}
 
 		.dashboard {
@@ -111,7 +114,7 @@
 					@include all.size($h: 80%);
 					@include all.fl($jc: center, $alit: center, $gap: 3rem);
 					background: white;
-					border-radius: 3rem;
+					border-radius: 1.5rem;
 					cursor: pointer;
 					position: relative;
 
@@ -146,7 +149,7 @@
 						}
 
 						p {
-							@include all.font-style($size: 2rem);
+							@include all.font-style($size: 1.8rem);
 						}
 					}
 				}
@@ -161,8 +164,13 @@
 				@include all.size($h: 80%);
 				@include all.fl($jc: center, $alit: center, $gap: 5rem);
 				background: white;
-				border-radius: 3rem;
+				border-radius: 1.5rem;
 				cursor: pointer;
+				padding: 1rem;
+
+				@include all.mobile {
+					@include all.fl($jc: center, $alit: center, $gap: 0.8rem);
+				}
 
 				&:hover {
 					background: #2a3647;
@@ -172,9 +180,14 @@
 				}
 
 				.dashboard-priority {
-					@include all.size($w: 8rem);
-					@include all.fl($alit: center);
+					@include all.size();
+					@include all.fl($alit: center, $jc: end);
 					@include all.font-style($size: 1.5rem);
+
+					img {
+						@include all.size($w: 4.5rem, $h: 4.5rem);
+						margin-right: 0.8rem;
+					}
 				}
 
 				hr {
@@ -183,6 +196,8 @@
 				}
 
 				.dashboard-date {
+					@include all.size();
+					@include all.fl($flexdir: column, $alit: start, $jc: center);
 
 					span {
 						@include all.font-style($size: 1.7rem, $weight: bold);
@@ -201,10 +216,10 @@
 			@include all.fl($gap: 2rem);
 
 			.end-dashboard-row {
-				@include all.size($h: 80%);
+				@include all.size($w: 100%, $h: 80%);
 				@include all.fl($alit: center, $jc: center, $flexdir: column);
 				background: white;
-				border-radius: 3rem;
+				border-radius: 1.5rem;
 				cursor: pointer;
 
 				&:hover {
@@ -219,15 +234,19 @@
 				}
 
 				p {
-					@include all.font-style($size: 2.5rem);
+					@include all.font-style($size: 1.8rem);
 					text-align: center;
+
+					@include all.mobile {
+						@include all.font-style($size: 1.5rem);
+					}
 				}
 			}
 		}
 	}
 
 	.greed-user {
-		@include all.size($w: 40dvw);
+		@include all.size();
 		@include all.fl($jc: center, $alit: start, $flexdir: column);
 		@include all.marpad($pad: 0 0 0 10rem);
 
