@@ -3,10 +3,10 @@
     <input type="text" id="add-subtask-input" name="add-subtask-input" placeholder="Add new Subtask" [(ngModel)]="newSubtask.name">
     <div class="control-btns add-ctrl">
         <input type="reset" id="add-reset">
-        <img class="close-icon" src="/assets/Icons/taskBoard/close.png" id="reset-icon"
+        <img class="close-icon" src="assets/Icons/taskBoard/close.png" id="reset-icon"
             onclick="document.getElementById('add-reset').click()">
         <hr class="btn-sep">
-        <input type="image" class="check-icon" id="add-check-icon" src="/assets/Icons/taskBoard/check.png">
+        <input type="image" class="check-icon" id="add-check-icon" src="assets/Icons/taskBoard/check.png">
     </div>
 </form>
 @if (subtasks() && subtasks().length > 0) {
@@ -19,9 +19,9 @@
                     <form id="edit-subtask-form" (submit)="changeName($event, i)">
                         <input #editsub type="text" id="edit-subtask-input" name="subtask-name" placeholder="current Subtask" [(ngModel)]="subtask.name">
                         <div class="control-btns edit-ctrl">
-                            <button type="button" (click)="deleteSub(i)"><img class="delete-icon" src="/assets/Icons/taskBoard/delete.png"></button>
+                            <button type="button" (click)="deleteSub(i)"><img class="delete-icon" src="assets/Icons/taskBoard/delete.png"></button>
                             <hr class="btn-sep">
-                            <input type="image" class="check-icon" src="/assets/Icons/taskBoard/check.png">
+                            <input type="image" class="check-icon" src="assets/Icons/taskBoard/check.png">
                         </div>
                     </form>
                 </li>
@@ -29,9 +29,9 @@
                 <div class="li-wrapper" (dblclick)="selectEditInput(i)">
                     <li class="regular">{{ subtask.name }}
                         <div class="control-btns edit-ctrl">
-                            <button type="button" (click)="selectEditInput(i)"><img class="edit-icon" src="/assets/Icons/taskBoard/edit.png" alt="edit Subtask"></button>
+                            <button type="button" (click)="selectEditInput(i)"><img class="edit-icon" src="assets/Icons/taskBoard/edit.png" alt="edit Subtask"></button>
                             <hr class="btn-sep">
-                            <button type="button" (click)="deleteSub(i)"><img class="delete-icon" src="/assets/Icons/taskBoard/delete.png" alt="delete Subtask"></button>
+                            <button type="button" (click)="deleteSub(i)"><img class="delete-icon" src="assets/Icons/taskBoard/delete.png" alt="delete Subtask"></button>
                         </div>
                     </li>
                 </div>

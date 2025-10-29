@@ -1,4 +1,4 @@
-import { Component, inject, input, InputSignal,} from '@angular/core';
+import { Component, inject, input, InputSignal, } from '@angular/core';
 import { Contact } from './../../../shared/classes/contact';
 import { ContactIconComponent } from '../../../shared/components/contact-icon/contact-icon.component';
 import { CommonModule } from '@angular/common';
@@ -48,6 +48,20 @@ export class ContactDetailComponent {
     this.fireDB.deleteInDB('contacts', doc);
     this.fireDB.setCurrentContact(new Contact());
     this.tms.add('Contact deleted', 3000, 'success');
+  }
+
+  closeMenu(): void {
+    this.isMenuVisible = false;
+  }
+
+  editContact(contact: Contact): void {
+    this.modalService.openAddContactModal('edit', contact);
+    this.closeMenu();
+  }
+
+  deleteContactAndClose(contact: Contact): void {
+    this.deleteContact(contact);
+    this.closeMenu();
   }
 
   // #endregion methods

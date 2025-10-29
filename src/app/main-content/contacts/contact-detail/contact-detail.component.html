@@ -5,12 +5,13 @@
         <h2>Better with a team</h2>
         <hr id="bottom-line" />
     </div>
-    <button class="contact-detail-back" (click)="unselectContact()"><img src="assets/Icons/contact/arrow-left-line.png" alt=""></button>
+    <button class="contact-detail-back" (click)="unselectContact()"><img src="assets/Icons/contact/arrow-left-line.png"
+            alt=""></button>
 </div>
 
 @if (fireDB.currentContact$ | async; as contact ) {
 @if(contact.id != '') {
-    
+
 <div class="contact-info-container">
     <div class="contact-detail-header-row">
         <app-contact-icon class="contact-icon {{ contact.iconColor }}" [contact]="contact"></app-contact-icon>
@@ -29,7 +30,7 @@
             </div>
         </div>
     </div>
-    
+
 
     <h2>Contact Information</h2>
 
@@ -48,11 +49,11 @@
     </button>
 </div>
 <div class="popup-menu" *ngIf="isMenuVisible">
-    <div class="menuItem" (click)="modalService.openAddContactModal('edit', contact)">
+    <div class="menuItem" (click)="editContact(contact)">
         <img src="assets/Icons/taskBoard/edit.png" alt="Edit Icon" />
         <span>Edit</span>
     </div>
-    <div class="menuItem deleteItem" (click)="deleteContact(contact)">
+    <div class="menuItem deleteItem" (click)="deleteContactAndClose(contact)">
         <img src="assets/Icons/taskBoard/delete.png" alt="Delete Icon" />
         <span>Delete</span>
     </div>
