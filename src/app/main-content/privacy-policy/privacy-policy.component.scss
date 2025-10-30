@@ -30,7 +30,11 @@
             }
 
             .privacy-policy-list {
-                border: 2px solid red;
+                display: block;
+                list-style: decimal;
+                padding-left: 3rem;
+                margin-bottom: 4rem;
+                list-style: decimal;
             }
 
             h2 {
