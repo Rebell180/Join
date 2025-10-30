@@ -1,8 +1,8 @@
 import { Component, inject, output, OutputEmitterRef } from '@angular/core';
 import { SectionType } from '../../shared/enums/section-type';
 import { CommonModule } from '@angular/common';
-import { NavItemComponent } from './nav-item/nav-item.component';
 import { ModalService } from '../../shared/services/modal.service';
+import { NavItemComponent } from '../../shared/components/nav-item/nav-item.component';
 
 
 export interface NavItemData {

@@ -5,10 +5,8 @@ import { ContactsComponent } from './contacts/contacts.component';
 import { SectionType } from '../shared/enums/section-type';
 import { BoardComponent } from './board/board.component';
 import { AddTaskContainerComponent } from "./add-task-container/add-task-container.component";
-import { PrivacyPolicyComponent } from '../shared/components/privacy-policy/privacy-policy.component';
-import { LegalNoticeComponent } from '../shared/components/legal-notice/legal-notice.component';
-import { SummmaryComponent } from './summmary/summmary.component';
-
+import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
+import { LegalNoticeComponent } from './legal-notice/legal-notice.component';
 
 @Component({
   selector: 'app-main-content',

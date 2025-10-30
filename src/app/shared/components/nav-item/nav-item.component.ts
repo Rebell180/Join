@@ -1,5 +1,5 @@
 import { Component, input } from '@angular/core';
-import { NavItemData } from '../aside.component';
+import { NavItemData } from '../../../main-content/aside/aside.component';
 
 @Component({
   selector: '[nav-item]',

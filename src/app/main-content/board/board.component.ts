@@ -1,5 +1,4 @@
 import { ChangeDetectorRef, Component, inject, OnDestroy, OnInit } from '@angular/core';
-import { SearchTaskComponent } from './search-task/search-task.component';
 import { Task } from '../../shared/classes/task';
 import { onSnapshot, Unsubscribe } from '@angular/fire/firestore';
 import { CommonModule } from '@angular/common';
@@ -14,6 +13,7 @@ import { TaskColumnItemComponent } from '../../shared/components/task-column-ite
 import { CdkDragDrop, DragDropModule, transferArrayItem }from '@angular/cdk/drag-drop';
 import { FirebaseDBService } from '../../shared/services/firebase-db.service';
 import { ToastMsgService } from '../../shared/services/toast-msg.service';
+import { SearchTaskComponent } from '../../shared/components/search-task/search-task.component';
 
 @Component({
   selector: 'section[board]',
