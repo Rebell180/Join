@@ -38,6 +38,9 @@ export class DatePickerComponent {
 
   protected years = Array.from({ length: 50 }, (_, i) => 2000 + i);
 
+  /** Warnmeldung */
+  protected warningMessage = signal<string | null>(null);
+
   /** Computed Label für Inputfeld */
   protected inputValue = computed(() => {
     const d = this.selectedTimestamp().toDate();
@@ -88,6 +91,12 @@ export class DatePickerComponent {
 
   /** Auswahl eines Tages */
   selectDate(day: { date: Timestamp; isCurrentMonth: boolean }) {
+    if (this.isPastDate(day.date)) {
+      this.warningMessage.set('Past data cannot be selected.');
+      return;
+    }
+
+    this.warningMessage.set(null);
     this.dateSelected.emit(day.date);
     this.showCalendar.set(false);
   }
@@ -132,5 +141,14 @@ export class DatePickerComponent {
       d.getMonth() === sel.getMonth() &&
       d.getFullYear() === sel.getFullYear()
     );
+  }
+
+  /** Prüfen, ob Datum in der Vergangenheit liegt */
+  protected isPastDate(ts: Timestamp): boolean {
+    const now = new Date();
+    const date = ts.toDate();
+    now.setHours(0, 0, 0, 0);
+    date.setHours(0, 0, 0, 0);
+    return date < now;
   }
 }
