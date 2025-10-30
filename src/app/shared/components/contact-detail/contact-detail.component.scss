@@ -1,16 +1,15 @@
 @use "./../../../../../public/styles/all_styles.scss" as all;
 
 :host {
-    //@include all.size();
-
+    
     // #region detail-header
     .contact-detail-header {
         @include all.fl($jc: space-between, $alit: center);
-        //@include all.size($h: 8rem);
+        @include all.size($h: 8rem);
 
         @include all.notebook {
             @include all.fl($jc: space-between, $alit: start);
-            //@include all.size($w: 30dvw, $h: 12rem);
+            @include all.size($w: 30dvw, $h: 12rem);
         }
 
         .header-info {

@@ -2,46 +2,48 @@
 
 :host {
     @include all.fl();
-    //@include all.size();
     .contact-list {
-        //@include all.size($w: 37.5rem, $minW: 37.5rem, $maxW:37.5rem, $h: 90dvh);
-        @include all.marpad ($pad: 2rem 0 0 3rem);
+        @include all.size($w: 37.5rem, $h: 90dvh);
+        @include all.marpad ($pad: 2rem 1.6rem 1rem 3rem);
 
         @include all.notebook {
-            //@include all.size($h: 90dvh);
+            @include all.size($h: 90dvh);
         }
 
         @include all.tablet {
-            //@include all.size($minW: 37.5rem, $h: 80dvh);
+            @include all.size($h: 80dvh);
+        }
+
+        @include all.mobile {
+            width: 100%;
         }
 
         @media(max-width: 376px) {
-            //@include all.size($w: 100dvw, $h: 80dvh);
+            @include all.size($w: 100dvw, $h: 80dvh);
         }
     }
 
     .contact-detail {
-        //@include all.size($h: 90dvh);
+        @include all.size($h: 90dvh);
         @include all.marpad($pad: 8rem 0 0 5rem);
         
         @include all.notebook {
-            //@include all.size($h: 90dvh);
-            z-index: 2;
+            @include all.size($h: 90dvh);
+            // z-index: 2;
         }
         
         @include all.tablet {
-            //@include all.size($h: 80dvh);
+            @include all.size($h: 80dvh);
         }
 
         @media(max-width: 425px) {
-            //@include all.size($h: 80dvh);
             @include all.marpad($pad: 6rem 0 0 3rem);
         }
     }
 }
 
 app-toast {
-    //@include all.size($w: 100%, $h: 100%);
+    @include all.size($w: 100%, $h: 100%);
     position: absolute;
     z-index: -2;
     bottom: 0;
