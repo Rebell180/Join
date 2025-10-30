@@ -2,7 +2,6 @@
 @forward '../../../../../../public/styles/component-styles';
 
 .modal-overlay {
-    border: 2px solid red;
     position: fixed;
     inset: 0;
     background: rgba(0, 0, 0, 0.5);
@@ -13,7 +12,6 @@
 }
 
 .add-task-modal-container {
-    border: 2px solid red;
     @include all.size($w: 90dvw, $maxW: 120rem, $h: 80dvh);
     @include all.fl($jc: center, $alit: center);
     background-color: white;
