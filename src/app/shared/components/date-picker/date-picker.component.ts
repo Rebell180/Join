@@ -92,7 +92,8 @@ export class DatePickerComponent {
   /** Auswahl eines Tages */
   selectDate(day: { date: Timestamp; isCurrentMonth: boolean }) {
     if (this.isPastDate(day.date)) {
-      this.warningMessage.set('Past data cannot be selected.');
+      this.warningMessage.set('cannot set date in past.');
+      this.showCalendar.set(false);
       return;
     }
 
