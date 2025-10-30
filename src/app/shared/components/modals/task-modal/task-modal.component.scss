@@ -155,16 +155,19 @@
 		@include all.fl($flexdir: column);
 		@include all.marpad($mar: 2rem 0 0 0);
 
-		.task-modal-input {
-			// @include all.limiter();
-			@include all.size($w: 100%, $h: 2rem);
-			@include all.marpad($mar: 0.5rem 0 0 1rem);
-			@include all.fl($alit: center, $gap: 1rem);
-			@include all.font-style($size: 1.7rem);
+		.task-modal-subtask-container {
+			@include all.size();
+			@include all.marpad($pad: 1rem);
+			@include all.fl($alit: center, $flexdir: column, $gap: 1rem);
 
-			input {
-				// @include all.limiter();
-				@include all.fl($alit: center);
+			.task-modal-input {
+				@include all.size($w: 100%, $h: 2rem);
+				@include all.fl($alit: center, $gap: 1rem);
+				@include all.font-style($size: 1.7rem);
+
+				input {
+					@include all.fl($alit: center);
+				}
 			}
 		}
 	}
@@ -186,11 +189,12 @@
 		}
 	}
 
-	app-add-task {
-		@include all.size($h: auto);
+	h3 {
+		@include all.font-style($size: 1.8rem, $weight: 300);
+		color: #42526e;
 	}
 
-	h3 {
-		@include all.font-style($size: 1.5rem, $weight: 300);
+	app-add-task {
+		@include all.size($h: auto);
 	}
 }

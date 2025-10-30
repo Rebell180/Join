@@ -46,12 +46,16 @@
 		</div>
 		<div class="task-modal-subtasks">
 			<h3>Subtasks:</h3>
-			@for (subtask of task().subtasks; track subtask.id) {
-			<div class="task-modal-input">
-				<input type="checkbox" [checked]="subtask.finished" (change)="updateSubTaskStatus(subtask, $event)" />
-				<span [title]="subtask.name">{{ subtask.name.length > 30 ? (subtask.name | slice:0:30) + '...' : subtask.name }}</span>
+			<div class="task-modal-subtask-container">
+				@for (subtask of task().subtasks; track subtask.id) {
+				<div class="task-modal-input">
+					<input type="checkbox" [checked]="subtask.finished"
+						(change)="updateSubTaskStatus(subtask, $event)" />
+					<span [title]="subtask.name">{{ subtask.name.length > 30 ? (subtask.name | slice:0:30) + '...' :
+						subtask.name }}</span>
+				</div>
+				}
 			</div>
-			}
 		</div>
 
 		<div class="task-option-container">
