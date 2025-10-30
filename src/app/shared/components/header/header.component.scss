@@ -37,7 +37,7 @@
 
         .header-icon-container {
             @include all.fl($alit: center);
-            gap: 10px;
+            gap: 1rem;
 
             .help-icon {
                 cursor: pointer;
