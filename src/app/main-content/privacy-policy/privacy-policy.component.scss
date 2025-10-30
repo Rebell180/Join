@@ -9,6 +9,7 @@
     @include all.tablet {
         @include all.marpad($pad: 3rem 0.5rem 0 0.5rem);
         @include all.size($h: 80dvh);
+        overflow-x: hidden;
     }
 
     .privacy-policy-container {
