@@ -26,6 +26,11 @@
 
                 button {
                     margin-bottom: 2rem;
+                    display: none;
+
+                    @include all.tablet {
+                        display: flex;
+                    }
                 }
             }
 
