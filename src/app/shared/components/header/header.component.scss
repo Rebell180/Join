@@ -4,16 +4,20 @@
 // Mit :host kann man in Angular die gesamte Komponente stylen.
 :host {
     .small-header {
-        //@include all.size($h: 10dvh);
+        @include all.size($h: 10dvh);
         @include all.fl($jc: space-between, $alit: center);
-        @include all.marpad($pad: 0 3rem);
+        @include all.marpad($pad: 0 3% 0 8%);
         grid-area: header;
         background: white;
         box-shadow: 0 1px 6px -2px grey;
 
+        @include all.tablet {
+            @include all.marpad($pad: 1.5rem);
+        }
+
         .join-logo {
             display: none;
-            height: 5dvh;
+            height: 100%;
             object-fit: contain;
 
             @include all.tablet {
@@ -23,11 +27,8 @@
 
         h1 {
             width: 100%;
-            padding: 10rem;
-
-            @include all.notebook {
-                padding: 5rem;
-            }
+            font-size: 2.3rem;
+            font-weight: 200;
 
             @include all.tablet {
                 display: none;
@@ -60,25 +61,25 @@
                 border: 3px solid #1f2a3a;
                 cursor: pointer;
 
-                @include all.tablet {
-                    z-index: 20;
+                span {
+                    font-size: 2.5rem;
+                    font-weight: bold;
                 }
             }
 
             .dropdown {
                 @include all.absolute($top: 7.8rem, $right: 0);
                 @include all.marpad($pad: 1rem);
-                @include all.size($h: 13rem);
-                min-width: 15rem;
+                @include all.size($h: 15.5rem);
+                @include all.fl($jc: center, $alit: start, $flexdir: column, $gap: 0.5rem);
+                min-width: 14.5rem;
                 background-color: #1f2a3a;
-                border-radius: 8px 0 8px 8px;
+                border-radius: 15px 0 15px 15px;
                 box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-                overflow: hidden;
                 z-index: 10;
 
                 @include all.tablet {
-                    @include all.size($h: 12rem);
-                    min-width: 15rem;
+                    @include all.size();
                 }
 
                 .help-mobile {
@@ -90,15 +91,15 @@
                 }
 
                 a {
-                    @include all.marpad($pad: 1rem 1.6rem);
+                    @include all.marpad($pad: 1rem);
                     color: #ffffff;
                     text-decoration: none;
-                    display: block;
-                    cursor: pointer;
+                    width: 100%;
 
                     &:hover {
                         background-color: #2c3b52;
                         border-radius: 0.5rem;
+                        @include all.size();
                     }
                 }
             }
