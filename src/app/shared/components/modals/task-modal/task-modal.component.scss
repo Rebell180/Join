@@ -1,7 +1,7 @@
 @use './../../../../../../public/styles/all_styles.scss' as all;
 
 :host {
-	@include all.size();
+	//@include all.size();
 	@include all.fl($jc: center, $alit: center);
 	position: absolute;
 	top: 0;
@@ -17,39 +17,39 @@
 	}
 
 	.task-modal-detail-container {
-		@include all.size($w: 30%, $h: 80dvh);
+		//@include all.size($w: 30%, $h: 80dvh);
 		@include all.marpad($pad: 2rem);
 		background: rgb(254, 253, 253);
 		border-radius: 2rem;
 		box-shadow: 0 0 5px lightgrey;
-		@include all.font-style($family: ("InterRegular, sans-serif"));
+		//@include all.font-style($family: ("InterRegular, sans-serif"));
 
 		@media(max-width: 1300px) {
 			width: 40dvw;
 		}
 
 		@include all.notebook {
-			@include all.size($w: 50dvw, $h: 80dvh);
+			//@include all.size($w: 50dvw, $h: 80dvh);
 		}
 
 		@include all.tablet {
-			@include all.size($w: 60dvw, $h: 80dvh);
+			//@include all.size($w: 60dvw, $h: 80dvh);
 		}
 
 		@include all.mobile {
-			@include all.size($w: 40dvh, $h: 75dvh);
+			//@include all.size($w: 40dvh, $h: 75dvh);
 		}
 
 		.task-modal-header {
 			@include all.fl($jc: space-between);
 
 			h2 {
-				@include all.size($w: fit-content, $h: auto);
+				//@include all.size($w: fit-content, $h: auto);
 				@include all.marpad($mar: 0 0 2rem 0, $pad: 0.8rem);
 				@include all.fl($jc: center);
 				color: white;
 				border-radius: 1.2rem;
-				@include all.font-style($size: 1.8rem, $weight: lighter);
+				//@include all.font-style($size: 1.8rem, $weight: lighter);
 			}
 
 			.blue {
@@ -65,7 +65,7 @@
 			}
 
 			#task-modal-close-btn {
-				@include all.size($w: 1.6rem, $h: 1.6rem);
+				//@include all.size($w: 1.6rem, $h: 1.6rem);
 				@include all.absolute($top: 0, $right: 0);
 				position: absolute;
 				z-index: 2;
@@ -82,42 +82,42 @@
 		}
 
 		.title {
-			@include all.size($h: auto);
+			//@include all.size($h: auto);
 			@include all.limiter();
-			@include all.font-style($size: 4rem, $weight: bold);
+			//@include all.font-style($size: 4rem, $weight: bold);
 			white-space: wrap;
 		}
 
 		.description {
 			@include all.fl($alit: center);
-			@include all.size($h: auto);
+			//@include all.size($h: auto);
 			@include all.limiter();
 			@include all.marpad($mar: 1.5rem 0 0.6rem 0);
-			@include all.font-style($size: 1.7rem);
+			//@include all.font-style($size: 1.7rem);
 			white-space: wrap;
 
 		}
 
 		.task-modal-dueDate-container {
 			@include all.fl($alit: center, $gap: 2rem);
-			@include all.size($h: 4dvh);
-			@include all.font-style($size: 1.5rem);
+			//@include all.size($h: 4dvh);
+			//@include all.font-style($size: 1.5rem);
 		}
 
 		.task-modal-priority-container {
 			@include all.fl($alit: center, $gap: 2rem);
-			@include all.size($h: 4dvh);
+			//@include all.size($h: 4dvh);
 
 			.task-modal-priority {
 				@include all.fl($alit: center, $jc: center, $gap: 1rem);
-				@include all.size($w: 30%, $h: 4dvh);
+				//@include all.size($w: 30%, $h: 4dvh);
 
 				p {
-					@include all.font-style($size: 1.5rem);
+					//@include all.font-style($size: 1.5rem);
 				}
 
 				img {
-					@include all.size($w: 2rem, $h: 1.2rem);
+					//@include all.size($w: 2rem, $h: 1.2rem);
 				}
 			}
 		}
@@ -126,7 +126,7 @@
 			@include all.marpad($mar: 0.8rem 0 0 0);
 
 			.task-modal-assigned {
-				@include all.size($h: 18.5dvh);
+				//@include all.size($h: 18.5dvh);
 				@include all.scrollbar();
 				overflow-y: auto;
 			}
@@ -139,7 +139,7 @@
 					@include all.fl($alit: center, $gap: 2rem);
 
 					.contact-icon {
-						@include all.size($w: 4.2rem, $minW: 4.2rem, $h: 4.2rem, $minH: 4.2rem);
+						//@include all.size($w: 4.2rem, $minW: 4.2rem, $h: 4.2rem, $minH: 4.2rem);
 					}
 
 					.contact-name {
@@ -151,19 +151,19 @@
 	}
 
 	.task-modal-subtasks {
-		@include all.size($h: 15dvh);
+		//@include all.size($h: 15dvh);
 		@include all.fl($flexdir: column);
 		@include all.marpad($mar: 2rem 0 0 0);
 
 		.task-modal-subtask-container {
-			@include all.size();
+			//@include all.size();
 			@include all.marpad($pad: 1rem);
 			@include all.fl($alit: center, $flexdir: column, $gap: 1rem);
 
 			.task-modal-input {
-				@include all.size($w: 100%, $h: 2rem);
+				//@include all.size($w: 100%, $h: 2rem);
 				@include all.fl($alit: center, $gap: 1rem);
-				@include all.font-style($size: 1.7rem);
+				//@include all.font-style($size: 1.7rem);
 
 				input {
 					@include all.fl($alit: center);
@@ -175,7 +175,7 @@
 	.task-option-container {
 		position: fixed;
 		bottom: 2rem;
-		@include all.size($w: 90%, $h: 3rem);
+		//@include all.size($w: 90%, $h: 3rem);
 		@include all.fl($jc: end, $gap: 1rem, $alit: center);
 		@include all.marpad($pad: 1rem);
 
@@ -184,17 +184,17 @@
 		}
 
 		hr {
-			@include all.size($w: 0.2rem, $h: 3rem);
+			//@include all.size($w: 0.2rem, $h: 3rem);
 			color: lightgrey
 		}
 	}
 
 	h3 {
-		@include all.font-style($size: 1.8rem, $weight: 300);
+		//@include all.font-style($size: 1.8rem, $weight: 300);
 		color: #42526e;
 	}
 
 	app-add-task {
-		@include all.size($h: auto);
+		//@include all.size($h: auto);
 	}
 }

@@ -8,7 +8,7 @@
 .toast {
 
     @include all.slightInFromRightAnimation();
-    @include all.size($w: 30rem, $h: 5rem);
+    //@include all.size($w: 30rem, $h: 5rem);
     @include all.borRad();
     @include all.fl($jc: center, $alit: center);
     z-index: 5;

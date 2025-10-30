@@ -20,7 +20,7 @@
 }
 
 .help-modal-container {
-    @include all.size($w: 90dvw, $maxW: 120rem, $h: 80dvh);
+    //@include all.size($w: 90dvw, $maxW: 120rem, $h: 80dvh);
     @include all.fl($flexdir: column, $jc: center, $alit: start, $gap: 1rem);
     background-color: white;
     border-radius: 16px;
@@ -34,34 +34,34 @@
     }
     
     @include all.tablet {
-        @include all.size($w: 90dvw, $maxW:90rem, $h: 80dvh);
+        //@include all.size($w: 90dvw, $maxW:90rem, $h: 80dvh);
         @include all.fl($flexdir: column, $jc: center, $alit: center);
         padding: 5rem 1.5rem;
     }
 
     @include all.mobile {
-        @include all.size($w: 90dvw, $maxW: 60rem, $h: 80dvh);
+        //@include all.size($w: 90dvw, $maxW: 60rem, $h: 80dvh);
         padding: 5rem 1rem;
     }
     
     .help-modal-content {
         @include all.fl($flexdir: column);
-        @include all.size($h: auto);
+        //@include all.size($h: auto);
         @include all.scrollbar();
         overflow-y: auto;
         
 
         .help-header {
-            @include all.size($h: auto);
+            //@include all.size($h: auto);
             margin-bottom: 4rem;
 
             h1{
-                @include all.font-style($size: 4.8rem);
+                //@include all.font-style($size: 4.8rem);
             }
         }
 
         .help-main-content {
-            @include all.size($h: auto);
+            //@include all.size($h: auto);
             padding-right: 4rem;
             
             h2 {

@@ -37,7 +37,7 @@ b {
 }
 
 .add-task-section {
-    @include all.size();
+    //@include all.size();
     @include all.marpad($pad: 3dvw);
 
     @include all.mobile {

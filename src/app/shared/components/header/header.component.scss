@@ -4,7 +4,7 @@
 // Mit :host kann man in Angular die gesamte Komponente stylen.
 :host {
     .small-header {
-        @include all.size($h: 10dvh);
+        //@include all.size($h: 10dvh);
         @include all.fl($jc: space-between, $alit: center);
         @include all.marpad($pad: 0 3rem);
         grid-area: header;
@@ -22,7 +22,7 @@
         }
 
         h1 {
-            @include all.font-style($size: 2rem);
+            // //@include all.font-style($size: 2rem);
             width: 100%;
             padding: 10rem;
 
@@ -54,8 +54,8 @@
             }
 
             .profile-img {
-                @include all.size($w: 6.5rem, $h: 6.5rem);
-                @include all.font-style($size: 2.3rem, $weight: 600);
+                //@include all.size($w: 6.5rem, $h: 6.5rem);
+                // //@include all.font-style($size: 2.3rem, $weight: 600);
                 @include all.fl($alit: center, $jc: center);
                 color: #29abe3;
                 border-radius: 50%;
@@ -70,7 +70,7 @@
             .dropdown {
                 @include all.absolute($top: 7.8rem, $right: 0);
                 @include all.marpad($pad: 1rem);
-                @include all.size($minW: 15rem, $h: 13rem);
+                //@include all.size($minW: 15rem, $h: 13rem);
                 background-color: #1f2a3a;
                 border-radius: 8px 0 8px 8px;
                 box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
@@ -78,8 +78,7 @@
                 z-index: 10;
 
                 @include all.tablet {
-                    @include all.size($minW: 15rem, $h: 17rem);
-                    z-index: 20;
+                    //@include all.size($minW: 15rem, $h: 17rem);
                 }
 
                 .help-mobile {
@@ -91,7 +90,7 @@
                 }
 
                 a {
-                    @include all.font-style($size: 1.4rem);
+                    // //@include all.font-style($size: 1.4rem);
                     @include all.marpad($pad: 1rem 1.6rem);
                     color: #ffffff;
                     text-decoration: none;

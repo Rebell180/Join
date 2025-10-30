@@ -1,14 +1,14 @@
 @use './../../../../public/styles/all_styles.scss' as all;
   
 :host {
-    @include all.size();
+    //@include all.size();
     @include all.fl($jc: center, $alit: center);
     
     #add-task-content{
-        @include all.size($w: 90%, $h: 90%);
+        //@include all.size($w: 90%, $h: 90%);
 
         @include all.tablet{
-            @include all.size($w: 90%, $h: 95%);
+            //@include all.size($w: 90%, $h: 95%);
         }
     }
 }

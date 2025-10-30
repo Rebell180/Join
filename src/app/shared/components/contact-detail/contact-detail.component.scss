@@ -1,11 +1,17 @@
 @use "./../../../../../public/styles/all_styles.scss" as all;
 
 :host {
-    
+    //@include all.size();
+
     // #region detail-header
     .contact-detail-header {
         @include all.fl($jc: space-between, $alit: center);
-        @include all.size($h: 8rem, $w: 100%);
+        //@include all.size($h: 8rem);
+
+        @include all.notebook {
+            @include all.fl($jc: space-between, $alit: start);
+            //@include all.size($w: 30dvw, $h: 12rem);
+        }
 
         .header-info {
             @include all.fl($alit: center, $gap: 2rem);
@@ -14,16 +20,21 @@
                 @include all.fl($flexdir: column, $gap: 1rem);
             }
 
-            h2 {
-                letter-spacing: 2px;
+            h1 {
+                //@include all.font-style($size: 6rem);
+
+                @include all.mobile {
+                    //@include all.font-style($size: 5rem, $weight: bold);
+                }
             }
 
-            @media (max-width: 455px) {
-                h1 {
-                    font-size: 3.2rem;
-                }
-                h2 {
-                    font-size: 1.8rem;
+            h2 {
+                //@include all.size($h: auto);
+                //@include all.font-style($size: 2.5rem);
+                letter-spacing: 2px;
+
+                @media(max-width: 425px) {
+                    //@include all.font-style($size: 1.8rem);
                 }
             }
 
@@ -33,7 +44,7 @@
 
             #middle-line {
                 display: block;
-                @include all.size($w: 3px, $h: 6rem);
+                //@include all.size($w: 1rem, $h: 6rem);
 
                 @media (max-width: 1200px) {
                     display: none;
@@ -42,7 +53,7 @@
 
             #bottom-line {
                 display: none;
-                @include all.size($w: 12rem, $h: 3px);
+                //@include all.size($w: 12rem, $h: 0.6rem);
 
                 @media (max-width: 1200px) {
                     display: flex;
@@ -52,7 +63,7 @@
 
         .contact-detail-back {
             display: none;
-            background: transparent;
+
             @include all.notebook {
                 @include all.marpad($mar: 0 2rem);
                 display: block;
@@ -66,25 +77,30 @@
     // #region contact-info
     .contact-info-container {
         @include all.slightInFromRightAnimation();
-        @include all.size($w: 80%, $h: 75%);
+        //@include all.size($w: 80%, $h: 75%);
         @include all.marpad($mar: 3rem 0 0);
 
         .contact-detail-header-row {
             @include all.fl($alit: center);
-            @include all.size($w: 100%);
-            
+            //@include all.size($h: auto);
+
             .contact-icon {
-                height: 12rem;
-                width: 12rem;
-                flex: 0 0 12rem;
-                font-size: 6rem;
+                //@include all.size($w: 12rem, $minW: 12rem, $h: 12rem, $minH: 12rem);
+                //@include all.font-style();
+
+                @media(max-width: 450px) {
+                    //@include all.size($w: 8rem, $minW: 8rem, $h: 8rem, $minH: 8rem);
+                }
             }
 
             .name-option-container {
-                @include all.fl($flexdir: column);
-                flex: 1;
-                @include all.size($w: 100%, $h: 100%);
+                //@include all.size($h: auto);
                 @include all.marpad($pad: 0 0 0 3rem);
+                @include all.fl($flexdir: column);
+
+                @include all.notebook {
+                    //@include all.size($w: 45dvw, $maxW: 50rem, $h: auto);
+                }
 
                 @include all.mobile {
                     @include all.marpad($pad: 0 0 0 2rem);
@@ -95,27 +111,18 @@
                 }
 
                 .name {
-                    display: -webkit-box;
-                    -webkit-line-clamp: 2;
-                    -webkit-box-orient: vertical;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                    white-space: normal;
-                    line-clamp: 2;
-                    max-height: 7rem;
-                    line-height: 3.5rem;
-                    margin-bottom: 2rem;
-                    
-                    font: 3.2rem 'InterBold', sans-serif;
+                    @include all.limiter();
+                    //@include all.size($h: 4rem);
+                    //@include all.font-style($size: 3.2rem, $weight: bold);
 
                     @include all.smart {
-                        @include all.size($h: 3dvh);
-                        font-size: 2.2rem;
+                        //@include all.size($h: 3dvh);
+                        //@include all.font-style($size: 2.2rem);
                     }
                 }
 
                 .option-container {
-                    @include all.size($h: 3rem);
+                    //@include all.size($h: 2.8rem);
                     @include all.fl($jc: start, $alit: center, $gap: 2rem);
 
                     @include all.tablet {
@@ -126,11 +133,11 @@
                         @include all.fl($alit: center, $gap: 0.7rem);
 
                         .delete-btn {
-                            @include all.size($w: 20px, $h: 20px);
+                            //@include all.size($w: 20px, $h: 20px);
                         }
 
                         img {
-                            @include all.size($w: 16px, $h: 16px);
+                            //@include all.size($w: 16px, $h: 16px);
                         }
 
                         &:hover {
@@ -143,19 +150,18 @@
 
         h2 {
             @include all.marpad($mar: 3rem 0);
-            font-size: 2.4rem;
+            //@include all.font-style($size: 2.4rem);
         }
 
         .emailPhone {
-            @include all.limiter();
 
             h3 {
                 @include all.marpad($mar: 1.5rem 0);
-                font-size: 2rem;
+                //@include all.font-style($size: 2rem);
             }
 
             a {
-                font-size: 2rem;
+                //@include all.font-style($size: 2rem);
                 color: #007bed;
             }
 
@@ -170,7 +176,7 @@
 
     .mobile-options-container {
         @include all.absolute($bottom: 0, $right: 1rem);
-        @include all.size($w: 5rem, $h: 5rem);
+        //@include all.size($w: 5rem, $h: 5rem);
         display: none;
         z-index: 1;
 
@@ -179,7 +185,7 @@
         }
 
         .option-btns {
-            @include all.size($w: 40px, $h: 40px);
+            //@include all.size($w: 40px, $h: 40px);
             @include all.fl($flexdir: column, $alit: center, $jc: center);
             background-color: #2c3e50;
             border: none;
@@ -190,7 +196,7 @@
         }
 
         .dot {
-            @include all.size($w: 4px, $h: 4px);
+            //@include all.size($w: 4px, $h: 4px);
             @include all.marpad($mar: 0.2rem 0);
             background-color: white;
             border-radius: 50%;
@@ -200,7 +206,7 @@
     .popup-menu {
         @include all.absolute($bottom: 5rem, $right: 5rem);
         @include all.marpad($pad: 0.4rem 0);
-        @include all.size($w: 11rem, $h: 8rem);
+        //@include all.size($w: 11rem, $h: 8rem);
         background-color: white;
         border-radius: 8px 8px 0 8px;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
@@ -208,6 +214,7 @@
         .menuItem {
             @include all.fl($alit: center);
             @include all.marpad($pad: 0.8rem 1.6rem);
+            //@include all.font-style($size: 1.6rem);
             cursor: pointer;
             color: #333;
 
@@ -216,7 +223,7 @@
             }
 
             img {
-                @include all.size($w: 18px, $h: 18px);
+                //@include all.size($w: 18px, $h: 18px);
                 @include all.marpad($pad: 0 0.1rem 0 0);
             }
         }

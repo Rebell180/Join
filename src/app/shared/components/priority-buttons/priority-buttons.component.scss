@@ -5,7 +5,7 @@
 }
 
 .add-task-priority-btn-container {
-    @include all.size();
+    //@include all.size();
     @include all.fl($jc: space-between, $gap: 1rem);
 
     @include all.mobile{
@@ -15,7 +15,7 @@
     
     .priority-btn {
         @include all.fl($jc: center, $alit: center, $gap: 1rem);
-        @include all.size($minW: 12rem, $h: 4rem);
+        //@include all.size($minW: 12rem, $h: 4rem);
         @include all.borRad($radius: 8px, $thick: 2px, $c: rgba(0, 0, 0, 0.1));
 
         &:hover {

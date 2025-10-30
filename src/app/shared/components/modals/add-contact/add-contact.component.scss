@@ -12,7 +12,7 @@
 }
 
 .add-contact-modal-container {
-    @include all.size($w: 90dvw, $maxW: 90rem, $h: 50rem);
+    //@include all.size($w: 90dvw, $maxW: 90rem, $h: 50rem);
     @include all.fl($jc: center, $alit: center);
     background-color: white;
     border-radius: 16px;
@@ -24,19 +24,19 @@
     }
 
     @include all.tablet {
-        @include all.size($w: 90dvw, $maxW:90rem, $h: 80dvh);
+        //@include all.size($w: 90dvw, $maxW:90rem, $h: 80dvh);
         @include all.fl($flexdir: column, $jc: center, $alit: center);
     }
 
     .contact-modal-header {
         @include all.fl($flexdir: column, $jc: center);
-        @include all.size($w: 40%);
+        //@include all.size($w: 40%);
         @include all.marpad($pad: 0 2rem);
         background-color: #2a3647;
         border-radius: 16px 0 0 16px;
 
         @include all.tablet {
-            @include all.size($h: 40%);
+            //@include all.size($h: 40%);
             border-radius: 16px;
         }
 
@@ -44,7 +44,7 @@
             display: none;
 
             button {
-                @include all.size($w: 4.8rem, $h: 4.8rem);
+                //@include all.size($w: 4.8rem, $h: 4.8rem);
                 color: white;
                 border: none;
                 background: transparent;
@@ -66,7 +66,7 @@
         }
 
         img {
-            @include all.size($w: 4rem, $h: 4rem);
+            //@include all.size($w: 4rem, $h: 4rem);
             margin-bottom: 2rem;
 
             @include all.tablet {
@@ -94,7 +94,7 @@
         }
 
         hr {
-            @include all.size($w: 6rem, $h: 0.3rem);
+            //@include all.size($w: 6rem, $h: 0.3rem);
             background: rgb(17, 148, 213);
             border: none
         }
@@ -102,17 +102,17 @@
     }
 
     .contact-modal-main {
-        @include all.size($w: 60%);
+        //@include all.size($w: 60%);
         @include all.fl($flexdir: column, $jc: center, $gap: 2dvw);
         padding-top: 1rem;
 
         @include all.tablet {
-            @include all.size($h: auto);
+            //@include all.size($h: auto);
             @include all.fl($alit: flex-start);
         }
 
         @include all.tablet {
-            @include all.size($h: 60%);
+            //@include all.size($h: 60%);
         }
 
         .line-close-btn {
@@ -134,12 +134,12 @@
         }
 
         .line-form {
-            @include all.size($h: auto);
+            //@include all.size($h: auto);
             @include all.fl($jc: space-between, $alit: center, $gap: 2rem);
             @include all.marpad($pad: 0 3rem);
 
             @include all.tablet {
-                @include all.size($h: auto);
+                //@include all.size($h: auto);
                 margin-top: 3rem;
                 @include all.fl($jc: center, $alit: center);
             }
@@ -147,7 +147,7 @@
             .single-icon {
                 @include all.tablet {
                     display: block; 
-                    @include all.size($w: 12rem, $minW: 12rem, $h: 12rem);
+                    //@include all.size($w: 12rem, $minW: 12rem, $h: 12rem);
                     @include all.absolute($top: 1rem, $left: 50%);
                     transform: translate(-50%, -100%);
                     border-radius: 50%;
@@ -157,11 +157,11 @@
             }
 
             .single-initial-icon {
-                @include all.size($w: 15rem, $h: 12rem);
+                //@include all.size($w: 15rem, $h: 12rem);
 
                 @include all.tablet {
                     border: 2px solid red;
-                    @include all.size($w: 10rem, $h: 10rem);
+                    //@include all.size($w: 10rem, $h: 10rem);
                     @include all.absolute($top: 0, $left: 50%);
                     transform: translate(-50%, -95%);
                     border-radius: 50%;
@@ -171,18 +171,18 @@
 
             form {
                 @include all.fl($flexdir: column, $jc: space-between, $alit: end);
-                @include all.size();
+                //@include all.size();
                 @include all.tablet {
                     margin-top: 2rem;
                 }
 
                 .form-field {
-                    @include all.size($h: auto);
+                    //@include all.size($h: auto);
                     @include all.fl($flexdir: column, $alit: end);
                     margin-bottom: 1.5rem;
 
                     .input-img-container {
-                        @include all.size($w: 100%, $h: 40px);
+                        //@include all.size($w: 100%, $h: 40px);
                         @include all.fl($jc: space-between, $alit: center);
                         padding: 0 10px;
                         border: 1px solid rgba(184, 184, 184);
@@ -190,7 +190,7 @@
                         border-radius: 5px;
 
                         input {
-                            @include all.size();
+                            //@include all.size();
                             outline: none;
 
                             &::placeholder {
@@ -199,14 +199,14 @@
                         }
 
                         img {
-                            @include all.size($w: 20px, $h: 20px);
+                            //@include all.size($w: 20px, $h: 20px);
                             margin: 0;
                             display: flex;
                         }
                     }
 
                     .errmsg {
-                        @include all.size($w: 100%, $h: 1rem);
+                        //@include all.size($w: 100%, $h: 1rem);
                         color: #c00000;
                         font-size: 1.2rem;
                         padding: 1px 16px;
@@ -218,7 +218,7 @@
                 }
 
                 .form-btn-container {
-                    @include all.size($h: 4rem);
+                    //@include all.size($h: 4rem);
                     @include all.fl($jc: start);
 
                     margin-top: 2rem;

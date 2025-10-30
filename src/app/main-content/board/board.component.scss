@@ -2,7 +2,7 @@
 @forward '../../../../public/styles/component-styles';
 
 :host {
-    @include all.size($w: 100%, $h: 85dvh);
+    //@include all.size($w: 100%, $h: 85dvh);
     padding: 5rem 1rem 1rem 1rem;
 
 
@@ -12,15 +12,15 @@
         padding: 2rem 2rem;
 
         h1 {
-            @include all.font-style($size: 48px);
+            //@include all.font-style($size: 48px);
 
             @include all.mobile{
-                @include all.font-style($size: 36px);
+                //@include all.font-style($size: 36px);
             }
         }
 
         .search-task {
-            @include all.size($w: 40%, $h: 4.8rem);
+            //@include all.size($w: 40%, $h: 4.8rem);
 
             @include all.mobile {
                 display: none;
@@ -28,14 +28,14 @@
         }
 
         .btn-set {
-            @include all.size($w: 25%, $h: 4.8rem);
+            //@include all.size($w: 25%, $h: 4.8rem);
 
             @include all.notebook {
                 #add-task-label {
                     display: none;
                 }
 
-                @include all.size($w: 4.8rem, $h: 4.8rem);
+                //@include all.size($w: 4.8rem, $h: 4.8rem);
             }
         }
     }
@@ -49,7 +49,7 @@
         @include all.mobile {
             display: flex;
             padding: 0 2rem;
-            @include all.size($h: 6rem);
+            //@include all.size($h: 6rem);
         }
     }
 
@@ -114,7 +114,7 @@
             main {
                 // width: 100%;
                 // height: 100%;
-                @include all.size();
+                //@include all.size();
                 @include all.fl($flexdir: column);
                 @include all.scrollbar();
                 overflow-y: auto;
@@ -126,13 +126,13 @@
                 }
 
                 .drag-content {
-                    @include all.size($maxW: 28rem, $minW: 20rem, $h: auto);
+                    //@include all.size($maxW: 28rem, $minW: 20rem, $h: auto);
                 }
 
                 .no-entry-container {
-                    @include all.size($maxW: 28rem, $minW: 20rem, $h: auto);
+                    //@include all.size($maxW: 28rem, $minW: 20rem, $h: auto);
                     @include all.borRad($c: rgba(0, 0, 0, 0.2), $radius: 16px, $thick: 2px, $design: dotted);
-                    @include all.font-style($size: 18px, $weight: 600);
+                    //@include all.font-style($size: 18px, $weight: 600);
                     @include all.marpad($pad: 1rem);
                     background: rgba(0, 0, 0, 0.1);
                     text-align: center;

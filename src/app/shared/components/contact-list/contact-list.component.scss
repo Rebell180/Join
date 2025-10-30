@@ -2,23 +2,22 @@
 @forward '../../../../../public/styles/component-styles';
 
 :host {
-    @include all.size($w: 100%, $h:100%);
+    //@include all.size($h: 90dvh);
     background: white;
     box-shadow: 5px 0 10px -5px grey;
 
     #add-contact-button {
-        @include all.size($w: 100%);
+        width: 91%;
         @include all.marpad ($mar: 1rem 0, $pad: 1rem 0);
-        z-index: 2;
+        z-index: 20;
+
         @include all.tablet {
-            @include all.size($w: 6.2rem, $h: 6.2rem);
+            //@include all.size($w: 6.2rem, $minW: 6.2rem, $h: 6.2rem, $minH: 6.2rem);
             border-radius: 50%;
             position: absolute;
             right: 2rem;
             bottom: 0;
-            @media (max-width: 422px) {
-                right: 3rem;
-            }
+                
             span {
                 display: none;
             }
@@ -32,18 +31,17 @@
     .contact-groups-container {
         overflow-y: auto;
         @include all.scrollbar();
-        @include all.size($w: 100%, $h: 74dvh);
+        //@include all.size($h: 100%);
 
         .contact-group-container {
             @include all.fl($flexdir: column);
-            margin-right: 1rem;
-            overflow-x: hidden;
+            //@include all.size($h: auto);
 
             .letter {
                 vertical-align: center;
                 @include all.marpad($mar: 2rem 0, $pad: 0 3rem);
                 cursor: default;
-                font-size: 2.4rem;
+                //@include all.font-style($size: 2.5rem, $weight: 100);
             }
 
             hr {
@@ -54,8 +52,8 @@
 
             .single-contact-container {
                 @include all.fl($alit: center, $jc: start, $gap: 25px);
-                @include all.size($w: 95%, $h: 78px);
-                @include all.marpad($pad: 0 2rem);
+                //@include all.size($w: 95%, $h: 78px);
+                @include all.marpad($pad: 0 1.75rem);
                 border-radius: 10px;
                 cursor: pointer;
 
@@ -63,29 +61,34 @@
                     background: rgba(219, 220, 220, 0.7);
                 }
 
-                app-contact-icon {
+                .icon-wrapper {
                     @include all.fl($jc: center, $alit: center);
-                    @include all.size($w: 4.2rem, $h: 4.2rem);
-                    font-size: 18px;
-                    flex-shrink: 0;
+                    //@include all.size($w: 4.2rem, $minW: 4.2rem, $h: 4.2rem, $minH: 4.2rem);
                 }
 
                 .contact-data {
                     @include all.fl($flexdir: column, $jc: center);
-                    @include all.size($w: 25rem, $h: 4.8rem);
-                    overflow-x: hidden;
+                    //@include all.size($w: 25rem, $h: 4.8rem);
 
                     .name {
                         @include all.limiter();
                         margin-bottom: 5px;
                         font-size: 20px;
                         font-family: 'InterBoldReg', sans-serif;
+
+                        @media(max-width: 376px) {
+                            font-size: clamp(16px, 2rem, 32px);
+                        }
                     }
 
                     .email {
                         @include all.limiter();
                         color: #007bed;
                         font-size: 16px;
+
+                        @media(max-width: 376px) {
+                            font-size: clamp(16px, 1.8rem, 32px);
+                        }
                     }
                 }
             }
@@ -100,6 +103,26 @@
                 }
             }
 
+        }
+
+        ::-webkit-scrollbar {
+            width: 5px;
+            scroll-behavior: smooth;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            border-radius: 5px;
+            border: 1px solid transparent;
+            background: #a8a8a8;
+            background-clip: content-box;
+        }
+
+        ::-webkit-scrollbar-button:single-button:vertical:decrement {
+            background: url('../../../../../public/assets/Icons/contact/scroll-up.png') no-repeat center center / contain;
+        }
+
+        ::-webkit-scrollbar-button:single-button:vertical:increment {
+            background: url('../../../../../public/assets/Icons/contact/scroll-down.png') no-repeat center center / contain;
         }
     }
 }

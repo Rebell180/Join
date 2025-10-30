@@ -1,20 +1,20 @@
 @use './../../../../../public/styles/all_styles.scss' as all;
 
 .icon-list-container {
-	@include all.size($w: 12rem, $h: 4rem);
+	//@include all.size($w: 12rem, $h: 4rem);
 	@include all.fl($alit: center);
 	z-index: 10;
 
 
 	.icon-list-item {
-		@include all.size($w: 3rem, $h: 3rem);
+		//@include all.size($w: 3rem, $h: 3rem);
 		@include all.marpad($mar: 0 -0.4rem 0 0);
 		border: 1px solid white;
 	}
 
 	.icon-counter {
 		@include all.fl($jc: center, $alit: center);
-		@include all.size($w: 2.8rem, $h: 2.7rem);
+		//@include all.size($w: 2.8rem, $h: 2.7rem);
 		@include all.marpad($mar: 0 0 0 0.8rem);
 		font-size: 1.2rem;
 		font-family: 'InterBold', sans-serif;
