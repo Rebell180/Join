@@ -15,9 +15,12 @@
         @include all.fl($jc: space-between);
         margin: 2rem 0;
 
-        button {
+        display: none;
             cursor: pointer;
-        }
+
+            @include all.tablet {
+                display: flex;
+            }
     }
 
     h2 {
