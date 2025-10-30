@@ -53,11 +53,12 @@ li {
 
 .li-wrapper {
     @include all.fl($alit: center);
+    background: #fbfafa;
     height: 3.2rem;
-    border-radius: 10px;
     cursor: pointer;
     &:hover {
         background: #dddddd;
+        border-radius: 10px;
     }
 }
 

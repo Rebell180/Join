@@ -156,13 +156,14 @@
 		@include all.marpad($mar: 2rem 0 0 0);
 
 		.task-modal-input {
-			@include all.limiter();
-			@include all.size($w: auto, $h: 2rem);
+			// @include all.limiter();
+			@include all.size($w: 100%, $h: 2rem);
 			@include all.marpad($mar: 0.5rem 0 0 1rem);
 			@include all.fl($alit: center, $gap: 1rem);
 			@include all.font-style($size: 1.7rem);
 
 			input {
+				// @include all.limiter();
 				@include all.fl($alit: center);
 			}
 		}
