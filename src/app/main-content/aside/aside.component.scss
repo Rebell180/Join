@@ -13,7 +13,7 @@
 	}
 
 	@include all.mobile {
-		width: 100dvw;
+		@include all.size($w: 100dvw);
 		@include all.fl($jc: center, $alit: center);
 		@include all.marpad($pad: 0.5rem);
 	}
