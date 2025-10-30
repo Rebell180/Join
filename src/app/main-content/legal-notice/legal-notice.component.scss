@@ -1,7 +1,7 @@
 @use "../../../../public/styles/all_styles" as all;
 
 :host {
-    @include all.size($w: 100%, $h: 100%);
+    @include all.size($w: 100%, $h: 90dvh);
     @include all.marpad($pad: 9rem 7rem 0 7rem);
     @include all.scrollbar();
     overflow-y: auto;
