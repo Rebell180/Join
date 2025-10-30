@@ -12,6 +12,12 @@
 		@include all.marpad($pad: 0.5rem);
 	}
 
+	@include all.mobile {
+		width: 100dvw;
+		@include all.fl($jc: center, $alit: center);
+		@include all.marpad($pad: 0.5rem);
+	}
+
 	img {
 
 		@include all.tablet {
