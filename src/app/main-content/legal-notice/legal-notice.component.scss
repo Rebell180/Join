@@ -1,104 +1,56 @@
-@use '../../../../public/styles/all_styles' as all;
+@use "../../../../public/styles/all_styles" as all;
 
 :host {
-    //@include all.size($h: 90dvh);
-    @include all.marpad($pad: 8rem 8rem 0 8rem);
+    @include all.size($w: 100%, $h: 100%);
+    @include all.marpad($pad: 9rem 7rem 0 7rem);
     @include all.scrollbar();
     overflow-y: auto;
-    scrollbar-width: thin;
-    scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
 
     @include all.tablet {
-            //@include all.size($h: 80dvh);
-            padding: 2rem;
+        @include all.size($h: 80dvh);
+        @include all.marpad($pad: 2rem 1rem);
+    }
+    
+    header {
+        @include all.fl($jc: space-between);
+        margin: 2rem 0;
+
+        button {
+            cursor: pointer;
         }
+    }
+
+    h2 {
+        @include all.marpad($mar: 0 0 2rem 0);
+        font-size: 2.4rem;
+    }
+
+    h3 {
+        @include all.marpad($mar: 0 0 2rem 0);
+        font-size: 2rem;
+    }
+
+    p {
+        @include all.marpad($mar: 0 0 1rem 0);
+    }
+
+    .legal-notice-list {
+        @include all.marpad($pad: 2rem 3rem);
+        display: block;
+        list-style: decimal;
+    }
+
+    a {
+        color: #29abe2;
+        cursor: pointer;
 
         @include all.mobile {
-            //@include all.size($w: 100dvw, $h: 80dvh);
+            word-wrap: break-word;
+            text-wrap: true;
         }
+    }
 
-        @media(max-width: 530px) {
-            @include all.marpad($pad: 0);
-        }
-
-    .legal-notice-container {
-
-        .legal-notice-back {
-            @include all.fl($display: none);
-
-            @include all.tablet {
-                @include all.fl($jc: end);
-            }
-        }
-
-        .legal-notice-header {
-
-            h1 {
-                @include all.marpad($mar: 0 0 3rem 0);
-                @include all.mobile {
-                    font-size: 4rem;
-                    @include all.marpad($pad: 0 0 0 1rem);
-                }
-            }
-        }
-
-        .legal-notice-main-content {
-            //@include all.size($h: 75dvh);
-
-            @include all.tablet {
-                //@include all.size($h: 65dvh);
-            }
-
-            @media(max-width: 530px) {
-                //@include all.size($h: 74dvh);
-                @include all.marpad($pad: 1rem);
-            }
-
-            h2 {
-                @include all.marpad($mar: 0 0 2rem 0);
-                font-size: 3rem;
-
-                @include all.mobile {
-                    font-size: 2.4rem;
-                }
-            }
-
-            h3 {
-                font-size: 2.4rem;
-                @include all.marpad($mar: 0 0 2rem 0);
-
-                @include all.mobile {
-                    font-size: 2rem;
-                }
-            }
-
-            h4 {
-                font-size: 1.8rem;
-            }
-
-            p {
-                @include all.marpad($mar: 0 0 1rem 0);
-            }
-
-            .legal-notice-list {
-                display: block;
-                list-style: decimal;
-                @include all.marpad($pad: 0 3rem 0 0);
-
-                @include all.mobile {
-                    @include all.marpad($pad: 2rem 3rem);
-                }
-            }
-
-            a {
-                color: #29ABE2;
-                cursor: pointer;
-
-                @include all.mobile {
-                    word-wrap: break-word;
-                    text-wrap: true;
-                }
-            }
-        }
+    span {
+        color: #29abe2;
     }
 }

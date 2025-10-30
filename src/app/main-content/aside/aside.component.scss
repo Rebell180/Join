@@ -9,7 +9,7 @@
 
 	@include all.tablet {
 		@include all.fl($jc: center, $alit: center);
-		@include all.marpad($pad: 0.5rem)
+		@include all.marpad($pad: 0.5rem);
 	}
 
 	img {
