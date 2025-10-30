@@ -35,13 +35,12 @@
 
         .contact-group-container {
             @include all.fl($flexdir: column);
-            //@include all.size($h: auto);
 
             .letter {
                 vertical-align: center;
                 @include all.marpad($mar: 2rem 0, $pad: 0 3rem);
                 cursor: default;
-                //@include all.font-style($size: 2.5rem, $weight: 100);
+                font-size: 2.5rem;
             }
 
             hr {
@@ -52,7 +51,7 @@
 
             .single-contact-container {
                 @include all.fl($alit: center, $jc: start, $gap: 25px);
-                //@include all.size($w: 95%, $h: 78px);
+                @include all.size($w: 95%, $h: 78px);
                 @include all.marpad($pad: 0 1.75rem);
                 border-radius: 10px;
                 cursor: pointer;
@@ -63,12 +62,12 @@
 
                 .icon-wrapper {
                     @include all.fl($jc: center, $alit: center);
-                    //@include all.size($w: 4.2rem, $minW: 4.2rem, $h: 4.2rem, $minH: 4.2rem);
+                    @include all.size($w: 4.2rem, $h: 4.2rem);
                 }
 
                 .contact-data {
                     @include all.fl($flexdir: column, $jc: center);
-                    //@include all.size($w: 25rem, $h: 4.8rem);
+                    @include all.size($w: 25rem, $h: 4.8rem);
 
                     .name {
                         @include all.limiter();

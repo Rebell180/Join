@@ -52,16 +52,10 @@
         
 
         .help-header {
-            //@include all.size($h: auto);
             margin-bottom: 4rem;
-
-            h1{
-                //@include all.font-style($size: 4.8rem);
-            }
         }
 
         .help-main-content {
-            //@include all.size($h: auto);
             padding-right: 4rem;
             
             h2 {

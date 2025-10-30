@@ -71,8 +71,6 @@ nav {
 				//@include all.size($h: auto);
 				@include all.fl($jc: center);
 				color: grey;
-				//@include all.font-style($size: 1.6rem);
-
 				&:hover {
 					color: rgb(17, 119, 227);
 				}

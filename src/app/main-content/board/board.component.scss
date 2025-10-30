@@ -12,10 +12,8 @@
         padding: 2rem 2rem;
 
         h1 {
-            //@include all.font-style($size: 48px);
-
             @include all.mobile{
-                //@include all.font-style($size: 36px);
+                font-size: 3.6rem;
             }
         }
 
@@ -132,7 +130,7 @@
                 .no-entry-container {
                     //@include all.size($maxW: 28rem, $minW: 20rem, $h: auto);
                     @include all.borRad($c: rgba(0, 0, 0, 0.2), $radius: 16px, $thick: 2px, $design: dotted);
-                    //@include all.font-style($size: 18px, $weight: 600);
+                    font-size: 1.8rem;
                     @include all.marpad($pad: 1rem);
                     background: rgba(0, 0, 0, 0.1);
                     text-align: center;

@@ -1,23 +1,19 @@
 @use '../../../../../public/styles/all_styles' as all;
 
 :host {
-	//@include all.size($h: 5rem);
+	@include all.size($h: 5rem);
 	@include all.fl($alit: center, $gap: 1rem);
 	@include all.marpad($mar: 1rem 0, $pad: 1rem 0 0 4rem);
-	//@include all.font-style($size: 1.8rem);
+	font-size: 1.8rem;
 	cursor: pointer;
 	color: white;
 	background: transparent;
 
 	@include all.tablet {
-		//@include all.size($h: 5rem);
+		@include all.size($h: 5rem);
 		@include all.fl($flexdir: column, $gap: 1rem);
 		@include all.marpad($mar: 0, $pad: 0);
 		border-radius: 10px;
-	}
-
-	@include all.smart {
-		//@include all.font-style($size: 1.4rem);
 	}
 
 	&:hover {
@@ -26,11 +22,11 @@
 
 	img {
 		@include all.fl();
-		//@include all.size($w: 2.8rem, $h: 2.8rem);
+		@include all.size($w: 2.8rem, $h: 2.8rem);
 		@include all.marpad($mar: 0 0 1rem 0);
 
 		@include all.smart {
-		//@include all.size($w: 2.4rem, $h: 2.4rem);
+		@include all.size($w: 2.4rem, $h: 2.4rem);
 	}
 	}
 }

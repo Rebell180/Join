@@ -18,10 +18,10 @@
 	box-shadow: 0 0 5px lightgrey;
 
 	h2 {
-		//@include all.size($w: fit-content,  $h: 3rem);
+		@include all.size($h: 3rem);
 		@include all.marpad($mar: 0 0 2rem 0, $pad: 0.5rem);
 		@include all.fl($jc: center);
-		//@include all.font-style($size: 1.8rem, $weight: lighter);
+		font-size: 1.8rem;
 		color: white;
 		border-radius: 0.8rem;
 
@@ -43,17 +43,15 @@
 	}
 
 	.title {
-		//@include all.size($h: auto);
 		@include all.limiter();
-		//@include all.font-style($size: 1.8rem, $weight: bold);
+		font-size: 1.8rem;
 		margin-bottom: 1rem;
 		white-space: wrap;
 	}
 
 	.description {
-		//@include all.size($h: auto);
 		@include all.limiter();
-		//@include all.font-style($size: 1.8rem);
+		font-size: 1.8rem;
 		@include all.marpad($mar: 0 0 1rem 0);
 		white-space: wrap;
 		color: grey;
@@ -70,20 +68,18 @@
 
 	.progress-bar-background {
 		flex-grow: 1;
-		//@include all.size($h: 0.8rem);
+		@include all.size($h: 0.8rem);
 		background-color: #dedddd;
 		border-radius: 4px;
 		overflow: hidden;
 	}
 
 	.progress-bar-fill {
-		//@include all.size();
 		background-color: #3b82f6;
 		transition: width 0.3s ease-in-out;
 	}
 
 	.subtask-counter {
-		//@include all.font-style($size: 1.5rem);
 		white-space: nowrap;
 	}
 
@@ -92,7 +88,7 @@
 		@include all.marpad($pad: 0 1rem);
 
 		img {
-			//@include all.size($w: 2rem, $h: 1.2rem);
+			@include all.size($w: 2rem, $h: 1.2rem);
 		}
 	}
 }
