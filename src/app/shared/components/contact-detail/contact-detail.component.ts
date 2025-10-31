@@ -1,4 +1,4 @@
-import { Component, inject, input, InputSignal, } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Contact } from './../../../shared/classes/contact';
 import { ContactIconComponent } from '../../../shared/components/contact-icon/contact-icon.component';
 import { CommonModule } from '@angular/common';
@@ -50,15 +50,24 @@ export class ContactDetailComponent {
     this.tms.add('Contact deleted', 3000, 'success');
   }
 
+  /** Closes the Menu. */
   closeMenu(): void {
     this.isMenuVisible = false;
   }
 
+  /**
+   * Opens a modal to edit a contact.
+   * @param contact - Contact to edit.
+   */
   editContact(contact: Contact): void {
     this.modalService.openAddContactModal('edit', contact);
     this.closeMenu();
   }
 
+  /**
+   * Deletes a contact and close the modal.
+   * @param contact - Contact to delete.
+   */
   deleteContactAndClose(contact: Contact): void {
     this.deleteContact(contact);
     this.closeMenu();

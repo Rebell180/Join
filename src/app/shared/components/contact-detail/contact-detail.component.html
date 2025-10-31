@@ -17,14 +17,14 @@
         <app-contact-icon class="contact-icon {{ contact.iconColor }}" [contact]="contact"></app-contact-icon>
 
         <div class="name-option-container">
-            <p class="name">{{ contact.firstname }} {{ contact.lastname }}</p>
+            <p class="name">{{ contact.getFullName() }}</p>
 
             <div class="option-container">
                 <button (click)="modalService.openAddContactModal('edit', contact)" type="button">
                     <img src="assets/Icons/taskBoard/edit.png" alt="" />Edit
                 </button>
                 <button (click)="deleteContact(contact)">
-                    <img class="delete-btn" src="assets/Icons/taskBoard/delete.png" alt="" />Delete
+                    <img class="delete-btn" src="assets/Icons/taskBoard/delete.png">Delete
                 </button>
             </div>
         </div>
