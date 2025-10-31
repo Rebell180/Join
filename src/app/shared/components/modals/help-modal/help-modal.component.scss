@@ -9,14 +9,13 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 12;
+    z-index: 10;
 }
 
 #help-close-btn{
     position: absolute;
     top: 2rem;
     right: 2rem;
-    z-index: 2;
     font-size: 20px;
 }
 
@@ -25,7 +24,6 @@
     @include all.fl($flexdir: column, $jc: center, $alit: start, $gap: 1rem);
     background-color: white;
     border-radius: 16px;
-    border: none;
     box-shadow: 8px 8px 8px rgba(0, 0, 0, 0.2);
     padding: 5rem;
 
