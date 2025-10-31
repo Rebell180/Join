@@ -57,7 +57,7 @@
 
         .contact-detail-back {
             display: none;
-
+            background: transparent;
             @include all.notebook {
                 @include all.marpad($mar: 0 2rem);
                 display: block;
@@ -82,6 +82,7 @@
                 height: 12rem;
                 width: 12rem;
                 flex: 0 0 12rem;
+                font-size: 6rem;
             }
 
             .name-option-container {
@@ -89,10 +90,6 @@
                 flex: 1;
                 @include all.size($w: 100%, $h: 100%);
                 @include all.marpad($pad: 0 0 0 3rem);
-
-                // @include all.notebook {
-                //     @include all.size($w:45dvw);
-                // }
 
                 @include all.mobile {
                     @include all.marpad($pad: 0 0 0 2rem);

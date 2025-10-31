@@ -29,13 +29,13 @@ input {
 
 .content {
     display: grid;
-    grid-template-columns: 20rem 1fr;
+    grid-template-columns: 20rem auto;
     grid-template-rows: 10dvh 90dvh;
     grid-template-areas: "aside header" "aside main";
     height: 100dvh;
 
     @include all.tablet {
-        grid-template-columns: 1fr;
+        grid-template-columns: 100%;
         grid-template-rows: 10dvh 80dvh 10dvh;
         grid-template-areas:
             "header"

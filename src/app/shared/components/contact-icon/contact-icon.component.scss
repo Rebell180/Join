@@ -6,10 +6,7 @@
     border-radius: 50%;
     color: white;
     padding: 0.5rem;
-    span {
-        @include all.fl($jc: center, $alit: center);
-        font-size: 100%;
-    }
+    font-size: 50%;
 }
 
 :host(.orange) {
