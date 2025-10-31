@@ -1,94 +1,16 @@
 @use '../../../../../public/styles/all_styles.scss' as all;
 
 :host {
-	@include all.fl();
-	//@include all.size($h: auto);
-
-	@media(max-width: 1280px) {
-		@include all.marpad($mar: 0.5rem 0, $pad: 0.5rem);
-		//@include all.size($h: auto);
-	}
+	width: 20dvw;
 }
 
 .task-column-container {
-	//@include all.size($h: auto);
-	@include all.marpad($mar: 0 0 0.5rem 0, $pad: 1rem);
+	@include all.size($w: 100%, $h: auto);
 	background: rgb(254, 253, 253);
-	border-radius: 1.6rem;
+	border-radius: 16px;
 	box-shadow: 0 0 5px lightgrey;
 
-	h2 {
-		@include all.size($h: 3rem);
-		@include all.marpad($mar: 0 0 2rem 0, $pad: 0.5rem);
-		@include all.fl($jc: center);
-		font-size: 1.8rem;
-		color: white;
-		border-radius: 0.8rem;
-
-		@media(max-width: 1230px) {
-			@include all.marpad($mar: 0 0 1rem 0, $pad: 0.5rem);
-		}
-	}
-
-	.blue {
-		background: #0038FF;
-	}
-
-	.green {
-		background: #1fd7c1;
-	}
-
-	.yellow {
-		background: teal;
-	}
-
-	.title {
-		@include all.limiter();
-		font-size: 1.8rem;
-		margin-bottom: 1rem;
-		white-space: wrap;
-	}
-
-	.description {
-		@include all.limiter();
-		font-size: 1.8rem;
-		@include all.marpad($mar: 0 0 1rem 0);
-		white-space: wrap;
-		color: grey;
-	}
-
-
-	.subtask-progress-box {
-		@include all.marpad($mar: 1rem 0, $pad: 0.6rem 0.8rem);
-	}
-
-	.progress-bar-wrapper {
-		@include all.fl($alit: center, $gap: 1rem);
-	}
-
-	.progress-bar-background {
-		flex-grow: 1;
-		@include all.size($h: 0.8rem);
-		background-color: #dedddd;
-		border-radius: 4px;
-		overflow: hidden;
-	}
-
-	.progress-bar-fill {
-		background-color: #3b82f6;
-		transition: width 0.3s ease-in-out;
-	}
-
-	.subtask-counter {
-		white-space: nowrap;
-	}
-
-	.column-bottom-container {
-		@include all.fl($alit: center, $jc: space-between);
-		@include all.marpad($pad: 0 1rem);
-
-		img {
-			@include all.size($w: 2rem, $h: 1.2rem);
-		}
-	}
+	// @media(max-width: 1280px) {
+	// 		max-width: 25dvw
+	// 	}
 }
