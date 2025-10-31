@@ -28,7 +28,7 @@
 	// #endregion
 
 	// #region nav-btn
-	.nav-btn {
+	nav {
 		width: 100%;
 		@include all.fl($flexdir: column, $alit: center, $jc: center);
 
@@ -48,38 +48,43 @@
 			}
 		}
 	}
-}
 
-// #endregion
 
-// #region nav
-nav {
-	@include all.size($w: 100%);
+	// #endregion
 
-	@include all.tablet {
-		display: none;
-	}
+	// #region nav
 
-	ul {
-		@include all.size($h: 100%);
-		display: flex;
-		flex-direction: column;
-		gap: 2rem;
-		padding: 1rem;
+	.select-legal-button {
 
-		@include all.tablet {
-			display: none;
-		}
+		ol {
+			@include all.size($w: 100%, $h: 5rem);
+			margin-bottom: 3rem;
 
-		button {
-			@include all.size($h: 100%);
-			@include all.fl($jc: center, $alit: center);
-			color: grey;
-			background-color: transparent;
-			font-size: 1.6rem;
+			@include all.tablet {
+				display: none;
+			}
 
-			&:hover {
-				color: rgb(17, 119, 227);
+			li {
+				@include all.size($h: 100%);
+				display: flex;
+				flex-direction: column;
+				padding: 1rem;
+
+				@include all.tablet {
+					display: none;
+				}
+
+				button {
+					@include all.size($h: 100%);
+					@include all.fl($jc: center, $alit: center);
+					color: grey;
+					background-color: transparent;
+					font-size: 1.6rem;
+
+					&:hover {
+						color: rgb(17, 119, 227);
+					}
+				}
 			}
 		}
 	}

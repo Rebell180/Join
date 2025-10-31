@@ -61,13 +61,13 @@ export class AsideComponent {
       protected itemLegal: LegalLinks[] = [
             {
                   sectionId: 'Privacy',
-                  title: 'privacy',
+                  title: 'Privacy Policy',
                   section: SectionType.PRIVACY,
                   active: false
             },
             {
                   sectionId: 'Legal',
-                  title: 'legal',
+                  title: 'Legal Notice',
                   section: SectionType.LEGAL,
                   active: false
             },
@@ -75,15 +75,22 @@ export class AsideComponent {
       selectedSection: OutputEmitterRef<SectionType> = output<SectionType>();
       protected modalService: ModalService = inject(ModalService);
 
-      selectSection(index: number) {
-            this.itemLegal.forEach(i => i.active = false);
-            this.items.forEach((item, i) => item.active = i === index);
-            this.selectedSection.emit(this.items[index].section);
+      private activateItem<T extends { active: boolean; section: SectionType }>(
+            list: T[],
+            index: number
+      ): void {
+            if (index < 0 || index >= list.length) return;
+            list.forEach((item, i) => (item.active = i === index));
+            this.selectedSection.emit(list[index].section);
       }
 
-      selectLegal(index: number) {
-            this.items.forEach(i => i.active = false);
-            this.itemLegal.forEach((item, i) => item.active = i === index);
-            this.selectedSection.emit(this.itemLegal[index].section);
+      selectSection(index: number): void {
+            this.itemLegal.forEach(i => (i.active = false));
+            this.activateItem(this.items, index);
+      }
+
+      selectLegal(index: number): void {
+            this.items.forEach(i => (i.active = false));
+            this.activateItem(this.itemLegal, index);
       }
 }

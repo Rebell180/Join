@@ -1,15 +1,23 @@
 <img src="assets/Icons/contact/JoinLogoWhite.png" alt="das Logo von Join">
 
-<div class="nav-btn">
+<nav class="nav-buttons">
     @for (navItem of items; track navItem.sectionId; let i = $index) {
-        <button [ngClass]="{active: navItem.active}" type="button" nav-item [item]="navItem" (click)="selectSection(i)"></button>
+    <button type="button" nav-item [item]="navItem" [ngClass]="{ active: navItem.active }"
+        [attr.aria-pressed]="navItem.active" (click)="selectSection(i)">
+        {{ navItem.title }}
+    </button>
     }
-
-</div>
-
-<nav>
-    <ul>
-        <button type="button" (click)="selectLegal(0)">Privacy Policy</button>
-        <button type="button" (click)="selectLegal(1)">Legal notice</button>
-    </ul>
 </nav>
+
+<div class="select-legal-button">
+    <ol>
+        @for (legalItem of itemLegal; track legalItem.sectionId; let i = $index) {
+        <li>
+            <button type="button" [ngClass]="{ active: legalItem.active }" [attr.aria-pressed]="legalItem.active"
+                (click)="selectLegal(i)">
+                {{ legalItem.title }}
+            </button>
+        </li>
+        }
+    </ol>
+</div>

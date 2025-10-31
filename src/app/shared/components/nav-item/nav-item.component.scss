@@ -12,7 +12,7 @@
 		@include all.size($w: 100%, $h: 100%);
 		@include all.fl($flexdir: column, $gap: 1rem);
 		@include all.marpad($mar: 0, $pad: 0);
-		border-radius: 1rem;
+		border-radius: 16px;
 	}
 
 	&:hover {
