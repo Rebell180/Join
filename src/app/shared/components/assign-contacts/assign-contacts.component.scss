@@ -6,23 +6,17 @@
 
 .assign-to-container {
     width: 100%;
-    font-family: 'InterRegular', sans-serif;
     
     .assign-to-input {
-        
-        border: 1px solid #ccc;
-        border-radius: 8px;
-        padding: 1rem;
-        cursor: pointer;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+        @include all.fl($jc: space-between, $alit: center);
+        @include all.borRad($radius: 8px, $c: ccc);
+        @include all.marpad($pad: 1rem);
         background: white;
+        cursor: pointer;
 
         .selection-presenter-txt {
-          width: 100%;
+          width: 90%;
           @include all.limiter();
-          font-size: 16px;
           padding-right: 1rem;
 
           @include all.notebook {
@@ -31,7 +25,6 @@
         }
 
         .placeholder {
-            font-size: 16px;
             color: rgba(0,0,0,0.2);
         }
 
@@ -61,29 +54,29 @@
         border: none;
         border-bottom: 1px solid #eee;
         outline: none;
-        font-size: 14px;
+        font-size: 16px;
       }
 
       .option {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: 6px 10px;
+        padding: 0.5rem 1rem;
         cursor: pointer;
 
         .contact-container {
           @include all.fl($alit: center, $gap: 1rem);
           
           app-contact-icon{
-            width: 2rem;
-            height: 2rem;
-
+            @include all.size($w: 3.5rem, $h: 3.5rem);
           }
+
           span {
-            width: 28dvw;
-            max-width: 20rem;
+            // width: 28dvw;
+            // max-width: 20rem;
+            width: 80%;
             @include all.limiter();
-            font-size: 18px;
+            font-size: 16px;
 
             @include all.notebook {
               width: 40dvw;
@@ -91,7 +84,7 @@
           }
         }
         input {
-          // padding-right: 2rem;
+          padding-right: 2rem;
         }
 
         &:hover {
@@ -101,7 +94,7 @@
     }
 
     .contact-list-item-container{
-      height: 4rem;
+      height: 6rem;
       padding: 1rem;
     }
 

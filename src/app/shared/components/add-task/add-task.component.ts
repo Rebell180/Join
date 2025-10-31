@@ -86,13 +86,17 @@ export class AddtaskComponent implements OnDestroy {
   
   /** Adds a task into Database. */
   private async addTask(): Promise<void> {
-    const refTask: CollectionReference = collection(this.fs, 'tasks');
-    const taskDocRef = await addDoc(refTask, this.currentTask().toJSON());
-    await updateDoc(taskDocRef, {id: taskDocRef.id});
-    for (let i = 0; i < this.currentTask().subtasks.length; i++) {
-      this.currentTask().subtasks[i].taskId = taskDocRef.id;
-      await this.addSubtask(this.currentTask().subtasks[i]);
-    }
+    // const taskRef = this.fireDB.getCollectionRef('tasks');
+    console.log(this.currentTask());
+    this.fireDB.taskAddToDB('tasks', this.currentTask());
+
+    // // const refTask: CollectionReference = collection(this.fs, 'tasks');
+    // // const taskDocRef = await addDoc(refTask, this.currentTask().toJSON());
+    // await updateDoc(taskDocRef, {id: taskDocRef.id});
+    // for (let i = 0; i < this.currentTask().subtasks.length; i++) {
+    //   this.currentTask().subtasks[i].taskId = taskDocRef.id;
+    //   await this.addSubtask(this.currentTask().subtasks[i]);
+    // }
     this.cdr.detectChanges();
   }
   

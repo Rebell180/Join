@@ -1,13 +1,15 @@
 <div class="assign-to-container">
     <div class="assign-to-input" (click)="toggleDropdown()">
-        @if (selectedValuesLocal.length) {
+        @if (selectedValues().length) {
             <span class="selection-presenter-txt">
-                @for(value of selectedValuesLocal; track $index) {
-                    @if(selectedValues.length > 1) { 
-                        {{ value.getFullName() }},
-                    } @else {
-                        {{ value.getFullName() }}
-                    }
+                @if (selectedValues()[0]) {
+                    {{ selectedValues()[0].getFullName() }}
+                }
+                @if(selectedValues()[1]) { 
+                    , {{ selectedValues()[1].getFullName() }}
+                } 
+                @if(selectedValues()[2]) {
+                    , ...
                 }
             </span>
         } @else {

@@ -87,12 +87,14 @@ export class SubtaskComponent {
    * Adds a Subtaksk.
    * @param e - Submit-Event from form.
    */
-  add(e: Event): void {
-    e.preventDefault();
+  add(): void {
     this.newSubtask.editState = SubtaskEditState.NEW;
-    if (this.newSubtask.name.length == 0) this.sendErrMsg('Name is required.');
-    else if (this.countSubtaskName(this.newSubtask) > 0) this.sendErrMsg('Subtask already exists.');
-    else {
+    if (this.newSubtask.name.length == 0) {
+      this.sendErrMsg('Name is required.');
+    } else if (this.countSubtaskName(this.newSubtask) > 0) {
+      this.sendErrMsg('Subtask already exists.');
+    } else {
+      this.newSubtask.editMode = false;
       this.subtasks().push(this.newSubtask);
       this.newSubtask = new SubTask();
       if (this.subtasks().length < 2) this.sendErrMsg('Add another Subtask.');
@@ -100,6 +102,25 @@ export class SubtaskComponent {
         this.sendErrMsg('');
         this.outSubtasks.emit(this.subtasks());
       }
+    }
+  }
+
+  reset(index: number): void {
+    if( index == -1 ) {
+      this.newSubtask.name = '';
+    }
+    else {
+      this.subtasks()[index].name = '';
+    }
+  }
+
+  endbleEditMode(index: number) {
+    if( index == -1 ) {
+      this.newSubtask.editMode = true;
+    }
+    else {
+      this.subtasks()[index].editMode = true;
+      // this.newSubtask.editMode = true;
     }
   }
 
@@ -119,6 +140,7 @@ export class SubtaskComponent {
       this.outSubtasks.emit(this.subtasks())
     }
   }
+
 
   /**
    * Deletes a subtask.

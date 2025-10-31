@@ -10,7 +10,6 @@ app-date-picker {
 
 b {
     color: red;
-
 }
 
 .input-wrapper {
@@ -20,13 +19,12 @@ b {
 
 .add-task-input-lbl {
     font-size: 18px;
-    font-family: 'InterRegular', sans-serif;
+    padding-bottom: 0.5rem;
 }
 
 .add-task-input {
     @include all.borRad($c: rgba(0, 0, 0, 0.2), $radius: 8px);
     @include all.marpad($pad: 1rem);
-    font-family: 'InterRegular', sans-serif;
     font-size: 16px;
 
     &:focus-visible {
@@ -37,7 +35,7 @@ b {
 }
 
 .add-task-section {
-    //@include all.size();
+    height: 100%;
     @include all.marpad($pad: 3dvw);
 
     @include all.mobile {
@@ -45,19 +43,18 @@ b {
     }
 
     #add-task-form {
-        height: 100%;
+        @include all.size($w: 100%, $h: 100%);
         @include all.fl($flexdir: column, $jc: space-between, $alit: space-between);
 
         .add-task-header {
-            h1 {
-                font-size: 42px;
-                font-family: 'Interbold', sans-serif;
-            }
+            height: 10dvh;
+            @include all.fl($alit: center);
+            margin-bottom: 2rem;
         }
 
         .add-task-main-container {
+            @include all.size($w: 100%, $h: 100%);
             @include all.fl($jc: space-between, $alit: start, $gap: 1rem);
-
 
             @include all.notebook {
                 @include all.fl($flexdir: column, $alit: center);
@@ -67,7 +64,6 @@ b {
             }
 
             .add-task-info-block1 {
-
                 width: 50%;
                 @include all.fl($flexdir: column, $gap: 2rem);
 
@@ -78,7 +74,6 @@ b {
                 #add-task-info-description {
                     @include all.scrollbar();
                     height: 14dvh;
-                    font-family: 'InterRegular', sans-serif;
                     overflow-y: auto;
                     resize: none;
                 }
@@ -86,7 +81,7 @@ b {
 
             hr {
                 width: 0.2rem;
-                height: 110%;
+                height: 75%;
                 margin: 0 1rem;
                 border: 1px solid rgba(0, 0, 0, 0.1);
 
@@ -101,7 +96,7 @@ b {
 
                 @include all.notebook {
                     width: 90%;
-                    margin: 2rem 0 5rem 0;
+                    margin: 2rem 0 3rem 0;
                 }
 
                 .add-task-assigned-to {
@@ -121,22 +116,30 @@ b {
                         outline: 1px solid #29ABE2;
                     }
                 }
+
+                .add-task-subtask-container {
+                    height: 20rem;
+                }
             }
         }
 
         .add-task-footer {
             @include all.fl($jc: space-between, $alit: end);
 
+            // @include all.tablet {
+            //     @include all.fl($flexdir: column, )
+            // }
+
             .required-info-txt {
                 font-size: 1.5rem;
 
-                @include all.tablet {
-                    display: none;
-                }
+                // @include all.tablet {
+                //     display: none;
+                // }
             }
 
             @include all.tablet {
-                @include all.fl($flexdir: column);
+                @include all.fl($flexdir: column, $gap: 1rem);
             }
 
             .add-task-btn-container {
@@ -154,13 +157,13 @@ b {
             }
         }
 
-        .required-info-txt-mobile {
-            display: none;
+        // .required-info-txt-mobile {
+        //     display: none;
 
-            @include all.tablet {
-                display: flex;
-                font-size: 1.2rem;
-            }
-        }
+        //     @include all.tablet {
+        //         display: flex;
+        //         font-size: 1.2rem;
+        //     }
+        // }
     }
 }

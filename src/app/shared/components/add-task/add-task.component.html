@@ -61,11 +61,12 @@
                 </div>
 
                 <div class="input-wrapper add-task-subtask-container">
-                    <app-subtask [subtasks]="currentTask().subtasks"
+                    <label class="add-task-input-lbl" for="add-task-subtask">Subtasks</label>
+                    <app-subtask id="app-task-subtask" [subtasks]="currentTask().subtasks"
                         (outSubtasks)="updateSubtasks($event)"></app-subtask>
                 </div>
 
-                <span class="required-info-txt-mobile"><b>*</b> this field is required</span>
+                <!-- <span class="required-info-txt-mobile"><b>*</b> this field is required</span> -->
             </div>
         </main>
 
