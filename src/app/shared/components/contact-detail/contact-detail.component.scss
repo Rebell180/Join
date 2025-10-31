@@ -5,12 +5,12 @@
     // #region detail-header
     .contact-detail-header {
         @include all.fl($jc: space-between, $alit: center);
-        @include all.size($h: 8rem);
+        @include all.size($h: 8rem, $w: 100%);
 
-        @include all.notebook {
-            @include all.fl($jc: space-between, $alit: start);
-            @include all.size($w: 30dvw, $h: 12rem);
-        }
+        // @include all.notebook {
+        //     @include all.fl($jc: space-between, $alit: start);
+        //     @include all.size($w: 30dvw, $h: 12rem);
+        // }
 
         .header-info {
             @include all.fl($alit: center, $gap: 2rem);
@@ -21,6 +21,15 @@
 
             h2 {
                 letter-spacing: 2px;
+            }
+
+            @media (max-width: 455px) {
+                h1 {
+                    font-size: 3.2rem;
+                }
+                h2 {
+                    font-size: 1.8rem;
+                }
             }
 
             hr {
@@ -67,16 +76,23 @@
 
         .contact-detail-header-row {
             @include all.fl($alit: center);
-            @include all.size();
+            @include all.size($w: 100%);
             
+            .contact-icon {
+                height: 12rem;
+                width: 12rem;
+                flex: 0 0 12rem;
+            }
 
             .name-option-container {
-                @include all.marpad($pad: 0 0 0 3rem);
                 @include all.fl($flexdir: column);
+                flex: 1;
+                @include all.size($w: 100%, $h: 100%);
+                @include all.marpad($pad: 0 0 0 3rem);
 
-                @include all.notebook {
-                    @include all.size($w:45dvw);
-                }
+                // @include all.notebook {
+                //     @include all.size($w:45dvw);
+                // }
 
                 @include all.mobile {
                     @include all.marpad($pad: 0 0 0 2rem);
@@ -87,8 +103,17 @@
                 }
 
                 .name {
-                    @include all.limiter();
-                    @include all.size($h: 4rem);
+                    display: -webkit-box;
+                    -webkit-line-clamp: 2;
+                    -webkit-box-orient: vertical;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: normal;
+                    line-clamp: 2;
+                    max-height: 7rem;
+                    line-height: 3.5rem;
+                    margin-bottom: 2rem;
+                    
                     font: 3.2rem 'InterBold', sans-serif;
 
                     @include all.smart {
@@ -98,7 +123,7 @@
                 }
 
                 .option-container {
-                    @include all.size($h: 2.8rem);
+                    @include all.size($h: 3rem);
                     @include all.fl($jc: start, $alit: center, $gap: 2rem);
 
                     @include all.tablet {
@@ -130,6 +155,7 @@
         }
 
         .emailPhone {
+            @include all.limiter();
 
             h3 {
                 @include all.marpad($mar: 1.5rem 0);

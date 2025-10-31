@@ -17,8 +17,7 @@
         <app-contact-icon class="contact-icon {{ contact.iconColor }}" [contact]="contact"></app-contact-icon>
 
         <div class="name-option-container">
-            <p class="name">{{ contact.firstname }}</p>
-            <p class="name">{{ contact.lastname }}</p>
+            <p class="name">{{ contact.firstname }} {{ contact.lastname }}</p>
 
             <div class="option-container">
                 <button (click)="modalService.openAddContactModal('edit', contact)" type="button">
