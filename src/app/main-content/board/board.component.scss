@@ -3,7 +3,7 @@
 
 :host {
     @include all.size($h: 90dvh);
-    @include all.marpad($pad: 3rem);
+    @include all.marpad($pad: 4rem 5rem);
 
     @media(max-width: 1280px) {
         @include all.size($h: 80dvh);
@@ -13,7 +13,7 @@
     // #region header
     header {
         @include all.size($w: 100%);
-        @include all.marpad($pad: 1rem);
+        @include all.marpad($pad: 0 3rem 2rem 5rem);
         @include all.fl($alit: center, $jc: space-between);
 
         .search-task-board {
