@@ -2,28 +2,22 @@
 @forward '../../../../public/styles/component-styles';
 
 :host {
-    @include all.size($w: 100%, $h: auto);
-    padding: 3rem 3rem 0 3rem;
+    @include all.size($h: 90dvh);
+    @include all.marpad($pad: 3rem);
 
-    @include all.notebook {
-            height: 80dvh;
-        }
-
-        @include all.tablet {
-            height: 70dvh;
-            padding: 1rem 1rem 0 1rem;
-        }
+    @media(max-width: 1280px) {
+        @include all.size($h: 80dvh);
+        @include all.marpad($pad: 0.5rem);
+    }
 
     // #region header
     header {
-        @include all.fl($alit: center);
-        padding: 1rem;
+        @include all.size($w: 100%);
+        @include all.marpad($pad: 1rem);
+        @include all.fl($alit: center, $jc: space-between);
 
         .search-task-board {
-            width: 100%;
-            display: flex;
-            justify-content: end;
-            gap: 5rem;
+            @include all.fl($gap: 5rem);
 
             .search-task {
 
@@ -33,7 +27,7 @@
             }
 
             .btn-set {
-                @include all.size($w: 12%);
+                @include all.size($w: 100%, $h: 3.8rem);
 
                 @include all.notebook {
                     #add-task-label {
@@ -50,55 +44,67 @@
     .search-task-container-mobile {
         display: none;
 
-        // @include all.mobile {
-        //     display: flex;
-        //     padding: 0 2rem;
-        // }
+        @include all.mobile {
+            padding: 2rem;
+            display: flex;
+            justify-content: center;
+            width: 100%;
+        }
     }
 
     // #endregion
 
     // #region task-list-container
     .task-list-wrapper {
-        display: flex;
-        gap: 1rem;
+        @include all.size($w: 100%, $h: 77dvh);
+        @include all.fl($gap: 1rem);
 
         @include all.notebook {
-            flex-direction: column;
-            height: 100%;
-            overflow-y: auto;
+            @include all.size($h: 80dvh);
+            @include all.fl($flexdir: column);
             @include all.scrollbar();
+            overflow: auto;
+        }
+
+        @include all.tablet {
+            height: 70dvh;
+        }
+
+        @include all.mobile {
+            height: 62.5dvh;
         }
 
         .task-list {
-            width: 100%;
+            @include all.size($w: 100%, $h: 77dvh);
             display: flex;
             flex-direction: column;
 
             @include all.notebook {
-            height: 75dvh;
-        }
+                height: 75dvh;
+            }
 
             header {
-                padding: 1rem;
-                display: flex;
-                justify-content: space-between;
-
-                add-contact-btn {
-                    width: 25%;
-                }
+                @include all.marpad($pad: 0 1rem 0 0, $mar: 0 0 1rem 0);
+                @include all.fl($jc: space-between, $alit: center);
             }
 
             main {
-                display: flex;
-                flex-direction: column;
-                height: 70dvh;
-                overflow-y: auto;
+                @include all.fl($flexdir: column);
                 @include all.scrollbar();
+                overflow: auto;
 
                 @include all.notebook {
-                    height: auto;
-                    flex-direction: row;
+                    @include all.size();
+                    @include all.fl();
+                    max-width: 76dvw;
+                }
+
+                @media(max-width: 920px) {
+                    max-width: 71dvw;
+                }
+
+                @include all.tablet {
+                    max-width: 100%;
                 }
 
                 .drag-content {

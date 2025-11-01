@@ -7,11 +7,17 @@
 
         input[type=text] {
             @include all.fl();
-            @include all.size($h: 4rem);
+            @include all.size($w: 20dvw, $h: 4rem);
             @include all.marpad($pad: 8px 16px);
             outline: none;
             border-radius: 10px;
             border: 1px solid #a8a8a8;
+
+            @include all.mobile {
+                border: 2px solid green;
+                width: 96dvw;
+                height: 4rem;
+            }
 
             &::placeholder {
                 color: #d1d1d1;
@@ -23,8 +29,9 @@
         }
 
         hr {
-            @include all.size($w: 0.2rem, $h: 60%);
+            @include all.size($w: 0.2rem, $h: 65%);
             @include all.absolute($top: 20%, $right: 4.8rem);
+            background: lightgrey;
         }
 
         input[type=submit] {

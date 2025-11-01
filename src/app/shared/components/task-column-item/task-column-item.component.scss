@@ -1,14 +1,115 @@
 @use '../../../../../public/styles/all_styles.scss' as all;
 
 :host {
-	width: 20dvw;
-}
-
-.task-column-container {
+	@include all.fl();
 	@include all.size($w: 100%, $h: auto);
-	background: rgb(254, 253, 253);
-	border-radius: 16px;
-	box-shadow: 0 0 5px lightgrey;
+	max-width: 25dvw;
 
+	@include all.notebook {
+		min-width: 30dvw;
+	}
 
+	@include all.mobile {
+		min-width: 50dvw;
+	}
+
+	@media(max-width: 400px) {
+		min-width: 70dvw
+	}
+
+	.task-column-container {
+		@include all.size($w: 100%, $h: auto);
+		@include all.marpad($mar: 0 0 1rem 0, $pad: 1rem);
+		background: rgb(254, 253, 253);
+		border-radius: 1.6rem;
+		box-shadow: 0 0 5px lightgrey;
+
+		@include all.notebook {
+			@include all.marpad($mar: 0 1rem 0 0, $pad: 1rem);
+		}
+
+		h2 {
+			@include all.size($w: fit-content, $h: 3rem);
+			@include all.marpad($mar: 0 0 2rem 0, $pad: 0.5rem);
+			@include all.fl($jc: center);
+			font-size: 1.8rem;
+			font-weight: lighter;
+			color: white;
+			border-radius: 0.8rem;
+
+			@media(max-width: 1230px) {
+				@include all.marpad($mar: 0 0 1rem 0, $pad: 0.5rem);
+			}
+		}
+
+		.blue {
+			background: #0038FF;
+		}
+
+		.green {
+			background: #1fd7c1;
+		}
+
+		.yellow {
+			background: teal;
+		}
+
+		.title-description {
+			@include all.fl($flexdir: column);
+
+			.title {
+				@include all.size($w: 100%, $h: auto);
+				@include all.limiter();
+				@include all.marpad($mar: 0 0 1rem 0);
+				font-size: 1.8rem;
+				font-weight: bold;
+				white-space: wrap;
+			}
+
+			.description {
+				@include all.size($w: 100%, $h: auto);
+				@include all.limiter();
+				@include all.marpad($mar: 0 0 1rem 0);
+				font-size: 1.8rem;
+				white-space: wrap;
+				color: grey;
+			}
+		}
+
+		.subtask-progress-box {
+			@include all.marpad($mar: 1rem 0, $pad: 0.6rem 0.8rem);
+		}
+
+		.progress-bar-wrapper {
+			@include all.fl($alit: center, $gap: 1rem);
+		}
+
+		.progress-bar-background {
+			@include all.size($h: 0.8rem);
+			flex-grow: 1;
+			background-color: #dedddd;
+			border-radius: 4px;
+			overflow: hidden;
+		}
+
+		.progress-bar-fill {
+			@include all.size($w: 100%, $h: 0.8rem);
+			background-color: #3b82f6;
+			transition: width 0.3s ease-in-out;
+		}
+
+		.subtask-counter {
+			@include all.font-style($size: 1.5rem);
+			white-space: nowrap;
+		}
+
+		.column-bottom-container {
+			@include all.fl($alit: center, $jc: space-between);
+			@include all.marpad($pad: 0 1rem);
+
+			img {
+				@include all.size($w: 2rem, $h: 1.2rem);
+			}
+		}
+	}
 }

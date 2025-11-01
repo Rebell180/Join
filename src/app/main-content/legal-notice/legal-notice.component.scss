@@ -7,9 +7,8 @@
     overflow-y: auto;
 
     @include all.tablet {
-        @include all.marpad($pad: 3rem 0.5rem 0 0.5rem);
+        @include all.marpad($pad: 3rem 2rem);
         @include all.size($h: 80dvh);
-        overflow-x: hidden;
     }
 
     .legal-notice-container {

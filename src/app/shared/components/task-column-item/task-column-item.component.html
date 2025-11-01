@@ -5,9 +5,10 @@
 				{{ task().category }}
 			</h2>
 		</div>
-
-	<p class="title limiter">{{task().title}}</p>
+	<div class="title-description">
+	<h3 class="title limiter">{{task().title}}</h3>
 	<p class="description limiter">{{task().description}}</p>
+	</div>
 
 	@if (isSubtaskProgressVisible) {
 	<div class="subtask-progress-box">
