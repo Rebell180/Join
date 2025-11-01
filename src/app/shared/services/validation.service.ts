@@ -29,6 +29,41 @@ export class ValidationService {
   }
   // #endregion
   
-  
+  /**
+   * Validates a form.
+   * @param formType - Type of Form ('contact')
+   * @returns Record of errors
+   */
+  validateForm(formType: 'contact'): Record<string, string[]> {
+    const errors: Record<string, string[]> = {};
+    const form: FormGroup | undefined = this.forms.get(formType);
+
+    if (form) {
+      Object.keys(form.controls).forEach(key => {
+        const control = form.get(key);
+        if (control && control.errors) {
+          errors[key] = [];
+          for (const errorKey in control.errors) {
+            errors[key].push(this.getErrorMessage(errorKey, control.errors[errorKey]))
+          }
+        }
+      });
+    }
+
+    return errors
+  }
+  /**
+   * Gets an error message for user.
+   * @param errorKey - Key in Error-Record
+   * @param errorValue - Value of Validation (example maxLength(value))
+   * @returns - Errormessage for user.
+   */
+  private getErrorMessage(errorKey: string, errorValue:any): string {
+    switch (errorKey) {
+      case 'strictRequired':
+        return 'Field is required.'
+    }
+    return '';
+  }
   // #endregion
 }
