@@ -2,7 +2,7 @@
 
 :host {
     @include all.size($h: 90dvh);
-    @include all.marpad($pad: 8rem 5rem 0 5rem);
+    @include all.marpad($pad: 4rem 5rem 0 5rem);
     @include all.scrollbar();
     overflow-y: auto;
 
@@ -21,7 +21,7 @@
                 h1 {
                     width: 100%;
                     margin-bottom: 2rem;
-                    font-size: 3.9rem;
+                    font-size: 4.2rem;
                 }
 
                 button {

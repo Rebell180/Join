@@ -2,7 +2,7 @@
 
 :host {
     @include all.size($h: 90dvh);
-    @include all.marpad($pad: 8rem 5rem 0 5rem);
+    @include all.marpad($pad: 4rem 5rem 0 5rem);
     @include all.scrollbar();
     overflow-y: auto;
 
