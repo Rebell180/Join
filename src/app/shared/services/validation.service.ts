@@ -63,6 +63,9 @@ export class ValidationService {
       case 'strictRequired':
         return 'Field is required.';
 
+      case 'firstUpperCase':
+        return 'Use upper case at frist.'
+
       case 'minlength':
         return `Minimal ${errorValue.requiredLength} sign required.`;
 
