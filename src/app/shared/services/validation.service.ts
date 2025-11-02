@@ -58,10 +58,16 @@ export class ValidationService {
    * @param errorValue - Value of Validation (example maxLength(value))
    * @returns - Errormessage for user.
    */
-  private getErrorMessage(errorKey: string, errorValue:any): string {
+  private getErrorMessage(errorKey: string, errorValue?:any): string {
     switch (errorKey) {
       case 'strictRequired':
-        return 'Field is required.'
+        return 'Field is required.';
+
+      case 'minlength':
+        return `Minimal ${errorValue.requiredLength} sign required.`;
+
+      case 'email':
+        return 'E-Mail format is not correct.';
     }
     return '';
   }
