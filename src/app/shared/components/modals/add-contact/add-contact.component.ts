@@ -1,17 +1,19 @@
-import { Component, ElementRef, inject, QueryList, Renderer2, ViewChildren, AfterViewInit, input, InputSignal } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { Component, inject, AfterViewInit, input, InputSignal, OnInit, OnDestroy } from '@angular/core';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { ContactIconComponent } from "./../../contact-icon/contact-icon.component";
 import { Contact } from '../../../classes/contact';
 import { FirebaseDBService } from '../../../services/firebase-db.service';
 import { ToastMsgService } from '../../../services/toast-msg.service';
+import { ValidationService } from '../../../services/validation.service';
+import { Subscription } from 'rxjs';
+import { CustomValidator } from '../../../classes/custom-validator';
 
 @Component({
   selector: 'app-add-contact',
   standalone: true,
-  imports: [CommonModule, FormsModule, ContactIconComponent],
-  imports: [CommonModule, FormsModule, ContactIconComponent],
+  imports: [CommonModule, ContactIconComponent, ReactiveFormsModule],
   templateUrl: './add-contact.component.html',
   styleUrl: './add-contact.component.scss',
   animations: [
@@ -33,7 +35,7 @@ import { ToastMsgService } from '../../../services/toast-msg.service';
     ])
   ]
 })
-export class AddContactComponent implements AfterViewInit {
+export class AddContactComponent implements OnInit, AfterViewInit, OnDestroy {
 
   // #region properties
 
@@ -44,20 +46,37 @@ export class AddContactComponent implements AfterViewInit {
 
   /** callback function on close => remove from DOM => will be set in ModalService */
   dissolve?: () => void;
+  subFormCahange ?:Subscription;
 
   private fireDB: FirebaseDBService = inject(FirebaseDBService);
   private tms: ToastMsgService = inject(ToastMsgService);
-  private renderer: Renderer2 = inject(Renderer2);
+  private fb: FormBuilder = inject(FormBuilder);
+  private val: ValidationService = inject(ValidationService);
   
   isOpen = false;
 
-  errors: boolean[] = [false, false, false, false];
-  @ViewChildren('errEl') errorRefs!: QueryList<ElementRef<HTMLDivElement>>;
+  protected contactForm: FormGroup = this.fb.group({
+    firstname: ['', [CustomValidator.strictRequired(), CustomValidator.firstUpperCase(), Validators.minLength(3)]],
+    lastname: ['', [CustomValidator.strictRequired(), CustomValidator.firstUpperCase(), Validators.minLength(3)]],
+    email: ['', [CustomValidator.strictRequired(), Validators.minLength(10), Validators.email]],
+    tel: ['', [CustomValidator.strictRequired(), Validators.minLength(10), CustomValidator.tel()]]
+  })
+  errors: Record<string, string[]> = {};
 
   // #endregion properties
   
+  ngOnInit(): void {
+    this.val.registerForm('contact', this.contactForm);
+    this.subFormCahange = this.contactForm.valueChanges.subscribe(() => {this.validateForm();});
+  }
+
   ngAfterViewInit() {
     setTimeout(() => this.isOpen = true, 10); // Animation trigger
+  }
+
+  ngOnDestroy(): void {
+    this.subFormCahange?.unsubscribe();
+    this.val.removeForm('contact');
   }
 
   // #region methods
@@ -72,14 +91,23 @@ export class AddContactComponent implements AfterViewInit {
     setTimeout(() => this.dissolve?.(), 400);
   }
 
+  private validateForm() {
+    this.errors = this.val.validateForm('contact');
+  }
+
   /**
    * Submit the entered data as add or as update after validation
    *  
    * @param e event
    */
-  async submitForm(e: SubmitEvent) {
-    e.preventDefault();
-    if (this.validateAll()) {
+  async submitForm() {
+    this.validateForm();
+    if (this.contactForm.valid) {
+      const values = this.contactForm.value;
+      this.contact().firstname = values.firstname;
+      this.contact().lastname = values.lastname;
+      this.contact().email = values.email;
+      this.contact().tel = values.tel;
       if(this.contact().id == '') {
         await this.fireDB.addToDB('contacts', this.contact());
         this.tms.add('Contact was created', 3000, 'success');
@@ -100,126 +128,4 @@ export class AddContactComponent implements AfterViewInit {
   }
 
   // #endregion methods
-
-  // #region validation 
-
-  /** Validates firstname. */
-  protected validateFirstName(): void {
-    const valueToValidate: string = this.contact().firstname;
-    const errors: boolean[] = [];
-    const name: string = 'Firstname';
-    const errorRef: ElementRef<HTMLDivElement> = this.errorRefs.toArray()[0];
-    const pattern: RegExp = /^[A-ZÄÖÜ][a-zäöüß]+(?:[ -][A-ZÄÖÜ][a-zäöüß]+)*$/g;
-    errors.push(this.checkRequired(name, valueToValidate, errorRef));
-    if (errors.includes(false)) return
-    errors.push(this.checkMinLength(name, valueToValidate, 3, errorRef));
-    if (errors.includes(false)) return
-    errors.push(this.checkFormat(name, valueToValidate, pattern, errorRef));
-    this.errors[0] = errors.every(e => e);
-  }
-
-  /** Validates lastname. */
-  protected validateLastName(): void {
-    const valueToValidate: string = this.contact().lastname;
-    const errors: boolean[] = [];
-    const name: string = 'Lastname';
-    const errorRef: ElementRef<HTMLDivElement> = this.errorRefs.toArray()[1];
-    const pattern: RegExp = /^[A-ZÄÖÜ][a-zäöüß]+(?:[ -][A-ZÄÖÜ][a-zäöüß]+)*$/g;
-    errors.push(this.checkRequired(name, valueToValidate, errorRef))
-    if (errors.includes(false)) return
-    errors.push(this.checkMinLength(name, valueToValidate, 3, errorRef));
-    if (errors.includes(false)) return
-    errors.push(this.checkFormat(name, valueToValidate, pattern, errorRef));
-    this.errors[1] = errors.every(e => e);
-  }
-
-  /** Validates e-mail. */
-  protected validateEmail(): void {
-    const valueToValidate: string = this.contact().email;
-    const errors: boolean[] = [];
-    const name: string = 'E-Mail';
-    const errorRef: ElementRef<HTMLDivElement> = this.errorRefs.toArray()[2];
-    const pattern: RegExp = /^\w*(\.?-?\w*)*?@\w*\.[a-z]{2,3}$/g;
-    errors.push(this.checkRequired(name, valueToValidate, errorRef));
-    if (errors.includes(false)) return
-    errors.push(this.checkMinLength(name, valueToValidate, 3, errorRef));
-    if (errors.includes(false)) return
-    errors.push(this.checkFormat(name, valueToValidate, pattern, errorRef));
-    this.errors[2] = errors.every(e => e);
-  }
-
-  /** Validates tel-number. */
-  protected validateTel(): void {
-    const valueToValidate: string = this.contact().tel;
-    const errors: boolean[] = [];
-    const name: string = 'Phonenumber';
-    const errorRef: ElementRef<HTMLDivElement> = this.errorRefs.toArray()[3];
-    const pattern: RegExp = /^(?:\+49|0049|0)[ \-]?(?:\(?\d{1,5}\)?[ \-]?)?\d{3,11}$/;
-    errors.push(this.checkRequired(name, valueToValidate, errorRef));
-    if (errors.includes(false)) return
-    errors.push(this.checkMinLength(name, valueToValidate, 3, errorRef));
-    if (errors.includes(false)) return
-    errors.push(this.checkFormat(name, valueToValidate, pattern, errorRef));
-    this.errors[3] = errors.every(e => e);
-  }
-
-  private validateAll(): boolean {
-    this.validateFirstName();
-    this.validateLastName();
-    this.validateEmail();
-    this.validateTel();
-    return this.errors.every(e => e);
-  }
-
-  /**
-   * Checks, if fieldiput exists.
-   * @param desc - Description, what is requred.
-   * @param field - Formvalue
-   * @param errElem - Div for error message.
-   * @returns - true, if input exists.
-   */
-  private checkRequired(desc: string, field: string, errElem: ElementRef<HTMLDivElement>): boolean {
-    if (field.length == 0) {
-      this.renderer.setProperty(errElem.nativeElement, 'innerText', `${desc} is required.`);
-      return false;
-    }
-    this.renderer.setProperty(errElem.nativeElement, 'innerText', '');
-    return true;
-  }
-
-  /**
-   * Checks, if fieldinput is long enough.
-   * @param desc - Decription, what needs length.
-   * @param field - Formvalue.
-   * @param min - Minimum of length.
-   * @param errElem - Div for error message.
-   * @returns - true, if minmum length is reached.
-   */
-  private checkMinLength(desc: string, field: string, min: number, errElem: ElementRef<HTMLDivElement>): boolean {
-    if (field.length < min) {
-      this.renderer.setProperty(errElem.nativeElement, 'innerText', `${desc} is too short.`);
-      return false;
-    }
-    this.renderer.setProperty(errElem.nativeElement, 'innerText', '');
-    return true;
-  }
-
-  /**
-   * Checkes format.
-   * @param desc - Description, which name is tested.
-   * @param field - Formvalue.
-   * @param patten - Regex-Pattern.
-   * @param errElem - Div for error message
-   * @returns - true, if name-format is correct.
-   */
-  private checkFormat(desc: string, field: string, pattern: RegExp, errElem: ElementRef<HTMLDivElement>): boolean {
-    if (!field.match(pattern)) {
-      this.renderer.setProperty(errElem.nativeElement, 'innerText', `${desc}-Format is not correct.`);
-      return false;
-    }
-    this.renderer.setProperty(errElem.nativeElement, 'innerText', '');
-    return true;
-  }
-
-  // #endregion Validation
 }

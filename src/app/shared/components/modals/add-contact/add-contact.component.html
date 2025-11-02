@@ -20,47 +20,56 @@
                 <button type="button" (click)="closeModal()">x</button>
             </div>
             <div class="line-form">
-                @if(cs.isAddModalOpen | async) {
-                <img class="single-icon" src="assets/Icons/contact/contact_icon_grey.png" alt="">
-                } @else if(cs.isEditModalOpen | async) {
-                <app-contact-icon id="{{ 'contact-modal-icon-' + contact.id}}"
-                    class="single-initial-icon {{ contact.iconColor }}" [contact]="contact"></app-contact-icon>
+                @if(headlineTxt() == 'Add') {
+                <img class="single-icon" src="assets/Icons/contact/contact_icon_grey.png">
+                } @else if(headlineTxt() == 'Edit') {
+                <app-contact-icon id="{{ 'contact-modal-icon-' + contact().id}}"
+                    class="single-initial-icon {{ contact().iconColor }}" [contact]="contact()"></app-contact-icon>
                 }
-
-                <form method="post" (submit)="submitForm($event)">
+                <form [formGroup]="contactForm" (ngSubmit)="submitForm()">
                     <div class="form-field">
                         <div class="input-img-container">
-                            <input type="text" name="firstname" id="firstname" placeholder="fullname"
-                                [(ngModel)]="contact.firstname" (keyup)="validateFirstName()">
-                            <img src="assets/Icons/contact/person.png" alt="">
+                            <input type="text" formControlName="firstname" placeholder="First name">
+                            <img src="assets/Icons/contact/person.png">
                         </div>
-                        <div #errEl class="errmsg"></div>
+                        <div class="errmsg">
+                            @if (errors['firstname']) {
+                                {{ errors['firstname'][0] }}
+                            }
+                        </div>
                     </div>
                     <div class="form-field">
                         <div class="input-img-container">
-                            <input type="text" name="lastname" id="lastname" placeholder="lastname"
-                                [(ngModel)]="contact.lastname" (keyup)="validateLastName()">
-                            <img src="assets/Icons/contact/person.png" alt="">
+                            <input type="text" formControlName="lastname" placeholder="lastname">
+                            <img src="assets/Icons/contact/person.png">
                         </div>
-                        <div #errEl class="errmsg"></div>
+                        <div class="errmsg">
+                            @if (errors['lastname']) {
+                                {{ errors['lastname'][0] }}
+                            }
+                        </div>
                     </div>
                     <div class="form-field">
                         <div class="input-img-container">
-                            <input type="text" name="email" id="email" placeholder="email" [(ngModel)]="contact().email"
-                                (keyup)="validateEmail()">
-                            <img src="assets/Icons/contact/mail.png" alt="">
-                            <img src="assets/Icons/contact/mail.png" alt="">
+                            <input type="text" formControlName="email" placeholder="E-Mail">
+                            <img src="assets/Icons/contact/mail.png">
                         </div>
-                        <div #errEl class="errmsg"></div>
+                        <div class="errmsg">
+                            @if (errors['email']) {
+                                {{ errors['email'][0] }}
+                            }
+                        </div>
                     </div>
                     <div class="form-field">
                         <div class="input-img-container">
-                            <input type="text" name="tel" id="tel" placeholder="tel" [(ngModel)]="contact().tel"
-                                (keyup)="validateTel()">
-                            <img src="assets/Icons/contact/call.png" alt="">
-                            <img src="assets/Icons/contact/call.png" alt="">
+                            <input type="text" formControlName="tel" placeholder="Phone">
+                            <img src="assets/Icons/contact/call.png">
                         </div>
-                        <div #errEl class="errmsg"></div>
+                        <div class="errmsg">
+                            @if (errors['tel']) {
+                                {{ errors['tel'][0] }}
+                            }
+                        </div>
                     </div>
                     <div class="form-btn-container">
                         @if(headlineTxt() == 'Add') {

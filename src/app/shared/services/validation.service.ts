@@ -9,7 +9,6 @@ export class ValidationService {
   forms: Map<string, FormGroup> = new Map<string, FormGroup>();
 
   // #region Methods
-  // #region Form-Mangement
   /**
    * Adds a new from for registry.
    * @param key - Key of form.
@@ -27,7 +26,6 @@ export class ValidationService {
   removeForm(key: string): void {
     this.forms.delete(key);
   }
-  // #endregion
   
   /**
    * Validates a form.
