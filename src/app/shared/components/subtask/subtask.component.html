@@ -1,18 +1,6 @@
-<!-- <form id="add-subtask-form" (submit)="add($event)">
-    <input type="text" id="add-subtask-input" name="add-subtask-input" placeholder="Add new Subtask"
-        [(ngModel)]="newSubtask.name">
-    <div class="control-btns add-ctrl">
-        <input type="reset" id="add-reset">
-        <img class="close-icon" src="assets/Icons/taskBoard/close.png" id="reset-icon"
-            onclick="document.getElementById('add-reset').click()">
-        <hr class="btn-sep">
-        <input type="image" class="check-icon" id="add-check-icon" src="assets/Icons/taskBoard/check.png">
-    </div>
-</form> -->
-
-<div class="add-subtask-container" [ngClass]="{'active': newSubtask.editMode}" (click)="endbleEditMode(-1)">
-    <input type="text" class="add-subtask-input" name="add-subtask-input" placeholder="Add new Subtask"
-        [(ngModel)]="newSubtask.name">
+<div class="add-subtask-container" [ngClass]="{'active': newSubtask.editMode == true}" (click)="endbleEditMode(-1)">
+    <input type="text" class="add-subtask-input" name="add-subtask-input" placeholder="Add new Subtask..."
+        [(ngModel)]="newSubtask.name" autocomplete="off">
     
     @if(newSubtask.editMode) {
         <div class="add-subtask-input-btns-container">
@@ -20,7 +8,7 @@
                 <img class="edit-icon edit-icon-reset" id="reset-icon" src="assets/Icons/taskBoard/close.png" alt="">
             </button>
             <hr>
-            <button class="add-subtask-input-btn" type="button" (click)="add()">
+            <button class="add-subtask-input-btn" type="button" (click)="addSub()">
                 <img class="edit-icon edit-icon-check" id="add-check-icon" src="assets/Icons/taskBoard/check.png" alt="">
             </button>
         </div>
@@ -28,46 +16,43 @@
 </div>
 <p class="errmsg" #errmsg></p>
 @if (subtasks() && subtasks().length > 0) {
-<ul>
-    @for (subtask of subtasks(); track $index) {
-        @if (subtask.editState != SubtastEditState.DELETED) {
-            @if (subtask.editMode) {
-                <li>
-                    <div class="add-subtask-list-item-container active">
-                        <input type="text" class="add-subtask-input" name="add-subtask-input" placeholder="Add new Subtask"
-                            [(ngModel)]="subtask.name">
+    <ol>
+        @for (subtask of subtasks(); track $index) {
+            @if (subtask.editState != SubtaskEditState.DELETED) {
+                @if (subtask.editMode) {
+                    <li>
+                        <div class="add-subtask-container active">
+                            <input #editsub type="text" class="add-subtask-input" name="add-subtask-input" placeholder="Edit name..."
+                                [(ngModel)]="subtask.name" autocomplete="off">
 
-                        <div class="add-subtask-input-btns-container">
-                            <button class="add-subtask-input-btn" type="button" (click)="reset($index)">
-                                <img class="edit-icon edit-icon-reset" id="reset-icon-2" src="assets/Icons/taskBoard/close.png" alt="">
-                            </button>
-                            <hr>
-                            <button class="add-subtask-input-btn" type="button" (click)="add()">
-                                <img class="edit-icon edit-icon-check" id="add-check-icon" src="assets/Icons/taskBoard/check.png" alt="">
-                            </button>
+                            <div class="add-subtask-input-btns-container">
+                                <button class="add-subtask-input-btn" type="button" (click)="reset($index)">
+                                    <img class="edit-icon edit-icon-reset" id="reset-icon-2" src="assets/Icons/taskBoard/close.png" alt="">
+                                </button>
+                                <hr>
+                                <button class="add-subtask-input-btn" type="button" (click)="updateSub($index)">
+                                    <img class="edit-icon edit-icon-check" id="add-check-icon" src="assets/Icons/taskBoard/check.png" alt="">
+                                </button>
+                            </div>
                         </div>
-                    </div>
-                </li>
-            } @else {
-                <div class="li-wrapper" (dblclick)="endbleEditMode($index)">
-                    <li class="regular">
-                        <span [title]="subtask.name">{{ subtask.name.length > 30 ? (subtask.name | slice:0:30)
+                    </li>
+                } @else {
+                    <li class="regular" (dblclick)="selectEditInput($index)">
+                        <span [title]="subtask.name">•  {{ subtask.name.length > 30 ? (subtask.name | slice:0:30)
                             + '...' : subtask.name }}</span>
-
                         
-                        <div class="add-subtask-input-btns-container">
-                            <button class="add-subtask-input-btn" type="button" (click)="endbleEditMode($index)">
+                        <div class="add-subtask-input-btns-container hover-btns">
+                            <button class="add-subtask-input-btn" type="button" (click)="selectEditInput($index)">
                                 <img class="edit-icon edit-icon-edit" id="edit-icon" src="assets/Icons/taskBoard/edit.png" alt="">
                             </button>
                             <hr>
-                            <button class="add-subtask-input-btn" type="button" (click)="add()">
+                            <button class="add-subtask-input-btn" type="button" (click)="deleteSub($index)">
                                 <img class="edit-icon edit-icon-delete" id="add-delete-icon" src="assets/Icons/taskBoard/delete.png" alt="">
                             </button>
                         </div>
                     </li>
-                </div>
+                }
             }
         }
-    }
-</ul>
+    </ol>
 }

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectorRef, Component, ElementRef, inject, input, InputSignal, output, OutputEmitterRef, Renderer2, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, HostListener, inject, input, InputSignal, output, OutputEmitterRef, Renderer2, ViewChild } from '@angular/core';
 import { SubTask } from '../../classes/subTask';
 import { FormsModule } from '@angular/forms';
 import { SubtaskEditState } from '../../enums/subtask-edit-state';
@@ -15,31 +15,25 @@ import { SubtaskEditState } from '../../enums/subtask-edit-state';
 })
 export class SubtaskComponent {
   // #region Attributes
+
   subtasks: InputSignal<SubTask[]> = input.required<SubTask[]>();
   outSubtasks: OutputEmitterRef<SubTask[]> = output<SubTask[]>()
   protected newSubtask = new SubTask();
-  protected SubtastEditState = SubtaskEditState;
+  protected SubtaskEditState = SubtaskEditState;
 
   cdr: ChangeDetectorRef = inject(ChangeDetectorRef);
   rd2: Renderer2 = inject(Renderer2);
 
   @ViewChild('editsub') editsub!: ElementRef<HTMLInputElement>;
   @ViewChild('errmsg') errmsg!: ElementRef<HTMLParagraphElement>;
-  // #endregion
+  
+  // #endregion attributes
 
-  // #region Methods
+  constructor(private elementRef: ElementRef) {}
+
+  // #region methods
+
   // #region Form
-  /**
-   * Enables the Edit-Mode of Subtask.
-   * @param index - Index for subtask-array.
-   */
-  private endbleEdit(index: number): void {
-    let editEnabled: boolean = this.subtasks().every(subtask => !subtask.editMode)
-    if (editEnabled) {
-      this.sendErrMsg('');
-      this.subtasks()[index].editMode = true;
-    } else this.sendErrMsg('Edit another subtask at first.');
-  }
 
   /** Sets focus on edit subtask input */
   private focusEdit(): void {
@@ -64,7 +58,7 @@ export class SubtaskComponent {
    * @param index - Index of subtaskarray
    */
   protected selectEditInput(index: number) {
-    this.endbleEdit(index);
+    this.endbleEditMode(index);
     this.focusEdit();
   }
 
@@ -83,28 +77,12 @@ export class SubtaskComponent {
   // #endregion
 
   // #region CRUD
-  /**
-   * Adds a Subtaksk.
-   * @param e - Submit-Event from form.
-   */
-  add(): void {
-    this.newSubtask.editState = SubtaskEditState.NEW;
-    if (this.newSubtask.name.length == 0) {
-      this.sendErrMsg('Name is required.');
-    } else if (this.countSubtaskName(this.newSubtask) > 0) {
-      this.sendErrMsg('Subtask already exists.');
-    } else {
-      this.newSubtask.editMode = false;
-      this.subtasks().push(this.newSubtask);
-      this.newSubtask = new SubTask();
-      if (this.subtasks().length < 2) this.sendErrMsg('Add another Subtask.');
-      else {
-        this.sendErrMsg('');
-        this.outSubtasks.emit(this.subtasks());
-      }
-    }
-  }
 
+  /**
+   * Resets input of submitted subtask.
+   * 
+   * @param index index of subtask element.
+   */
   reset(index: number): void {
     if( index == -1 ) {
       this.newSubtask.name = '';
@@ -114,42 +92,103 @@ export class SubtaskComponent {
     }
   }
 
+  /**
+   * Enables submitted edit mode and deactivate all others.
+   * 
+   * @param index index of input to enable.
+   */
   endbleEditMode(index: number) {
+    const allSubtasks = this.subtasks();
+    allSubtasks.forEach((subtask) => {
+      subtask.editMode = false
+    })
+    this.newSubtask.editMode = false;
+
     if( index == -1 ) {
       this.newSubtask.editMode = true;
     }
     else {
-      this.subtasks()[index].editMode = true;
-      // this.newSubtask.editMode = true;
+      allSubtasks[index].editMode = true;
+    }
+    this.outSubtasks.emit(allSubtasks);
+  }
+
+  addSub() {
+    if (this.newSubtask.name.length == 0) {
+      this.sendErrMsg('Name is required.');
+    } else if (this.countSubtaskName(this.newSubtask) > 0) {
+      this.sendErrMsg('Subtask already exists.');
+    } else {
+      this.newSubtask.editMode = false;
+
+      const allSubtasks = this.subtasks();
+      allSubtasks.push(this.newSubtask);
+      this.outSubtasks.emit(allSubtasks);
+
+      this.newSubtask = new SubTask();
+
+      if (this.subtasks().length < 2) {  
+        this.sendErrMsg('Add another Subtask.');
+      } else {
+        this.sendErrMsg('');
+        this.outSubtasks.emit(this.subtasks());
+      }
     }
   }
 
   /**
-   * Chenge the name of subtask.
-   * @param e - Submit-Event from form.
-   * @param index - Indes of subtask-aray.
+   * Updates an existing subtask. 
+   * 
+   * @param index index of subtask array.
    */
-  changeName(e: Event, index:number): void {
-    e.preventDefault();
-    if (this.subtasks()[index].name.length == 0) this.sendErrMsg('New name required.');
-    else if (this.countSubtaskName(this.subtasks()[index]) > 1) this.sendErrMsg('Subtask allready exists.');
-    else {
-      this.sendErrMsg('');
-      if (this.subtasks()[index].editState == SubtaskEditState.NONE) this.subtasks()[index].editState = SubtaskEditState.CHANGED;
-      this.subtasks()[index].editMode = false;
-      this.outSubtasks.emit(this.subtasks())
-    }
-  }
+  updateSub(index: number): void {
+    const allSubtasks = this.subtasks();
+    allSubtasks[index].editMode = false;
+    allSubtasks[index].editState = SubtaskEditState.CHANGED;
 
+    this.outSubtasks.emit(allSubtasks);
+  }
 
   /**
    * Deletes a subtask.
+   * 
    * @param index - Index of subtask array.
    */
-  deleteSub(index:number):void {
-    this.subtasks()[index].editState = SubtaskEditState.DELETED;
-    this.outSubtasks.emit(this.subtasks());
+  deleteSub(index: number): void {
+    const allSubtasks = this.subtasks();
+    allSubtasks[index].editMode = false;
+    allSubtasks[index].editState = SubtaskEditState.DELETED;
+
+    this.outSubtasks.emit(allSubtasks);
   }
+
+  validateSubtask(subtask: SubTask): boolean {
+    let isValid: boolean = false;
+
+
+    return false;
+  }
+
+  /**
+   * Click event of onClick outside of content to close pop up.
+   * 
+   * @param event click event on outside of content.
+   */
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: MouseEvent) {
+    if (!this.elementRef.nativeElement.contains(event.target)) {
+      event.preventDefault();
+      const allSubTasks = this.subtasks();
+      allSubTasks.forEach((subtask) => {
+        subtask.editMode = false;
+      })
+      this.newSubtask.editMode = false;
+    }
+  }
+
+
+
   // #endregion
-  // #endregion
+  
+  // #endregion methods
 }

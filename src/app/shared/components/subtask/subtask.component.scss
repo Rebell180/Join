@@ -6,6 +6,13 @@
     font-size: 16px;
 }
 
+.errmsg {
+    color: #800000;
+    height: 2.2rem;
+    width: 100%;
+}
+
+// #region input field
 .add-subtask-container {
     width: 100%;
     @include all.fl($jc: space-between, $alit: center);
@@ -21,6 +28,7 @@
         @include all.limiter();
         inset: none;
         outline: none;
+        background: white;
     }
 
     .add-subtask-input-btns-container {
@@ -28,10 +36,11 @@
         
         .add-subtask-input-btn {
             @include all.size($w: 3rem, $h: 3rem);
-            background: white;
+            background: transparent;
 
             .edit-icon {
                 @include all.size($w: 3rem, $h: 3rem);
+                background: transparent;
 
                 &:hover {
                     @include all.size($w:3.2rem, $h: 3.2rem);
@@ -45,69 +54,34 @@
             border: none
         }
     }
-    
+    &.active {
+        outline: 1px solid #29ABE2;
+    }
 }
 
-.add-subtask-container.active {
-    outline: 1px solid #29ABE2;
-}
+// #endregion input field
 
-ul {
+// #region ordered list
+ol {
     width: 100%;
+    overflow-y: auto;
+    max-height: 12rem;
+    @include all.scrollbar();
     
     li {
-        height: 3.2rem;
+        height: 4.8rem;
         width: 100%;
         font-size: 16px;
-        list-style-type: none;
+        @include all.fl($jc: space-between, $alit: center);
+        background: transparent;
     }
 }
 
-.add-subtask-list-item-container {
-    width: 100%;
-    @include all.fl($jc: space-between, $alit: center);
-    padding: 0 0.5rem;
-    border: 1px solid rgba(0,0,0,0.2);
-    border-radius: 8px;
-    background: white;
+// #endregion ordered list
 
-    .add-subtask-input{
-        width: 100%;
-        font-size: 16px;
-        padding: 1rem;
-        @include all.limiter();
-        inset: none;
-        outline: none;
-    }
-
-    .add-subtask-input-btns-container {
-        @include all.fl($alit: center);
-        
-        .add-subtask-input-btn {
-            @include all.size($w: 3rem, $h: 3rem);
-            background: white;
-
-            .edit-icon {
-                @include all.size($w: 3rem, $h: 3rem);
-
-                &:hover {
-                    @include all.size($w:3.2rem, $h: 3.2rem);
-                }
-            }
-        }
-
-        hr {
-            @include all.size($w: 0.2rem, $h: 3rem);
-            background: rgb(0, 0, 0, 0.3);
-            border: none
-        }
-    }
-}
-
-.li-wrapper {
-    @include all.fl($alit: center);
-    background: transparent;
-    height: 3.2rem;
+// #region display item 
+.regular {
+    font-size: 1.6rem;
     cursor: pointer;
 
     &:hover {
@@ -115,50 +89,39 @@ ul {
         border-radius: 8px;
     }
 
-    .regular {
-        list-style: disc;
-        margin-left: 5rem;
-        padding-right: 5rem;
-        height: auto;
-        font-size: 1.6rem;
-        @include all.fl($jc: space-between);
+    &:hover .hover-btns {
+        @include all.fl($alit: center);
+    }
 
+    .add-subtask-input-btns-container {
+        display: none;
+        background: transparent;
+        padding-right: 1rem;
 
-        .add-subtask-input-btns-container {
-            display: none;
+        .add-subtask-input-btn {
+            @include all.size($w: 3rem, $h: 3rem);
+            background: transparent;
 
-            .add-subtask-input-btn {
+            .edit-icon {
                 @include all.size($w: 3rem, $h: 3rem);
-                background: rgb(0, 0, 0, 0.1);
 
-                .edit-icon {
-                    @include all.size($w: 3rem, $h: 3rem);
-
-                    &:hover {
-                        @include all.size($w:3.2rem, $h: 3.2rem);
-                    }
+                &:hover {
+                    @include all.size($w:3.2rem, $h: 3.2rem);
                 }
             }
-
-            hr {
-                @include all.size($w: 0.2rem, $h: 3rem);
-                background: rgb(0, 0, 0, 0.3);
-                border: none
-            }
-
-            
         }
-        &:hover {
-            .add-subtask-input-btns-container{
-                @include all.fl($alit: center);
-            
-            }
+
+        hr {
+            @include all.size($w: 0.2rem, $h: 3rem);
+            background: rgb(0, 0, 0, 0.3);
+            border: none
+        }
+    }
+    &:hover {
+        .add-subtask-input-btns-container{
+            @include all.fl($alit: center);
         }
     }
 }
 
-.errmsg {
-    color: #800000;
-    height: 2.2rem;
-    width: 100%;
-}
+// #endregion display item
