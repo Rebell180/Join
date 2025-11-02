@@ -68,8 +68,14 @@ export class ValidationService {
 
       case 'email':
         return 'E-Mail format is not correct.';
+
+      case 'tel':
+        return 'Use format: 0<prefix phone number> <phone number>';
+
+      case 'pattern':
+        return 'Format is not correct.'
     }
-    return '';
+    return 'Value is invalid.';
   }
   // #endregion
 }
