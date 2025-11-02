@@ -10,5 +10,5 @@
     left: 0;
     z-index: 1;
     pointer-events: none;
-    //@include all.size($w: 100dvw, $h: 100dvh);
+    @include all.size($w: 100dvw, $h: 100dvh);
 }
