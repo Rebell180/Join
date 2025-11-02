@@ -7,15 +7,26 @@
 
         input[type=text] {
             @include all.fl();
-            @include all.size($w: 20dvw, $h: 4rem);
+            @include all.size($w: 30dvw, $h: 4.5rem);
             @include all.marpad($pad: 8px 16px);
             outline: none;
             border-radius: 10px;
             border: 1px solid #a8a8a8;
+            margin-left: 5rem;
+
+            @include all.notebook {
+                width: 35dvw;
+                gap: 1.6rem;
+                }
+
+            @include all.tablet {
+                width: 50dvw;
+                height: 4.5rem;
+            }
 
             @include all.mobile {
-                border: 2px solid green;
-                width: 96dvw;
+                width: 90dvw;
+                margin: 0;
                 height: 4rem;
             }
 
@@ -35,7 +46,7 @@
         }
 
         input[type=submit] {
-            @include all.absolute($top: 0, $right: 0);
+            @include all.absolute($top: 2px, $right: 2px);
             height: 4rem;
             aspect-ratio: 1 / 1;
             background: url(../../../../../public/assets//Icons//taskBoard/searchDefault.png) no-repeat center / cover;
