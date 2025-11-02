@@ -43,6 +43,10 @@
 				@include all.fl($flexdir: column, $jc: center, $alit: center);
 			}
 
+			@include all.mobile {
+				@include all.size($w: 6rem, $h: 6rem);
+			}
+
 			&:hover {
 				background: #091930;
 			}
