@@ -68,55 +68,38 @@ export class AddtaskComponent implements OnDestroy {
     });
   }
 
-  /**
-   * Submit the entered data as new Task to DB
-   *  
-   * @param e event
-   */
-  async submitForm(e: SubmitEvent) {
-    if(this.currentTask().id == '') {
-      await this.addTask();
-      this.clear();
-      this.tms.add('Task was created', 3000, 'success');
-    } else {
-      await this.updateTask();
-    }
-    this.closeModal();
-  }
+  // /**
+  //  * Submit the entered data as new Task to DB
+  //  *  
+  //  * @param e event
+  //  */
+  // async submitForm(e: SubmitEvent) {
+  //   if(this.currentTask().id == '') {
+  //     await this.addTask();
+  //     this.clear();
+  //     this.tms.add('Task was created', 3000, 'success');
+  //   } else {
+  //     await this.updateTask();
+  //   }
+  //   this.closeModal();
+  // }
   
-  /** Adds a task into Database. */
-  private async addTask(): Promise<void> {
-    // const taskRef = this.fireDB.getCollectionRef('tasks');
-    console.log(this.currentTask());
-    this.fireDB.taskAddToDB('tasks', this.currentTask());
-
-    // // const refTask: CollectionReference = collection(this.fs, 'tasks');
-    // // const taskDocRef = await addDoc(refTask, this.currentTask().toJSON());
-    // await updateDoc(taskDocRef, {id: taskDocRef.id});
-    // for (let i = 0; i < this.currentTask().subtasks.length; i++) {
-    //   this.currentTask().subtasks[i].taskId = taskDocRef.id;
-    //   await this.addSubtask(this.currentTask().subtasks[i]);
-    // }
+  /** 
+   * Adds a task into Database. 
+   */
+  protected async addTask(): Promise<void> {
+    await this.fireDB.taskAddToDB('tasks', this.currentTask());
     this.cdr.detectChanges();
-  }
-  
-  /**
-   * Adds Subtask in Database.
-   * @param subtask - Instance of Subtask.
-   */
-  private async addSubtask(subtask: SubTask): Promise<void> {
-    const refSubtask: CollectionReference = collection(this.fs, 'subtasks');
-    const subtaskDocRef = await addDoc(refSubtask, subtask.toJSON());
-    await updateDoc(subtaskDocRef, {id: subtaskDocRef.id});
+    this.clear();
   }
 
   /**
    * Updates existing task in DB
    */
-  async updateTask() {
+  protected async updateTask(): Promise<void> {
     await this.fireDB.taskUpdateInDB('tasks', this.currentTask());
     this.closeModal();
-    this.tms.add('Task was updated', 3000, 'success');
+    // this.tms.add('Task was updated', 3000, 'success');
   }
 
   /**
@@ -163,15 +146,20 @@ export class AddtaskComponent implements OnDestroy {
    * @param subtasks 
    */
   updateSubtasks(subtasks: Array<SubTask>) {
+    this.currentTask().subtasks = [];
     subtasks.forEach((subtask) => {
       if(subtask.taskId == ''){
         subtask.taskId = this.currentTask().id;
       }
+      this.currentTask().subtasks.push(subtask);
     });
-    this.currentTask().subtasks = subtasks;
     this.currentTask().hasSubtasks = this.currentTask().subtasks.length >= 1;
   }
 
+  /**
+   * if this component is part of a modal
+   * this method emits a close output which can handle by parent.
+   */
   closeModal() {
     this.close.emit(true);
   }

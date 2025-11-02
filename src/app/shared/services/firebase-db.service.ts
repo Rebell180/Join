@@ -172,9 +172,7 @@ export class FirebaseDBService {
     const collectionRef = this.getCollectionRef(collectionName);
     const dbObjRef = await addDoc(collectionRef, task.toJSON());
     task.id = dbObjRef.id;
-    if(task.hasSubtasks) {
-      await this.taskUpdateInDB(collectionName, task);
-    }
+    await this.taskUpdateInDB(collectionName, task);
   }
 
   /**
@@ -196,11 +194,11 @@ export class FirebaseDBService {
    * @param collectionName name of collection in database.
    * @param doc task to update in database.
    */
-  async taskUpdateInDB(collectionName: string, doc: Task): Promise<void> {
-    if(doc.hasSubtasks) {
-      await this.handleSubtasksInDB(doc.subtasks, doc.id);
+  async taskUpdateInDB(collectionName: string, task: Task): Promise<void> {
+    if(task.hasSubtasks) {
+      await this.handleSubtasksInDB(task.subtasks, task.id);
     }
-    await this.updateInDB(collectionName, doc);
+    await this.updateInDB(collectionName, task);
   }
 
   /**
@@ -245,6 +243,13 @@ export class FirebaseDBService {
     this.currentContactBS.next(contact);
   }
 
+  /**
+   * Handles subtasks of task in DB 
+   * Adds new, updates subtasks with changes and delete removed subtasks.
+   * 
+   * @param subtasks subtasks to handle 
+   * @param taskId task id of subtasks
+   */
   async handleSubtasksInDB(subtasks: Array<SubTask>, taskId: string) {
     subtasks.forEach(async (subTask) => {
       const colName: string = 'subtasks';
@@ -254,10 +259,10 @@ export class FirebaseDBService {
           await this.addToDB(colName, subTask);
           break;
         case SubtaskEditState.CHANGED:
-          this.updateInDB(colName, subTask);
+          await this.updateInDB(colName, subTask);
           break;
         case SubtaskEditState.DELETED:
-          this.deleteInDB(colName, subTask);
+          await this.deleteInDB(colName, subTask);
           break;
         default:
           break;

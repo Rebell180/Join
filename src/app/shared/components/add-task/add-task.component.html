@@ -1,5 +1,5 @@
 <section class="add-task-section">
-    <form #addTaskForm="ngForm" id="add-task-form" method="post" (ngSubmit)="submitForm($event)">
+    <form #addTaskForm="ngForm" id="add-task-form">
         <header class="add-task-header">
             @if(currentTask().id == '') {
             <h1 id="add-task-headline">Add Task</h1>
@@ -65,8 +65,6 @@
                     <app-subtask id="app-task-subtask" [subtasks]="currentTask().subtasks"
                         (outSubtasks)="updateSubtasks($event)"></app-subtask>
                 </div>
-
-                <!-- <span class="required-info-txt-mobile"><b>*</b> this field is required</span> -->
             </div>
         </main>
 
@@ -74,13 +72,11 @@
             <span class="required-info-txt"><b>*</b> this field is required</span>
             <div class="add-task-btn-container">
                 @if(currentTask().id == '') {
-                <input class="btn-default" type="button" (click)="clear()" value="Clear" />
-                <input class="btn-set" type="submit" value="Create Task"
-                    [disabled]="addTaskForm.invalid || !currentTask().dueDate" />
+                <button class="btn-default" type="button" (click)="clear()">Clear</button>
+                <button class="btn-set" type="submit" (click)="addTask()" [disabled]="addTaskForm.invalid || !currentTask().dueDate">Create Task</button>
                 }
                 @else {
-                <input class="btn-set" type="submit" value="Update Task"
-                    [disabled]="addTaskForm.invalid || !currentTask().dueDate" />
+                <button class="btn-set" type="submit" (click)="updateTask()" [disabled]="addTaskForm.invalid || !currentTask().dueDate">Update Task</button>
                 }
             </div>
         </footer>
