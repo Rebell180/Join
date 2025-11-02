@@ -17,7 +17,7 @@
         @include all.fl($alit: center, $jc: space-between);
 
         .search-task-board {
-            @include all.fl($jc: space-between);
+            @include all.fl($jc: end, $gap: 3rem);
             width: 70%;
 
             @include all.notebook {
@@ -98,7 +98,7 @@
                 height: 75dvh;
             }
 
-            header {
+            .task-list-header {
                 @include all.marpad($pad: 1rem 1rem 0rem 0, $mar: 0 0 0rem 0);
                 @include all.fl($jc: space-between, $alit: center);
             }
