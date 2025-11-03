@@ -1,5 +1,5 @@
 import { Component, inject, AfterViewInit, input, InputSignal, OnInit, OnDestroy } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { ContactIconComponent } from "./../../contact-icon/contact-icon.component";
@@ -13,7 +13,7 @@ import { CustomValidator } from '../../../classes/custom-validator';
 @Component({
   selector: 'app-add-contact',
   standalone: true,
-  imports: [CommonModule, ContactIconComponent, ReactiveFormsModule],
+  imports: [CommonModule, ContactIconComponent, FormsModule, ReactiveFormsModule],
   templateUrl: './add-contact.component.html',
   styleUrl: './add-contact.component.scss',
   animations: [
@@ -66,9 +66,11 @@ export class AddContactComponent implements OnInit, AfterViewInit, OnDestroy {
   // #endregion properties
   
   ngOnInit(): void {
+    const {id, group, iconColor, ...formdata} = this.contact().toJSON();
+    this.contactForm.setValue(formdata);
     this.val.registerForm('contact', this.contactForm);
     this.subFormCahange = this.contactForm.valueChanges.subscribe(() => {this.validateForm();});
-    console.log(this.headlineTxt());
+    
   }
 
   ngAfterViewInit() {

@@ -18,7 +18,7 @@
                         @if (headlineTxt() == 'Add') {
                             <img src="assets/Icons/contact/contact_icon_grey.png">
                         } @else {
-                            <app-contact-icon [contact]="contact()"></app-contact-icon>
+                            <app-contact-icon class="{{ contact().iconColor }}" [contact]="contact()"></app-contact-icon>
                         }
                     </div>
                     <div class="input-area">
