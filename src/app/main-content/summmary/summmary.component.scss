@@ -46,7 +46,7 @@
 				@include all.font-style($size: 2.5rem, $weight: 100);
 				letter-spacing: 2px;
 
-				@media(max-width: 1150px) {
+				@media (max-width: 1150px) {
 					@include all.size();
 					@include all.font-style($size: 2.1rem);
 				}
@@ -85,6 +85,7 @@
 		}
 	}
 
+	// #region dashboard
 	.dashboard-main-container {
 		@include all.fl($alit: center);
 		@include all.size($w: 90%);
@@ -117,7 +118,9 @@
 					border-radius: 1.5rem;
 					cursor: pointer;
 					position: relative;
+					transition: all 0.8s ease;
 
+					// --- ICON-STYLING MIT HOVER WECHSEL ---
 					img {
 						@include all.size($w: 4.5rem, $h: 4.5rem);
 					}
@@ -129,7 +132,6 @@
 					&:hover {
 						background: #2a3647;
 						scale: 1.1;
-						transition: all 0.8s;
 						color: white;
 
 						img.default {
@@ -141,6 +143,7 @@
 						}
 					}
 
+					// --- TEXT-INHALTE ---
 					.done-count {
 						@include all.fl($alit: center, $flexdir: column);
 
@@ -155,96 +158,96 @@
 				}
 			}
 
-		}
+			.middle-dashboard-row-container {
+				@include all.size($h: 33%);
 
-		.middle-dashboard-row-container {
-			@include all.size($h: 33%);
+				.middle-dashboard-row {
+					@include all.size($h: 80%);
+					@include all.fl($jc: center, $alit: center, $gap: 5rem);
+					background: white;
+					border-radius: 1.5rem;
+					cursor: pointer;
+					padding: 1rem;
 
-			.middle-dashboard-row {
-				@include all.size($h: 80%);
-				@include all.fl($jc: center, $alit: center, $gap: 5rem);
-				background: white;
-				border-radius: 1.5rem;
-				cursor: pointer;
-				padding: 1rem;
-
-				@include all.mobile {
-					@include all.fl($jc: center, $alit: center, $gap: 0.8rem);
-				}
-
-				&:hover {
-					background: #2a3647;
-					scale: 1.1;
-					transition: all 0.8s;
-					color: white;
-				}
-
-				.dashboard-priority {
-					@include all.size();
-					@include all.fl($alit: center, $jc: end);
-					@include all.font-style($size: 1.5rem);
-
-					img {
-						@include all.size($w: 4.5rem, $h: 4.5rem);
-						margin-right: 0.8rem;
-					}
-				}
-
-				hr {
-					@include all.size($w: 0.5rem, $h: 5rem);
-					background: grey;
-				}
-
-				.dashboard-date {
-					@include all.size();
-					@include all.fl($flexdir: column, $alit: start, $jc: center);
-
-					span {
-						@include all.font-style($size: 1.7rem, $weight: bold);
+					@include all.mobile {
+						@include all.fl($jc: center, $alit: center, $gap: 0.8rem);
 					}
 
-					p {
-						@include all.font-style($size: 1.2rem);
-						@include all.marpad($mar: 0.3rem 0 0 0);
+					&:hover {
+						background: #2a3647;
+						scale: 1.1;
+						transition: all 0.8s;
+						color: white;
+					}
+
+					.dashboard-priority {
+						@include all.size();
+						@include all.fl($alit: center, $jc: end);
+						@include all.font-style($size: 1.5rem);
+
+						img {
+							@include all.size($w: 4.5rem, $h: 4.5rem);
+							margin-right: 0.8rem;
+						}
+					}
+
+					hr {
+						@include all.size($w: 0.5rem, $h: 5rem);
+						background: grey;
+					}
+
+					.dashboard-date {
+						@include all.size();
+						@include all.fl($flexdir: column, $alit: start, $jc: center);
+
+						span {
+							@include all.font-style($size: 1.8rem, $weight: bold);
+						}
+
+						p {
+							@include all.font-style($size: 1.6rem);
+							@include all.marpad($mar: 0.3rem 0 0 0);
+						}
 					}
 				}
 			}
-		}
 
-		.end-dashboard-row-container {
-			@include all.size($h: 33%);
-			@include all.fl($gap: 2rem);
+			.end-dashboard-row-container {
+				@include all.size($h: 33%);
+				@include all.fl($gap: 2rem);
 
-			.end-dashboard-row {
-				@include all.size($w: 100%, $h: 80%);
-				@include all.fl($alit: center, $jc: center, $flexdir: column);
-				background: white;
-				border-radius: 1.5rem;
-				cursor: pointer;
+				.end-dashboard-row {
+					@include all.size($w: 100%, $h: 80%);
+					@include all.fl($alit: center, $jc: center, $flexdir: column);
+					background: white;
+					border-radius: 1.5rem;
+					cursor: pointer;
+					transition: all 0.8s ease;
 
-				&:hover {
-					background: #2a3647;
-					scale: 1.1;
-					transition: all 0.8s;
-					color: white;
-				}
+					&:hover {
+						background: #2a3647;
+						scale: 1.1;
+						color: white;
+					}
 
-				span {
-					@include all.font-style($size: 5rem, $weight: 500);
-				}
+					span {
+						@include all.font-style($size: 5rem, $weight: 500);
+					}
 
-				p {
-					@include all.font-style($size: 1.8rem);
-					text-align: center;
+					p {
+						@include all.font-style($size: 1.8rem);
+						text-align: center;
 
-					@include all.mobile {
-						@include all.font-style($size: 1.5rem);
+						@include all.mobile {
+							@include all.font-style($size: 1.5rem);
+						}
 					}
 				}
 			}
 		}
 	}
 
+	// #region greeting user
 	.greed-user {
 		@include all.size();
 		@include all.fl($jc: center, $alit: start, $flexdir: column);
@@ -264,5 +267,6 @@
 		}
 	}
 }
+
 
 // #endregion..
