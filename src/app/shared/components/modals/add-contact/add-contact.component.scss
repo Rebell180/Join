@@ -24,7 +24,7 @@
     }
 
     @include all.tablet {
-        //@include all.size($w: 90dvw, $maxW:90rem, $h: 80dvh);
+        @include all.size($w: 90dvw, $h: 80dvh);
         @include all.fl($flexdir: column, $jc: center, $alit: center);
     }
 
@@ -36,15 +36,20 @@
         border-radius: 16px 0 0 16px;
 
         @include all.tablet {
-            //@include all.size($h: 40%);
+            @include all.size($w: 90dvw, $h: 40%);
             border-radius: 16px;
+        }
+
+        @include all.mobile {
+            height: 30%;
+            justify-content: flex-start;
+            padding-top: 1.6rem;
         }
 
         .mobile-close-btn {
             display: none;
 
             button {
-                //@include all.size($w: 4.8rem, $h: 4.8rem);
                 color: white;
                 border: none;
                 background: transparent;
@@ -66,7 +71,6 @@
         }
 
         img {
-            //@include all.size($w: 4rem, $h: 4rem);
             margin-bottom: 2rem;
 
             @include all.tablet {
@@ -94,7 +98,6 @@
         }
 
         hr {
-            //@include all.size($w: 6rem, $h: 0.3rem);
             background: rgb(17, 148, 213);
             border: none
         }
@@ -106,6 +109,30 @@ main {
     @include all.fl($jc: center, $alit: center);
     @include all.size($w: 60%, $h: 100%);
     padding: 0 3.2rem;
+
+    @include all.tablet {
+        width: 90dvw;
+        height: 60%;
+    }
+
+    @include all.mobile {
+        align-items: flex-start;
+        height: 70%;
+        padding: 7rem 1.6rem 0 1.6rem;
+        ;
+    }
+
+    .icon-area-mobile {
+        display: none;
+        @include all.mobile {
+            display: flex;
+            @include all.size($w: 12rem, $h: 12rem);
+            position: absolute;
+            top: -6rem;
+            left: calc((90dvw / 2) - 6rem);
+        }
+    }
+
     form {
         width: 100%;
     }
@@ -113,26 +140,42 @@ main {
     .form-button-container {
         @include all.fl($jc: flex-end, $gap: 1.6rem);
         margin: 1.6rem 3.2rem 0 0;
+
         input {
             padding: 1rem 1.6rem;
         }
-    }
-    .close {
-        position: absolute;
-        top: 3.2rem;
-        right: 3.2rem;
-        width: 3.2rem;
-        height: 3.2rem;
-        font-size: 3.2rem;
+
+        @include all.mobile {
+            width: 80dvw;
+            justify-content: space-between;
+            position: absolute;
+            bottom: -6.4rem;
+            input {
+                padding: 0.5rem;
+                font-size: 1.6rem;
+            }
+        }
+
     }
 }
 
 .form-main-container {
-    display: flex;
+    @include all.fl($gap: 1.6rem);
     width: 100%;
+
+    @include all.mobile {
+        height: 32dvh;
+        overflow-y: auto;
+        @include all.scrollbar();
+    }
+
     .icon-area {
         @include all.fl($jc: center, $alit: center);
         @include all.size($w: 40%, $h: 30dvh);
+
+        @include all.mobile {
+            display: none;
+        }
 
         img,
         app-contact-icon {
@@ -145,16 +188,32 @@ main {
     .input-area {
         @include all.fl($flexdir: column);
         width: 60%;
+
+        @include all.mobile {
+            width: 100%;
+            margin-top: 0.5rem;
+        }
+
         .form-field {
             @include all.fl($flexdir: column, $jc: center);
             width: 100%;
+
             input {
                 width: 27dvw;
                 padding: 1rem 4.8rem 1rem 1.6rem;
                 font-size: 1.6rem;
                 border: 1px solid #d1d1d1;
                 border-radius: 1rem;
+
+                @include all.tablet {
+                    width: 100%;
+                }
+
+                @include all.mobile {
+                    width: 78dvw;
+                }
             }
+
             img {
                 width: 1.6rem;
                 height: 1.6rem;
@@ -162,6 +221,7 @@ main {
                 right: 1.6rem;
                 top: 1rem;
             }
+
             .errmsg {
                 height: 1.6rem;
                 color: #800000;
@@ -169,5 +229,27 @@ main {
                 text-align: center;
             }
         }
+    }
+}
+
+.close {
+    position: absolute;
+    top: 3.2rem;
+    right: 3.2rem;
+    width: 3.2rem;
+    height: 3.2rem;
+    font-size: 3.2rem;
+    background: transparent;
+
+    @include all.tablet {
+        color: white;
+    }
+
+    @include all.mobile {
+        top: 1.6rem;
+        right: 1.6rem;
+        width: 1.6rem;
+        height: 1.6rem;
+        font-size: 1.6rem;
     }
 }

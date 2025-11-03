@@ -16,9 +16,9 @@
                 <div class="form-main-container">
                     <div class="icon-area">
                         @if (headlineTxt() == 'Add') {
-                            <img src="assets/Icons/contact/contact_icon_grey.png">
+                        <img src="assets/Icons/contact/contact_icon_grey.png">
                         } @else {
-                            <app-contact-icon class="{{ contact().iconColor }}" [contact]="contact()"></app-contact-icon>
+                        <app-contact-icon class="{{ contact().iconColor }}" [contact]="contact()"></app-contact-icon>
                         }
                     </div>
                     <div class="input-area">
@@ -79,8 +79,14 @@
                     <input class="btn-set" type="submit" value="{{ submitBtnTxt() }}">
                 </div>
             </form>
-            <button class="close" type="button" (click)="closeModal()">X</button>
+            <div class="icon-area-mobile">
+                @if (headlineTxt() == 'Add') {
+                <img src="assets/Icons/contact/contact_icon_grey.png">
+                } @else {
+                <app-contact-icon class="{{ contact().iconColor }}" [contact]="contact()"></app-contact-icon>
+                }
+            </div>
         </main>
+        <button class="close" type="button" (click)="closeModal()">X</button>
     </dialog>
-
 </div>
