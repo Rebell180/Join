@@ -41,7 +41,7 @@
             }
 
             .btn-set {
-                @include all.size($w: 30%, $h: 4.5rem);
+                @include all.size($w: 20%, $h: 4.5rem);
 
                 @include all.notebook {
                     width: 4.5rem;
