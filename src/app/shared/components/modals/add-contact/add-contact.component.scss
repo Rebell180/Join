@@ -12,7 +12,7 @@
 }
 
 .add-contact-modal-container {
-    //@include all.size($w: 90dvw, $maxW: 90rem, $h: 50rem);
+    @include all.size($w: 85dvw, $h: 80dvh);
     @include all.fl($jc: center, $alit: center);
     background-color: white;
     border-radius: 16px;
@@ -30,7 +30,7 @@
 
     .contact-modal-header {
         @include all.fl($flexdir: column, $jc: center);
-        //@include all.size($w: 40%);
+        @include all.size($w: 40%, $h: 80dvh);
         @include all.marpad($pad: 0 2rem);
         background-color: #2a3647;
         border-radius: 16px 0 0 16px;
@@ -100,156 +100,72 @@
         }
 
     }
+}
 
-    .contact-modal-main {
-        //@include all.size($w: 60%);
-        @include all.fl($flexdir: column, $jc: center, $gap: 2dvw);
-        padding-top: 1rem;
+main {
+    @include all.fl($jc: center, $alit: center);
+    @include all.size($w: 60%, $h: 100%);
+    padding: 0 3.2rem;
+    form {
+        width: 100%;
+    }
 
-        @include all.tablet {
-            //@include all.size($h: auto);
-            @include all.fl($alit: flex-start);
+    .form-button-container {
+        @include all.fl($jc: flex-end, $gap: 1.6rem);
+        margin: 1.6rem 3.2rem 0 0;
+        input {
+            padding: 1rem 1.6rem;
         }
+    }
+    .close {
+        position: absolute;
+        top: 3.2rem;
+        right: 3.2rem;
+        width: 3.2rem;
+        height: 3.2rem;
+        font-size: 3.2rem;
+    }
+}
 
-        @include all.tablet {
-            //@include all.size($h: 60%);
+.form-main-container {
+    display: flex;
+    width: 100%;
+    .icon-area {
+        @include all.fl($jc: center, $alit: center);
+        @include all.size($w: 40%, $h: 30dvh);
+
+        img,
+        app-contact-icon {
+            width: 12rem;
+            height: 12rem;
         }
+    }
 
-        .line-close-btn {
-            @include all.absolute($top: 0, $right: 3rem);
-            @include all.fl($jc: end);
-
-            button {
-                @include all.marpad($mar: 2rem 0 0);
-                font-size: 20px;
-
-                &:hover {
-                    color: red;
-                }
+    .input-area {
+        @include all.fl($flexdir: column);
+        width: 60%;
+        .form-field {
+            @include all.fl($flexdir: column, $jc: center);
+            width: 100%;
+            input {
+                width: 27dvw;
+                padding: 1rem 4.8rem 1rem 1.6rem;
+                font-size: 1.6rem;
+                border: 1px solid #d1d1d1;
+                border-radius: 1rem;
             }
-
-            @include all.tablet {
-                display: none;
+            img {
+                width: 1.6rem;
+                height: 1.6rem;
+                position: absolute;
+                right: 1.6rem;
+                top: 1rem;
             }
-        }
-
-        .line-form {
-            //@include all.size($h: auto);
-            @include all.fl($jc: space-between, $alit: center, $gap: 2rem);
-            @include all.marpad($pad: 0 3rem);
-
-            @include all.tablet {
-                //@include all.size($h: auto);
-                margin-top: 3rem;
-                @include all.fl($jc: center, $alit: center);
-            }
-
-            .single-icon {
-                @include all.tablet {
-                    display: block; 
-                    //@include all.size($w: 12rem, $minW: 12rem, $h: 12rem);
-                    @include all.absolute($top: 1rem, $left: 50%);
-                    transform: translate(-50%, -100%);
-                    border-radius: 50%;
-                    background: white;
-                    z-index: 1;
-                }
-            }
-
-            .single-initial-icon {
-                //@include all.size($w: 15rem, $h: 12rem);
-
-                @include all.tablet {
-                    border: 2px solid red;
-                    //@include all.size($w: 10rem, $h: 10rem);
-                    @include all.absolute($top: 0, $left: 50%);
-                    transform: translate(-50%, -95%);
-                    border-radius: 50%;
-                    border: 2px solid white;
-                }
-            }
-
-            form {
-                @include all.fl($flexdir: column, $jc: space-between, $alit: end);
-                //@include all.size();
-                @include all.tablet {
-                    margin-top: 2rem;
-                }
-
-                .form-field {
-                    //@include all.size($h: auto);
-                    @include all.fl($flexdir: column, $alit: end);
-                    margin-bottom: 1.5rem;
-
-                    .input-img-container {
-                        //@include all.size($w: 100%, $h: 40px);
-                        @include all.fl($jc: space-between, $alit: center);
-                        padding: 0 10px;
-                        border: 1px solid rgba(184, 184, 184);
-                        ;
-                        border-radius: 5px;
-
-                        input {
-                            //@include all.size();
-                            outline: none;
-
-                            &::placeholder {
-                                color: rgba(184, 184, 184);
-                            }
-                        }
-
-                        img {
-                            //@include all.size($w: 20px, $h: 20px);
-                            margin: 0;
-                            display: flex;
-                        }
-                    }
-
-                    .errmsg {
-                        //@include all.size($w: 100%, $h: 1rem);
-                        color: #c00000;
-                        font-size: 1.2rem;
-                        padding: 1px 16px;
-
-                        @include all.tablet {
-                            padding-left: 40px;
-                        }
-                    }
-                }
-
-                .form-btn-container {
-                    //@include all.size($h: 4rem);
-                    @include all.fl($jc: start);
-
-                    margin-top: 2rem;
-                    gap: 1rem;
-
-                    input {
-                        height: 4rem;
-                        font-size: 16px;
-                    }
-
-                    @media(max-width: 840px) {
-                        #add-contact-cancel-btn {
-                            display: none;
-                        }
-                    }
-
-                    @include all.tablet {
-                        gap: 0.5rem;
-                        @include all.fl($jc: center, $gap: 2rem);
-
-                        #add-contact-cancel-btn {
-                            display: flex;
-                        }
-                    }
-
-                    @include all.mobile{
-                        #add-contact-cancel-btn {
-                            display: none;
-                        }
-                    }
-                }
+            .errmsg {
+                height: 1.6rem;
+                color: #800000;
+                @include all.marpad ($pad: 0 1.6rem, $mar: 0.5rem 0);
+                text-align: center;
             }
         }
     }

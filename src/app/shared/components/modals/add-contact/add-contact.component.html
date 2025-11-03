@@ -10,78 +10,77 @@
                 <h2>Tasks are better with a team!</h2>
                 <hr>
             </div>
-            <div class="mobile-close-btn">
-                <button type="button" (click)="closeModal()">X</button>
-            </div>
         </header>
-
-        <main class="contact-modal-main">
-            <div class="line-close-btn">
-                <button type="button" (click)="closeModal()">x</button>
-            </div>
-            <div class="line-form">
-                @if(headlineTxt() == 'Add') {
-                <img class="single-icon" src="assets/Icons/contact/contact_icon_grey.png">
-                } @else if(headlineTxt() == 'Edit') {
-                <app-contact-icon id="{{ 'contact-modal-icon-' + contact().id}}"
-                    class="single-initial-icon {{ contact().iconColor }}" [contact]="contact()"></app-contact-icon>
-                }
-                <form [formGroup]="contactForm" (ngSubmit)="submitForm()">
-                    <div class="form-field">
-                        <div class="input-img-container">
-                            <input type="text" formControlName="firstname" placeholder="First name">
-                            <img src="assets/Icons/contact/person.png">
-                        </div>
-                        <div class="errmsg">
-                            @if (errors['firstname']) {
-                                {{ errors['firstname'][0] }}
-                            }
-                        </div>
-                    </div>
-                    <div class="form-field">
-                        <div class="input-img-container">
-                            <input type="text" formControlName="lastname" placeholder="lastname">
-                            <img src="assets/Icons/contact/person.png">
-                        </div>
-                        <div class="errmsg">
-                            @if (errors['lastname']) {
-                                {{ errors['lastname'][0] }}
-                            }
-                        </div>
-                    </div>
-                    <div class="form-field">
-                        <div class="input-img-container">
-                            <input type="text" formControlName="email" placeholder="E-Mail">
-                            <img src="assets/Icons/contact/mail.png">
-                        </div>
-                        <div class="errmsg">
-                            @if (errors['email']) {
-                                {{ errors['email'][0] }}
-                            }
-                        </div>
-                    </div>
-                    <div class="form-field">
-                        <div class="input-img-container">
-                            <input type="text" formControlName="tel" placeholder="Phone">
-                            <img src="assets/Icons/contact/call.png">
-                        </div>
-                        <div class="errmsg">
-                            @if (errors['tel']) {
-                                {{ errors['tel'][0] }}
-                            }
-                        </div>
-                    </div>
-                    <div class="form-btn-container">
-                        @if(headlineTxt() == 'Add') {
-                            <input id="add-contact-cancel-btn" class="btn-default" type="button" (click)="closeModal()" value="Cancel X">
-                        } @else if(headlineTxt() == 'Edit') {
-                            <input class="btn-default" type="button" (click)="deleteContact()" value="Delete">
+        <main>
+            <form [formGroup]="contactForm" (ngSubmit)="submitForm()">
+                <div class="form-main-container">
+                    <div class="icon-area">
+                        @if (headlineTxt() == 'Add') {
+                            <img src="assets/Icons/contact/contact_icon_grey.png">
+                        } @else {
+                            <app-contact-icon [contact]="contact()"></app-contact-icon>
                         }
-                        <input class="btn-set" type="submit" value="{{ submitBtnTxt() }}">
                     </div>
-                </form>
-            </div>
+                    <div class="input-area">
+                        <div class="form-field">
+                            <div class="input-img-container">
+                                <input type="text" formControlName="firstname" placeholder="First name">
+                                <img src="assets/Icons/contact/person.png">
+                            </div>
+                            <div class="errmsg">
+                                @if (errors['firstname']) {
+                                {{ errors['firstname'][0] }}
+                                }
+                            </div>
+                        </div>
+                        <div class="form-field">
+                            <div class="input-img-container">
+                                <input type="text" formControlName="lastname" placeholder="Last name">
+                                <img src="assets/Icons/contact/person.png">
+                            </div>
+                            <div class="errmsg">
+                                @if (errors['lastname']) {
+                                {{ errors['lastname'][0] }}
+                                }
+                            </div>
+                        </div>
+                        <div class="form-field">
+                            <div class="input-img-container">
+                                <input type="text" formControlName="email" placeholder="E-Mail">
+                                <img src="assets/Icons/contact/mail.png">
+                            </div>
+                            <div class="errmsg">
+                                @if (errors['email']) {
+                                {{ errors['email'][0] }}
+                                }
+                            </div>
+                        </div>
+                        <div class="form-field">
+                            <div class="input-img-container">
+                                <input type="text" formControlName="tel" placeholder="Phone">
+                                <img src="assets/Icons/contact/call.png">
+                            </div>
+                            <div class="errmsg">
+                                @if (errors['tel']) {
+                                {{ errors['tel'][0] }}
+                                }
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="form-button-container">
+                    @if(headlineTxt() == 'Add') {
+                    <input id="add-contact-cancel-btn" class="btn-default" type="button" (click)="closeModal()"
+                        value="Cancel X">
+                    } @else if(headlineTxt() == 'Edit') {
+                    <input class="btn-default" type="button" (click)="deleteContact()" value="Delete">
+                    }
+                    <input class="btn-set" type="submit" value="{{ submitBtnTxt() }}">
+                </div>
+            </form>
+            <button class="close" type="button" (click)="closeModal()">X</button>
         </main>
     </dialog>
-    
+
 </div>

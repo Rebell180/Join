@@ -68,6 +68,7 @@ export class AddContactComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnInit(): void {
     this.val.registerForm('contact', this.contactForm);
     this.subFormCahange = this.contactForm.valueChanges.subscribe(() => {this.validateForm();});
+    console.log(this.headlineTxt());
   }
 
   ngAfterViewInit() {
