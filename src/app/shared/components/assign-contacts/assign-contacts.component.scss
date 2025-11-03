@@ -9,7 +9,7 @@
     
     .assign-to-input {
         @include all.fl($jc: space-between, $alit: center);
-        @include all.borRad($radius: 8px, $c: ccc);
+        @include all.borRad($radius: 8px, $c: rgba(0, 0, 0, 0.2), $thick: 1px);
         @include all.marpad($pad: 1rem);
         background: white;
         cursor: pointer;
@@ -88,7 +88,7 @@
         }
 
         &:hover {
-          background-color: #f5f5f5;
+          background-color: #29ABE2;
         }
       }
     }

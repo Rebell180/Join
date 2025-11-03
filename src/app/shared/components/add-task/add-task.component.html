@@ -50,14 +50,8 @@
 
                 <div class="input-wrapper add-task-category-container">
                     <label class="add-task-input-lbl" for="add-task-category">Category <b>*</b></label>
-                    <select name="add-task-category" id="add-task-category" class="add-task-input add-task-category"
-                        [(ngModel)]="currentTask().category" required #category="ngModel">
-                        @for(category of (Category | keyvalue); track $index) {
-                        <option id="('add-task-category_' + $index)" class="add-task-category-option"
-                            [value]="category.value">{{ category.value }}</option>
-                        }
-                    </select>
-                    <small class="error" *ngIf="category.invalid && category.touched">Category is required.</small>
+                    
+                    <app-category-drop #category [currentCategory]="currentTask().category" (newCategory)="updateCategory($event)"></app-category-drop>
                 </div>
 
                 <div class="input-wrapper add-task-subtask-container">

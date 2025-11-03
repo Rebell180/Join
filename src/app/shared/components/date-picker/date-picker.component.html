@@ -38,3 +38,50 @@
         {{ warningMessage() }}
     </div>
 </div>
+
+<!-- #region next try -->
+<!-- <div class="dp-container">
+    <div class="dp-presenter-container" (click)="togglePicker()">
+        <span class="dp-presenter-txt">{{ getCurrentDate() }}</span>
+        <img src="assets/Icons/taskBoard/date_picker.png" alt="Calendar" class="calendar-icon" />
+    </div>
+</div>
+    @if(isOpen) {
+        <div class="dp-selection-container">
+            <div class="dp-date-container">
+                <div class="picker">
+                    <h3>Month</h3>
+                    <button (click)="addTime('month')">▲</button>
+                    @if(isCurrentMonthEdit()) {
+                        <input type="number" min="1" max="12" [ngClass]="{'active': isCurrentMonthEdit() }" (keyup)="validateInput('year')" name="month-input" [(ngModel)]="currentMonth">
+                    } @else {
+                        <span (click)="toggleEditState('month')">{{currentMonthTxt()}}</span>
+                    }
+                    <button (click)="subTime('month')">▼</button>
+                </div>
+                <div class="picker">
+                    <h3>Day</h3>
+                    <button (click)="addTime('day')">▲</button>
+                    @if(isCurrentDayEdit()) {
+                        <input type="number" [ngClass]="{'active': isCurrentDayEdit() }" (keyup)="validateInput('year')" name="day-input" [(ngModel)]="currentDay">
+                    } @else {
+                        <span (click)="toggleEditState('day')">{{ currentDayTxt() }}</span>
+                    }
+                    <button (click)="subTime('day')">▼</button>
+                </div>
+                <div class="picker">
+                    <h3>Year</h3>
+                    <button (click)="addTime('year')">▲</button>
+                    @if(isCurrentYearEdit()) {
+                        <input type="number" min="2025" [ngClass]="{'active': isCurrentYearEdit() }" (keyup)="validateInput('year')" name="year-input" [(ngModel)]="currentYear">
+                    } @else {
+                        <span (click)="toggleEditState('year')">{{ currentYear }}</span>
+                    }
+                    <span>{{ currentYear }}</span>
+                    <button (click)="subTime('year')">▼</button>
+                </div>
+            </div>
+
+        </div>
+    } -->
+<!-- #endregion next try -->

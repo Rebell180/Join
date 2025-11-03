@@ -1,3 +1,5 @@
+@use '../../../../../public/styles/all_styles' as all;
+
 .date-picker-container {
     position: relative;
     display: inline-block;
@@ -123,3 +125,75 @@
         }
     }
 }
+
+
+
+// #region next try
+
+.dp-container {
+    width: 100%;
+    
+    background: white;
+
+    padding: 1rem;
+    border-radius: 8px;
+
+    .dp-presenter-container {
+        width: 100%;
+        @include all.fl($jc: space-between, $alit: center);
+    }
+
+
+    
+}
+.dp-selection-container {
+        width: 100%;
+        max-width: 25rem;
+        background: white;
+        @include all.marpad($pad: 2rem);
+        @include all.borRad($c: rgba(0, 0, 0, 0.1), $radius: 8px);
+        @include all.boxSh($c: rgba(0, 0, 0, 0.1));
+
+        .dp-date-container {
+            @include all.fl($jc:space-between, $alit: center);
+
+            .picker {
+                @include all.fl($flexdir: column, $alit: center);
+                width: 100%;
+                min-width: 3rem;
+
+                h3 {
+                    margin-bottom: 1rem;
+                }
+                span {
+                    font-size: 20px;
+                    width: 5rem;
+                    height: 2.5rem;
+                    text-align: center;
+                }
+                input {
+                    width: 5rem;
+                    height: 2.5rem;
+                    font-size: 20px;
+                    -moz-appearance: textfield;
+                    text-align: center;
+
+                    &::-webkit-inner-spin-button,
+                    .no-spinner::-webkit-outer-spin-button {
+                        -webkit-appearance: none;
+                        margin: 0;
+                    }
+
+                    &.active {
+                        border: 2px solid #29abe3;
+                    }
+                }
+                button {
+                    background: transparent;
+                    font-size: 20px;
+                }
+            }
+        }
+    }
+
+    // #endregion next try

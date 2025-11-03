@@ -12,7 +12,8 @@
 }
 
 .add-task-modal-container {
-    //@include all.size($w: 90dvw, $maxW: 120rem, $h: 80dvh);
+    @include all.size($w: 90dvw, $h: 80dvh);
+    max-width: 120rem;
     @include all.fl($jc: center, $alit: center);
     background-color: white;
     border-radius: 16px;
@@ -24,7 +25,8 @@
     }
 
     @include all.tablet {
-        //@include all.size($w: 90dvw, $maxW:90rem, $h: 80dvh);
+        @include all.size($w: 90dvw, $h: 80dvh);
+        max-width: 90rem;
         @include all.fl($flexdir: column, $jc: center, $alit: center);
     }
 
@@ -37,7 +39,7 @@
     }
 
     #add-task-modal-content {
-        //@include all.size();
+        width: 100%;
         @include all.marpad($pad: 2rem);
     }
     

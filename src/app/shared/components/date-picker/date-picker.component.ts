@@ -203,3 +203,191 @@ export class DatePickerComponent {
 
   // #endregion methods
 }
+
+// #region next try
+  // currentMonth : number = Timestamp.now().toDate().getMonth();
+  // currentMonthTxt = () => this.currentMonth < 10 
+  //   ? '0' + this.currentMonth.toString() 
+  //   : this.currentMonth.toString();
+  // isCurrentMonthEdit = () => false;
+  // currentDay: number = Timestamp.now().toDate().getDay();
+  // currentDayTxt = () => this.currentDay < 10 
+  //   ? '0' + this.currentDay.toString() 
+  //   : this.currentDay.toString();
+  // isCurrentDayEdit = () => false;
+  // currentYear: number = Timestamp.now().toDate().getFullYear();
+  // isCurrentYearEdit = () => false;
+
+  // isOpen: boolean = false;
+
+  // // #endregion attributes
+
+  // constructor(private elementRef: ElementRef) {
+  //   console.log(this.currentDay);
+  //   console.log(this.currentMonth);
+  //   console.log(this.currentYear);
+  // }
+
+  // // #region methods
+
+
+  // /**
+  //  * Toggles the date picker selection modal.
+  //  */
+  // togglePicker() {
+  //   this.isOpen = !this.isOpen;
+  //   this.setDate();
+  // }
+
+  // toggleEditState(kind: 'month' | 'day' | 'year' | null) {
+  //   switch(kind){
+  //     case 'month':
+  //       if(this.isCurrentMonthEdit()) {
+  //         this.isCurrentMonthEdit = () => false;
+  //       }
+  //       else {
+  //         this.isCurrentMonthEdit = () => true;
+  //         this.isCurrentDayEdit = () => false;
+  //         this.isCurrentYearEdit = () => false;
+  //       }
+  //       break;
+  //     case 'day':
+  //       if(this.isCurrentDayEdit()) {
+  //         this.isCurrentDayEdit = () => false;
+  //       }
+  //       else {
+  //         this.isCurrentDayEdit = () => true;
+  //         this.isCurrentMonthEdit = () => false;
+  //         this.isCurrentYearEdit = () => false;
+  //       }
+  //       break;
+  //     case 'year':
+  //       if(this.isCurrentYearEdit()) {
+  //         this.isCurrentYearEdit = () => false;
+  //       }
+  //       else {
+  //         this.isCurrentYearEdit = () => true;
+  //         this.isCurrentDayEdit = () => false;
+  //         this.isCurrentMonthEdit = () => false;
+  //       } 
+  //       break;
+  //     default: 
+  //       this.isCurrentYearEdit = () => false;
+  //       this.isCurrentDayEdit = () => false;
+  //       this.isCurrentMonthEdit = () => false;
+  //       break;
+  //   }
+  // }
+
+  // getCurrentDate = () => {
+  //   return this.currentMonthTxt() + " / " + this.currentDayTxt() + " / " + this.currentYear;
+  // }
+
+  // setDate() {
+  //   const date = this.selectedTimestamp().toDate();
+  //   this.currentMonth = date.getMonth();
+  //   this.currentDay = date.getDay();
+  //   this.currentYear = date.getFullYear();
+  // }
+
+  // addTime(kind: 'day' | 'month' | 'year') {
+  //   switch(kind) {
+  //     case 'day':
+  //       if(this.currentDay < this.getLastDateOfMonth()) {
+  //         this.currentDay++;
+  //       }
+  //       else {
+  //         this.currentDay = 1;
+  //         this.addTime('month');
+  //       }
+  //       break;
+  //     case 'month':
+  //       if(this.currentMonth < 12) {
+  //         this.currentMonth++;
+  //       } else {
+  //         this.currentMonth = 1;
+  //         this.addTime('year');
+  //       }
+  //       break;
+  //     case 'year':
+  //       this.currentYear++;
+  //       break;
+  //     default: 
+  //       break;
+  //   }
+  //   this.updateDueDate();
+  // }
+
+  // subTime(kind: 'day' | 'month' | 'year') {
+  //   switch(kind) {
+  //     case 'day':
+  //       if(this.currentDay > 1) {
+  //         this.currentDay--;
+  //       } else {
+  //         this.subTime('month');
+  //       }
+  //       break;
+  //     case 'month':
+  //       if(this.currentMonth > 1) {
+  //         this.currentMonth--;
+  //       } else {
+  //         this.currentMonth = 12;
+  //         this.subTime('year');
+  //       }
+  //       this.currentDay = this.getLastDateOfMonth();
+  //       break;
+  //     case 'year':
+  //       this.currentYear--;
+  //       break;
+  //     default: 
+  //       break;
+  //   }
+  //   this.updateDueDate();
+  // }
+
+  // getLastDateOfMonth() {
+  //   switch(this.currentMonth) {
+  //     case 1:
+  //     case 3:
+  //     case 5:
+  //     case 7:
+  //     case 8:
+  //     case 10:
+  //     case 12:
+  //       return 31;
+  //     case 4:
+  //     case 6: 
+  //     case 9:
+  //     case 11:
+  //       return 30;
+  //     case 2:
+  //       if(this.currentYear / 4 == 0) {
+  //         return 29;
+  //       } else {
+  //         return 28;
+  //       }
+  //     default:
+  //       return 31;
+  //   }
+  // }
+
+  // validateInput(kind: 'month' | 'day' | 'year' ){
+  //   switch(kind){
+  //     case 'month':
+
+  //       break;
+  //     case 'day': 
+  //       break;
+  //     case 'year':
+  //       break;
+  //   }
+  // }
+
+  // updateDueDate() {
+  //   const dateNow = Timestamp.now().toDate();
+  //   dateNow.setDate(new Date(this.currentYear, this.currentMonth, this.currentDay).getMilliseconds());
+  //   const newTimestamp = new Timestamp(dateNow.getSeconds(), dateNow.getMilliseconds());
+  //   this.dateSelected.emit(newTimestamp);
+  // }
+
+// #endregion try

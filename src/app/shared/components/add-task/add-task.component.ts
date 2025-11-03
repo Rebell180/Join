@@ -14,12 +14,13 @@ import { ToastMsgService } from '../../services/toast-msg.service';
 import { SubtaskComponent } from '../subtask/subtask.component';
 import { SubtaskEditState } from '../../enums/subtask-edit-state';
 import { SubTask } from '../../classes/subTask';
+import { CategoryDropComponent } from "../category-drop/category-drop.component";
 
 
 @Component({
   selector: 'app-add-task',
   standalone: true,
-  imports: [CommonModule, FormsModule, PriorityButtonsComponent, DatePickerComponent, AssignContactsComponent, SubtaskComponent],
+  imports: [CommonModule, FormsModule, PriorityButtonsComponent, DatePickerComponent, AssignContactsComponent, SubtaskComponent, CategoryDropComponent],
   templateUrl: './add-task.component.html',
   styleUrl: './add-task.component.scss'
 })
@@ -67,22 +68,6 @@ export class AddtaskComponent implements OnDestroy {
       });
     });
   }
-
-  // /**
-  //  * Submit the entered data as new Task to DB
-  //  *  
-  //  * @param e event
-  //  */
-  // async submitForm(e: SubmitEvent) {
-  //   if(this.currentTask().id == '') {
-  //     await this.addTask();
-  //     this.clear();
-  //     this.tms.add('Task was created', 3000, 'success');
-  //   } else {
-  //     await this.updateTask();
-  //   }
-  //   this.closeModal();
-  // }
   
   /** 
    * Adds a task into Database. 
@@ -110,7 +95,9 @@ export class AddtaskComponent implements OnDestroy {
     this.currentTask().description = '';
     this.currentTask().category = Category.TASK;
     this.currentTask().priority = Priority.MEDIUM;
-    this.currentTask().dueDate = Timestamp.now();
+    this.currentTask().dueDate = Timestamp.fromMillis(
+	    Timestamp.now().toMillis() + (24 * 60 * 60 * 1000)
+	  );
     this.currentTask().subtasks = []
     this.currentTask().hasSubtasks = false;
     this.updateContacts([]);
@@ -139,6 +126,14 @@ export class AddtaskComponent implements OnDestroy {
     chosenContacts.forEach((contact) => {
       this.currentTask().assignedTo.push(contact.id);
     })
+  }
+
+  /**
+   * 
+   * @param category 
+   */
+  updateCategory(category: Category) {
+    this.currentTask().category = category;
   }
 
   /**

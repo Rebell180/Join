@@ -73,6 +73,7 @@ b {
 
                 #add-task-info-description {
                     @include all.scrollbar();
+                    font-family: 'Inter', sans-serif;
                     height: 14dvh;
                     overflow-y: auto;
                     resize: none;
