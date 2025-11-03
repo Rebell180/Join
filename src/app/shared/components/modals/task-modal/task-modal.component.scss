@@ -80,6 +80,7 @@
 		.title {
 			@include all.limiter();
 			font-size: 2.5rem;
+			font-weight: 600;
 			white-space: wrap;
 
 			@include all.mobile {
@@ -118,7 +119,7 @@
 			@include all.marpad($mar: 0.8rem 0 0 0);
 
 			.task-modal-assigned {
-				@include all.size($h: 15dvh);
+				@include all.size($h: 19dvh);
 				@include all.scrollbar();
 				overflow-y: auto;
 			}
@@ -186,5 +187,6 @@
 
 	h3 {
 		color: #42526e;
+		font-weight: 200;
 	}
 }
