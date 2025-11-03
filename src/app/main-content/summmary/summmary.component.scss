@@ -101,7 +101,7 @@
 			@include all.marpad($mar: 2rem 0 0 0);
 
 			.first-dashboard-row-container {
-				@include all.size($h: 30%);
+				@include all.size($h: 33%);
 				@include all.fl($gap: 1rem);
 
 				.first-dashboard-row {
