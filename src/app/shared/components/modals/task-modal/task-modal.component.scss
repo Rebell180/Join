@@ -141,19 +141,18 @@
 
 	.task-modal-subtasks {
 		@include all.fl($flexdir: column);
-		@include all.marpad($mar: 2rem 0 0 0);
+		@include all.marpad($mar: 1rem 0 0 0);
 
 		.task-modal-subtask-container {
 			@include all.marpad($pad: 1rem);
 			@include all.fl($alit: center, $flexdir: column, $gap: 1rem);
 			@include all.scrollbar();
-			@include all.size($w: 100%, $h: 10rem);
+			@include all.size($w: 100%, $h: 6rem);
 			overflow-y: auto;
 
 			@include all.mobile {
 				@include all.marpad($pad: 0.5rem);
 				@include all.scrollbar();
-				@include all.size($w: 100%, $h: 6rem);
 				overflow-y: auto;
 			}
 
