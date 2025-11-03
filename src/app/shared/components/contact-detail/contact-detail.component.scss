@@ -7,11 +7,6 @@
         @include all.fl($jc: space-between, $alit: center);
         @include all.size($h: 8rem, $w: 100%);
 
-        // @include all.notebook {
-        //     @include all.fl($jc: space-between, $alit: start);
-        //     @include all.size($w: 30dvw, $h: 12rem);
-        // }
-
         .header-info {
             @include all.fl($alit: center, $gap: 2rem);
 
@@ -38,7 +33,7 @@
 
             #middle-line {
                 display: block;
-                @include all.size($w: 1rem, $h: 6rem);
+                @include all.size($w: 3px, $h: 6rem);
 
                 @media (max-width: 1200px) {
                     display: none;
@@ -47,7 +42,7 @@
 
             #bottom-line {
                 display: none;
-                @include all.size($w: 12rem, $h: 0.6rem);
+                @include all.size($w: 12rem, $h: 3px);
 
                 @media (max-width: 1200px) {
                     display: flex;

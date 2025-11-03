@@ -7,7 +7,7 @@
     box-shadow: 5px 0 10px -5px grey;
 
     #add-contact-button {
-        @include all.size($w: 100%, $h: 10dvh);
+        @include all.size($w: 100%);
         @include all.marpad ($mar: 1rem 0, $pad: 1rem 0);
         z-index: 2;
         @include all.tablet {
