@@ -80,7 +80,7 @@
 
 		.title {
 			@include all.limiter();
-			font-size: 4rem;
+			font-size: 2.8rem;
 			white-space: wrap;
 		}
 
@@ -115,7 +115,7 @@
 			@include all.marpad($mar: 0.8rem 0 0 0);
 
 			.task-modal-assigned {
-				@include all.size($h: 18.5dvh);
+				@include all.size($h: 17dvh);
 				@include all.scrollbar();
 				overflow-y: auto;
 			}
@@ -142,6 +142,16 @@
 		.task-modal-subtask-container {
 			@include all.marpad($pad: 1rem);
 			@include all.fl($alit: center, $flexdir: column, $gap: 1rem);
+			@include all.scrollbar();
+			@include all.size($w: 100%, $h: 10rem);
+			overflow-y: auto;
+
+			@include all.mobile {
+				@include all.marpad($pad: 0.5rem);
+				@include all.scrollbar();
+				@include all.size($w: 100%, $h: 6rem);
+				overflow-y: auto;
+			}
 
 			.task-modal-input {
 				@include all.size($w: 100%, $h: 2rem);
