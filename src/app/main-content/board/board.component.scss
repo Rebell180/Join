@@ -6,11 +6,13 @@
     @include all.marpad($pad: 4rem 0);
 
     @media(max-width: 1280px) {
-        padding: 0;
+        @include all.marpad($pad: 4rem 0);
+        height: 78dvh;
     }
 
     @include all.tablet {
         height: 80dvh;
+        padding: 0;
     }
 
     // #region header
@@ -90,7 +92,7 @@
         height: 74dvh;
 
         @media(max-width: 1280px) {
-            @include all.size($h: 75dvh);
+            @include all.size($h: 70dvh);
             @include all.fl($flexdir: column);
             @include all.scrollbar();
             padding: 0 1rem 4rem 1rem;
