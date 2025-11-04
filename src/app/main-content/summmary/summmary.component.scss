@@ -39,13 +39,14 @@
 	.dashboard-main-container {
 		@include all.fl($alit: center);
 		@include all.size($w: 90%);
+		margin-top: 2rem;
 
 		.dashboard {
 			@include all.size($w: 80%, $h: 50dvh);
 
 			.first-dashboard-row-container {
 				@include all.size($h: 33%);
-				@include all.fl($gap: 1rem);
+				@include all.fl($gap: 2rem);
 
 				.first-dashboard-row {
 					@include all.size($w: 100%, $h: 100%);
@@ -85,7 +86,7 @@
 
 			.middle-dashboard-row-container {
 				@include all.size($h: 33%);
-				@include all.marpad($mar: 1rem 0);
+				@include all.marpad($mar: 2rem 0);
 
 				.middle-dashboard-row {
 					@include all.size($h: 100%);
@@ -132,8 +133,8 @@
 
 			.end-dashboard-row-container {
 				@include all.size($h: 33%);
-				@include all.fl($gap: 1rem);
-				@include all.marpad($mar: 1rem 0);
+				@include all.fl($gap: 2rem);
+				@include all.marpad($mar: 2rem 0);
 
 				.end-dashboard-row {
 					@include all.size($w: 100%, $h: 100%);
