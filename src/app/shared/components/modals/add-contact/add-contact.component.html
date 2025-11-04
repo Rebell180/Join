@@ -22,51 +22,19 @@
                         }
                     </div>
                     <div class="input-area">
-                        <div class="form-field">
+                        @for (field of fields; track field; let i = $index) {
+                            <div class="form-field">
                             <div class="input-img-container">
-                                <input type="text" formControlName="firstname" placeholder="First name">
-                                <img src="assets/Icons/contact/person.png">
+                                <input type="text" formControlName="{{ field.name }}" placeholder="{{ field.placeholder }}" (focus)="focusOnInput(i)">
+                                <img src="assets/Icons/contact/{{ field.img }}">
                             </div>
                             <div class="errmsg">
-                                @if (errors['firstname']) {
-                                {{ errors['firstname'][0] }}
+                                @if (errors[field.name]) {
+                                {{ errors[field.name][0] }}
                                 }
                             </div>
                         </div>
-                        <div class="form-field">
-                            <div class="input-img-container">
-                                <input type="text" formControlName="lastname" placeholder="Last name">
-                                <img src="assets/Icons/contact/person.png">
-                            </div>
-                            <div class="errmsg">
-                                @if (errors['lastname']) {
-                                {{ errors['lastname'][0] }}
-                                }
-                            </div>
-                        </div>
-                        <div class="form-field">
-                            <div class="input-img-container">
-                                <input type="text" formControlName="email" placeholder="E-Mail">
-                                <img src="assets/Icons/contact/mail.png">
-                            </div>
-                            <div class="errmsg">
-                                @if (errors['email']) {
-                                {{ errors['email'][0] }}
-                                }
-                            </div>
-                        </div>
-                        <div class="form-field">
-                            <div class="input-img-container">
-                                <input type="text" formControlName="tel" placeholder="Phone">
-                                <img src="assets/Icons/contact/call.png">
-                            </div>
-                            <div class="errmsg">
-                                @if (errors['tel']) {
-                                {{ errors['tel'][0] }}
-                                }
-                            </div>
-                        </div>
-
+                        }
                     </div>
                 </div>
                 <div class="form-button-container">

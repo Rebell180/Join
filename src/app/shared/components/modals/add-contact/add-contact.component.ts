@@ -61,7 +61,27 @@ export class AddContactComponent implements OnInit, AfterViewInit, OnDestroy {
     email: ['', [CustomValidator.strictRequired(), Validators.minLength(10), Validators.email]],
     tel: ['', [CustomValidator.strictRequired(), Validators.minLength(10), CustomValidator.tel()]]
   })
-  errors: Record<string, string[]> = {};
+  protected fields: {name: string, placeholder: string, img: string}[] = [
+    {
+      name: 'firstname',
+      placeholder: 'First name',
+      img: 'person.png'
+    }, {
+      name: 'lastname',
+      placeholder: 'Last name',
+      img: 'person.png'
+    }, {
+      name: 'email',
+      placeholder: 'E-Mail',
+      img: 'mail.png'
+    }, {
+      name: 'tel',
+      placeholder: 'Phone',
+      img: 'call.png'
+    }
+  ]
+  protected lastFucusIndex: number = -1;
+  protected errors: Record<string, string[]> = {};
 
   // #endregion properties
   
@@ -96,6 +116,14 @@ export class AddContactComponent implements OnInit, AfterViewInit, OnDestroy {
 
   private validateForm() {
     this.errors = this.val.validateForm('contact');
+  }
+
+  /**
+   * Changes current focus.
+   * @param index - Index of value in fields-array;
+   */
+  focusOnInput (index: number): void {
+    this.lastFucusIndex = index;
   }
 
   /**
