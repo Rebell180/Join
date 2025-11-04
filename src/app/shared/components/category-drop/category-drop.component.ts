@@ -1,10 +1,9 @@
 import { Component, ElementRef, HostListener, input, InputSignal, output, OutputEmitterRef } from '@angular/core';
 import { Category } from '../../enums/category.enum';
-import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-category-drop',
-  imports: [CommonModule],
+  imports: [],
   templateUrl: './category-drop.component.html',
   styleUrl: './category-drop.component.scss'
 })

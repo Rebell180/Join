@@ -1,5 +1,5 @@
-<div class="category-drop-container" (click)="$event.stopPropagation()">
-    <div class="category-drop-presenter" [ngClass]="{'active': isOpen == true}" (click)="toggleOptions()">
+<div class="category-drop-container">
+    <div class="category-drop-presenter" (click)="toggleOptions()">
         <span class="category-drop-presenter-txt">{{ currentCategory() }}</span>
         <span class="arrow">{{ isOpen ? '▲' : '▼' }}</span>
     </div>
