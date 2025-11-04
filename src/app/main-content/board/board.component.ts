@@ -14,7 +14,6 @@ import { CdkDragDrop, DragDropModule, transferArrayItem }from '@angular/cdk/drag
 import { FirebaseDBService } from '../../shared/services/firebase-db.service';
 import { ToastMsgService } from '../../shared/services/toast-msg.service';
 import { SearchTaskComponent } from '../../shared/components/search-task/search-task.component';
-import { TaskStateService } from '../../shared/services/task-state.service';
 
 @Component({
   selector: 'section[board]',
@@ -34,7 +33,6 @@ export class BoardComponent implements  OnDestroy, OnInit {
   private fireDB: FirebaseDBService = inject(FirebaseDBService);
   private tms: ToastMsgService = inject(ToastMsgService);
   private cdr: ChangeDetectorRef = inject(ChangeDetectorRef);
-  private taskState = inject(TaskStateService);
 
   // Primary Data
   tasks: Task[] = [];
@@ -116,7 +114,6 @@ export class BoardComponent implements  OnDestroy, OnInit {
       for (let i = 0; i < this.taskLists.length; i++) {
         this.sortTasks(i);
       }
-      this.taskState.setTasks(this.tasks);
     });
   }
 

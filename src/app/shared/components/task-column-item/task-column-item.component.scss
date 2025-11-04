@@ -2,25 +2,10 @@
 
 :host {
 	@include all.fl();
-	@include all.size($w: 100%, $h: auto);
-	max-width: 25dvw;
-
-	@include all.notebook {
-		min-width: 30dvw;
-	}
-
-	@include all.mobile {
-		min-width: 50dvw;
-	}
-
-	@media(max-width: 400px) {
-		min-width: 70dvw
-	}
 
 	.task-column-container {
-		@include all.size($w: 100%, $h: auto);
-		min-height: 25dvh;
-		@include all.marpad($mar: 0 0 1rem 0, $pad: 1rem);
+		@include all.size($w: 30rem, $h: 30rem);
+		@include all.marpad($mar: 0 0 1rem 0, $pad: 1.5rem);
 		background: rgb(254, 253, 253);
 		border-radius: 1.6rem;
 		box-shadow: 0 0 5px lightgrey;
@@ -37,10 +22,6 @@
 			font-weight: lighter;
 			color: white;
 			border-radius: 0.8rem;
-
-			@media(max-width: 1230px) {
-				@include all.marpad($mar: 0 0 1rem 0, $pad: 0.5rem);
-			}
 		}
 
 		.blue {
@@ -78,7 +59,6 @@
 				white-space: normal;
 				line-clamp: 2;
 				max-height: 7rem;
-				line-height: 3.5rem;
 				font-size: 1.8rem;
 				color: grey;
 			}

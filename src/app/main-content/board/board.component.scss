@@ -1,13 +1,16 @@
-@use '../../../../public/styles/all_styles' as all;
-@forward '../../../../public/styles/component-styles';
+@use "../../../../public/styles/all_styles" as all;
+@forward "../../../../public/styles/component-styles";
 
 :host {
     @include all.size($h: 85dvh);
-    @include all.marpad($pad: 4rem 5rem);
+    @include all.marpad($pad: 4rem 0);
 
     @media(max-width: 1280px) {
-        @include all.size($h: 80dvh);
-        @include all.marpad($pad: 3rem 0.5rem);
+        padding: 0;
+    }
+
+    @include all.tablet {
+        height: 80dvh;
     }
 
     // #region header
@@ -15,6 +18,12 @@
         @include all.size($w: 100%);
         @include all.marpad($pad: 2rem 3rem 0 3rem);
         @include all.fl($alit: center, $jc: space-between);
+        margin-bottom: 3rem;
+
+        @include all.tablet {
+            margin-bottom: 0;
+            padding: 2rem 2rem 0 2rem;
+        }
 
         .search-task-board {
             @include all.fl($jc: end, $gap: 3rem);
@@ -22,19 +31,18 @@
 
             @include all.notebook {
                 width: 75%;
-                }
+            }
 
             @include all.tablet {
                 width: 75%;
                 gap: 1.6rem;
-                }
+            }
 
             @include all.mobile {
-                    justify-content: end;
-                }
+                justify-content: end;
+            }
 
             .search-task {
-
                 @include all.mobile {
                     display: none;
                 }
@@ -43,8 +51,13 @@
             .btn-set {
                 @include all.size($w: 20%, $h: 4.5rem);
 
+                @media(max-width: 1280px) {
+                    width: 25%;
+                }
+
                 @include all.notebook {
                     width: 4.5rem;
+
                     #add-task-label {
                         display: none;
                     }
@@ -71,35 +84,42 @@
 
     // #region task-list-container
     .task-list-wrapper {
-        @include all.size($w: 100%, $h: 77dvh);
+        @include all.size($w: 100%);
         @include all.fl($gap: 1rem);
+        justify-content: space-evenly;
+        height: 74dvh;
 
-        @include all.notebook {
-            @include all.size($h: 78dvh);
+        @media(max-width: 1280px) {
+            @include all.size($h: 75dvh);
             @include all.fl($flexdir: column);
             @include all.scrollbar();
+            padding: 0 1rem 4rem 1rem;
             overflow: auto;
         }
 
         @include all.tablet {
-            height: 68dvh;
+            height: 70dvh;
+            padding: 0 1rem 4rem 1rem;
         }
 
         @include all.mobile {
-            height: 55dvh;
+            height: 60dvh;
         }
 
         .task-list {
-            @include all.size($w: 100%, $h: 77dvh);
+            @include all.size($w: 100%, $h: 73.5dvh);
+            max-width: 32rem;
             display: flex;
             flex-direction: column;
 
-            @include all.notebook {
+            @media (max-width: 1280px) {
+                max-width: 100%;
                 height: 75dvh;
             }
 
             .task-list-header {
-                @include all.marpad($pad: 1rem 1rem 0rem 0, $mar: 0 0 0rem 0);
+                width: 100%;
+                @include all.marpad($pad: 1.5rem 0);
                 @include all.fl($jc: space-between, $alit: center);
             }
 
@@ -108,13 +128,17 @@
                 @include all.scrollbar();
                 overflow: auto;
 
+                @media(max-width: 1280px) {
+                    flex-direction: row;
+                }
+
                 @include all.notebook {
                     @include all.size();
                     @include all.fl();
                     max-width: 76dvw;
                 }
 
-                @media(max-width: 920px) {
+                @media (max-width: 920px) {
                     max-width: 71dvw;
                 }
 
