@@ -1,4 +1,5 @@
-import { Component} from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
+import { TaskStatusType } from '../../shared/enums/task-status-type';
 
 @Component({
   selector: 'section[summmary]',
@@ -6,4 +7,5 @@ import { Component} from '@angular/core';
   styleUrls: ['./summmary.component.scss']
 })
 export class SummmaryComponent {
+
 }
