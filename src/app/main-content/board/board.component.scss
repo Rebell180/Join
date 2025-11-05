@@ -123,6 +123,10 @@
                 width: 99%;
                 @include all.marpad($pad: 1.5rem 0);
                 @include all.fl($jc: space-around, $alit: center, $gap: 7rem);
+
+                @media(max-width: 1280px) {
+                    justify-content: space-between;
+                }
             }
 
             main {
