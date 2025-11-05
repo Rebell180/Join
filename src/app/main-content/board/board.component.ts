@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, inject, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, HostListener, inject, OnDestroy, OnInit } from '@angular/core';
 import { Task } from '../../shared/classes/task';
 import { onSnapshot, Unsubscribe } from '@angular/fire/firestore';
 import { CommonModule } from '@angular/common';
@@ -236,4 +236,19 @@ export class BoardComponent implements  OnDestroy, OnInit {
     }
   }
   // #endregion
+
+    isMobile = false;
+
+  constructor() {
+    this.checkIfMobile();
+  }
+
+  @HostListener('window:resize')
+  onResize() {
+    this.checkIfMobile();
+  }
+
+  private checkIfMobile() {
+    this.isMobile = window.innerWidth <= 768; // oder jede gewünschte Breite
+  }
 }

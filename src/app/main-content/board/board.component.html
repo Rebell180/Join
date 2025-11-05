@@ -45,8 +45,15 @@
             [cdkDropListConnectedTo]="[todo, review, done]" (cdkDropListDropped)="drop($event)">
             @if(taskItems[1].length) { @for (task of taskItems[1]; let j = $index;
             track j) {
-            <app-task-column-item class="drag-content" [task]="task" cdkDrag
-                [cdkDragData]="task"></app-task-column-item>
+            <!-- <app-task-column-item class="drag-content" [task]="task" cdkDrag
+                [cdkDragData]="task"></app-task-column-item> -->
+                <app-task-column-item
+  class="drag-content"
+  [task]="task"
+  cdkDrag
+  [cdkDragStartDelay]="isMobile ? 1000 : 0"
+  [cdkDragData]="task">
+</app-task-column-item>
             } } @else {
             <div class="no-entry-container">
                 <p>no entries</p>
