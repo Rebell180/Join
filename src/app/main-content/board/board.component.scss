@@ -87,7 +87,7 @@
     // #region task-list-container
     .task-list-wrapper {
         @include all.size($w: 100%);
-        @include all.fl($gap: 1rem);
+        @include all.fl($gap: 2rem);
         justify-content: space-evenly;
         height: 74dvh;
 
@@ -110,7 +110,7 @@
 
         .task-list {
             @include all.size($w: 100%, $h: 73.5dvh);
-            max-width: 32rem;
+            max-width: 28rem;
             display: flex;
             flex-direction: column;
 
@@ -120,9 +120,9 @@
             }
 
             .task-list-header {
-                width: 100%;
+                width: 99%;
                 @include all.marpad($pad: 1.5rem 0);
-                @include all.fl($jc: space-between, $alit: center);
+                @include all.fl($jc: space-around, $alit: center, $gap: 7rem);
             }
 
             main {
@@ -132,6 +132,7 @@
 
                 @media(max-width: 1280px) {
                     flex-direction: row;
+                    gap: 1rem;
                 }
 
                 @include all.notebook {

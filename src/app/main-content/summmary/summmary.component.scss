@@ -1,7 +1,7 @@
 @use "../../../../public/styles/all_styles.scss" as all;
 
 :host {
-	@include all.size($h: 90dvh);
+	@include all.size($h: 80dvh);
 	@include all.marpad($pad: 5rem 3rem 0 5rem);
 
 	// #region summary-header

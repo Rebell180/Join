@@ -15,37 +15,45 @@
 		z-index: 12;
 	}
 
+	.task-detail-main-container {
+		overflow-y: auto;
+		height: 70dvh;
+		@include all.scrollbar();
+
+		@include all.mobile {
+			height: 64dvh;
+		}
+	}
+
 	.task-modal-detail-container {
-		@include all.size($w: 28%, $h: 80dvh);
+		@include all.size($w: 50rem, $h: 85dvh);
 		@include all.marpad($pad: 2rem);
 		background: rgb(254, 253, 253);
 		border-radius: 2rem;
 		box-shadow: 0 0 5px lightgrey;
 
-		@media(max-width: 1300px) {
-			width: 40dvw;
-		}
-
-		@include all.notebook {
-			@include all.size($w: 50dvw, $h: 80dvh);
-		}
-
-		@include all.tablet {
-			@include all.size($w: 60dvw, $h: 80dvh);
+		@media(max-width: 520px) {
+			width: 95dvw;
 		}
 
 		@include all.mobile {
-			@include all.size($w: 90%, $h: 70dvh);
+			height: 75dvh;
 		}
 
 		.task-modal-header {
-			@include all.fl($jc: space-between);
+			@include all.fl($jc: space-between, $alit: center);
+			margin-bottom: 1rem;
 
 			h2 {
-				@include all.marpad($mar: 0 0 2rem 0, $pad: 0.8rem);
+				@include all.marpad($pad: 0 0.8rem);
 				@include all.fl($jc: center);
 				color: white;
 				border-radius: 1.2rem;
+
+				@include all.mobile {
+					font-size: 1.8rem;
+					border-radius: 0.5rem;
+				}
 			}
 
 			.blue {
@@ -62,13 +70,11 @@
 
 			#task-modal-close-btn {
 				@include all.size($w: 1.6rem, $h: 1.6rem);
-				@include all.absolute($top: 0, $right: 0);
-				position: absolute;
-				z-index: 2;
-
-
+				// @include all.absolute($top: 0, $right: 0);
+				
 				button {
 					font-size: 2rem;
+					background: transparent;
 
 					&:hover {
 						color: #29ABE2;
@@ -77,23 +83,23 @@
 			}
 		}
 
-		.title {
-			@include all.limiter();
-			font-size: 4rem;
-			font-weight: 600;
-			white-space: wrap;
+		.title-description-container {
+			flex-direction: column;
 
-			@include all.mobile {
-				font-size: 2rem;
+			.title {
+				font-weight: 600;
+				font-size: 4rem;
+				margin-bottom: 1rem;
+
+				@include all.mobile {
+					font-size: 2.6rem;
+				}
 			}
-		}
 
-		.description {
-			@include all.fl($alit: center);
-			@include all.limiter();
-			@include all.marpad($mar: 1rem 0 0.6rem 0);
-			white-space: wrap;
-
+			.description {
+				@include all.fl($alit: center);
+				@include all.marpad($mar: 1rem 0 0.6rem 0);
+			}
 		}
 
 		.task-modal-dueDate-container {
@@ -119,20 +125,30 @@
 			@include all.marpad($mar: 0.8rem 0 0 0);
 
 			.task-modal-assigned {
-				@include all.size($h: 19dvh);
+				@include all.size($h: 18dvh);
 				@include all.scrollbar();
+				margin-top: 0.5rem;
 				overflow-y: auto;
+
+				@include all.mobile {
+					height: 20rem;
+				}
 			}
 
 			.task-modal-assigned-detail {
-				@include all.fl($flexdir: column, $gap: 1rem);
-				@include all.marpad($pad: 2rem);
+				@include all.fl($flexdir: column, $gap: 2rem);
+				@include all.marpad($pad: 1rem);
 
 				.contact-item {
+					width: 100%;
 					@include all.fl($alit: center, $gap: 2rem);
 
 					.contact-icon {
-						@include all.size($w: 4.2rem, $h: 4.2rem);
+						@include all.size($w: 4.5rem, $h: 4.4rem);
+					}
+
+					.contact-name {
+						width: 80%;
 					}
 				}
 			}
@@ -141,20 +157,18 @@
 
 	.task-modal-subtasks {
 		@include all.fl($flexdir: column);
-		@include all.marpad($mar: 1rem 0 0 0);
+		@include all.marpad($mar: 2rem 0 0 0);
 
 		.task-modal-subtask-container {
 			@include all.marpad($pad: 1rem);
-			@include all.fl($alit: center, $flexdir: column, $gap: 1rem);
+			@include all.fl($alit: center, $flexdir: column, $gap: 0.7rem);
 			@include all.scrollbar();
-			@include all.size($w: 100%, $h: 6rem);
+			@include all.size($w: 100%, $h: 12rem);
 			overflow-y: auto;
 
 			@include all.mobile {
-				@include all.marpad($pad: 0.5rem);
-				@include all.scrollbar();
-				overflow-y: auto;
-			}
+					height: 12rem;
+				}
 
 			.task-modal-input {
 				@include all.size($w: 100%, $h: 2rem);
@@ -168,19 +182,25 @@
 	}
 
 	.task-option-container {
-		position: fixed;
+		position: absolute;
 		bottom: 1rem;
 		@include all.size($w: 90%, $h: 3rem);
 		@include all.fl($jc: end, $gap: 1rem, $alit: center);
-		@include all.marpad($pad: 1rem);
+		@include all.marpad($mar: 0 0 1rem 0);
+
+		@include all.mobile {
+			padding-right: 1.5rem;
+			margin: 0;
+		}
 
 		button {
-			@include all.fl($alit: center);
+			@include all.fl($alit: center, $gap: 1rem);
+			background: transparent;
 		}
 
 		hr {
 			@include all.size($w: 0.2rem, $h: 3rem);
-			color: lightgrey
+			background: rgb(196, 195, 195);
 		}
 	}
 

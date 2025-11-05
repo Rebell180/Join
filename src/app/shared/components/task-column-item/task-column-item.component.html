@@ -1,14 +1,15 @@
 <div class="task-column-container" (click)="modalService.openTaskDetailModal(task())">
 	<div class="task-column-item-header">
-			<h2
-				[ngClass]="{ blue: task().category == Category.USERSTORY, green: task().category == Category.TECHNICAL, yellow: task().category == Category.TASK}">
-				{{ task().category }}
-			</h2>
-		</div>
-	<div class="title-description">
-	<h3 class="title limiter">{{task().title}}</h3>
-	<p class="description limiter">{{task().description}}</p>
+		<h2
+			[ngClass]="{ blue: task().category == Category.USERSTORY, green: task().category == Category.TECHNICAL, yellow: task().category == Category.TASK}">
+			{{ task().category }}
+		</h2>
 	</div>
+
+		<h3 class="title">
+			<span class="text">{{ task().title }}</span>
+		</h3>
+		<p class="description limiter">{{task().description}}</p>
 
 	@if (isSubtaskProgressVisible) {
 	<div class="subtask-progress-box">

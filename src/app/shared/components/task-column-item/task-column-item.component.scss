@@ -4,7 +4,7 @@
 	@include all.fl();
 
 	.task-column-container {
-		@include all.size($w: 30rem, $h: 30rem);
+		@include all.size($w: 26rem, $h: 30rem);
 		@include all.marpad($mar: 0 0 1rem 0, $pad: 1.5rem);
 		background: rgb(254, 253, 253);
 		border-radius: 1.6rem;
@@ -36,13 +36,10 @@
 			background: teal;
 		}
 
-		.title-description {
-			@include all.fl($flexdir: column);
-
 			.title {
 				@include all.size($w: 100%, $h: auto);
 				@include all.limiter();
-				@include all.marpad($mar: 0 0 1rem 0);
+				@include all.marpad($mar: 0 0 2rem 0);
 				font-size: 1.8rem;
 				font-weight: bold;
 				white-space: wrap;
@@ -62,7 +59,6 @@
 				font-size: 1.8rem;
 				color: grey;
 			}
-		}
 
 		.subtask-progress-box {
 			@include all.marpad($mar: 1rem 0, $pad: 0.6rem 0.8rem);

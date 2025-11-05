@@ -6,7 +6,6 @@
 }
 
 .toast {
-    
     @include all.slightInFromRightAnimation();
     @include all.size($w: 30rem, $h: 5rem);
     @include all.borRad();
@@ -22,13 +21,13 @@
         color: white;
         font-size: 20px
     }
-    
-        button {
-            color: white;
-            font-weight: 500;
-            font-size: 1.6rem;
-            background: transparent;
-            margin: 1rem 1rem;
+
+    button {
+        color: white;
+        font-weight: 500;
+        font-size: 1.6rem;
+        background: transparent;
+        margin: 1rem 1rem;
     }
 }
 
