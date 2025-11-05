@@ -25,9 +25,7 @@
             [cdkDropListConnectedTo]="[progress, review, done]" (cdkDropListDropped)="drop($event)">
             @if(taskItems[0].length) { @for (task of taskItems[0]; let j = $index;
             track j) {
-            <!-- <app-task-column-item class="drag-content" [task]="task" cdkDrag
-                [cdkDragData]="task"></app-task-column-item> -->
-                <app-task-column-item class="drag-content" [task]="task" cdkDrag [cdkDragStartDelay]="isMobile ? 1000 : 0"
+            <app-task-column-item class="drag-content" [task]="task" cdkDrag [cdkDragStartDelay]="(((dss.size() | async) === DisplayType.TABLET) || ((dss.size() | async) === DisplayType.MOBILE))? 500 : 0"
                 [cdkDragData]="task">
             </app-task-column-item>
             } } @else {
@@ -48,9 +46,7 @@
             [cdkDropListConnectedTo]="[todo, review, done]" (cdkDropListDropped)="drop($event)">
             @if(taskItems[1].length) { @for (task of taskItems[1]; let j = $index;
             track j) {
-            <!-- <app-task-column-item class="drag-content" [task]="task" cdkDrag
-                [cdkDragData]="task"></app-task-column-item> -->
-            <app-task-column-item class="drag-content" [task]="task" cdkDrag [cdkDragStartDelay]="isMobile ? 1000 : 0"
+            <app-task-column-item class="drag-content" [task]="task" cdkDrag [cdkDragStartDelay]="(((dss.size() | async) === DisplayType.TABLET) || ((dss.size() | async) === DisplayType.MOBILE))? 500 : 0"
                 [cdkDragData]="task">
             </app-task-column-item>
             } } @else {
@@ -71,9 +67,7 @@
             [cdkDropListConnectedTo]="[todo, progress, done]" (cdkDropListDropped)="drop($event)">
             @if(taskItems[2].length) { @for (task of taskItems[2]; let j = $index;
             track j) {
-            <!-- <app-task-column-item class="drag-content" [task]="task" cdkDrag
-                [cdkDragData]="task"></app-task-column-item> -->
-                <app-task-column-item class="drag-content" [task]="task" cdkDrag [cdkDragStartDelay]="isMobile ? 1000 : 0"
+            <app-task-column-item class="drag-content" [task]="task" cdkDrag [cdkDragStartDelay]="(((dss.size() | async) === DisplayType.TABLET) || ((dss.size() | async) === DisplayType.MOBILE))? 500 : 0"
                 [cdkDragData]="task">
             </app-task-column-item>
             } } @else {
@@ -94,9 +88,7 @@
             [cdkDropListConnectedTo]="[todo, progress, review]" (cdkDropListDropped)="drop($event)">
             @if(taskItems[3].length) { @for (task of taskItems[3]; let j = $index;
             track j) {
-            <!-- <app-task-column-item class="drag-content" [task]="task" cdkDrag
-                [cdkDragData]="task"></app-task-column-item> -->
-                <app-task-column-item class="drag-content" [task]="task" cdkDrag [cdkDragStartDelay]="isMobile ? 1000 : 0"
+            <app-task-column-item class="drag-content" [task]="task" cdkDrag [cdkDragStartDelay]="(((dss.size() | async) === DisplayType.TABLET) || ((dss.size() | async) === DisplayType.MOBILE))? 500 : 0"
                 [cdkDragData]="task">
             </app-task-column-item>
             } } @else {

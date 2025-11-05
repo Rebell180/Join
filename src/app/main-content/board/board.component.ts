@@ -10,10 +10,11 @@ import { SubtaskObject } from '../../shared/interfaces/subtask-object';
 import { TaskObject } from '../../shared/interfaces/task-object';
 import { ModalService } from '../../shared/services/modal.service';
 import { TaskColumnItemComponent } from '../../shared/components/task-column-item/task-column-item.component';
-import { CdkDragDrop, DragDropModule, transferArrayItem }from '@angular/cdk/drag-drop';
+import { CdkDragDrop, DragDropModule, transferArrayItem } from '@angular/cdk/drag-drop';
 import { FirebaseDBService } from '../../shared/services/firebase-db.service';
 import { ToastMsgService } from '../../shared/services/toast-msg.service';
 import { SearchTaskComponent } from '../../shared/components/search-task/search-task.component';
+import { DisplaySizeService, DisplayType } from '../../shared/services/display-size.service';
 
 @Component({
   selector: 'section[board]',
@@ -23,17 +24,19 @@ import { SearchTaskComponent } from '../../shared/components/search-task/search-
     CommonModule,
     TaskColumnItemComponent,
     DragDropModule
-],
+  ],
   templateUrl: './board.component.html',
   styleUrl: './board.component.scss'
 })
-export class BoardComponent implements  OnDestroy, OnInit {
+export class BoardComponent implements OnDestroy, OnInit {
   // #region Attrbutes
   protected modalService: ModalService = inject(ModalService);
   private fireDB: FirebaseDBService = inject(FirebaseDBService);
   private tms: ToastMsgService = inject(ToastMsgService);
   private cdr: ChangeDetectorRef = inject(ChangeDetectorRef);
+  protected dss: DisplaySizeService = inject(DisplaySizeService);
 
+  DisplayType = DisplayType;
   // Primary Data
   tasks: Task[] = [];
   private shownTasks: Task[] = [];
@@ -46,7 +49,7 @@ export class BoardComponent implements  OnDestroy, OnInit {
       { listName: 'Await feedback', status: TaskStatusType.REVIEW },
       { listName: 'Done', status: TaskStatusType.DONE }
     ]
-  protected taskItems: Task[][] = [[],[],[],[]];
+  protected taskItems: Task[][] = [[], [], [], []];
 
   // Database
   private contacts: Contact[] = [];
@@ -80,7 +83,7 @@ export class BoardComponent implements  OnDestroy, OnInit {
   private subscribeContacts(): Unsubscribe {
     return onSnapshot(this.fireDB.getCollectionRef('contacts'), contactsSnap => {
       this.contacts = [];
-      contactsSnap.docs.map( doc => {this.contacts.push(new Contact(doc.data() as ContactObject))});
+      contactsSnap.docs.map(doc => { this.contacts.push(new Contact(doc.data() as ContactObject)) });
       this.sortContacts();
     });
   }
@@ -92,7 +95,7 @@ export class BoardComponent implements  OnDestroy, OnInit {
   private subscribeSubtasks(): Unsubscribe {
     return onSnapshot(this.fireDB.getCollectionRef('subtasks'), subtasksSnap => {
       this.subtasks = [];
-      subtasksSnap.docs.map( doc => {this.subtasks.push(new SubTask(doc.data() as SubtaskObject))})
+      subtasksSnap.docs.map(doc => { this.subtasks.push(new SubTask(doc.data() as SubtaskObject)) })
     })
   }
 
@@ -104,7 +107,7 @@ export class BoardComponent implements  OnDestroy, OnInit {
     return onSnapshot(this.fireDB.getCollectionRef('tasks'), taskSnap => {
       this.tasks = [];
       this.shownTasks = [];
-      taskSnap.docs.map( doc => {this.tasks.push(new Task(doc.data() as TaskObject))});
+      taskSnap.docs.map(doc => { this.tasks.push(new Task(doc.data() as TaskObject)) });
       for (let i = 0; i < this.tasks.length; i++) {
         this.addContactsToTask(i);
         this.addSubtasktoTask(i);
@@ -140,7 +143,7 @@ export class BoardComponent implements  OnDestroy, OnInit {
   private splitTasks() {
     this.taskItems = [[], [], [], []];
     for (let i = 0; i < this.shownTasks.length; i++) {
-      switch(this.shownTasks[i].status) {
+      switch (this.shownTasks[i].status) {
         case TaskStatusType.TODO:
           this.taskItems[0].push(this.shownTasks[i]);
           break;
@@ -176,7 +179,7 @@ export class BoardComponent implements  OnDestroy, OnInit {
    * Adds all contacts to a task.
    * @param index - Positon in Task-Array.
    */
-  private addContactsToTask(index:number) {
+  private addContactsToTask(index: number) {
     this.tasks[index].contacts = [];
     for (let i = 0; i < this.tasks[index].assignedTo.length; i++) {
       for (let j = 0; j < this.contacts.length; j++) {
@@ -194,7 +197,7 @@ export class BoardComponent implements  OnDestroy, OnInit {
   private addSubtasktoTask(index: number) {
     for (let i = 0; i < this.subtasks.length; i++) {
       if (this.tasks[index].hasSubtasks && this.subtasks[i].taskId == this.tasks[index].id) {
-        if(!this.tasks[index].subtasks.includes(this.subtasks[i])) {
+        if (!this.tasks[index].subtasks.includes(this.subtasks[i])) {
           this.tasks[index].subtasks.push(this.subtasks[i]);
         }
       }
@@ -236,19 +239,4 @@ export class BoardComponent implements  OnDestroy, OnInit {
     }
   }
   // #endregion
-
-    isMobile = false;
-
-  constructor() {
-    this.checkIfMobile();
-  }
-
-  @HostListener('window:resize')
-  onResize() {
-    this.checkIfMobile();
-  }
-
-  private checkIfMobile() {
-    this.isMobile = window.innerWidth <= 768; // oder jede gewünschte Breite
-  }
 }
