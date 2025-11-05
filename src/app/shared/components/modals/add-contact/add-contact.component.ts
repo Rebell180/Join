@@ -128,24 +128,16 @@ export class AddContactComponent implements OnInit, AfterViewInit, OnDestroy {
     return this.contactForm.invalid && control.touched || this.lastFucusIndex >= index
   }
 
-  /**
-   * Submit the entered data as add or as update after validation
-   *  
-   * @param e event
-   */
+  /** Submit the entered data as add or as update after validation */
   async submitForm() {
     this.validateForm();
     if (this.contactForm.valid) {
-      const values = this.contactForm.value;
-      this.contact().firstname = values.firstname;
-      this.contact().lastname = values.lastname;
-      this.contact().email = values.email;
-      this.contact().tel = values.tel;
-      if(this.contact().id == '') {
-        await this.fireDB.addToDB('contacts', this.contact());
+      const contact = new Contact({id: this.contact().id, group: this.contactForm.value.firstname[0], iconColor: this.contact().iconColor, ...this.contactForm.value})
+      if(contact.id == '') {
+        await this.fireDB.addToDB('contacts', contact);
         this.tms.add('Contact was created', 3000, 'success');
       } else {
-        await this.fireDB.updateInDB('contacts', this.contact());
+        await this.fireDB.updateInDB('contacts', contact);
         this.tms.add('Contact was updated', 3000, 'success');
       }
       this.closeModal();
