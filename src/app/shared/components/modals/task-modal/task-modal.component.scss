@@ -48,7 +48,7 @@
 				@include all.marpad($pad: 0.5rem 1rem);
 				@include all.fl($jc: center);
 				color: white;
-				font-size: 2.4rem;
+				font-size: 2rem;
 				font-weight: 100;
 				border-radius: 1rem;
 
@@ -76,7 +76,7 @@
 				right: 0rem;
 				width: 3.2rem;
 				height: 3.2rem;
-				font-size: 3.2rem;
+				font-size: 2rem;
 				background: transparent;
 
 				@include all.mobile {
