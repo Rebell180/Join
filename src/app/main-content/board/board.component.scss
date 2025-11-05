@@ -169,6 +169,10 @@
                         color: rgb(178, 177, 177);
                         border: 2px dotted rgb(178, 177, 177);
                     }
+
+                    @media(max-width: 1280px) {
+                        height: 30dvh;
+                    }
                 }
             }
         }
