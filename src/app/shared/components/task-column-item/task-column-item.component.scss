@@ -4,15 +4,22 @@
 	@include all.fl();
 
 	.task-column-container {
-		@include all.size($w: 26rem, $h: 30rem);
+		@include all.size($w: 26rem, $h: 28rem);
 		@include all.marpad($mar: 0 0 1rem 0, $pad: 1.5rem);
 		background: rgb(254, 253, 253);
 		border-radius: 1.6rem;
 		box-shadow: 0 0 5px lightgrey;
+		cursor: pointer;
 
 		@include all.notebook {
 			@include all.marpad($mar: 0 1rem 0 0, $pad: 1rem);
 		}
+
+		.task-column-item-header {
+			height: 3.5rem;
+			margin-bottom: 2rem;
+		}
+
 
 		h2 {
 			@include all.size($w: fit-content, $h: 3rem);
@@ -36,29 +43,29 @@
 			background: teal;
 		}
 
-			.title {
-				@include all.size($w: 100%, $h: auto);
-				@include all.limiter();
-				@include all.marpad($mar: 0 0 2rem 0);
-				font-size: 1.8rem;
-				font-weight: bold;
-				white-space: wrap;
-			}
+		.title {
+			@include all.size($w: 100%, $h: auto);
+			@include all.limiter();
+			@include all.marpad($mar: 0 0 2rem 0);
+			font-size: 1.8rem;
+			font-weight: bold;
+			white-space: wrap;
+		}
 
-			.description {
-				@include all.size($w: 100%, $h: auto);
-				@include all.marpad($mar: 0 0 1rem 0);
-				display: -webkit-box;
-				-webkit-line-clamp: 2;
-				-webkit-box-orient: vertical;
-				overflow: hidden;
-				text-overflow: ellipsis;
-				white-space: normal;
-				line-clamp: 2;
-				max-height: 7rem;
-				font-size: 1.8rem;
-				color: grey;
-			}
+		.description {
+			@include all.size($w: 100%, $h: auto);
+			@include all.marpad($mar: 0 0 1rem 0);
+			display: -webkit-box;
+			-webkit-line-clamp: 2;
+			-webkit-box-orient: vertical;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: normal;
+			line-clamp: 2;
+			max-height: 7rem;
+			font-size: 1.8rem;
+			color: grey;
+		}
 
 		.subtask-progress-box {
 			@include all.marpad($mar: 1rem 0, $pad: 0.6rem 0.8rem);
@@ -89,7 +96,6 @@
 
 		.column-bottom-container {
 			@include all.fl($alit: center, $jc: space-between);
-			@include all.marpad($pad: 0 1rem);
 
 			img {
 				@include all.size($w: 2rem, $h: 1.2rem);

@@ -105,7 +105,7 @@
         }
 
         @include all.mobile {
-            height: 60dvh;
+            height: 59dvh;
         }
 
         .task-list {
@@ -120,7 +120,7 @@
             }
 
             .task-list-header {
-                width: 99%;
+                width: 100%;
                 @include all.marpad($pad: 1.5rem 0);
                 @include all.fl($jc: space-around, $alit: center, $gap: 7rem);
 
@@ -143,6 +143,7 @@
                     @include all.size();
                     @include all.fl();
                     max-width: 76dvw;
+                    padding-bottom: 1rem;
                 }
 
                 @media (max-width: 920px) {
@@ -158,11 +159,16 @@
                 }
 
                 .no-entry-container {
-                    @include all.size($w: 100%, $h: 5rem);
-                    @include all.fl($jc: center, $alit: center);
-                    border-radius: 16px;
-                    background: rgb(236, 235, 235);
-                    border: 2px dotted lightgrey;
+                    @include all.size($w: 100%, $h: 70rem);
+
+                    p {
+                        @include all.size($w: 100%, $h: 5rem);
+                        @include all.fl($jc: center, $alit: center);
+                        border-radius: 16px;
+                        background: rgb(226, 226, 226);
+                        color: rgb(178, 177, 177);
+                        border: 2px dotted rgb(178, 177, 177);
+                    }
                 }
             }
         }
@@ -174,7 +180,6 @@
 // #region CDK-Drag-Drop
 
 .cdk-drop-list-dragging {
-    height: 70dvh;
     border: 3px dotted #800000;
 }
 

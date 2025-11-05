@@ -45,10 +45,12 @@
 			margin-bottom: 1rem;
 
 			h2 {
-				@include all.marpad($pad: 0 0.8rem);
+				@include all.marpad($pad: 0.5rem 1rem);
 				@include all.fl($jc: center);
 				color: white;
-				border-radius: 1.2rem;
+				font-size: 2.4rem;
+				font-weight: 100;
+				border-radius: 1rem;
 
 				@include all.mobile {
 					font-size: 1.8rem;
