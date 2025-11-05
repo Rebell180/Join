@@ -1,5 +1,5 @@
 import { Component, inject, AfterViewInit, input, InputSignal, OnInit, OnDestroy } from '@angular/core';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { ContactIconComponent } from "./../../contact-icon/contact-icon.component";
@@ -103,17 +103,8 @@ export class AddContactComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   // #region methods
-
-  /**
-   * Closes the modal
-   * 
-   * Use a timeout to defer the close function for animation.
-   */
-  closeModal() {
-    this.isOpen = false;
-    setTimeout(() => this.dissolve?.(), 400);
-  }
-
+  // #region Form-Management
+  /** Validates the form. */
   private validateForm() {
     this.errors = this.val.validateForm('contact');
   }
@@ -121,9 +112,20 @@ export class AddContactComponent implements OnInit, AfterViewInit, OnDestroy {
   /**
    * Changes current focus.
    * @param index - Index of value in fields-array;
-   */
+  */
   focusOnInput (index: number): void {
     this.lastFucusIndex = index;
+  }
+
+  /**
+   * Decides if error message is shown.
+   * @param index - Index of Field-Array
+   * @returns true, if user passed this entry in form.
+   */
+  showError(index: number): boolean {
+    const control: AbstractControl<any, any> | null = this.contactForm.get(this.fields[index].name);
+    if (!control) return false;
+    return this.contactForm.invalid && control.touched || this.lastFucusIndex >= index
   }
 
   /**
@@ -148,6 +150,17 @@ export class AddContactComponent implements OnInit, AfterViewInit, OnDestroy {
       }
       this.closeModal();
     }
+  }
+  // #endregion
+  
+  /**
+   * Closes the modal
+   * 
+   * Use a timeout to defer the close function for animation.
+   */
+  closeModal() {
+    this.isOpen = false;
+    setTimeout(() => this.dissolve?.(), 400);
   }
 
   /**

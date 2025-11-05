@@ -29,7 +29,7 @@
                                 <img src="assets/Icons/contact/{{ field.img }}">
                             </div>
                             <div class="errmsg">
-                                @if (errors[field.name]) {
+                                @if (errors[field.name] && showError(i)) {
                                 {{ errors[field.name][0] }}
                                 }
                             </div>
