@@ -11,7 +11,7 @@
         }
 
         @include all.tablet {
-            @include all.size($h: 80dvh);
+            @include all.size($w: 100%, $h: 80dvh);
         }
 
         @include all.mobile {
@@ -29,11 +29,10 @@
         
         @include all.notebook {
             @include all.size($h: 90dvh);
-            // z-index: 2;
         }
         
         @include all.tablet {
-            @include all.size($h: 80dvh);
+            @include all.size($w: 100%, $h: 80dvh);
         }
 
         @media(max-width: 425px) {

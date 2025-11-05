@@ -39,7 +39,7 @@
 		button {
 
 			@include all.tablet {
-				@include all.size($w: 10rem, $h: 8rem);
+				@include all.size($w: 10rem, $h: 10dvh);
 				@include all.fl($flexdir: column, $jc: center, $alit: center);
 			}
 
