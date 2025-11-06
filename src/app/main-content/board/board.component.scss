@@ -3,16 +3,11 @@
 
 :host {
     @include all.size($h: 85dvh);
-    @include all.marpad($pad: 3dvw);
-
-    @include all.notebook {
-        padding: 0;
-    }
 
     // #region header
     header {
         @include all.size($w: 100%);
-        @include all.marpad($pad: 2rem 0);
+        @include all.marpad($pad: 3.5dvw 4dvw 0 3dvw);
         @include all.fl($alit: center, $jc: space-between);
         margin-bottom: 3rem;
 
