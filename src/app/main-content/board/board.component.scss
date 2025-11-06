@@ -7,7 +7,7 @@
     // #region header
     header {
         @include all.size($w: 100%);
-        @include all.marpad($pad: 3.5dvw 4dvw 0 3dvw);
+        @include all.marpad($pad: 3dvw 4dvw 0 3dvw);
         @include all.fl($alit: center, $jc: space-between);
         margin-bottom: 3rem;
 
