@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, EventEmitter, inject, OnDestroy, OnInit, Output, } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, inject, OnDestroy, OnInit, output, Output, OutputEmitterRef, } from '@angular/core';
 import { onSnapshot, Timestamp, Unsubscribe } from '@angular/fire/firestore';
 import { FirebaseDBService } from '../../shared/services/firebase-db.service';
 import { Task } from '../../shared/classes/task';
@@ -15,29 +15,22 @@ import { SectionType } from '../../shared/enums/section-type';
   styleUrls: ['./summmary.component.scss']
 })
 export class SummmaryComponent implements OnInit, OnDestroy {
-//Attribute
-private cdr: ChangeDetectorRef = inject(ChangeDetectorRef);
-@Output() selectedSection = new EventEmitter<SectionType>();
 
-Priority = Priority;
+  // #region attributes
+  Priority = Priority;
 
-goToBoard(): void {
-  this.selectedSection.emit(SectionType.BOARD);
-}
+  selectedSection: OutputEmitterRef<SectionType> = output<SectionType>();
 
-/**
- * Holds the unsubscribe function for the Firestore tasks snapshot listener.
- * @private
- */
-private unsubTasks!: Unsubscribe;
+  private cdr: ChangeDetectorRef = inject(ChangeDetectorRef);
+  private unsubTasks!: Unsubscribe;
 
-todoCount: number = 0;
-progressCount: number = 0;
-reviewCount: number = 0;
-doneCount: number = 0;
+  todoCount: number = 0;
+  progressCount: number = 0;
+  reviewCount: number = 0;
+  doneCount: number = 0;
+  totalTasks: number = 0;
 
-totalTasks: number = 0;
-sortedTasks: Task[] = [];
+  sortedTasks: Task[] = [];
 //endregion
 
 
@@ -70,6 +63,11 @@ ngOnDestroy(): void {
 }
 //#endregion
 
+/** */
+goToBoard(): void {
+  this.selectedSection.emit(SectionType.BOARD);
+}
+
 
 //#region subscribeTasksStatusCount
 /**
@@ -80,12 +78,9 @@ ngOnDestroy(): void {
 private subscribeTasksStatusCount(): void {
   this.unsubTasks = onSnapshot(this.fireDB.getCollectionRef('tasks'), snapshot => {
     const tasks: Task[] = snapshot.docs.map(doc => new Task(doc.data() as TaskObject));
-
     this.sortedTasks = this.getNextTasks(tasks);
-
     this.updateStatusCounts(tasks);
-
-    this.cdr.detectChanges();
+    // this.cdr.detectChanges();
   });
 }
 //#endregion
@@ -205,17 +200,14 @@ private updateStatusCounts(tasks: Task[]): void {
         filteredTasks.filter(task => task.priority == Priority.URGENT).forEach(task => {
           sortedTasks.push(task);
         });
-        console.log('URGENT');
       } else if (filteredTasks.filter(task => task.priority == Priority.MEDIUM).length >= 1) {
         filteredTasks.filter(task => task.priority == Priority.MEDIUM).forEach(task => {
           sortedTasks.push(task);
         });
-        console.log('MEDIUM');
       } else if (filteredTasks.filter(task => task.priority == Priority.LOW).length >= 1) {
         filteredTasks.filter(task => task.priority == Priority.LOW).forEach(task => {
           sortedTasks.push(task);
         });
-        console.log('LOW');
       }
     }
 
