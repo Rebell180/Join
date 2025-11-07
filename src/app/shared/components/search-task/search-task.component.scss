@@ -6,11 +6,11 @@
 
         input[type=text] {
             @include all.fl();
-            @include all.size($w: 20dvw, $h: 4.5rem);
+            @include all.size($w: 30dvw, $h: 4.5rem);
             @include all.marpad($pad: 1rem 2rem);
             @include all.borRad($radius: 8px, $c: rgba(0, 0, 0, 0.2));
             outline: none;
-            // margin-left: 5rem;
+            font-size: 16px;
 
             @media(max-width: 1280px) {
                 width: 35dvw;
@@ -29,7 +29,7 @@
             }
 
             &::placeholder {
-                color: #d1d1d1;
+                color: rgba(0, 0, 0, 0.3);
             }
 
             &:focus {
