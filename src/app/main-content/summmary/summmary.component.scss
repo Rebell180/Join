@@ -10,7 +10,7 @@
 		@include all.fl($jc: start, $alit: center);
 
 		.summary-header-info {
-			@include all.fl($alit: center, $gap: 2rem);
+			@include all.fl($alit: center, $gap: 3rem);
 
 			h1 {
 				font-family: 'Interbold', sans-serif;
@@ -43,26 +43,25 @@
 	// #region dashboard
 	.dashboard-main-container {
 		@include all.fl($alit: center);
-		@include all.size($w: 90%);
+		@include all.size($w: 100%);
 		margin-top: 2rem;
 
 		.dashboard {
-			@include all.size($w: 100%, $h: 50dvh);
+			@include all.size($w: 60dvw, $h: 70dvh);
+			padding: 4rem 4rem 4rem 0;
 
 			.first-dashboard-row-container {
-				@include all.size($h: 33%);
+				@include all.size($h: 30%);
 				@include all.fl($gap: 2rem);
 
 				.first-dashboard-row {
 					@include all.size($w: 100%, $h: 100%);
-					max-width: 24rem;
-					@include all.fl($jc: center, $alit: center, $gap: 3rem);
+					@include all.fl($jc: center, $alit: center, $gap: 2rem);
 					background: white;
 					border-radius: 1.5rem;
 					position: relative;
 					transition: all 0.8s ease;
 					cursor: pointer;
-
 
 					img {
 						@include all.size($w: 6rem, $h: 6rem);
@@ -93,13 +92,12 @@
 			}
 
 			.middle-dashboard-row-container {
-				@include all.size($h: 33%);
+				@include all.size($h: 30%);
 				@include all.marpad($mar: 2rem 0);
 
 				.middle-dashboard-row {
 					@include all.size($w: 100%, $h: 100%);
-					max-width: 50rem;
-					@include all.fl($jc: center, $alit: center, $gap: 3rem);
+					@include all.fl($jc: center, $alit: center, $gap: 4rem);
 					background: white;
 					border-radius: 1.5rem;
 					cursor: pointer;
@@ -116,9 +114,46 @@
 						@include all.size($h: 6rem);
 						@include all.fl($alit: center, $jc: center);
 
-						img {
-							@include all.size($w: 6rem, $h: 6rem);
+						.red {
+							background: #ff3c00;
+							width: 6rem;
+							height: 6rem;
 							border-radius: 50%;
+							display: flex;
+							justify-content: center;
+							align-items: center;
+
+							img {
+								@include all.size($w: 3rem, $h: 3rem);
+							}
+						}
+
+						.orange {
+							background: #ffaa00;
+							width: 6rem;
+							height: 6rem;
+							border-radius: 50%;
+							display: flex;
+							justify-content: center;
+							align-items: center;
+
+							img {
+								@include all.size($w: 2.5rem, $h: 1.5rem);
+							}
+						}
+
+						.green {
+							background: #79e329;
+							width: 6rem;
+							height: 6rem;
+							border-radius: 50%;
+							display: flex;
+							justify-content: center;
+							align-items: center;
+
+							img {
+								@include all.size($w: 2.5rem, $h: 2rem);
+							}
 						}
 					}
 
@@ -151,13 +186,12 @@
 			}
 
 			.end-dashboard-row-container {
-				@include all.size($h: 33%);
-				@include all.fl($gap: 2rem);
+				@include all.size($h: 30%);
+				@include all.fl($gap: 3rem);
 				@include all.marpad($mar: 2rem 0);
 
 				.end-dashboard-row {
 					@include all.size($w: 100%, $h: 100%);
-					max-width: 15.3rem;
 					@include all.fl($alit: center, $jc: center, $flexdir: column);
 					background: white;
 					border-radius: 1.5rem;
@@ -180,7 +214,7 @@
 
 	// #region greeting user
 	.greed-user {
-		@include all.size($w: 100%, $h: 60dvh);
+		@include all.size($w: 100%, $h: 70dvh);
 		@include all.fl($jc: center, $alit: start, $flexdir: column);
 		@include all.marpad($pad: 0 0 0 10rem);
 
@@ -194,7 +228,7 @@
 		}
 
 		h2 {
-			font-size: 2.8rem; 
+			font-size: 2.8rem;
 			font-weight: 100;
 		}
 	}

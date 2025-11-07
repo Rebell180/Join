@@ -11,6 +11,11 @@
         @include all.fl($alit: center, $jc: space-between);
         margin-bottom: 3rem;
 
+        h1 {
+            font-family: 'Interbold', sans-serif;
+            font-size: 5rem;
+        }
+
         @include all.tablet {
             margin-bottom: 0;
             padding: 2rem 2rem 0 2rem;

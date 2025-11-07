@@ -50,6 +50,11 @@ b {
             height: 10dvh;
             @include all.fl($alit: center);
             margin-bottom: 2rem;
+
+            h1 {
+                font-family: 'Interbold', sans-serif;
+                font-size: 5rem;
+            }
         }
 
         .add-task-main-container {

@@ -10,7 +10,6 @@ import { SectionType } from '../../shared/enums/section-type';
 
 @Component({
   selector: 'section[summary]',
-  standalone: true,
   imports: [CommonModule],
   templateUrl: './summmary.component.html',
   styleUrls: ['./summmary.component.scss']
@@ -47,9 +46,7 @@ sortedTasks: Task[] = [];
  * Creates the TaskSummaryComponent.
  * @param fireDB - Service used to interact with Firestore.
  */
-constructor(
-    private fireDB: FirebaseDBService
-  ) {}
+constructor( private fireDB: FirebaseDBService ) {}
 //endregion
 
 //#region ngOnInit/ngOnDestroy

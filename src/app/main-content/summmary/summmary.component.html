@@ -10,8 +10,8 @@
 	<div class="dashboard">
 		<div class="first-dashboard-row-container" (click)="goToBoard()">
 			<div class="first-dashboard-row">
-				<img class="default" src="assets/Icons/summary/ToDoIcon.png" alt="To-do">
-				<img class="hover" src="assets/Icons/summary/ToDoIconHover.png" alt="To-do Hover">
+				<img class="default" src="assets/Icons/summary/ToDoIcon.png" alt="To-do" />
+				<img class="hover" src="assets/Icons/summary/ToDoIconHover.png" alt="To-do Hover" />
 				<div class="done-count">
 					<span>{{ todoCount }}</span>
 					<p>To-do</p>
@@ -19,8 +19,8 @@
 			</div>
 
 			<div class="first-dashboard-row" (click)="goToBoard()">
-				<img class="default" src="assets/Icons/summary/DoneIcon.png" alt="Done">
-				<img class="hover" src="assets/Icons/summary/DoneIconHover.png" alt="Done Hover">
+				<img class="default" src="assets/Icons/summary/DoneIcon.png" alt="Done" />
+				<img class="hover" src="assets/Icons/summary/DoneIconHover.png" alt="Done Hover" />
 				<div class="done-count">
 					<span>{{ doneCount }}</span>
 					<p>Done</p>
@@ -31,24 +31,27 @@
 			<div class="middle-dashboard-row" (click)="goToBoard()">
 				<div class="dashboard-priority">
 					@if (sortedTasks[0]?.priority == Priority.URGENT) {
-					<img src="assets/Icons/summary/UrgentSum.png" alt="Urgent Priority">
-					}
-					@else if (sortedTasks[0]?.priority == Priority.MEDIUM) {
-					<img src="assets/Icons/summary/MediumSum.png" alt="Medium Priority">
-					}
-					@else if (sortedTasks[0]?.priority == Priority.LOW) {
-					<img src="assets/Icons/summary/LowSum.png" alt="Low Priority">
-					}
-					@else {}
+					<div class="red">
+						<img src="assets/Icons/summary/UrgentSum.png" alt="Urgent Priority" />
+					</div>
+					} @else if (sortedTasks[0]?.priority == Priority.MEDIUM) {
+					<div class="orange">
+						<img src="assets/Icons/summary/MediumSum.png" alt="Medium Priority" />
+					</div>
+					} @else if (sortedTasks[0]?.priority == Priority.LOW) {
+					<div class="green">
+						<img src="assets/Icons/summary/LowSum.png" alt="Low Priority" />
+					</div>
+					} @else {}
 				</div>
 				<div class="priority-count">
-					<span>{{ sortedTasks.length}}</span>
+					<span>{{ sortedTasks.length }}</span>
 					<p>{{ sortedTasks[0]?.priority }}</p>
 				</div>
-				<hr>
+				<hr />
 				<div class="dashboard-date">
 					<p class="dash-date">
-						{{ sortedTasks[0]?.dueDate?.toDate() | date: 'MMMM d, yyyy' }}
+						{{ sortedTasks[0]?.dueDate?.toDate() | date : "MMMM d, yyyy" }}
 					</p>
 					<p>Upcoming Deadline</p>
 				</div>
@@ -57,15 +60,24 @@
 		<div class="end-dashboard-row-container">
 			<div class="end-dashboard-row" (click)="goToBoard()">
 				<span>{{ totalTasks }}</span>
-				<p>Task in <br> Board</p>
+				<p>
+					Task in <br />
+					Board
+				</p>
 			</div>
 			<div class="end-dashboard-row" (click)="goToBoard()">
 				<span>{{ progressCount }}</span>
-				<p>Tasks in <br> progress</p>
+				<p>
+					Tasks in <br />
+					progress
+				</p>
 			</div>
 			<div class="end-dashboard-row" (click)="goToBoard()">
 				<span>{{ reviewCount }}</span>
-				<p>Awaiting <br> Feedback</p>
+				<p>
+					Awaiting <br />
+					Feedback
+				</p>
 			</div>
 		</div>
 	</div>
