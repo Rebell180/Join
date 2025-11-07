@@ -2,7 +2,7 @@ import { inject, Injectable} from '@angular/core';
 import { Contact } from '../classes/contact';
 import { Task } from '../classes/task';
 import { SubTask } from '../classes/subTask';
-import { collection, CollectionReference, Firestore, Unsubscribe, where, Query, query, onSnapshot, addDoc, updateDoc, DocumentReference, doc, deleteDoc } from '@angular/fire/firestore';
+import { collection, CollectionReference, Firestore, addDoc, updateDoc, DocumentReference, doc, deleteDoc } from '@angular/fire/firestore';
 import { DBObject } from '../interfaces/db-object';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { ToastMsgService } from './toast-msg.service';
@@ -12,66 +12,17 @@ import { SubtaskEditState } from '../enums/subtask-edit-state';
   providedIn: 'root'
 })
 export class FirebaseDBService {
-
   // #region properties
 
   private firestore: Firestore = inject(Firestore);
+  private tms: ToastMsgService = inject(ToastMsgService);
 
   private currentContactBS: BehaviorSubject<Contact> = new BehaviorSubject<Contact>(new Contact());
   currentContact$: Observable<Contact> = this.currentContactBS.asObservable();
 
-  private tms: ToastMsgService = inject(ToastMsgService);
-  
-  tasks: Array<Task> = [];
-  subTasks: Array<SubTask> = [];
-
-  unsubTasks: Unsubscribe;
-  unsubSubTasks: Unsubscribe;
-
   // #endregion properties
 
-  constructor() {
-      this.unsubTasks = this.getTasksSnapshot();
-      this.unsubSubTasks = this.getSubTasksSnapshot();
-  }
-
   // #region methods
-
-  // #region snapshots
-
-  /**
-   * Opens a two way data stream between code and firebase collection 'tasks'.
-   * 
-   * @returns an @type Unsubscribe.
-   */
-  getTasksSnapshot(): Unsubscribe {
-    const q: Query = query(this.getCollectionRef('tasks'), where('id', '!=', 'null'));
-
-    return onSnapshot(q, (list) => {
-      this.tasks = [];
-      list.forEach((docRef) => {
-        this.tasks.push(this.mapResponseToTask({ ...docRef.data(), id: docRef.id}));
-      });
-    });
-  }
-
-  /**
-   * Opens a two way data stream between code and firebase collection 'subtasks'.
-   * 
-   * @returns an @type Unsubscribe.
-   */
-  getSubTasksSnapshot(): Unsubscribe {
-    const q: Query = query(this.getCollectionRef('subtasks'), where('id', '!=', 'null'));
-
-    return onSnapshot(q, (list) => {
-      this.subTasks = [];
-      list.forEach((docRef) => {
-        this.subTasks.push(this.mapResponseToSubTask({ ...docRef.data(), id: docRef.id}));
-      });
-    });
-  }
-
-  // #endregion snapshots
 
   // #region helpers
 
@@ -232,8 +183,6 @@ export class FirebaseDBService {
   }
   // #endregion CRUD
 
-  // #region contact helper
-
   /**
    * Sets the current selected Contact.
    * 
@@ -269,7 +218,4 @@ export class FirebaseDBService {
       }
     });
   }
-
-  // #enregion contact helper
-
 }
