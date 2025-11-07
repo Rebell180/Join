@@ -72,25 +72,23 @@ export class AsideComponent {
                   active: false
             },
       ];
+
       selectedSection: OutputEmitterRef<SectionType> = output<SectionType>();
       protected modalService: ModalService = inject(ModalService);
 
-      private activateItem<T extends { active: boolean; section: SectionType }>(
-            list: T[],
-            index: number
-      ): void {
-            if (index < 0 || index >= list.length) return;
-            list.forEach((item, i) => (item.active = i === index));
-            this.selectedSection.emit(list[index].section);
+      selectSection(index: number) {
+            this.items.forEach((item, i) => {
+                  item.active = false;
+                  if (i == index) item.active = true;
+            });
+            this.selectedSection.emit(this.items[index].section)
       }
 
-      selectSection(index: number): void {
-            this.itemLegal.forEach(i => (i.active = false));
-            this.activateItem(this.items, index);
-      }
-
-      selectLegal(index: number): void {
-            this.items.forEach(i => (i.active = false));
-            this.activateItem(this.itemLegal, index);
+      selectLegal(index: number) {
+            this.items.forEach((item, i) => {
+                  item.active = false;
+                  if (i == index) item.active = true;
+            });
+            this.selectedSection.emit(this.itemLegal[index].section)
       }
 }

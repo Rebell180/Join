@@ -12,6 +12,11 @@
 		.summary-header-info {
 			@include all.fl($alit: center, $gap: 2rem);
 
+			h1 {
+				font-family: 'Interbold', sans-serif;
+				font-size: 5rem;
+			}
+
 			h2 {
 				@include all.size($w: 35dvw, $h: 3rem);
 				font-size: 2.5rem;
@@ -25,7 +30,7 @@
 
 			#middle-line {
 				display: block;
-				@include all.size($w: 0.5rem, $h: 6rem);
+				@include all.size($w: 0.3rem, $h: 6rem);
 			}
 
 			#bottom-line {
@@ -42,7 +47,7 @@
 		margin-top: 2rem;
 
 		.dashboard {
-			@include all.size($w: 80%, $h: 50dvh);
+			@include all.size($w: 100%, $h: 50dvh);
 
 			.first-dashboard-row-container {
 				@include all.size($h: 33%);
@@ -50,6 +55,7 @@
 
 				.first-dashboard-row {
 					@include all.size($w: 100%, $h: 100%);
+					max-width: 24rem;
 					@include all.fl($jc: center, $alit: center, $gap: 3rem);
 					background: white;
 					border-radius: 1.5rem;
@@ -91,8 +97,9 @@
 				@include all.marpad($mar: 2rem 0);
 
 				.middle-dashboard-row {
-					@include all.size($h: 100%);
-					@include all.fl($jc: center, $alit: center, $gap: 5rem);
+					@include all.size($w: 100%, $h: 100%);
+					max-width: 50rem;
+					@include all.fl($jc: center, $alit: center, $gap: 3rem);
 					background: white;
 					border-radius: 1.5rem;
 					cursor: pointer;
@@ -106,7 +113,7 @@
 					}
 
 					.dashboard-priority {
-						@include all.size($w: 6rem, $h: 6rem);
+						@include all.size($h: 6rem);
 						@include all.fl($alit: center, $jc: center);
 
 						img {
@@ -150,6 +157,7 @@
 
 				.end-dashboard-row {
 					@include all.size($w: 100%, $h: 100%);
+					max-width: 15.3rem;
 					@include all.fl($alit: center, $jc: center, $flexdir: column);
 					background: white;
 					border-radius: 1.5rem;
@@ -176,7 +184,7 @@
 		@include all.fl($jc: center, $alit: start, $flexdir: column);
 		@include all.marpad($pad: 0 0 0 10rem);
 
-		@media(max-width: 1100px) {
+		@media(max-width: 1280px) {
 			display: none;
 		}
 
