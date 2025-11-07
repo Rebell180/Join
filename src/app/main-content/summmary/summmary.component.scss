@@ -55,9 +55,11 @@
 					border-radius: 1.5rem;
 					position: relative;
 					transition: all 0.8s ease;
+					cursor: pointer;
+
 
 					img {
-						@include all.size($w: 4.5rem, $h: 4.5rem);
+						@include all.size($w: 6rem, $h: 6rem);
 					}
 
 					img.hover {
@@ -93,6 +95,8 @@
 					@include all.fl($jc: center, $alit: center, $gap: 5rem);
 					background: white;
 					border-radius: 1.5rem;
+					cursor: pointer;
+
 
 					&:hover {
 						background: #2a3647;
@@ -102,17 +106,23 @@
 					}
 
 					.dashboard-priority {
-						@include all.size();
-						@include all.fl($alit: center, $jc: end);
+						@include all.size($w: 6rem, $h: 6rem);
+						@include all.fl($alit: center, $jc: center);
 
 						img {
-							@include all.size($w: 4.5rem, $h: 4.5rem);
-							@include all.marpad($mar: 0 0.8rem 0 0);
+							@include all.size($w: 6rem, $h: 6rem);
+							border-radius: 50%;
 						}
 					}
 
+					.priority-count {
+						display: flex;
+						align-items: center;
+						flex-direction: column;
+					}
+
 					hr {
-						@include all.size($w: 0.5rem, $h: 5rem);
+						@include all.size($w: 0.2rem, $h: 8rem);
 						background: grey;
 					}
 
@@ -122,6 +132,8 @@
 
 						.dash-date {
 							font-weight: bold;
+							columns: #2a3647;
+							font-size: 2.2rem;
 						}
 
 						p {
@@ -142,6 +154,7 @@
 					background: white;
 					border-radius: 1.5rem;
 					transition: all 0.8s ease;
+					cursor: pointer;
 
 					&:hover {
 						background: #2a3647;
@@ -179,8 +192,8 @@
 	}
 
 	span {
-		font-size: 5rem;
-		font-weight: 500;
+		font-size: 6rem;
+		font-family: 'Interbold', sans-serif;
 	}
 }
 

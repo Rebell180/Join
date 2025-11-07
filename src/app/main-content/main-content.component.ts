@@ -22,7 +22,7 @@ import { SummmaryComponent } from './summmary/summmary.component';
     PrivacyPolicyComponent,
     LegalNoticeComponent,
     SummmaryComponent
-],
+  ],
   templateUrl: './main-content.component.html',
   styleUrl: './main-content.component.scss'
 })

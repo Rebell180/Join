@@ -1,34 +1,33 @@
-<div class="content"> <!-- bekommt style display: grid-->
-    <!-- Hier wird die Header-Komponente aus Angular als normals HTML-Tage eingebunden -->
-    <!-- app-heder ist dabei der Name der Kopoenente. Der Name muss sich von den normalen Tag untersccheiden. -->
+<div class="content"> <!-- display: grid -->
     <aside app-aside (selectedSection)="changeSection($event)"></aside>
     <header app-header (selectedSection)="changeSection($event)"></header>
+
     <main>
         @switch (currentSection) {
-        @case (SectionType.TASK) {
-        <app-add-task-container></app-add-task-container>
-        }
 
-        @case (SectionType.SUMMARY) {
-        <section summmary></section>
-        }
+            @case (SectionType.TASK) {
+                <app-add-task-container></app-add-task-container>
+            }
 
-        @case (SectionType.BOARD) {
-        <section board></section>
-        }
+            @case (SectionType.SUMMARY) {
+                <section summary (selectedSection)="changeSection($event)"></section>
+            }
 
-        @case (SectionType.CONTACT) {
-        <section contacts></section>
-        }
+            @case (SectionType.BOARD) {
+                <section board></section>
+            }
 
-        @case (SectionType.PRIVACY) {
-        <section privacy-policy (back)="changeSection(SectionType.CONTACT)">
-        </section>
-        }
+            @case (SectionType.CONTACT) {
+                <section contacts></section>
+            }
 
-        @case (SectionType.LEGAL) {
-        <section legal-notice (back)="changeSection(SectionType.CONTACT)"></section>
-        }
+            @case (SectionType.PRIVACY) {
+                <section privacy-policy (back)="changeSection(SectionType.CONTACT)"></section>
+            }
+
+            @case (SectionType.LEGAL) {
+                <section legal-notice (back)="changeSection(SectionType.CONTACT)"></section>
+            }
         }
     </main>
 </div>

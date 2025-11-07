@@ -8,46 +8,63 @@
 </div>
 <div class="dashboard-main-container">
 	<div class="dashboard">
-		<div class="first-dashboard-row-container">
+		<div class="first-dashboard-row-container" (click)="goToBoard()">
 			<div class="first-dashboard-row">
 				<img class="default" src="assets/Icons/summary/ToDoIcon.png" alt="To-do">
 				<img class="hover" src="assets/Icons/summary/ToDoIconHover.png" alt="To-do Hover">
 				<div class="done-count">
-					<span>1</span>
+					<span>{{ todoCount }}</span>
 					<p>To-do</p>
 				</div>
 			</div>
 
-			<div class="first-dashboard-row">
+			<div class="first-dashboard-row" (click)="goToBoard()">
 				<img class="default" src="assets/Icons/summary/DoneIcon.png" alt="Done">
 				<img class="hover" src="assets/Icons/summary/DoneIconHover.png" alt="Done Hover">
 				<div class="done-count">
-					<span>1</span>
+					<span>{{ doneCount }}</span>
 					<p>Done</p>
 				</div>
 			</div>
 		</div>
 		<div class="middle-dashboard-row-container">
-			<div class="middle-dashboard-row">
-				<p class="dashboard-priority">Urgent</p>
+			<div class="middle-dashboard-row" (click)="goToBoard()">
+				<div class="dashboard-priority">
+					@if (sortedTasks[0]?.priority == Priority.URGENT) {
+					<img src="assets/Icons/summary/UrgentSum.png" alt="Urgent Priority">
+					}
+					@else if (sortedTasks[0]?.priority == Priority.MEDIUM) {
+					<img src="assets/Icons/summary/MediumSum.png" alt="Medium Priority">
+					}
+					@else if (sortedTasks[0]?.priority == Priority.LOW) {
+					<img src="assets/Icons/summary/LowSum.png" alt="Low Priority">
+					}
+					@else {}
+				</div>
+				<div class="priority-count">
+					<span>{{ sortedTasks.length}}</span>
+					<p>{{ sortedTasks[0]?.priority }}</p>
+				</div>
 				<hr>
 				<div class="dashboard-date">
-					<p class="dash-date">October 16, 2025</p>
+					<p class="dash-date">
+						{{ sortedTasks[0]?.dueDate?.toDate() | date: 'MMMM d, yyyy' }}
+					</p>
 					<p>Upcoming Deadline</p>
 				</div>
 			</div>
 		</div>
 		<div class="end-dashboard-row-container">
-			<div class="end-dashboard-row">
-				<span>1</span>
+			<div class="end-dashboard-row" (click)="goToBoard()">
+				<span>{{ totalTasks }}</span>
 				<p>Task in <br> Board</p>
 			</div>
-			<div class="end-dashboard-row">
-				<span>1</span>
+			<div class="end-dashboard-row" (click)="goToBoard()">
+				<span>{{ progressCount }}</span>
 				<p>Tasks in <br> progress</p>
 			</div>
-			<div class="end-dashboard-row">
-				<span>1</span>
+			<div class="end-dashboard-row" (click)="goToBoard()">
+				<span>{{ reviewCount }}</span>
 				<p>Awaiting <br> Feedback</p>
 			</div>
 		</div>
