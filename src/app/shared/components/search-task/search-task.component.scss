@@ -3,16 +3,14 @@
 :host {
 
     form {
-        @include all.size();
 
         input[type=text] {
             @include all.fl();
             @include all.size($w: 20dvw, $h: 4.5rem);
-            @include all.marpad($pad: 8px 16px);
+            @include all.marpad($pad: 1rem 2rem);
+            @include all.borRad($radius: 8px, $c: rgba(0, 0, 0, 0.2));
             outline: none;
-            border-radius: 10px;
-            border: 1px solid #a8a8a8;
-            margin-left: 5rem;
+            // margin-left: 5rem;
 
             @media(max-width: 1280px) {
                 width: 35dvw;
