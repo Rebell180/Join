@@ -30,15 +30,15 @@
 		<div class="middle-dashboard-row-container">
 			<div class="middle-dashboard-row" (click)="goToBoard()">
 				<div class="dashboard-priority">
-					@if (sortedTasks[0]?.priority == Priority.URGENT) {
+					@if (sortedTasks[0].priority == Priority.URGENT) {
 					<div class="red">
 						<img src="assets/Icons/summary/UrgentSum.png" alt="Urgent Priority" />
 					</div>
-					} @else if (sortedTasks[0]?.priority == Priority.MEDIUM) {
+					} @else if (sortedTasks[0].priority == Priority.MEDIUM) {
 					<div class="orange">
 						<img src="assets/Icons/summary/MediumSum.png" alt="Medium Priority" />
 					</div>
-					} @else if (sortedTasks[0]?.priority == Priority.LOW) {
+					} @else if (sortedTasks[0].priority == Priority.LOW) {
 					<div class="green">
 						<img src="assets/Icons/summary/LowSum.png" alt="Low Priority" />
 					</div>
@@ -46,12 +46,12 @@
 				</div>
 				<div class="priority-count">
 					<span>{{ sortedTasks.length }}</span>
-					<p>{{ sortedTasks[0]?.priority }}</p>
+					<p>{{ sortedTasks[0].priority }}</p>
 				</div>
 				<hr />
 				<div class="dashboard-date">
 					<p class="dash-date">
-						{{ sortedTasks[0]?.dueDate?.toDate() | date : "MMMM d, yyyy" }}
+						{{ sortedTasks[0].dueDate.toDate() | date : "MMMM d, yyyy" }}
 					</p>
 					<p>Upcoming Deadline</p>
 				</div>
