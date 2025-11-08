@@ -23,15 +23,18 @@
         </header>
         <main cdkDropList #todo="cdkDropList" [cdkDropListData]="taskItems[0]"
             [cdkDropListConnectedTo]="[progress, review, done]" (cdkDropListDropped)="drop($event)">
-            @if(taskItems[0].length) { @for (task of taskItems[0]; let j = $index;
-            track j) {
-            <app-task-column-item class="drag-content" [task]="task" cdkDrag [cdkDragStartDelay]="(((dss.size() | async) === DisplayType.TABLET) || ((dss.size() | async) === DisplayType.MOBILE))? 500 : 0"
-                [cdkDragData]="task">
-            </app-task-column-item>
-            } } @else {
-            <div class="no-entry-container">
-                <p>no entries</p>
-            </div>
+            @if(taskItems[0].length) { 
+                @for (task of taskItems[0]; track $index) {
+                    <app-task-column-item cdkDrag class="drag-content" 
+                        [task]="task"  
+                        [cdkDragData]="task"
+                        [cdkDragStartDelay]="(((dss.size() | async) === DisplayType.TABLET) || ((dss.size() | async) === DisplayType.MOBILE))? 500 : 0">
+                    </app-task-column-item>
+                } 
+            } @else {
+                <div class="no-entry-container">
+                    <p>no entries</p>
+                </div>
             }
         </main>
     </section>
@@ -44,15 +47,18 @@
         </header>
         <main cdkDropList #progress="cdkDropList" [cdkDropListData]="taskItems[1]"
             [cdkDropListConnectedTo]="[todo, review, done]" (cdkDropListDropped)="drop($event)">
-            @if(taskItems[1].length) { @for (task of taskItems[1]; let j = $index;
-            track j) {
-            <app-task-column-item class="drag-content" [task]="task" cdkDrag [cdkDragStartDelay]="(((dss.size() | async) === DisplayType.TABLET) || ((dss.size() | async) === DisplayType.MOBILE))? 500 : 0"
-                [cdkDragData]="task">
-            </app-task-column-item>
-            } } @else {
-            <div class="no-entry-container">
-                <p>no entries</p>
-            </div>
+            @if(taskItems[1].length) { 
+                @for (task of taskItems[1]; track $index) {
+                    <app-task-column-item cdkDrag class="drag-content" 
+                        [task]="task"  
+                        [cdkDragData]="task"
+                        [cdkDragStartDelay]="(((dss.size() | async) === DisplayType.TABLET) || ((dss.size() | async) === DisplayType.MOBILE))? 500 : 0">
+                    </app-task-column-item>
+                } 
+            } @else {
+                <div class="no-entry-container">
+                    <p>no entries</p>
+                </div>
             }
         </main>
     </section>
@@ -65,15 +71,18 @@
         </header>
         <main cdkDropList #review="cdkDropList" [cdkDropListData]="taskItems[2]"
             [cdkDropListConnectedTo]="[todo, progress, done]" (cdkDropListDropped)="drop($event)">
-            @if(taskItems[2].length) { @for (task of taskItems[2]; let j = $index;
-            track j) {
-            <app-task-column-item class="drag-content" [task]="task" cdkDrag [cdkDragStartDelay]="(((dss.size() | async) === DisplayType.TABLET) || ((dss.size() | async) === DisplayType.MOBILE))? 500 : 0"
-                [cdkDragData]="task">
-            </app-task-column-item>
-            } } @else {
-            <div class="no-entry-container">
-                <p>no entries</p>
-            </div>
+            @if(taskItems[2].length) { 
+                @for (task of taskItems[2]; track $index) {
+                    <app-task-column-item cdkDrag class="drag-content" 
+                        [task]="task" 
+                        [cdkDragData]="task"
+                        [cdkDragStartDelay]="(((dss.size() | async) === DisplayType.TABLET) || ((dss.size() | async) === DisplayType.MOBILE))? 500 : 0">
+                    </app-task-column-item>
+                } 
+            } @else {
+                <div class="no-entry-container">
+                    <p>no entries</p>
+                </div>
             }
         </main>
     </section>
@@ -86,15 +95,18 @@
         </header>
         <main cdkDropList #done="cdkDropList" [cdkDropListData]="taskItems[3]"
             [cdkDropListConnectedTo]="[todo, progress, review]" (cdkDropListDropped)="drop($event)">
-            @if(taskItems[3].length) { @for (task of taskItems[3]; let j = $index;
-            track j) {
-            <app-task-column-item class="drag-content" [task]="task" cdkDrag [cdkDragStartDelay]="(((dss.size() | async) === DisplayType.TABLET) || ((dss.size() | async) === DisplayType.MOBILE))? 500 : 0"
-                [cdkDragData]="task">
-            </app-task-column-item>
-            } } @else {
-            <div class="no-entry-container">
-                <p>no entries</p>
-            </div>
+            @if(taskItems[3].length) { 
+                @for (task of taskItems[3]; track $index) {
+                    <app-task-column-item cdkDrag class="drag-content" 
+                        [task]="task" 
+                        [cdkDragData]="task"
+                        [cdkDragStartDelay]="(((dss.size() | async) === DisplayType.TABLET) || ((dss.size() | async) === DisplayType.MOBILE))? 500 : 0">
+                    </app-task-column-item>
+                } 
+            } @else {
+                <div class="no-entry-container">
+                    <p>no entries</p>
+                </div>
             }
         </main>
     </section>

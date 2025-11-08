@@ -2,12 +2,11 @@
 @forward "../../../../public/styles/component-styles";
 
 :host {
-    @include all.size($h: 85dvh);
+    @include all.size($h: 90dvh);
+    @include all.marpad($pad: 5rem 3rem 2rem 3rem);
 
-    // #region header
     header {
         @include all.size($w: 100%);
-        @include all.marpad($pad: 3dvw 4dvw 0 3dvw);
         @include all.fl($alit: center, $jc: space-between);
         margin-bottom: 3rem;
 
@@ -17,8 +16,7 @@
         }
 
         @include all.tablet {
-            margin-bottom: 0;
-            padding: 2rem 2rem 0 2rem;
+            margin-bottom: 2rem;
         }
 
         .search-task-board {
@@ -27,6 +25,7 @@
 
             @include all.notebook {
                 width: 75%;
+                gap: 1.5rem;
             }
 
             @include all.tablet {
@@ -45,10 +44,10 @@
             }
 
             .btn-set {
-                @include all.size($w: 20%, $h: 4.5rem);
+                @include all.size($w: 20rem, $h: 4.5rem);
 
                 @media(max-width: 1280px) {
-                    width: 25%;
+                    // width: 25%;
                 }
 
                 @include all.notebook {
@@ -62,34 +61,22 @@
         }
     }
 
-    // #endregion
-
-    // #region search-task-container-mobile
     .search-task-container-mobile {
         display: none;
 
         @include all.mobile {
-            padding: 2rem;
-            display: flex;
-            justify-content: center;
             width: 100%;
+            @include all.fl($jc: center);
         }
     }
 
-    // #endregion
-
-    // #region task-list-container
     .task-list-wrapper {
-        @include all.size($w: 100%);
-        @include all.fl($gap: 2rem);
-        justify-content: space-evenly;
-        height: 74dvh;
+        @include all.size($w: 100%, $h: 74dvh);
+        @include all.fl($gap: 2rem, $jc: space-between);
 
         @media(max-width: 1280px) {
-            @include all.size($h: 70dvh);
             @include all.fl($flexdir: column);
             @include all.scrollbar();
-            padding: 0 1rem 4rem 1rem;
             overflow: auto;
         }
 
@@ -103,53 +90,51 @@
         }
 
         .task-list {
-            @include all.size($w: 100%, $h: 73.5dvh);
-            max-width: 28rem;
-            display: flex;
-            flex-direction: column;
+            @include all.size($w: 25%, $h: 72dvh);
+            @include all.fl($flexdir: column);
 
             @media (max-width: 1280px) {
-                max-width: 100%;
-                height: 75dvh;
+                width: 100%;
+                height: 72dvh;
+                margin-bottom: 1rem;
             }
 
             .task-list-header {
-                width: 100%;
-                @include all.marpad($pad: 1.5rem 0);
-                @include all.fl($jc: space-around, $alit: center, $gap: 7rem);
+                @include all.fl($jc: space-between, $alit: center);
+                margin-bottom: 1rem;
 
-                @media(max-width: 1280px) {
-                    justify-content: space-between;
+                h3 {
+                    white-space: nowrap;
                 }
             }
 
             main {
+                width: 100%;
                 @include all.fl($flexdir: column);
                 @include all.scrollbar();
-                overflow: auto;
+                overflow-y: auto;
 
                 @media(max-width: 1280px) {
-                    flex-direction: row;
-                    gap: 1rem;
+                    @include all.fl($gap: 1rem);
+                    overflow-x: auto;
                 }
 
                 @include all.notebook {
-                    @include all.size();
-                    @include all.fl();
-                    max-width: 76dvw;
-                    padding-bottom: 1rem;
+                    // max-width: 76dvw;
+                    // padding-bottom: 1rem;
                 }
 
                 @media (max-width: 920px) {
-                    max-width: 71dvw;
+                    // max-width: 71dvw;
                 }
 
                 @include all.tablet {
-                    max-width: 100%;
+                    // max-width: 100%;
                 }
 
                 .drag-content {
-                    height: auto;
+                    width: 100%;
+                    min-width: 24rem;
                 }
 
                 .no-entry-container {
@@ -158,10 +143,9 @@
                     p {
                         @include all.size($w: 100%, $h: 5rem);
                         @include all.fl($jc: center, $alit: center);
-                        border-radius: 16px;
-                        background: rgb(226, 226, 226);
-                        color: rgb(178, 177, 177);
-                        border: 2px dotted rgb(178, 177, 177);
+                        @include all.borRad($radius: 8px, $design: dotted, $thick: 2px, $c: rgba(0, 0, 0, 0.3));
+                        background: rgba(0, 0, 0, 0.1);
+                        color: rgba(0, 0, 0, 0.4);
                     }
 
                     @media(max-width: 1280px) {
@@ -170,8 +154,6 @@
                 }
             }
         }
-
-        // #endregion
     }
 }
 
@@ -182,8 +164,8 @@
 }
 
 .cdk-drag-preview {
-    border-radius: 16px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    @include all.boxSh($c: rgba(0, 0, 0, 0.4));
     transform: translate(rotate(15deg));
 }
 

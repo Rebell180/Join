@@ -1,29 +1,25 @@
 <div class="task-column-container" (click)="modalService.openTaskDetailModal(task())">
-	<div class="task-column-item-header">
-		<h2
-			[ngClass]="{ blue: task().category == Category.USERSTORY, green: task().category == Category.TECHNICAL, yellow: task().category == Category.TASK}">
-			{{ task().category }}
-		</h2>
-	</div>
-
-	<h3 class="title">
-		<span class="text">{{ task().title }}</span>
-	</h3>
+	<h2 [ngClass]="{ 
+			blue: task().category == Category.USERSTORY, 
+			green: task().category == Category.TECHNICAL, 
+			yellow: task().category == Category.TASK
+			}">
+		{{ task().category }}
+	</h2>
+	<h3 class="title">{{ task().title }}</h3>
 	<p class="description limiter">{{task().description}}</p>
 
 	@if (isSubtaskProgressVisible) {
-	<div class="subtask-progress-box">
-
-		<div class="progress-bar-wrapper">
-			<div class="progress-bar-background">
-				<div class="progress-bar-fill" [style.width.%]="subtaskProgressPercentage"></div>
+		<div class="subtask-progress-box">
+			<div class="progress-bar-wrapper">
+				<div class="progress-bar-background">
+					<div class="progress-bar-fill" [style.width.%]="subtaskProgressPercentage"></div>
+				</div>
+				<span class="subtask-counter">
+					{{ completedSubtaskCount }}/{{ totalSubtaskCount }} Subtasks
+				</span>
 			</div>
-			<span class="subtask-counter">
-				{{ completedSubtaskCount }}/{{ totalSubtaskCount }} Subtasks
-			</span>
 		</div>
-
-	</div>
 	}
 	<div class="column-bottom-container">
 		<app-contact-icon-list [contacts]="task().contacts"></app-contact-icon-list>

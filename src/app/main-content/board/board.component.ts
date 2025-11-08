@@ -1,20 +1,21 @@
-import { ChangeDetectorRef, Component, HostListener, inject, OnDestroy, OnInit } from '@angular/core';
-import { Task } from '../../shared/classes/task';
-import { onSnapshot, Unsubscribe } from '@angular/fire/firestore';
 import { CommonModule } from '@angular/common';
-import { TaskStatusType } from '../../shared/enums/task-status-type';
+import { Component, inject, NgZone, OnDestroy, OnInit } from '@angular/core';
+import { onSnapshot, Unsubscribe } from '@angular/fire/firestore';
+import { CdkDragDrop, DragDropModule, transferArrayItem } from '@angular/cdk/drag-drop';
+import { ModalService } from '../../shared/services/modal.service';
+import { FirebaseDBService } from '../../shared/services/firebase-db.service';
+import { DisplaySizeService } from '../../shared/services/display-size.service';
+import { ToastMsgService } from '../../shared/services/toast-msg.service';
 import { Contact } from '../../shared/classes/contact';
+import { Task } from '../../shared/classes/task';
 import { SubTask } from '../../shared/classes/subTask';
+import { TaskStatusType } from '../../shared/enums/task-status-type';
+import { DisplayType } from '../../shared/enums/display-type.enum';
 import { ContactObject } from '../../shared/interfaces/contact-object';
 import { SubtaskObject } from '../../shared/interfaces/subtask-object';
 import { TaskObject } from '../../shared/interfaces/task-object';
-import { ModalService } from '../../shared/services/modal.service';
 import { TaskColumnItemComponent } from '../../shared/components/task-column-item/task-column-item.component';
-import { CdkDragDrop, DragDropModule, transferArrayItem } from '@angular/cdk/drag-drop';
-import { FirebaseDBService } from '../../shared/services/firebase-db.service';
-import { ToastMsgService } from '../../shared/services/toast-msg.service';
 import { SearchTaskComponent } from '../../shared/components/search-task/search-task.component';
-import { DisplaySizeService, DisplayType } from '../../shared/services/display-size.service';
 
 @Component({
   selector: 'section[board]',
@@ -29,17 +30,25 @@ import { DisplaySizeService, DisplayType } from '../../shared/services/display-s
   styleUrl: './board.component.scss'
 })
 export class BoardComponent implements OnDestroy, OnInit {
-  // #region Attrbutes
+  // #region attributes
+
   protected modalService: ModalService = inject(ModalService);
-  private fireDB: FirebaseDBService = inject(FirebaseDBService);
-  private tms: ToastMsgService = inject(ToastMsgService);
-  private cdr: ChangeDetectorRef = inject(ChangeDetectorRef);
   protected dss: DisplaySizeService = inject(DisplaySizeService);
+  private tms: ToastMsgService = inject(ToastMsgService);
+  private fireDB: FirebaseDBService = inject(FirebaseDBService);
+  private ngZone: NgZone = inject(NgZone);
 
   DisplayType = DisplayType;
-  // Primary Data
-  tasks: Task[] = [];
+
+  protected tasks: Task[] = [];
   private shownTasks: Task[] = [];
+  private contacts: Contact[] = [];
+  private subtasks: SubTask[] = [];
+
+  private unsubTasks!: Unsubscribe;
+  private unsubContacts!: Unsubscribe;
+  private unsubSubtasks!: Unsubscribe;
+
   protected taskLists: {
     listName: string,
     status: TaskStatusType
@@ -50,22 +59,13 @@ export class BoardComponent implements OnDestroy, OnInit {
       { listName: 'Done', status: TaskStatusType.DONE }
     ]
   protected taskItems: Task[][] = [[], [], [], []];
-
-  // Database
-  private contacts: Contact[] = [];
-  private subtasks: SubTask[] = []
-  private unsubTasks!: Unsubscribe;
-  private unsubContacts!: Unsubscribe;
-  private unsubSubtasks!: Unsubscribe;
-  // #endregion
+  
+  // #endregion attributes
 
   ngOnInit(): void {
     this.unsubContacts = this.subscribeContacts();
     this.unsubSubtasks = this.subscribeSubtasks();
     this.unsubTasks = this.subscribeTasks();
-    setTimeout(() => {
-      this.cdr.detectChanges();
-    }, 1000);
   }
 
   ngOnDestroy(): void {
@@ -75,16 +75,20 @@ export class BoardComponent implements OnDestroy, OnInit {
   }
 
   // #region methods
-  // #region database
+
+  // #region subscriptions
+
   /**
    * Subscribes the contacts.
    * @returns - Unsubscribe of Contacts.
    */
   private subscribeContacts(): Unsubscribe {
     return onSnapshot(this.fireDB.getCollectionRef('contacts'), contactsSnap => {
-      this.contacts = [];
-      contactsSnap.docs.map(doc => { this.contacts.push(new Contact(doc.data() as ContactObject)) });
-      this.sortContacts();
+      this.ngZone.run(() => {
+        this.contacts = [];
+        contactsSnap.docs.forEach(doc => this.contacts.push(new Contact(doc.data() as ContactObject)));
+        this.sortContacts();
+      });
     });
   }
 
@@ -94,9 +98,11 @@ export class BoardComponent implements OnDestroy, OnInit {
    */
   private subscribeSubtasks(): Unsubscribe {
     return onSnapshot(this.fireDB.getCollectionRef('subtasks'), subtasksSnap => {
-      this.subtasks = [];
-      subtasksSnap.docs.map(doc => { this.subtasks.push(new SubTask(doc.data() as SubtaskObject)) })
-    })
+      this.ngZone.run(() => {
+        this.subtasks = [];
+        subtasksSnap.docs.forEach(doc => this.subtasks.push(new SubTask(doc.data() as SubtaskObject)));
+      });
+    });
   }
 
   /**
@@ -105,41 +111,39 @@ export class BoardComponent implements OnDestroy, OnInit {
    */
   private subscribeTasks(): Unsubscribe {
     return onSnapshot(this.fireDB.getCollectionRef('tasks'), taskSnap => {
-      this.tasks = [];
-      this.shownTasks = [];
-      taskSnap.docs.map(doc => { this.tasks.push(new Task(doc.data() as TaskObject)) });
-      for (let i = 0; i < this.tasks.length; i++) {
-        this.addContactsToTask(i);
-        this.addSubtasktoTask(i);
-      }
-      this.shownTasks = this.tasks;
-      this.splitTasks();
-      for (let i = 0; i < this.taskLists.length; i++) {
-        this.sortTasks(i);
-      }
+      this.ngZone.run(() => {
+        this.tasks = [];
+        this.shownTasks = [];
+        taskSnap.docs.forEach(doc => this.tasks.push(new Task(doc.data() as TaskObject)));
+
+        for (let i = 0; i < this.tasks.length; i++) {
+          this.addContactsToTask(i);
+          this.addSubtasktoTask(i);
+        }
+
+        this.shownTasks = this.tasks;
+        this.splitTasks();
+        for (let i = 0; i < this.taskLists.length; i++) {
+          this.sortTasks(i);
+        }
+      });
     });
   }
 
-  /**
-   * Updates a task.
-   * @param task - Task for update.
-   */
-  private async updateTask(task: Task) {
-    await this.fireDB.taskUpdateInDB('tasks', task);
-    this.tms.add('Task was updated', 3000, 'success');
-  }
-  // #endregion
-  // #region taskmgmt
+  // #endregion subscriptions
+
   /**
    * Filters all Tasks by user input.
    * @param userSearch - Input from User-Searchbar.
    */
-  filterTasks(userSearch: string) {
+  protected filterTasks(userSearch: string) {
     this.shownTasks = userSearch.length == 0 ? this.tasks : this.tasks.filter(task => task.title.toLowerCase().includes(userSearch.toLowerCase()));
     this.splitTasks();
   }
 
-  /** Divides all shwohn Tasks in their lists */
+  /**
+   * Divides all shwohn Tasks in their lists
+   */
   private splitTasks() {
     this.taskItems = [[], [], [], []];
     for (let i = 0; i < this.shownTasks.length; i++) {
@@ -157,22 +161,6 @@ export class BoardComponent implements OnDestroy, OnInit {
           this.taskItems[3].push(this.shownTasks[i]);
       }
     }
-  }
-
-  /** Gets all Tasks, which has been searched.
-   * If user is not looking for tasks, all tasks are schown.
-   */
-  getTasks() {
-    return this.shownTasks;
-  }
-
-  /**
-   * Gets tasks from status.
-   * @param status - State of Task
-   * @returns - separete List for status
-   */
-  getTaskForList(status: TaskStatusType): Task[] {
-    return this.shownTasks.filter(task => task.status == status)
   }
 
   /**
@@ -204,7 +192,9 @@ export class BoardComponent implements OnDestroy, OnInit {
     }
   }
 
-  /**Sort contacts by  firstname, lastname. */
+  /**
+   * Sort contacts by  firstname, lastname.
+   */
   private sortContacts(): void {
     this.contacts.sort((a, b) => {
       const firstCompare: number = a.firstname.localeCompare(b.firstname, 'de');
@@ -222,8 +212,12 @@ export class BoardComponent implements OnDestroy, OnInit {
   private sortTasks(index: number): void {
     this.taskItems[index].sort((a, b) => a.dueDate.seconds - b.dueDate.seconds);
   }
-  // #endregion
 
+  /**
+   * Handles cdk drag and drop of task items. 
+   * 
+   * @param e cdk drag drop object
+   */
   protected drop(e: CdkDragDrop<Task[]>): void {
     const previousList = e.previousContainer.data || [];
     const currentList = e.container.data || [];
@@ -238,5 +232,15 @@ export class BoardComponent implements OnDestroy, OnInit {
       this.updateTask(e.item.data);
     }
   }
+
+  /**
+   * Updates a task.
+   * @param task - Task for update.
+   */
+  private async updateTask(task: Task) {
+    await this.fireDB.taskUpdateInDB('tasks', task);
+    this.tms.add('Task was updated', 3000, 'success');
+  }
+
   // #endregion
 }

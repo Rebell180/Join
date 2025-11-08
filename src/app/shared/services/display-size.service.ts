@@ -1,14 +1,6 @@
 import { Injectable, OnDestroy } from '@angular/core';
-import { BehaviorSubject, debounceTime, fromEvent, map, Observable, shareReplay, startWith, Subscription } from 'rxjs';
-
-export enum DisplayType {
-  NONE = 'none',
-  MOBILE = 'mobile',
-  TABLET = 'tablet',
-  NOTEBOOK = 'notebook',
-  DESKTOP = 'desktop',
-  BIGSCREEN = 'bigscreen'
-}
+import { BehaviorSubject, fromEvent, map, Observable, shareReplay, startWith, Subscription } from 'rxjs';
+import { DisplayType } from '../enums/display-type.enum';
 
 @Injectable({
   providedIn: 'root'
