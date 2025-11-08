@@ -39,13 +39,15 @@
     box-shadow: $right $bottom $blur $all $c ;
 }
 
-@mixin limiter() {
-	display: inline-block;
-	max-width: 100%;
-	white-space: nowrap;
-	word-wrap: break-word;
-	overflow: hidden; 
-	text-overflow: ellipsis;
+@mixin limiter($lines: 1) {
+  display: -webkit-box;
+  line-clamp: $lines; 
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: $lines;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-word;
+  max-width: 100%;
 }
 
 @mixin font-style($size: 1.6rem, $family: string.unquote("Inter, sans-serif"), $weight: none) {
