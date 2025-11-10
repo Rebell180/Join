@@ -2,11 +2,14 @@ import { inject, Injectable} from '@angular/core';
 import { Contact } from '../classes/contact';
 import { Task } from '../classes/task';
 import { SubTask } from '../classes/subTask';
-import { collection, CollectionReference, Firestore, addDoc, updateDoc, DocumentReference, doc, deleteDoc } from '@angular/fire/firestore';
+import { collection, CollectionReference, Firestore, addDoc, updateDoc, DocumentReference, doc, deleteDoc, collectionData } from '@angular/fire/firestore';
 import { DBObject } from '../interfaces/db-object';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { ToastMsgService } from './toast-msg.service';
 import { SubtaskEditState } from '../enums/subtask-edit-state';
+import { ContactObject } from '../interfaces/contact-object';
+import { SubtaskObject } from '../interfaces/subtask-object';
+import { TaskObject } from '../interfaces/task-object';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +22,18 @@ export class FirebaseDBService {
 
   private currentContactBS: BehaviorSubject<Contact> = new BehaviorSubject<Contact>(new Contact());
   currentContact$: Observable<Contact> = this.currentContactBS.asObservable();
+
+  contacts$(): Observable<ContactObject[]> {
+    return collectionData(collection(this.firestore, 'contacts'), { idField: 'id' }) as Observable<ContactObject[]>;
+  }
+
+  subtasks$(): Observable<SubtaskObject[]> {
+    return collectionData(collection(this.firestore, 'subtasks'), { idField: 'id' }) as Observable<SubtaskObject[]>;
+  }
+
+  tasks$(): Observable<TaskObject[]> {
+    return collectionData(collection(this.firestore, 'tasks'), { idField: 'id' }) as Observable<TaskObject[]>;
+  }
 
   // #endregion properties
 
