@@ -7,11 +7,6 @@
     font-size: 16px;
     width: 100%;
 
-    &:focus {
-        border: 1px solid #29ABE2;
-    }
-
-
     .date-picker-wrapper {
 
         display: flex;
@@ -21,6 +16,10 @@
         padding: 1rem;
         width: 100%;
         background: white;
+
+        &.active {
+            border: 1px solid #29ABE2;
+        }
 
         input {
             border: none;
@@ -125,8 +124,6 @@
         }
     }
 }
-
-
 
 // #region next try
 

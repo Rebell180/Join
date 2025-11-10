@@ -1,5 +1,5 @@
 <div class="date-picker-container">
-    <div class="date-picker-wrapper" (click)="toggleCalendar($event)">
+    <div class="date-picker-wrapper" [ngClass]="{'active': showCalendar() == true}" (click)="toggleCalendar($event)">
         <input type="text" [value]="inputValue()" readonly />
         <img src="assets/Icons/taskBoard/date_picker.png" alt="Calendar" class="calendar-icon" />
     </div>

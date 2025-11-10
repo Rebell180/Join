@@ -15,8 +15,11 @@
         height: 4rem;
         padding: 1rem;
         @include all.borRad($radius: 8px, $c: rgba(0, 0, 0, 0.2), $thick: 1px);
-        
         @include all.fl($jc: space-between, $alit: center);
+
+        &.active {
+            border: 1px solid #29ABE2;
+        }
 
         .category-drop-presenter-txt {
             font-size: 16px;
@@ -34,11 +37,8 @@
         @include all.scrollbar();
         background: white;
         border-radius: 8px;
-        // border: 1px solid rgba(0, 0, 0, 0.1);
         z-index: 2;
         overflow-y: auto;
-        // box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        // padding: 0.5rem;
 
         .option {
             width: 100%;

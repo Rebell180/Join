@@ -1,5 +1,5 @@
 <div class="assign-to-container">
-    <div class="assign-to-input" (click)="toggleDropdown()">
+    <div class="assign-to-input" [ngClass]="{'active': isOpen == true}" (click)="toggleDropdown()">
         @if (selectedValues().length) {
             <span class="selection-presenter-txt">
                 @if (selectedValues()[0]) {
