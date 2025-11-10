@@ -1,5 +1,5 @@
-<form [formGroup]="form" (submit)="startSearch($event)">
-    <input formControlName="search" type="text" name="border-header-search" id="board-task-search" placeholder="Find Task" autocomplete="off">
-    <input type="submit" src="../../../../public/assets/Icons/taskBoard/searchDefault.png" value="">
-    <hr>
+<form class="search-form-container" [formGroup]="form" (submit)="startSearch($event)">
+    <input class="search-input" formControlName="search" type="text" name="border-header-search" id="board-task-search" placeholder="Find Task" autocomplete="off">
+    <hr class="separator">
+    <input class="search-icon-btn" type="submit" src="../../../../public/assets/Icons/taskBoard/searchDefault.png" value="">
 </form>

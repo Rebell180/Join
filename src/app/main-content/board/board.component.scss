@@ -5,6 +5,11 @@
     @include all.size($h: 90dvh);
     @include all.marpad($pad: 5rem 3rem 2rem 3rem);
 
+    @include all.tablet {
+        @include all.size($h: 80dvh);
+        @include all.marpad($pad: 5rem 1rem 2rem 1rem);
+    }
+
     header {
         @include all.size($w: 100%);
         @include all.fl($alit: center, $jc: space-between);
@@ -21,21 +26,7 @@
 
         .search-task-board {
             @include all.fl($jc: end, $gap: 3rem);
-            width: 70%;
-
-            @include all.notebook {
-                width: 75%;
-                gap: 1.5rem;
-            }
-
-            @include all.tablet {
-                width: 75%;
-                gap: 1.6rem;
-            }
-
-            @include all.mobile {
-                justify-content: end;
-            }
+            width: 50dvw;
 
             .search-task {
                 @include all.mobile {
@@ -45,10 +36,6 @@
 
             .btn-set {
                 @include all.size($w: 20rem, $h: 4.5rem);
-
-                @media(max-width: 1280px) {
-                    // width: 25%;
-                }
 
                 @include all.notebook {
                     width: 4.5rem;
@@ -67,6 +54,7 @@
         @include all.mobile {
             width: 100%;
             @include all.fl($jc: center);
+            padding-bottom: 2rem;
         }
     }
 
@@ -75,18 +63,21 @@
         @include all.fl($gap: 2rem, $jc: space-between);
 
         @media(max-width: 1280px) {
+            width: calc(100dvw - 20rem - 6rem);
             @include all.fl($flexdir: column);
             @include all.scrollbar();
-            overflow: auto;
+            overflow-y: auto;
         }
 
         @include all.tablet {
-            height: 70dvh;
-            padding: 0 1rem 4rem 1rem;
+            width: calc(100dvw - 2rem);
+            height: 64dvh;
+            padding: 0 1rem 2rem 0;
         }
 
         @include all.mobile {
-            height: 59dvh;
+            padding: 0 0 4rem 0;
+            height: 57dvh;
         }
 
         .task-list {
@@ -95,8 +86,8 @@
 
             @media (max-width: 1280px) {
                 width: 100%;
-                height: 72dvh;
                 margin-bottom: 1rem;
+                padding-right: 1rem;
             }
 
             .task-list-header {
@@ -110,22 +101,24 @@
 
             main {
                 width: 100%;
-                @include all.fl($flexdir: column);
+                @include all.fl($flexdir: column, $gap: 1.5rem);
                 @include all.scrollbar();
+                padding-right: 1rem;
                 overflow-y: auto;
 
                 @media(max-width: 1280px) {
                     @include all.fl($gap: 1rem);
                     overflow-x: auto;
+                    overflow-y: hidden;
                 }
 
                 @include all.notebook {
                     // max-width: 76dvw;
-                    // padding-bottom: 1rem;
+                    padding-bottom: 1rem;
                 }
 
-                @media (max-width: 920px) {
-                    // max-width: 71dvw;
+                @media (max-width: 1000px) {
+                    overflow-x: auto;
                 }
 
                 @include all.tablet {
@@ -133,8 +126,14 @@
                 }
 
                 .drag-content {
-                    width: 100%;
+                    @include all.size($w: 100%, $h: 26rem);
                     min-width: 24rem;
+
+                    @media(max-width: 1280px) {
+                        width: 23rem;
+                        min-width: 23rem;
+                        height: 27rem;
+                    }
                 }
 
                 .no-entry-container {
@@ -158,6 +157,15 @@
 }
 
 // #region CDK-Drag-Drop
+// .cdk-drag-list {
+//     width: 100%;
+//     height: 100%;
+// }
+
+// .cdk-drop-list {
+//     width: 100%;
+//     height: 100%;
+// }
 
 .cdk-drop-list-dragging {
     border: 3px dotted #800000;

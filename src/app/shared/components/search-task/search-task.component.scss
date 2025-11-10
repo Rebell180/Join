@@ -1,32 +1,19 @@
 @use '../../../../../public/styles/all_styles' as all;
 
 :host {
+    width: 100%;
+    .search-form-container {
+        @include all.size($w: 100%, $h: 4.8rem);
+        @include all.fl($alit: center, $gap: 0.5rem);
+        @include all.borRad($radius: 8px, $c: rgba(0, 0, 0, 0.2));
+        background: white;
+        padding: 0 1rem;
 
-    form {
-
-        input[type=text] {
-            @include all.fl();
-            @include all.size($w: 30dvw, $h: 4.5rem);
-            @include all.marpad($pad: 1rem 2rem);
-            @include all.borRad($radius: 8px, $c: rgba(0, 0, 0, 0.2));
+        .search-input {
+            @include all.size($w: 100%, $h: 4.5rem);
+            @include all.marpad($pad: 1rem 0);
             outline: none;
             font-size: 16px;
-
-            @media(max-width: 1280px) {
-                width: 35dvw;
-                gap: 1.6rem;
-                margin-left: 0;
-                }
-
-            @include all.tablet {
-                width: 50dvw;
-                height: 4.5rem;
-            }
-
-            @include all.mobile {
-                width: 90dvw;
-                height: 4rem;
-            }
 
             &::placeholder {
                 color: rgba(0, 0, 0, 0.3);
@@ -39,14 +26,11 @@
 
         hr {
             @include all.size($w: 0.2rem, $h: 65%);
-            @include all.absolute($top: 20%, $right: 4.8rem);
             background: lightgrey;
         }
 
-        input[type=submit] {
-            @include all.absolute($top: 2px, $right: 2px);
-            height: 4rem;
-            aspect-ratio: 1 / 1;
+        .search-icon-btn {
+            @include all.size($w: 4rem, $h: 4rem);
             background: url(../../../../../public/assets//Icons//taskBoard/searchDefault.png) no-repeat center / cover;
             cursor: pointer;
 

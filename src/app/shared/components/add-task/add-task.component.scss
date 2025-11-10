@@ -132,16 +132,8 @@ b {
         .add-task-footer {
             @include all.fl($jc: space-between, $alit: end);
 
-            // @include all.tablet {
-            //     @include all.fl($flexdir: column, )
-            // }
-
             .required-info-txt {
                 font-size: 1.5rem;
-
-                // @include all.tablet {
-                //     display: none;
-                // }
             }
 
             @include all.tablet {
@@ -162,14 +154,5 @@ b {
                 }
             }
         }
-
-        // .required-info-txt-mobile {
-        //     display: none;
-
-        //     @include all.tablet {
-        //         display: flex;
-        //         font-size: 1.2rem;
-        //     }
-        // }
     }
 }

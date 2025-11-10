@@ -14,15 +14,15 @@
     <app-search-task class="search-task" (seachOut)="filterTasks($event)"></app-search-task>
 </div>
 <div class="task-list-wrapper">
-    <section class="task-list">
+    <section cdkDropList #todo="cdkDropList" [cdkDropListData]="taskItems[0]"
+            [cdkDropListConnectedTo]="[progress, review, done]" (cdkDropListDropped)="drop($event)" class="task-list">
         <header class="task-list-header">
             <h3>{{ taskLists[0].listName }}</h3>
             <button (click)="modalService.openAddTaskModal()">
                 <img class="add-icon-btn" src="assets/Icons/taskBoard/addBtnBoard.png" />
             </button>
         </header>
-        <main cdkDropList #todo="cdkDropList" [cdkDropListData]="taskItems[0]"
-            [cdkDropListConnectedTo]="[progress, review, done]" (cdkDropListDropped)="drop($event)">
+        <main>
             @if(taskItems[0].length) { 
                 @for (task of taskItems[0]; track $index) {
                     <app-task-column-item cdkDrag class="drag-content" 
@@ -38,15 +38,18 @@
             }
         </main>
     </section>
-    <section class="task-list">
+    <section cdkDropList #progress="cdkDropList" 
+            [cdkDropListData]="taskItems[1]"
+            [cdkDropListConnectedTo]="[todo, review, done]" 
+            (cdkDropListDropped)="drop($event)" 
+            class="task-list">
         <header class="task-list-header">
             <h3>{{ taskLists[1].listName }}</h3>
             <button (click)="modalService.openAddTaskModal()">
                 <img class="add-icon-btn" src="assets/Icons/taskBoard/addBtnBoard.png" />
             </button>
         </header>
-        <main cdkDropList #progress="cdkDropList" [cdkDropListData]="taskItems[1]"
-            [cdkDropListConnectedTo]="[todo, review, done]" (cdkDropListDropped)="drop($event)">
+        <main>
             @if(taskItems[1].length) { 
                 @for (task of taskItems[1]; track $index) {
                     <app-task-column-item cdkDrag class="drag-content" 
@@ -62,15 +65,15 @@
             }
         </main>
     </section>
-    <section class="task-list">
+    <section cdkDropList #review="cdkDropList" [cdkDropListData]="taskItems[2]"
+            [cdkDropListConnectedTo]="[todo, progress, done]" (cdkDropListDropped)="drop($event)" class="task-list">
         <header class="task-list-header">
             <h3>{{ taskLists[2].listName }}</h3>
             <button (click)="modalService.openAddTaskModal()">
                 <img class="add-icon-btn" src="assets/Icons/taskBoard/addBtnBoard.png" />
             </button>
         </header>
-        <main cdkDropList #review="cdkDropList" [cdkDropListData]="taskItems[2]"
-            [cdkDropListConnectedTo]="[todo, progress, done]" (cdkDropListDropped)="drop($event)">
+        <main>
             @if(taskItems[2].length) { 
                 @for (task of taskItems[2]; track $index) {
                     <app-task-column-item cdkDrag class="drag-content" 
@@ -86,15 +89,15 @@
             }
         </main>
     </section>
-    <section class="task-list">
+    <section cdkDropList #done="cdkDropList" class="task-list" [cdkDropListData]="taskItems[3]"
+            [cdkDropListConnectedTo]="[todo, progress, review]" (cdkDropListDropped)="drop($event)">
         <header class="task-list-header">
             <h3>{{ taskLists[3].listName }}</h3>
             <button (click)="modalService.openAddTaskModal()">
                 <img class="add-icon-btn" src="assets/Icons/taskBoard/addBtnBoard.png" />
             </button>
         </header>
-        <main cdkDropList #done="cdkDropList" [cdkDropListData]="taskItems[3]"
-            [cdkDropListConnectedTo]="[todo, progress, review]" (cdkDropListDropped)="drop($event)">
+        <main>
             @if(taskItems[3].length) { 
                 @for (task of taskItems[3]; track $index) {
                     <app-task-column-item cdkDrag class="drag-content" 

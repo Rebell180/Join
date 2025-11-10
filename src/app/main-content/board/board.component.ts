@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, NgZone, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, inject, NgZone, OnDestroy, OnInit } from '@angular/core';
 import { onSnapshot, Unsubscribe } from '@angular/fire/firestore';
 import { CdkDragDrop, DragDropModule, transferArrayItem } from '@angular/cdk/drag-drop';
 import { ModalService } from '../../shared/services/modal.service';
@@ -37,17 +37,18 @@ export class BoardComponent implements OnDestroy, OnInit {
   private tms: ToastMsgService = inject(ToastMsgService);
   private fireDB: FirebaseDBService = inject(FirebaseDBService);
   private ngZone: NgZone = inject(NgZone);
+  private cdr: ChangeDetectorRef = inject(ChangeDetectorRef);
 
   DisplayType = DisplayType;
 
   protected tasks: Task[] = [];
-  private shownTasks: Task[] = [];
   private contacts: Contact[] = [];
   private subtasks: SubTask[] = [];
-
-  private unsubTasks!: Unsubscribe;
+  private shownTasks: Task[] = [];
+  
   private unsubContacts!: Unsubscribe;
   private unsubSubtasks!: Unsubscribe;
+  private unsubTasks!: Unsubscribe;
 
   protected taskLists: {
     listName: string,
@@ -86,7 +87,9 @@ export class BoardComponent implements OnDestroy, OnInit {
     return onSnapshot(this.fireDB.getCollectionRef('contacts'), contactsSnap => {
       this.ngZone.run(() => {
         this.contacts = [];
-        contactsSnap.docs.forEach(doc => this.contacts.push(new Contact(doc.data() as ContactObject)));
+        contactsSnap.docs.forEach((doc) => {
+          this.contacts.push(new Contact(doc.data() as ContactObject))
+        });
         this.sortContacts();
       });
     });
@@ -100,7 +103,9 @@ export class BoardComponent implements OnDestroy, OnInit {
     return onSnapshot(this.fireDB.getCollectionRef('subtasks'), subtasksSnap => {
       this.ngZone.run(() => {
         this.subtasks = [];
-        subtasksSnap.docs.forEach(doc => this.subtasks.push(new SubTask(doc.data() as SubtaskObject)));
+        subtasksSnap.docs.forEach((doc) => {
+          this.subtasks.push(new SubTask(doc.data() as SubtaskObject))
+        });
       });
     });
   }
@@ -114,7 +119,9 @@ export class BoardComponent implements OnDestroy, OnInit {
       this.ngZone.run(() => {
         this.tasks = [];
         this.shownTasks = [];
-        taskSnap.docs.forEach(doc => this.tasks.push(new Task(doc.data() as TaskObject)));
+        taskSnap.docs.forEach((doc) => {
+          this.tasks.push(new Task(doc.data() as TaskObject))
+        });
 
         for (let i = 0; i < this.tasks.length; i++) {
           this.addContactsToTask(i);
@@ -123,9 +130,10 @@ export class BoardComponent implements OnDestroy, OnInit {
 
         this.shownTasks = this.tasks;
         this.splitTasks();
-        for (let i = 0; i < this.taskLists.length; i++) {
-          this.sortTasks(i);
+        for (let j = 0; j < this.taskLists.length; j++) {
+          this.sortTasks(j);
         }
+        this.cdr.detectChanges();
       });
     });
   }
@@ -218,7 +226,7 @@ export class BoardComponent implements OnDestroy, OnInit {
    * 
    * @param e cdk drag drop object
    */
-  protected drop(e: CdkDragDrop<Task[]>): void {
+  protected async drop(e: CdkDragDrop<Task[]>): Promise<void> {
     const previousList = e.previousContainer.data || [];
     const currentList = e.container.data || [];
 
@@ -229,7 +237,7 @@ export class BoardComponent implements OnDestroy, OnInit {
       else if (this.taskItems[1].some(task => task.id == e.item.data.id)) e.item.data.status = TaskStatusType.PROGRESS;
       else if (this.taskItems[2].some(task => task.id == e.item.data.id)) e.item.data.status = TaskStatusType.REVIEW;
       else e.item.data.status = TaskStatusType.DONE;
-      this.updateTask(e.item.data);
+      await this.updateTask(e.item.data);
     }
   }
 
