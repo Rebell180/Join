@@ -35,12 +35,7 @@ b {
 }
 
 .add-task-section {
-    height: 100%;
-    @include all.marpad($pad: 3dvw);
-
-    @include all.mobile {
-        padding: 1dvw;
-    }
+    @include all.size($w: 100%, $h: 100%);
 
     #add-task-form {
         @include all.size($w: 100%, $h: 100%);
@@ -54,6 +49,7 @@ b {
             h1 {
                 font-family: 'Interbold', sans-serif;
                 font-size: 5rem;
+                padding-right: 2rem;
             }
         }
 
@@ -133,7 +129,7 @@ b {
             @include all.fl($jc: space-between, $alit: end);
 
             .required-info-txt {
-                font-size: 1.5rem;
+                font-size: 16px;
             }
 
             @include all.tablet {
