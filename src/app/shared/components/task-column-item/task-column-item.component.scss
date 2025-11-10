@@ -3,17 +3,11 @@
 :host {
 
 	.task-column-container {
-		// @include all.size($w: 24rem, $h:28rem);
-		// min-width: 24 rem;
 		@include all.marpad($mar: 0 0 1rem 0, $pad: 1.5rem);
 		background: rgb(254, 253, 253);
 		border-radius: 8px;
 		box-shadow: 0 0 5px lightgrey;
 		cursor: pointer;
-
-		@include all.notebook {
-			// @include all.marpad($mar: 0 1rem 0 0, $pad: 1rem);
-		}
 
 		h2 {
 			@include all.size($w: fit-content, $h: 3rem);
