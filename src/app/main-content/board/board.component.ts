@@ -16,6 +16,7 @@ import { SubtaskObject } from '../../shared/interfaces/subtask-object';
 import { TaskObject } from '../../shared/interfaces/task-object';
 import { TaskColumnItemComponent } from '../../shared/components/task-column-item/task-column-item.component';
 import { SearchTaskComponent } from '../../shared/components/search-task/search-task.component';
+import { combineLatest, map, Subscription } from 'rxjs';
 
 @Component({
   selector: 'section[board]',
@@ -61,23 +62,93 @@ export class BoardComponent implements OnDestroy, OnInit {
     ]
   protected taskItems: Task[][] = [[], [], [], []];
   
+  protected tasksSub!: Subscription;
+
+  constructor() {
+    this.getData();
+  }
+
   // #endregion attributes
 
   ngOnInit(): void {
-    this.unsubContacts = this.subscribeContacts();
-    this.unsubSubtasks = this.subscribeSubtasks();
-    this.unsubTasks = this.subscribeTasks();
+    // this.unsubContacts = this.subscribeContacts();
+    // this.unsubSubtasks = this.subscribeSubtasks();
+    // this.unsubTasks = this.subscribeTasks();
   }
 
   ngOnDestroy(): void {
-    this.unsubContacts();
-    this.unsubSubtasks();
-    this.unsubTasks();
+    // this.unsubContacts();
+    // this.unsubSubtasks();
+    // this.unsubTasks();
   }
 
   // #region methods
 
   // #region subscriptions
+
+  private getData() {
+    this.tasksSub = combineLatest([
+      this.fireDB.contacts$(),
+      this.fireDB.subtasks$(),
+      this.fireDB.tasks$()
+    ])
+      .pipe(
+        map(([contactsData, subtasksData, tasksData]) => {
+          const contacts = contactsData.map(c => new Contact(c));
+          const subtasks = subtasksData.map(s => new SubTask(s));
+
+          const tasks = tasksData.map(t => {
+            const task = new Task(t);
+            task.contacts = contacts.filter(c => task.assignedTo.includes(c.id));
+            task.subtasks = subtasks.filter(s => s.taskId === task.id);
+            return task;
+          });
+
+          return tasks;
+        })
+      )
+      .subscribe(tasks => {
+        this.splitTasks2(tasks);
+      });
+  }
+
+  
+  private splitTasks2(tasks: Task[]) {
+    this.taskItems = [[], [], [], []];
+    for (const task of tasks) {
+      switch (task.status) {
+        case TaskStatusType.TODO:
+          this.taskItems[0].push(task);
+          break;
+        case TaskStatusType.PROGRESS:
+          this.taskItems[1].push(task);
+          break;
+        case TaskStatusType.REVIEW:
+          this.taskItems[2].push(task);
+          break;
+        case TaskStatusType.DONE:
+          this.taskItems[3].push(task);
+      }
+    }
+  }
+
+  protected async drop2(e: CdkDragDrop<Task[]>): Promise<void> {
+    const previousList = e.previousContainer.data || [];
+    const currentList = e.container.data || [];
+
+    if (e.previousContainer != e.container) {
+      transferArrayItem(previousList, currentList, e.previousIndex, e.currentIndex);
+      currentList.sort((a, b) => a.dueDate.seconds - b.dueDate.seconds);
+      if (this.taskItems[0].some(task => task.id == e.item.data.id)) e.item.data.status = TaskStatusType.TODO;
+      else if (this.taskItems[1].some(task => task.id == e.item.data.id)) e.item.data.status = TaskStatusType.PROGRESS;
+      else if (this.taskItems[2].some(task => task.id == e.item.data.id)) e.item.data.status = TaskStatusType.REVIEW;
+      else e.item.data.status = TaskStatusType.DONE;
+      await this.updateTask(e.item.data);
+    }
+  }
+
+
+
 
   /**
    * Subscribes the contacts.
@@ -133,7 +204,6 @@ export class BoardComponent implements OnDestroy, OnInit {
         for (let j = 0; j < this.taskLists.length; j++) {
           this.sortTasks(j);
         }
-        this.cdr.detectChanges();
       });
     });
   }

@@ -3,10 +3,10 @@
 :host {
     @include all.fl($jc: center, $alit: center);
     @include all.size($w: 100%, $h: 100%);
-    border-radius: 50%;
-    color: white;
     padding: 0.5rem;
-    font-size: 75%;
+    font-size: clamp(16px, 75%, 48rem);
+    color: white;
+    border-radius: 50%;
 }
 
 :host(.orange) {

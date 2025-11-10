@@ -23,9 +23,10 @@
             @if(taskItems[0].length) { 
                 @for (task of taskItems[0]; track $index) {
                     <app-task-column-item cdkDrag class="drag-content" 
+                        id="task-item-{{ task.id }}"
                         [task]="task"  
                         [cdkDragData]="task"
-                        [cdkDragStartDelay]="(((dss.size() | async) === DisplayType.TABLET) || ((dss.size() | async) === DisplayType.MOBILE))? 500 : 0">
+                        [cdkDragStartDelay]="(((dss.size() | async) === DisplayType.TABLET) || ((dss.size() | async) === DisplayType.MOBILE))? 250 : 0">
                     </app-task-column-item>
                 } 
             } @else {
