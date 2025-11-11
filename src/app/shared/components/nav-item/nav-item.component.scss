@@ -12,7 +12,6 @@
 		@include all.size($w: 100%, $h: 100%);
 		@include all.fl($flexdir: column, $gap: 1rem);
 		padding: 0;
-		// @include all.marpad($mar: 0, $pad: 0);
 		border-radius: 16px;
 	}
 

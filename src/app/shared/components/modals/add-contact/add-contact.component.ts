@@ -9,6 +9,7 @@ import { ToastMsgService } from '../../../services/toast-msg.service';
 import { ValidationService } from '../../../services/validation.service';
 import { Subscription } from 'rxjs';
 import { CustomValidator } from '../../../classes/custom-validator';
+import { ContactFields } from '../../../enums/contact-fields';
 
 @Component({
   selector: 'app-add-contact',
@@ -43,53 +44,20 @@ export class AddContactComponent implements OnInit, AfterViewInit, OnDestroy {
   contact: InputSignal<Contact> = input.required<Contact>();
   headlineTxt: InputSignal<string> = input.required<string>();
   submitBtnTxt: InputSignal<string> = input.required<string>();
-
+  ContactFields = ContactFields;
   /** callback function on close => remove from DOM => will be set in ModalService */
   dissolve?: () => void;
   subFormCahange ?:Subscription;
 
   private fireDB: FirebaseDBService = inject(FirebaseDBService);
   private tms: ToastMsgService = inject(ToastMsgService);
-  private fb: FormBuilder = inject(FormBuilder);
   private val: ValidationService = inject(ValidationService);
   
   isOpen = false;
 
-  protected contactForm: FormGroup = this.fb.group({
-    firstname: ['', [CustomValidator.strictRequired(), CustomValidator.firstUpperCase(), Validators.minLength(3)]],
-    lastname: ['', [CustomValidator.strictRequired(), CustomValidator.firstUpperCase(), Validators.minLength(3)]],
-    email: ['', [CustomValidator.strictRequired(), Validators.minLength(10), Validators.email]],
-    tel: ['', [CustomValidator.strictRequired(), Validators.minLength(10), CustomValidator.tel()]]
-  })
-  protected fields: {name: string, placeholder: string, img: string}[] = [
-    {
-      name: 'firstname',
-      placeholder: 'First name',
-      img: 'person.png'
-    }, {
-      name: 'lastname',
-      placeholder: 'Last name',
-      img: 'person.png'
-    }, {
-      name: 'email',
-      placeholder: 'E-Mail',
-      img: 'mail.png'
-    }, {
-      name: 'tel',
-      placeholder: 'Phone',
-      img: 'call.png'
-    }
-  ]
-  protected lastFucusIndex: number = -1;
-  protected errors: Record<string, string[]> = {};
-
   // #endregion properties
   
   ngOnInit(): void {
-    const {id, group, iconColor, ...formdata} = this.contact().toJSON();
-    this.contactForm.setValue(formdata);
-    this.val.registerForm('contact', this.contactForm);
-    this.subFormCahange = this.contactForm.valueChanges.subscribe(() => {this.validateForm();});
     
   }
 
@@ -106,15 +74,13 @@ export class AddContactComponent implements OnInit, AfterViewInit, OnDestroy {
   // #region Form-Management
   /** Validates the form. */
   private validateForm() {
-    this.errors = this.val.validateForm('contact');
   }
 
   /**
    * Changes current focus.
    * @param index - Index of value in fields-array;
   */
-  focusOnInput (index: number): void {
-    this.lastFucusIndex = index;
+  focusOnInput (inputname: string): void {
   }
 
   /**
@@ -123,25 +89,21 @@ export class AddContactComponent implements OnInit, AfterViewInit, OnDestroy {
    * @returns true, if user passed this entry in form.
    */
   showError(index: number): boolean {
-    const control: AbstractControl<any, any> | null = this.contactForm.get(this.fields[index].name);
-    if (!control) return false;
-    return this.contactForm.invalid && control.touched || this.lastFucusIndex >= index
+    return false;
   }
 
   /** Submit the entered data as add or as update after validation */
   async submitForm() {
     this.validateForm();
-    if (this.contactForm.valid) {
-      const contact = new Contact({id: this.contact().id, group: this.contactForm.value.firstname[0], iconColor: this.contact().iconColor, ...this.contactForm.value})
-      if(contact.id == '') {
-        await this.fireDB.addToDB('contacts', contact);
-        this.tms.add('Contact was created', 3000, 'success');
-      } else {
-        await this.fireDB.updateInDB('contacts', contact);
-        this.tms.add('Contact was updated', 3000, 'success');
-      }
-      this.closeModal();
+    const contact = this.contact();
+    if(contact.id == '') {
+      await this.fireDB.addToDB('contacts', contact);
+      this.tms.add('Contact was created', 3000, 'success');
+    } else {
+      await this.fireDB.updateInDB('contacts', contact);
+      this.tms.add('Contact was updated', 3000, 'success');
     }
+    this.closeModal();
   }
   // #endregion
   

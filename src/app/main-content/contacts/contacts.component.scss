@@ -1,13 +1,16 @@
 @use '../../../../public/styles/all_styles' as all;
 
 :host {
+    width: 100%;
     @include all.fl();
+    overflow: hidden;
+
     .contact-list {
-        @include all.size($w: 37.5rem, $h: 90dvh);
+        @include all.size($w: 35rem, $h: 90dvh);
         @include all.marpad ($pad: 2rem 1.6rem 1rem 3rem);
 
         @include all.notebook {
-            @include all.size($h: 90dvh);
+            @include all.size($w: 100%, $h: 90dvh);
         }
 
         @include all.tablet {
@@ -28,7 +31,7 @@
         @include all.marpad($pad: 8rem 0 0 5rem);
         
         @include all.notebook {
-            @include all.size($h: 90dvh);
+            @include all.size($w: 100%, $h: 90dvh);
         }
         
         @include all.tablet {
@@ -38,23 +41,5 @@
         @media(max-width: 425px) {
             @include all.marpad($pad: 6rem 0 0 3rem);
         }
-    }
-}
-
-app-toast {
-    @include all.size($w: 100%, $h: 100%);
-    position: absolute;
-    z-index: -2;
-    bottom: 0;
-    @include all.fl($flexdir: column, $jc: end, $alit: center);
-    gap: 1rem;
-}
-
-app-contact-detail {
-    @include all.tablet {
-        position: absolute;
-        z-index: 0;
-        left: 0;
-        width: 100%;
     }
 }

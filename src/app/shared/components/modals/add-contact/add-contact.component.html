@@ -1,5 +1,4 @@
 <div class="modal-overlay" (click)="closeModal()">
-
     <dialog class="add-contact-modal-container" [@slideInOut]="isOpen ? 'open' : 'closed'"
         (click)="$event.stopPropagation()">
         <header class="contact-modal-header">
@@ -11,7 +10,7 @@
             </div>
         </header>
         <main>
-            <form [formGroup]="contactForm" (ngSubmit)="submitForm()">
+            <form (ngSubmit)="submitForm()">
                 <div class="form-main-container">
                     <div class="icon-area">
                         @if (headlineTxt() == 'Add') {
@@ -21,36 +20,63 @@
                         }
                     </div>
                     <div class="input-area">
-                        @for (field of fields; track field; let i = $index) {
-                            <div class="form-field">
+                        <div class="input-container firstname-input-container">
                             <div class="input-img-container">
-                                <input type="text" formControlName="{{ field.name }}" placeholder="{{ field.placeholder }}" (focus)="focusOnInput(i)">
-                                <img src="assets/Icons/contact/{{ field.img }}">
+                                <input type="text" placeholder="firstname"
+                                    onchange="vds.validate(ContactFields.FIRSTNAME.value, contact().firstname)"
+                                    (focus)="focusOnInput(ContactFields.FIRSTNAME)" autocomplete="off">
+                                <img src="assets/Icons/contact/person.png">
                             </div>
-                            <div class="errmsg">
-                                @if (errors[field.name] && showError(i)) {
-                                {{ errors[field.name][0] }}
-                                }
-                            </div>
+                            <span id="error-firstname" class="error">la{{ contact().firstname }}</span>
                         </div>
-                        }
+
+                        <div class="input-container lastname-input-container">
+                            <div class="input-img-container">
+                                <input type="text" placeholder="lastname"
+                                    onchange="vds.validate(ContactFields.LASTNAME.value, contact().lastname)"
+                                    (focus)="focusOnInput(ContactFields.LASTNAME)" autocomplete="off">
+                                <img src="assets/Icons/contact/person.png">
+                            </div>
+                            <span id="error-lastname" class="error">la{{ contact().lastname }}</span>
+                        </div>
+
+                        <div class="input-container email-input-container">
+                            <div class="input-img-container">
+                                <input type="email" placeholder="email"
+                                    onchange="vds.validate(ContactFields.EMAIL.value, contact().email)"
+                                    (focus)="focusOnInput(ContactFields.EMAIL)" autocomplete="off">
+                                <img src="assets/Icons/contact/mail.png">
+                            </div>
+                            <span id="error-email" class="error">la{{ contact().email }}</span>
+                        </div>
+
+                        <div class="input-container phone-input-container">
+                            <div class="input-img-container">
+                                <input type="text" placeholder="phonenumber"
+                                    onchange="vds.validate(ContactFields.PHONE.value, contact().tel)"
+                                    (focus)="focusOnInput(ContactFields.PHONE)" autocomplete="off">
+                                <img src="assets/Icons/contact/call.png">
+                            </div>
+                            <span id="error-phone" class="error">la{{ contact().tel }}</span>
+                        </div>
                     </div>
                 </div>
+
                 <div class="form-button-container">
                     @if(headlineTxt() == 'Add') {
-                    <input id="add-contact-cancel-btn" class="btn-default" type="button" (click)="closeModal()"
-                        value="Cancel X">
+                        <input id="add-contact-cancel-btn" class="btn-default" type="button" (click)="closeModal()"
+                            value="Cancel X">
                     } @else if(headlineTxt() == 'Edit') {
-                    <input class="btn-default" type="button" (click)="deleteContact()" value="Delete">
+                        <input class="btn-default" type="button" (click)="deleteContact()" value="Delete">
                     }
-                    <input class="btn-set" type="submit" value="{{ submitBtnTxt() }}">
+                    <input class="btn-set sub-btn" type="submit" value="{{ submitBtnTxt() }}">
                 </div>
             </form>
             <div class="icon-area-mobile">
                 @if (headlineTxt() == 'Add') {
-                <img src="assets/Icons/contact/contact_icon_grey.png">
+                    <img src="assets/Icons/contact/contact_icon_grey.png">
                 } @else {
-                <app-contact-icon class="{{ contact().iconColor }}" [contact]="contact()"></app-contact-icon>
+                    <app-contact-icon class="{{ contact().iconColor }}" [contact]="contact()"></app-contact-icon>
                 }
             </div>
         </main>
