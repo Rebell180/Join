@@ -1,0 +1,14 @@
+@use '../../public/styles/all_styles' as all;
+
+.contact-add-modal {
+    z-index: 5
+}
+
+#toast-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    pointer-events: none;
+    @include all.size($w: 100dvw, $h: 100dvh);
+}

@@ -1,0 +1,243 @@
+@use "../../../../public/styles/all_styles.scss" as all;
+
+:host {
+	@include all.size($h: 80dvh);
+	@include all.marpad($pad: 3dvw);
+
+	// #region summary-header
+	.summary-header {
+		@include all.size($h: 8rem);
+		@include all.fl($jc: start, $alit: center);
+
+		.summary-header-info {
+			@include all.fl($alit: center, $gap: 3rem);
+
+			h1 {
+				font-family: 'Interbold', sans-serif;
+				font-size: 5rem;
+			}
+
+			h2 {
+				@include all.size($w: 35dvw, $h: 3rem);
+				font-size: 2.5rem;
+				font-weight: 100;
+				letter-spacing: 2px;
+			}
+
+			hr {
+				background: #29abe3;
+			}
+
+			#middle-line {
+				display: block;
+				@include all.size($w: 0.3rem, $h: 6rem);
+			}
+
+			#bottom-line {
+				display: none;
+				@include all.size($w: 12rem, $h: 0.6rem);
+			}
+		}
+	}
+
+	// #region dashboard
+	.dashboard-main-container {
+		@include all.fl($alit: center);
+		@include all.size($w: 100%);
+		margin-top: 2rem;
+
+		.dashboard {
+			@include all.size($w: 60dvw, $h: 70dvh);
+			padding: 4rem 4rem 4rem 0;
+
+			.first-dashboard-row-container {
+				@include all.size($h: 30%);
+				@include all.fl($gap: 2rem);
+
+				.first-dashboard-row {
+					@include all.size($w: 100%, $h: 100%);
+					@include all.fl($jc: center, $alit: center, $gap: 2rem);
+					background: white;
+					border-radius: 1.5rem;
+					position: relative;
+					transition: all 0.8s ease;
+					cursor: pointer;
+
+					img {
+						@include all.size($w: 6rem, $h: 6rem);
+					}
+
+					img.hover {
+						display: none;
+					}
+
+					&:hover {
+						background: #2a3647;
+						scale: 1.1;
+						color: white;
+
+						img.default {
+							display: none;
+						}
+
+						img.hover {
+							display: inline;
+						}
+					}
+
+					.done-count {
+						@include all.fl($alit: center, $flexdir: column);
+					}
+				}
+			}
+
+			.middle-dashboard-row-container {
+				@include all.size($h: 30%);
+				@include all.marpad($mar: 2rem 0);
+
+				.middle-dashboard-row {
+					@include all.size($w: 100%, $h: 100%);
+					@include all.fl($jc: center, $alit: center, $gap: 4rem);
+					background: white;
+					border-radius: 1.5rem;
+					cursor: pointer;
+
+
+					&:hover {
+						background: #2a3647;
+						scale: 1.1;
+						transition: all 0.8s;
+						color: white;
+					}
+
+					.dashboard-priority {
+						@include all.size($h: 6rem);
+						@include all.fl($alit: center, $jc: center);
+
+						.red {
+							background: #ff3c00;
+							width: 6rem;
+							height: 6rem;
+							border-radius: 50%;
+							display: flex;
+							justify-content: center;
+							align-items: center;
+
+							img {
+								@include all.size($w: 3rem, $h: 3rem);
+							}
+						}
+
+						.orange {
+							background: #ffaa00;
+							width: 6rem;
+							height: 6rem;
+							border-radius: 50%;
+							display: flex;
+							justify-content: center;
+							align-items: center;
+
+							img {
+								@include all.size($w: 2.5rem, $h: 1.5rem);
+							}
+						}
+
+						.green {
+							background: #79e329;
+							width: 6rem;
+							height: 6rem;
+							border-radius: 50%;
+							display: flex;
+							justify-content: center;
+							align-items: center;
+
+							img {
+								@include all.size($w: 2.5rem, $h: 2rem);
+							}
+						}
+					}
+
+					.priority-count {
+						display: flex;
+						align-items: center;
+						flex-direction: column;
+					}
+
+					hr {
+						@include all.size($w: 0.2rem, $h: 8rem);
+						background: grey;
+					}
+
+					.dashboard-date {
+						@include all.size();
+						@include all.fl($flexdir: column, $alit: start, $jc: center);
+
+						.dash-date {
+							font-weight: bold;
+							columns: #2a3647;
+							font-size: 2.2rem;
+						}
+
+						p {
+							@include all.marpad($mar: 1rem 0 0 0);
+						}
+					}
+				}
+			}
+
+			.end-dashboard-row-container {
+				@include all.size($h: 30%);
+				@include all.fl($gap: 3rem);
+				@include all.marpad($mar: 2rem 0);
+
+				.end-dashboard-row {
+					@include all.size($w: 100%, $h: 100%);
+					@include all.fl($alit: center, $jc: center, $flexdir: column);
+					background: white;
+					border-radius: 1.5rem;
+					transition: all 0.8s ease;
+					cursor: pointer;
+
+					&:hover {
+						background: #2a3647;
+						scale: 1.1;
+						color: white;
+					}
+
+					p {
+						text-align: center;
+					}
+				}
+			}
+		}
+	}
+
+	// #region greeting user
+	.greed-user {
+		@include all.size($w: 100%, $h: 70dvh);
+		@include all.fl($jc: center, $alit: start, $flexdir: column);
+		@include all.marpad($pad: 0 0 0 10rem);
+
+		@media(max-width: 1280px) {
+			display: none;
+		}
+
+		h1 {
+			font-size: 6rem;
+			color: #29abe3;
+		}
+
+		h2 {
+			font-size: 2.8rem;
+			font-weight: 100;
+		}
+	}
+
+	span {
+		font-size: 6rem;
+		font-family: 'Interbold', sans-serif;
+	}
+}
+
+
+// #endregion..

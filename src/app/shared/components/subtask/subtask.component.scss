@@ -1,0 +1,127 @@
+@use '../../../../../public/styles/all_styles' as all;
+
+:host {
+    @include all.fl($flexdir: column);
+    width: 100%;
+    font-size: 16px;
+}
+
+.errmsg {
+    color: #800000;
+    height: 2.2rem;
+    width: 100%;
+}
+
+// #region input field
+.add-subtask-container {
+    width: 100%;
+    @include all.fl($jc: space-between, $alit: center);
+    padding: 0 0.5rem;
+    border: 1px solid rgba(0,0,0,0.2);
+    border-radius: 8px;
+    background: white;
+
+    .add-subtask-input{
+        width: 100%;
+        font-size: 16px;
+        padding: 1rem;
+        @include all.limiter();
+        inset: none;
+        outline: none;
+        background: white;
+    }
+
+    .add-subtask-input-btns-container {
+        @include all.fl($alit: center);
+        
+        .add-subtask-input-btn {
+            @include all.size($w: 3rem, $h: 3rem);
+            background: transparent;
+
+            .edit-icon {
+                @include all.size($w: 3rem, $h: 3rem);
+                background: transparent;
+
+                &:hover {
+                    @include all.size($w:3.2rem, $h: 3.2rem);
+                }
+            }
+        }
+
+        hr {
+            @include all.size($w: 0.2rem, $h: 3rem);
+            background: rgb(0, 0, 0, 0.3);
+            border: none
+        }
+    }
+    &.active {
+        outline: 1px solid #29ABE2;
+    }
+}
+
+// #endregion input field
+
+// #region ordered list
+ol {
+    width: 100%;
+    overflow-y: auto;
+    max-height: 12rem;
+    @include all.scrollbar();
+    
+    li {
+        height: 4.8rem;
+        width: 100%;
+        font-size: 16px;
+        @include all.fl($jc: space-between, $alit: center);
+        background: transparent;
+    }
+}
+
+// #endregion ordered list
+
+// #region display item 
+.regular {
+    font-size: 1.6rem;
+    cursor: pointer;
+
+    &:hover {
+        background: rgba(0,0,0,0.1);
+        border-radius: 8px;
+    }
+
+    &:hover .hover-btns {
+        @include all.fl($alit: center);
+    }
+
+    .add-subtask-input-btns-container {
+        display: none;
+        background: transparent;
+        padding-right: 1rem;
+
+        .add-subtask-input-btn {
+            @include all.size($w: 3rem, $h: 3rem);
+            background: transparent;
+
+            .edit-icon {
+                @include all.size($w: 3rem, $h: 3rem);
+
+                &:hover {
+                    @include all.size($w:3.2rem, $h: 3.2rem);
+                }
+            }
+        }
+
+        hr {
+            @include all.size($w: 0.2rem, $h: 3rem);
+            background: rgb(0, 0, 0, 0.3);
+            border: none
+        }
+    }
+    &:hover {
+        .add-subtask-input-btns-container{
+            @include all.fl($alit: center);
+        }
+    }
+}
+
+// #endregion display item

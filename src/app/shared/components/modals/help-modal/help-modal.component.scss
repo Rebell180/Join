@@ -1,0 +1,103 @@
+@use '../../../../../../public/styles/all_styles' as all;
+@forward '../../../../../../public/styles/component-styles';
+
+.modal-overlay {
+    border: 2px solid;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+}
+
+#help-close-btn{
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    font-size: 20px;
+    z-index: 1;
+}
+
+.help-modal-container {
+    @include all.size($w: 80%, $h: 80%);
+    @include all.fl($flexdir: column, $jc: center, $alit: start, $gap: 1rem);
+    background-color: white;
+    border-radius: 16px;
+    box-shadow: 8px 8px 8px rgba(0, 0, 0, 0.2);
+    padding: 5rem;
+
+    @include all.mobile {
+        @include all.size($w: 90%, $h: 80%);
+        padding: 1rem;
+    }
+    
+    .help-modal-content {
+        @include all.fl($flexdir: column);
+        @include all.size();
+        @include all.scrollbar();
+        overflow-y: auto;
+        
+
+        .help-header {
+            margin-bottom: 4rem;
+        }
+
+        .help-main-content {
+            padding-right: 4rem;
+            
+            h2 {
+                font-size: 32px;
+                margin-bottom: 2rem;
+
+                @include all.mobile {
+                    font-size: 24px;
+                }
+            }
+            
+            h3 {
+                font-size: 24px;
+                margin-bottom: 1.5rem;
+                @include all.mobile {
+                    font-size: 20px;
+                }
+            }
+            
+            p {
+                font-size: 18px;
+                margin-bottom: 1rem;
+                @include all.mobile {
+                    font-size: 16px;
+                }
+            }
+            
+            .help-step-list {
+                display: block;
+                list-style: decimal;
+                padding-left: 3rem;
+                margin-bottom: 4rem;
+                list-style: decimal;
+                font-size: 24px;
+                font-family: 'InterRegular', sans-serif;
+
+                @include all.mobile {
+                    font-size: 18px;
+                    padding-left: 2rem; 
+                }
+            }
+            
+            a {
+                color: #29ABE2;
+                cursor: pointer;
+
+                @include all.mobile {
+                    word-wrap: break-word;
+                    text-wrap: true;
+                }
+            }
+        }
+    }
+
+
+}

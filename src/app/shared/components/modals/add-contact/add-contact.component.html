@@ -1,0 +1,59 @@
+<div class="modal-overlay" (click)="closeModal()">
+
+    <dialog class="add-contact-modal-container" [@slideInOut]="isOpen ? 'open' : 'closed'"
+        (click)="$event.stopPropagation()">
+        <header class="contact-modal-header">
+            <img src="assets/Icons/contact/JoinLogoWhite.png" alt="">
+            <div class="add-contact-header">
+                <h1 id="add-contact-headline">{{ headlineTxt() }} Contact</h1>
+                <h2>Tasks are better with a team!</h2>
+                <hr>
+            </div>
+        </header>
+        <main>
+            <form [formGroup]="contactForm" (ngSubmit)="submitForm()">
+                <div class="form-main-container">
+                    <div class="icon-area">
+                        @if (headlineTxt() == 'Add') {
+                        <img src="assets/Icons/contact/contact_icon_grey.png">
+                        } @else {
+                        <app-contact-icon class="{{ contact().iconColor }}" [contact]="contact()"></app-contact-icon>
+                        }
+                    </div>
+                    <div class="input-area">
+                        @for (field of fields; track field; let i = $index) {
+                            <div class="form-field">
+                            <div class="input-img-container">
+                                <input type="text" formControlName="{{ field.name }}" placeholder="{{ field.placeholder }}" (focus)="focusOnInput(i)">
+                                <img src="assets/Icons/contact/{{ field.img }}">
+                            </div>
+                            <div class="errmsg">
+                                @if (errors[field.name] && showError(i)) {
+                                {{ errors[field.name][0] }}
+                                }
+                            </div>
+                        </div>
+                        }
+                    </div>
+                </div>
+                <div class="form-button-container">
+                    @if(headlineTxt() == 'Add') {
+                    <input id="add-contact-cancel-btn" class="btn-default" type="button" (click)="closeModal()"
+                        value="Cancel X">
+                    } @else if(headlineTxt() == 'Edit') {
+                    <input class="btn-default" type="button" (click)="deleteContact()" value="Delete">
+                    }
+                    <input class="btn-set" type="submit" value="{{ submitBtnTxt() }}">
+                </div>
+            </form>
+            <div class="icon-area-mobile">
+                @if (headlineTxt() == 'Add') {
+                <img src="assets/Icons/contact/contact_icon_grey.png">
+                } @else {
+                <app-contact-icon class="{{ contact().iconColor }}" [contact]="contact()"></app-contact-icon>
+                }
+            </div>
+        </main>
+        <button class="close" type="button" (click)="closeModal()">X</button>
+    </dialog>
+</div>

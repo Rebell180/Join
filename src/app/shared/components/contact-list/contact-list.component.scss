@@ -1,0 +1,105 @@
+@use '../../../../../public/styles/all_styles' as all;
+@forward '../../../../../public/styles/component-styles';
+
+:host {
+    @include all.size($w: 100%, $h:100%);
+    background: white;
+    box-shadow: 5px 0 10px -5px grey;
+
+    #add-contact-button {
+        @include all.size($w: 100%);
+        @include all.marpad ($mar: 1rem 0, $pad: 1rem 0);
+        z-index: 2;
+        @include all.tablet {
+            @include all.size($w: 6.2rem, $h: 6.2rem);
+            border-radius: 50%;
+            position: absolute;
+            right: 2rem;
+            bottom: 0;
+            @media (max-width: 422px) {
+                right: 3rem;
+            }
+            span {
+                display: none;
+            }
+        }
+
+        @media(max-width: 376px) {
+            bottom: 0.5rem;
+        }
+    }
+
+    .contact-groups-container {
+        overflow-y: auto;
+        @include all.scrollbar();
+        @include all.size($w: 100%, $h: 74dvh);
+
+        .contact-group-container {
+            @include all.fl($flexdir: column);
+            margin-right: 1rem;
+            overflow-x: hidden;
+
+            .letter {
+                vertical-align: center;
+                @include all.marpad($mar: 2rem 0, $pad: 0 3rem);
+                cursor: default;
+                font-size: 2.4rem;
+            }
+
+            hr {
+                width: 95%;
+                margin: 1rem 0;
+                border: 1px solid rgba(0, 0, 0, 0.1);
+            }
+
+            .single-contact-container {
+                @include all.fl($alit: center, $jc: start, $gap: 25px);
+                @include all.size($w: 95%, $h: 78px);
+                @include all.marpad($pad: 0 2rem);
+                border-radius: 10px;
+                cursor: pointer;
+
+                &:hover {
+                    background: rgba(219, 220, 220, 0.7);
+                }
+
+                app-contact-icon {
+                    @include all.fl($jc: center, $alit: center);
+                    @include all.size($w: 4.2rem, $h: 4.2rem);
+                    font-size: 18px;
+                    flex-shrink: 0;
+                }
+
+                .contact-data {
+                    @include all.fl($flexdir: column, $jc: center);
+                    @include all.size($w: 25rem, $h: 4.8rem);
+                    overflow-x: hidden;
+
+                    .name {
+                        @include all.limiter();
+                        margin-bottom: 5px;
+                        font-size: 20px;
+                        font-family: 'InterBoldReg', sans-serif;
+                    }
+
+                    .email {
+                        @include all.limiter();
+                        color: #007bed;
+                        font-size: 16px;
+                    }
+                }
+            }
+
+            .active {
+                background: #2a3647;
+                color: white;
+                cursor: default;
+
+                &:hover {
+                    background: #2a3647;
+                }
+            }
+
+        }
+    }
+}

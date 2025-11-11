@@ -1,0 +1,54 @@
+@use '../../../../../public/styles/all_styles' as all;
+
+:host {
+    width: 100%;
+}
+
+.category-drop-container{
+    width: 100%;
+    height: 4rem;
+    background: white;
+    border-radius: 8px;
+    
+    .category-drop-presenter {
+        width: 100%;
+        height: 4rem;
+        padding: 1rem;
+        @include all.borRad($radius: 8px, $c: rgba(0, 0, 0, 0.2), $thick: 1px);
+        @include all.fl($jc: space-between, $alit: center);
+
+        &.active {
+            border: 1px solid #29ABE2;
+        }
+
+        .category-drop-presenter-txt {
+            font-size: 16px;
+        }
+
+        .arrow {
+            font-size: 12px;
+        }
+    }
+
+    .options-container {
+        @include all.fl($flexdir: column, $alit: center);
+        @include all.borRad($c: rgba(0, 0, 0, 0.1), $radius: 8px, $thick: 2px);
+        @include all.boxSh($c: rgba(0, 0, 0, 0.1));
+        @include all.scrollbar();
+        background: white;
+        border-radius: 8px;
+        z-index: 2;
+        overflow-y: auto;
+
+        .option {
+            width: 100%;
+            height: 4rem;
+            padding:  1rem 0.5rem;
+
+            &:hover{
+                background: #29ABE2;
+            }
+        }
+    }
+
+}

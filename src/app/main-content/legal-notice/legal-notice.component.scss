@@ -1,0 +1,51 @@
+@use '../../../../public/styles/all_styles.scss' as all;
+
+:host {
+    @include all.size($h: 90dvh);
+    @include all.marpad($pad: 4rem 5rem 0 5rem);
+    @include all.scrollbar();
+    overflow-y: auto;
+
+    @include all.tablet {
+        @include all.marpad($pad: 3rem 2rem);
+        @include all.size($h: 80dvh);
+    }
+
+    .legal-notice-container {
+
+        .legal-notice-main-content {
+
+            header {
+                display: flex;
+
+                h1 {
+                    width: 100%;
+                    margin-bottom: 2rem;
+                }
+
+                button {
+                    margin-bottom: 2rem;
+                    display: none;
+
+                    @include all.tablet {
+                        display: flex;
+                    }
+                }
+            }
+
+            h2, h3, p {
+                margin-bottom: 2rem;
+            }
+
+            span,
+            a {
+                color: #29abe3;
+            }
+
+            .date {
+                color: black;
+                font-weight: bold;
+            }
+        }
+    }
+}

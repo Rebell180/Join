@@ -1,0 +1,79 @@
+<section class="add-task-section">
+    <form #addTaskForm="ngForm" id="add-task-form">
+        <header class="add-task-header">
+            @if(kindOf() === 'add') {
+                <h1 id="add-task-headline">Add Task</h1>
+            }
+            @else {
+                <h1 id="add-task-headline">Edit Task</h1>
+            }
+        </header>
+
+        <main class="add-task-main-container">
+            <div class="add-task-info-block1">
+
+                <div class="input-wrapper">
+                    <label class="add-task-input-lbl" for="title">Title <b>*</b></label>
+                    <input class="add-task-input" type="text" name="title" id="add-task-info-title"
+                        placeholder="Enter a title" [(ngModel)]="currentTask().title" required #title="ngModel" />
+                    <small class="error" *ngIf="title.invalid && title.touched">Title is required.</small>
+                </div>
+
+                <div class="input-wrapper">
+                    <label class="add-task-input-lbl" for="descr">Description</label>
+                    <textarea name="descr" id="add-task-info-description" class="add-task-input"
+                        placeholder="Enter a Description ..." [(ngModel)]="currentTask().description"></textarea>
+                </div>
+
+                <div class="input-wrapper">
+                    <label class="add-task-input-lbl" for="due-date-picker">Due Date <b>*</b></label>
+                    <app-date-picker name="due-date-picker" required [selectedTimestamp]="currentTask().dueDate"
+                        (dateSelected)="currentTask().dueDate = $event"></app-date-picker>
+                    <small class="error" *ngIf="!currentTask().dueDate && addTaskForm.submitted">Due date is
+                        required.</small>
+                </div>
+            </div>
+
+            <hr />
+
+            <div class="add-task-info-block2">
+                <div class="input-wrapper add-task-priority-container">
+                    <label class="add-task-input-lbl" for="add-task-priority">Priority</label>
+                    <app-priority-buttons [task]="currentTask()"></app-priority-buttons>
+                </div>
+
+                <div class="input-wrapper add-task-assigned-to-container">
+                    <label class="add-task-input-lbl" for="add-task-assigned-to">Assigned to</label>
+                    <app-assign-contacts [options]="contacts" [selectedValues]="currentTask().contacts"
+                        (selectionChange)="updateContacts($event)"></app-assign-contacts>
+                </div>
+
+                <div class="input-wrapper add-task-category-container">
+                    <label class="add-task-input-lbl" for="add-task-category">Category <b>*</b></label>
+                    
+                    <app-category-drop #category [currentCategory]="currentTask().category" (newCategory)="updateCategory($event)"></app-category-drop>
+                </div>
+
+                <div class="input-wrapper add-task-subtask-container">
+                    <label class="add-task-input-lbl" for="add-task-subtask">Subtasks</label>
+                    <app-subtask id="app-task-subtask" [subtasks]="currentTask().subtasks"
+                        (outSubtasks)="updateSubtasks($event)"></app-subtask>
+                </div>
+            </div>
+        </main>
+
+        <footer class="add-task-footer">
+            <span class="required-info-txt"><b>*</b> this field is required</span>
+            <div class="add-task-btn-container">
+                @if(kindOf() === 'add') {
+                    <button class="btn-default" type="button" (click)="clear()">Clear</button>
+                    <button class="btn-set" type="submit" (click)="addTask()" [disabled]="addTaskForm.invalid || !currentTask().dueDate">Create Task</button>
+                }
+                @else {
+                    <button class="btn-set" type="submit" (click)="updateTask()" [disabled]="addTaskForm.invalid || !currentTask().dueDate">Update Task</button>
+                }
+            </div>
+        </footer>
+    </form>
+    
+</section>

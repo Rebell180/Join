@@ -1,0 +1,41 @@
+@use '../../../../../public/styles/all_styles' as all;
+
+:host {
+	@include all.size($w: 100%);
+	@include all.fl($alit: center, $gap: 1rem);
+	@include all.marpad($mar: 1rem 0, $pad: 1rem 3.8rem);
+	font-size: 1.8rem;
+	color: white;
+	background: transparent;
+
+	@include all.tablet {
+		@include all.size($w: 100%, $h: 100%);
+		@include all.fl($flexdir: column, $gap: 1rem);
+		@include all.marpad($mar: 0, $pad: 0);
+		border-radius: 16px;
+	}
+
+	&:hover {
+		background: #2a3d59;
+	}
+
+	img {
+		@include all.fl();
+		@include all.size($w: 2.8rem, $h: 2.8rem);
+
+		@include all.tablet {
+			@include all.size($w: 3.8rem, $h: 3.8rem);
+		}
+	}
+
+	.nav-name {
+
+		@include all.tablet {
+			display: none;
+		}
+	}
+}
+
+:host(.active) {
+	background: #091931;
+}

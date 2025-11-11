@@ -1,0 +1,15 @@
+@if(fireDB.currentContact$ | async; as contact) {
+    @if((((dss.size() | async) == DisplayType.NOTEBOOK) || ((dss.size() | async) == DisplayType.TABLET ) ||  ((dss.size() | async) == DisplayType.MOBILE ))) {
+        @if(contact.id == '') {
+            <section contact-list class="contact-list"></section>
+        }
+        @else {
+            <section contact-detail class="contact-detail"></section>
+        }
+    }
+    @else {
+        <section contact-list class="contact-list"></section>
+        <section contact-detail class="contact-detail"></section>
+    }
+}
+

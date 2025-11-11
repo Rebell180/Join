@@ -1,0 +1,53 @@
+@use '../../../../../../public/styles/all_styles' as all;
+@forward '../../../../../../public/styles/component-styles';
+
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 12;
+}
+
+.add-task-modal-container {
+    @include all.size($w: 90dvw, $h: 80dvh);
+    @include all.fl($jc: center, $alit: center);
+    max-width: 120rem;
+    background-color: white;
+    border-radius: 16px;
+    border: none;
+    box-shadow: 8px 8px 8px rgba(0, 0, 0, 0.2);
+
+    @include all.notebook {
+        box-shadow: 8px 0 8px rgba(0, 0, 0, 0.2), -8px 0 8px rgba(0, 0, 0, 0.2);
+    }
+
+    @include all.tablet {
+        @include all.size($w: 95dvw, $h: 80dvh);
+        max-width: 90rem;
+        @include all.fl($flexdir: column, $jc: center, $alit: center);
+    }
+
+    #add-task-close-btn {
+        position: absolute;
+        top: 2rem;
+        right: 2rem;
+        z-index: 2;
+        font-size: 16px;
+        background: transparent;
+    }
+
+    #add-task-modal-content {
+        @include all.size($w: 100%, $h: 100%);
+        @include all.marpad($pad: 4rem);
+
+        @include all.notebook {
+            @include all.marpad($pad: 4rem 3%);
+            @include all.scrollbar();
+            overflow-y: auto;
+        }
+    }
+    
+}

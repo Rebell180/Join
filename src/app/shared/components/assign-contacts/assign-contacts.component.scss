@@ -1,0 +1,110 @@
+@use '../../../../../public/styles/all_styles' as all;
+
+:host {
+    width: 100%;
+}
+
+.assign-to-container {
+    width: 100%;
+    
+    .assign-to-input {
+        @include all.fl($jc: space-between, $alit: center);
+        @include all.borRad($radius: 8px, $c: rgba(0, 0, 0, 0.2), $thick: 1px);
+        @include all.marpad($pad: 1rem);
+        background: white;
+        cursor: pointer;
+
+        &.active {
+            border: 1px solid #29ABE2;
+        }
+
+        .selection-presenter-txt {
+          width: 90%;
+          @include all.limiter();
+          padding-right: 1rem;
+
+          @include all.notebook {
+            width: 70dvw;
+          }
+        }
+
+        .placeholder {
+            color: rgba(0,0,0,0.2);
+        }
+
+        .arrow {
+          font-size: 12px;
+        }
+    }
+
+    .options {
+      @include all.scrollbar();
+      position: absolute;
+      top: 4rem;
+      left: 0;
+      width: 100%;
+      border: 1px solid #ddd;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      z-index: 20;
+      max-height: 220px;
+      overflow-y: auto;
+
+
+      .search{
+        width: 100%;
+        padding: 1rem;
+        border: none;
+        border-bottom: 1px solid #eee;
+        outline: none;
+        font-size: 16px;
+      }
+
+      .option {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.5rem 1rem;
+        cursor: pointer;
+
+        .contact-container {
+          @include all.fl($alit: center, $gap: 1rem);
+          
+          app-contact-icon{
+            @include all.size($w: 3.5rem, $h: 3.5rem);
+          }
+
+          span {
+            // width: 28dvw;
+            // max-width: 20rem;
+            width: 80%;
+            @include all.limiter();
+            font-size: 16px;
+
+            @include all.notebook {
+              width: 40dvw;
+            }
+          }
+        }
+        input {
+          padding-right: 2rem;
+        }
+
+        &:hover {
+          background-color: #29ABE2;
+        }
+      }
+    }
+
+    .contact-list-item-container{
+      height: 6rem;
+      padding: 1rem;
+    }
+
+    .no-results{
+      padding: 8px 10px;
+      color: #888;
+      font-size: 14px;
+    }
+}

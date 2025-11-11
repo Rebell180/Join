@@ -1,0 +1,40 @@
+@use '../../../../../public/styles/all_styles' as all;
+
+:host {
+    @include all.fl($flexdir: column, $jc: end, $alit: center);
+    @include all.marpad($pad: 10dvh 0);
+}
+
+.toast {
+    @include all.slightInFromRightAnimation();
+    @include all.size($w: 30rem, $h: 5rem);
+    @include all.borRad();
+    @include all.fl($jc: center, $alit: center);
+    z-index: 5;
+    pointer-events: auto;
+
+    @include all.mobile {
+        width: 25rem;
+    }
+
+    span {
+        color: white;
+        font-size: 20px
+    }
+
+    button {
+        color: white;
+        font-weight: 500;
+        font-size: 1.6rem;
+        background: transparent;
+        margin: 1rem 1rem;
+    }
+}
+
+.success {
+    background: #2a3647;
+}
+
+.error {
+    background: rgb(107, 3, 3);
+}

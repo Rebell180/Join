@@ -1,0 +1,154 @@
+@use '../../../../../public/styles/all_styles' as all;
+@forward '../../../../../public/styles/component-styles';
+
+input,
+select,
+textarea,
+app-date-picker {
+    width: 100%;
+}
+
+b {
+    color: red;
+}
+
+.input-wrapper {
+    width: 100%;
+    @include all.fl($flexdir: column, $gap: 0.5rem);
+}
+
+.add-task-input-lbl {
+    font-size: 18px;
+    padding-bottom: 0.5rem;
+}
+
+.add-task-input {
+    @include all.borRad($c: rgba(0, 0, 0, 0.2), $radius: 8px);
+    @include all.marpad($pad: 1rem);
+    font-size: 16px;
+
+    &:focus-visible {
+        border-inline: none;
+        border: 1px solid #29ABE2;
+        outline: none;
+    }
+}
+
+.add-task-section {
+    @include all.size($w: 100%, $h: 100%);
+
+    #add-task-form {
+        @include all.size($w: 100%, $h: 100%);
+        @include all.fl($flexdir: column, $jc: space-between, $alit: space-between);
+
+        .add-task-header {
+            height: 10dvh;
+            @include all.fl($alit: center);
+            margin-bottom: 2rem;
+
+            h1 {
+                font-family: 'Interbold', sans-serif;
+                font-size: 5rem;
+                padding-right: 2rem;
+            }
+        }
+
+        .add-task-main-container {
+            @include all.size($w: 100%, $h: 100%);
+            @include all.fl($jc: space-between, $alit: start, $gap: 1rem);
+
+            @include all.notebook {
+                @include all.fl($flexdir: column, $alit: center);
+                @include all.scrollbar();
+                overflow-y: auto;
+                margin: 2rem 0;
+            }
+
+            .add-task-info-block1 {
+                width: 50%;
+                @include all.fl($flexdir: column, $gap: 2rem);
+
+                @include all.notebook {
+                    width: 90%;
+                }
+
+                #add-task-info-description {
+                    @include all.scrollbar();
+                    font-family: 'Inter', sans-serif;
+                    height: 14dvh;
+                    overflow-y: auto;
+                    resize: none;
+                }
+            }
+
+            hr {
+                width: 0.2rem;
+                height: 75%;
+                margin: 0 1rem;
+                border: 1px solid rgba(0, 0, 0, 0.1);
+
+                @include all.notebook {
+                    display: none;
+                }
+            }
+
+            .add-task-info-block2 {
+                width: 50%;
+                @include all.fl($flexdir: column, $gap: 2rem);
+
+                @include all.notebook {
+                    width: 90%;
+                    margin: 2rem 0 3rem 0;
+                }
+
+                .add-task-assigned-to {
+                    @include all.marpad($pad: 1rem, $mar: 0 2rem 0 0);
+
+                    .add-task-assign-to-option {
+                        @include all.limiter();
+                        outline: 1px solid #29ABE2;
+                    }
+                }
+
+                .add-task-category {
+                    @include all.borRad($radius: 8px);
+                    @include all.marpad($pad: 1rem, $mar: 0 2rem 0 0);
+
+                    &:focus-visible {
+                        outline: 1px solid #29ABE2;
+                    }
+                }
+
+                .add-task-subtask-container {
+                    height: 20rem;
+                }
+            }
+        }
+
+        .add-task-footer {
+            @include all.fl($jc: space-between, $alit: end);
+
+            .required-info-txt {
+                font-size: 16px;
+            }
+
+            @include all.tablet {
+                @include all.fl($flexdir: column, $gap: 1rem);
+            }
+
+            .add-task-btn-container {
+                @include all.fl($jc: end, $gap: 2rem);
+
+                @include all.tablet {
+                    width: 100%;
+                    padding-left: 6rem;
+                }
+
+                .btn-default,
+                .btn-set {
+                    padding: 1rem;
+                }
+            }
+        }
+    }
+}

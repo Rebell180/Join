@@ -1,0 +1,97 @@
+@use './../../../../public/styles/all_styles.scss' as all;
+
+// #region host
+:host {
+	@include all.fl($jc: space-between, $flexdir: column, $alit: center);
+	@include all.marpad($pad: 5rem 0);
+	grid-area: aside;
+	background: #2a3647;
+
+	@include all.tablet {
+		@include all.fl($jc: center, $alit: center);
+		@include all.marpad($pad: 0.5rem);
+	}
+
+	@include all.mobile {
+		@include all.size($w: 100dvw);
+		@include all.fl($jc: center, $alit: center);
+		@include all.marpad($pad: 0.5rem);
+	}
+
+	img {
+
+		@include all.tablet {
+			display: none;
+		}
+	}
+
+	// #endregion
+
+	// #region nav-btn
+	nav {
+		width: 100%;
+		@include all.fl($flexdir: column, $alit: center, $jc: center);
+
+		@include all.tablet {
+			@include all.fl($gap: 1%, $jc: space-evenly);
+		}
+
+		button {
+
+			@include all.tablet {
+				@include all.size($w: 10rem, $h: 10dvh);
+				@include all.fl($flexdir: column, $jc: center, $alit: center);
+			}
+
+			@include all.mobile {
+				@include all.size($w: 6rem, $h: 6rem);
+			}
+
+			&:hover {
+				background: #091930;
+			}
+		}
+	}
+
+
+	// #endregion
+
+	// #region nav
+
+	.select-legal-button {
+
+		ol {
+			@include all.size($w: 100%, $h: 5rem);
+			margin-bottom: 3rem;
+
+			@include all.tablet {
+				display: none;
+			}
+
+			li {
+				@include all.size($h: 100%);
+				display: flex;
+				flex-direction: column;
+				padding: 1rem;
+
+				@include all.tablet {
+					display: none;
+				}
+
+				button {
+					@include all.size($h: 100%);
+					@include all.fl($jc: center, $alit: center);
+					color: grey;
+					background-color: transparent;
+					font-size: 1.6rem;
+
+					&:hover {
+						color: rgb(17, 119, 227);
+					}
+				}
+			}
+		}
+	}
+}
+
+// #endregion

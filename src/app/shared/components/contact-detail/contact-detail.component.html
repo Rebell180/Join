@@ -1,0 +1,62 @@
+<div class="contact-detail-header">
+    <div class="header-info">
+        <h1>Contacts</h1>
+        <hr id="middle-line" />
+        <h2>Better with a team</h2>
+        <hr id="bottom-line" />
+    </div>
+    <button class="contact-detail-back" (click)="unselectContact()"><img src="assets/Icons/contact/arrow-left-line.png"
+            alt=""></button>
+</div>
+
+@if (fireDB.currentContact$ | async; as contact ) {
+@if(contact.id != '') {
+
+<div class="contact-info-container">
+    <div class="contact-detail-header-row">
+        <app-contact-icon class="contact-icon {{ contact.iconColor }}" [contact]="contact"></app-contact-icon>
+
+        <div class="name-option-container">
+            <p class="name">{{ contact.getFullName() }}</p>
+
+            <div class="option-container">
+                <button (click)="modalService.openAddContactModal('edit', contact)" type="button">
+                    <img src="assets/Icons/taskBoard/edit.png" alt="" />Edit
+                </button>
+                <button (click)="deleteContact(contact)">
+                    <img class="delete-btn" src="assets/Icons/taskBoard/delete.png">Delete
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+    <h2>Contact Information</h2>
+
+    <div class="emailPhone">
+        <h3>Email</h3>
+        <a href="mailto:{{ contact.email }}">{{ contact.email }}</a>
+        <h3>Phone</h3>
+        <a class="tel-ref" href="tel:+49{{ contact.tel }}">{{ contact.tel }}</a>
+    </div>
+</div>
+<div class="mobile-options-container" id="mobileMenu">
+    <button class="option-btns" (click)="toggleMenu()">
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+    </button>
+</div>
+<div class="popup-menu" *ngIf="isMenuVisible">
+    <div class="menuItem" (click)="editContact(contact)">
+        <img src="assets/Icons/taskBoard/edit.png" alt="Edit Icon" />
+        <span>Edit</span>
+    </div>
+    <div class="menuItem deleteItem" (click)="deleteContactAndClose(contact)">
+        <img src="assets/Icons/taskBoard/delete.png" alt="Delete Icon" />
+        <span>Delete</span>
+    </div>
+</div>
+}
+
+}

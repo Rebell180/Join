@@ -1,1 +1,62 @@
-/* You can add global styles to this file, and also import other style files */
+@use '../public/styles/all_styles.scss' as all;
+@forward '../public/styles/fonts.scss';
+
+* {
+    position: relative;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    scroll-behavior: smooth;
+    border: unset;
+}
+
+html {
+    font-size: 10px; // für Verwendung von rem, 1rem = 10px
+}
+
+body {
+    background: #ededed;
+    max-width: 1920px;
+    font-size: 1.6rem;
+    font-family: 'Inter', sans-serif;
+}
+
+button, a,
+input {
+    cursor: pointer;
+}
+
+.content {
+    display: grid;
+    grid-template-columns: 20rem auto;
+    grid-template-rows: 10dvh 90dvh;
+    grid-template-areas: "aside header" "aside main";
+    height: 100dvh;
+
+    @include all.tablet {
+        grid-template-columns: 100%;
+        grid-template-rows: 10dvh 80dvh 10dvh;
+        grid-template-areas:
+            "header"
+            "main"
+            "aside";
+    }
+}
+
+.d_none {
+    display: none;
+}
+
+h1 {
+    font-size: 4.2rem;
+}
+
+h2 {
+    font-size: 3.4rem;
+}
+
+h3 {
+    font-size: 1.8rem;
+}
+

@@ -1,0 +1,60 @@
+@use '../../../../public/styles/all_styles' as all;
+
+:host {
+    @include all.fl();
+    .contact-list {
+        @include all.size($w: 37.5rem, $h: 90dvh);
+        @include all.marpad ($pad: 2rem 1.6rem 1rem 3rem);
+
+        @include all.notebook {
+            @include all.size($h: 90dvh);
+        }
+
+        @include all.tablet {
+            @include all.size($w: 100%, $h: 80dvh);
+        }
+
+        @include all.mobile {
+            width: 100%;
+        }
+
+        @media(max-width: 376px) {
+            @include all.size($w: 100%, $h: 80dvh);
+        }
+    }
+
+    .contact-detail {
+        @include all.size($h: 90dvh, $w: 100%);
+        @include all.marpad($pad: 8rem 0 0 5rem);
+        
+        @include all.notebook {
+            @include all.size($h: 90dvh);
+        }
+        
+        @include all.tablet {
+            @include all.size($w: 100%, $h: 80dvh);
+        }
+
+        @media(max-width: 425px) {
+            @include all.marpad($pad: 6rem 0 0 3rem);
+        }
+    }
+}
+
+app-toast {
+    @include all.size($w: 100%, $h: 100%);
+    position: absolute;
+    z-index: -2;
+    bottom: 0;
+    @include all.fl($flexdir: column, $jc: end, $alit: center);
+    gap: 1rem;
+}
+
+app-contact-detail {
+    @include all.tablet {
+        position: absolute;
+        z-index: 0;
+        left: 0;
+        width: 100%;
+    }
+}

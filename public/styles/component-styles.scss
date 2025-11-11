@@ -1,0 +1,30 @@
+@use './all_styles' as all;
+
+.btn-set {
+    @include all.marpad ($pad: 0 1rem);
+    @include all.fl($jc: center, $alit: center, $gap: 1rem);
+    font-size: 20px;
+    color: white;
+    background: #2a3647;
+    border: 1px solid #2a3647;
+    border-radius: 8px;
+    &:hover {
+        background: #29ABE2;
+        border: 1px solid #29ABE2;
+        box-shadow: 0 8px 8px rgba(0, 0, 0, 0.2);
+    }
+}
+
+.btn-default {
+    @include all.marpad ($pad: 0 1rem);
+    @include all.fl($jc: center, $alit: center, $gap: 1rem);
+    font-size: 20px;
+    color: #2a3647;
+    border: 1px solid #2a3647;
+    border-radius: 8px;
+    &:hover {
+        border: 1px solid #29ABE2;
+        color: #29ABE2;
+        box-shadow: 0 8px 8px rgba(0, 0, 0, 0.2);
+    }
+}

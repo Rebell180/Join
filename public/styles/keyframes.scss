@@ -1,0 +1,8 @@
+@keyframes change-col {
+	0%{
+		background: orange; transform: translateX(-10px)
+	};
+	100%{
+		background: purple; transform: translateX(20px)
+	};
+}

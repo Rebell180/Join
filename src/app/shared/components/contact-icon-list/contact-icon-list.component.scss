@@ -1,0 +1,22 @@
+@use './../../../../../public/styles/all_styles.scss' as all;
+
+.icon-list-container {
+	@include all.fl($alit: center);
+
+	.icon-list-item {
+		@include all.size($w: 3.5rem, $h: 3.5rem);
+		@include all.marpad($mar: 0 -0.6rem 0 0);
+		border: 1px solid white;
+	}
+
+	.icon-counter {
+		@include all.fl($jc: center, $alit: center);
+		@include all.size($w: 3rem, $h: 3rem);
+		@include all.marpad($mar: 0 0 0 0.8rem);
+		font-size: 16px;
+		font-family: 'InterBold', sans-serif;
+		background-color: rgb(34, 248, 34);
+		border: none;
+		border-radius: 50%;
+	}
+}

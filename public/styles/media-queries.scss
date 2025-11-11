@@ -1,0 +1,30 @@
+@mixin smart{
+    @media (max-width: 450px) {
+        @content;
+    }
+}
+@mixin mobile{
+    @media (max-width: 640px) {
+        @content;
+    }
+}
+@mixin tablet{
+    @media (max-width: 768px) {
+        @content;
+    }
+}
+@mixin notebook{
+    @media (max-width: 1024px) {
+        @content;
+    }
+}
+@mixin desktop{
+    @media (max-width: 1920px) {
+        @content;
+    }
+}
+@mixin bigscreen{
+    @media (min-width: 1921px) {
+        @content;
+    }
+}
