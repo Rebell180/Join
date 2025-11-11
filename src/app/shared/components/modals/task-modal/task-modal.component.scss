@@ -72,19 +72,26 @@ h3 {
 			}
 
 			.task-detail-main-container {
-				@include all.size($w: 100%, $h: 65dvh);
+				@include all.size($w: 100%, $h: 100%);
+				max-height: 70dvh;
 				@include all.fl($flexdir: column, $gap: 2rem);
 				@include all.scrollbar();
 				overflow-y: auto;
 
+				@media (max-width: 530px) {
+					max-height: 65dvh;
+				}
+
 				.title {
+					@include all.size($w: 100%, $h: 14rem);
 					@include all.limiter($lines: 3);
-					min-height: 12rem;
+					min-height: 14rem;
 				}
 
 				.description {
+					@include all.size($w: 100%, $h: 7.4rem);
 					@include all.limiter($lines: 4);
-					min-height: 8rem;
+					min-height: 7.4rem;
 				}
 
 				.task-modal-dueDate-container {
@@ -136,10 +143,7 @@ h3 {
 					.task-modal-assigned {
 						@include all.size($w: 100%, $h: 100%);
 						@include all.fl($flexdir: column, $gap: 0.5rem);
-						max-height: 13rem;
 						margin-top: 0.5rem;
-						@include all.scrollbar();
-						overflow-y: auto;
 
 						.contact-item {
 							width: 100%;
@@ -166,10 +170,8 @@ h3 {
 					}
 
 					.task-modal-subtask-container {
-						@include all.size($w: 100%, $h: 12rem);
+						@include all.size($w: 100%, $h: 100%);
 						@include all.fl($alit: center, $flexdir: column, $gap: 0.5rem);
-						@include all.scrollbar();
-						overflow-y: auto;
 
 						.task-modal-input {
 							@include all.size($w: 100%, $h: 2rem);

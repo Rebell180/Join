@@ -31,19 +31,17 @@
 		}
 
 		.title {
-			@include all.size($w: 100%, $h: 6rem);
+			@include all.size($w: 100%, $h: 5.6rem);
 			@include all.limiter($lines: 3);
-			@include all.marpad($mar: 0 0 1rem 0);
 			font-size: 1.6rem;
 			font-weight: bold;
 			white-space: wrap;
 		}
 
 		.description {
-			@include all.size($w: 100%, $h: 6rem);
-			@include all.marpad($mar: 0 0 1rem 0);
+			@include all.size($w: 100%, $h: 3.8rem);
 			@include all.limiter($lines: 2);
-			max-height: 4rem;
+			max-height: 3.8rem;
 			font-size: 1.6rem;
 			color: grey;
 		}
@@ -71,7 +69,7 @@
 		}
 
 		.subtask-counter {
-			@include all.font-style($size: 1.5rem);
+			@include all.font-style($size: 1.6rem);
 			white-space: nowrap;
 		}
 

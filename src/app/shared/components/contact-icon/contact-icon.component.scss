@@ -3,6 +3,8 @@
 :host {
     @include all.fl($jc: center, $alit: center);
     @include all.size($w: 100%, $h: 100%);
+    min-width: 4rem;
+    min-height: 4rem;
     padding: 0.5rem;
     font-size: clamp(16px, 75%, 48rem);
     color: white;
