@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectorRef, Component, ElementRef, HostListener, inject, input, InputSignal, output, OutputEmitterRef, Renderer2, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, inject, input, InputSignal, output, OutputEmitterRef, Renderer2, ViewChild, OnInit, OnDestroy } from '@angular/core';
 import { SubTask } from '../../classes/subTask';
 import { FormsModule } from '@angular/forms';
 import { SubtaskEditState } from '../../enums/subtask-edit-state';
@@ -30,6 +30,30 @@ export class SubtaskComponent {
   // #endregion attributes
 
   constructor(private elementRef: ElementRef) {}
+
+  private _docClickListener: ((evt: Event) => void) | null = null;
+
+  ngOnInit(): void {
+    this._docClickListener = (event: Event) => {
+      const target = event.target as Node | null;
+      if (target && !this.elementRef.nativeElement.contains(target)) {
+        const activeSubtasks = this.subtasks().filter(subtask => subtask.editMode);
+        activeSubtasks.forEach((subtask) => {
+          subtask.editMode = false;
+        });
+        this.newSubtask.editMode = false;
+        this.outSubtasks.emit(this.subtasks());
+      }
+    };
+    document.addEventListener('click', this._docClickListener, true);
+  }
+
+  ngOnDestroy(): void {
+    if (this._docClickListener) {
+      document.removeEventListener('click', this._docClickListener, true);
+      this._docClickListener = null;
+    }
+  }
 
   // #region methods
 
@@ -188,23 +212,6 @@ export class SubtaskComponent {
     let activeSubtasks = this.subtasks().filter((subtask) => subtask.editState != SubtaskEditState.DELETED);
     if (activeSubtasks.length <= 1) {  
       this.sendErrMsg('Add another Subtask.');
-    }
-  }
-
-  /**
-   * Click event of onClick outside of content to close pop up.
-   * 
-   * @param event click event on outside of content.
-   */
-  @HostListener('document:click', ['$event'])
-  onDocumentClick(event: MouseEvent) {
-    if (!this.elementRef.nativeElement.contains(event.target)) {
-      event.preventDefault();
-      const activeSubtasks = this.subtasks().filter(subtask => subtask.editMode);
-      activeSubtasks.forEach((subtask) => {
-        subtask.editMode = false;
-      })
-      this.newSubtask.editMode = false;
     }
   }
 

@@ -4,8 +4,9 @@ import {
   computed,
   input,
   output,
-  HostListener,
   ElementRef,
+  OnInit,
+  OnDestroy,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -77,6 +78,25 @@ export class DatePickerComponent {
 
   constructor(private elementRef: ElementRef) {}
 
+  private _docClickListener: ((evt: Event) => void) | null = null;
+
+  ngOnInit(): void {
+    this._docClickListener = (event: Event) => {
+      const target = event.target as Node | null;
+      if (target && !this.elementRef.nativeElement.contains(target)) {
+        this.showCalendar.set(false);
+      }
+    };
+    document.addEventListener('click', this._docClickListener, true);
+  }
+
+  ngOnDestroy(): void {
+    if (this._docClickListener) {
+      document.removeEventListener('click', this._docClickListener, true);
+      this._docClickListener = null;
+    }
+  }
+
   // #region methods
 
   /**
@@ -85,7 +105,6 @@ export class DatePickerComponent {
    * @param event 
    */
   toggleCalendar(event: Event) {
-    event.stopPropagation();
     this.showCalendar.update((v) => !v);
   }
 
@@ -189,17 +208,6 @@ export class DatePickerComponent {
     return date < now;
   }
 
-  /**
-   * Click event of onClick outside of content to close pop up.
-   * 
-   * @param event click event on outside of content.
-   */
-  @HostListener('document:click', ['$event'])
-  onDocumentClick(event: MouseEvent) {
-    if (!this.elementRef.nativeElement.contains(event.target)) {
-      this.showCalendar.set(false);
-    }
-  }
 
   // #endregion methods
 }

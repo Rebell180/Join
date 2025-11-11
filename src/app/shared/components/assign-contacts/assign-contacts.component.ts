@@ -1,4 +1,4 @@
-import { Component, HostListener, ElementRef, SimpleChanges, InputSignal, input, output, OutputEmitterRef, OnChanges } from '@angular/core';
+import { Component, ElementRef, SimpleChanges, InputSignal, input, output, OutputEmitterRef, OnChanges, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Contact } from '../../classes/contact';
@@ -12,7 +12,7 @@ import { ContactIconListComponent } from "../contact-icon-list/contact-icon-list
   templateUrl: './assign-contacts.component.html',
   styleUrl: './assign-contacts.component.scss'
 })
-export class AssignContactsComponent implements OnChanges{
+export class AssignContactsComponent implements OnChanges, OnInit, OnDestroy {
 
   // #region attributes
 
@@ -28,6 +28,25 @@ export class AssignContactsComponent implements OnChanges{
   // #endregion attributes
 
   constructor(private elementRef: ElementRef) {}
+
+  private _docClickListener: ((evt: Event) => void) | null = null;
+
+  ngOnInit(): void {
+    this._docClickListener = (event: Event) => {
+      const target = event.target as Node | null;
+      if (target && !this.elementRef.nativeElement.contains(target)) {
+        this.isOpen = false;
+      }
+    };
+    document.addEventListener('click', this._docClickListener, true);
+  }
+
+  ngOnDestroy(): void {
+    if (this._docClickListener) {
+      document.removeEventListener('click', this._docClickListener, true);
+      this._docClickListener = null;
+    }
+  }
 
   // #region methods
 
@@ -82,18 +101,6 @@ export class AssignContactsComponent implements OnChanges{
    */
   isSelected(option: Contact) {
     return this.selectedValuesLocal.includes(option);
-  }
-
-  /**
-   * Click event of onClick outside of content to close pop up.
-   * 
-   * @param event click event on outside of content.
-   */
-  @HostListener('document:click', ['$event'])
-  onDocumentClick(event: MouseEvent) {
-    if (!this.elementRef.nativeElement.contains(event.target)) {
-      this.isOpen = false;
-    }
   }
 
   // #endregion methods

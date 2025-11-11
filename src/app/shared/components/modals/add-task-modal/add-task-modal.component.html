@@ -1,11 +1,6 @@
 <div class="modal-overlay" (click)="closeModal()">
-
-    <dialog class="add-task-modal-container" [@slideInOut]="isOpen ? 'open' : 'closed'"
-        (click)="$event.stopPropagation()">
-    
+    <dialog class="add-task-modal-container" [@slideInOut]="isOpen ? 'open' : 'closed'" (click)="$event.stopPropagation()">
         <button id="add-task-close-btn" type="button" (click)="closeModal()">X</button>
         <app-add-task id="add-task-modal-content" [currentTask]="currentTask()" [kindOf]="kindOf()" (close)="closeModal()"></app-add-task>
-    
     </dialog>
-
 </div>

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, HostListener, inject, Output, output, OutputEmitterRef } from '@angular/core';
+import { Component, EventEmitter, inject, Output, OnInit, OnDestroy } from '@angular/core';
 import { ModalService } from '../../services/modal.service';
 import { SectionType } from '../../enums/section-type';
 
@@ -10,11 +10,13 @@ import { SectionType } from '../../enums/section-type';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit, OnDestroy {
   @Output() selectedSection = new EventEmitter<SectionType>();
   protected modalService = inject(ModalService);
 
   isMenuVisible = false;
+
+  private _docClickListener: ((evt: Event) => void) | null = null;
 
   toggleMenu(): void {
     this.isMenuVisible = !this.isMenuVisible;
@@ -40,15 +42,24 @@ export class HeaderComponent {
   }
 
   openHelpFromMenu() {
-    this.closeMenu(); // Menü zuerst schließen
-    this.modalService.openHelpModal(); // Dann Modal öffnen
+    this.closeMenu();
+    this.modalService.openHelpModal();
   }
 
-  @HostListener('document:click', ['$event'])
-  onClickOutside(event: Event): void {
-    const target = event.target as HTMLElement;
-    if (!target.closest('.profile-container')) {
-      this.closeMenu();
+  ngOnInit(): void {
+    this._docClickListener = (event: Event) => {
+      const target = event.target as HTMLElement | null;
+      if (!target || !target.closest('.profile-container')) {
+        this.closeMenu();
+      }
+    };
+    document.addEventListener('click', this._docClickListener, true);
+  }
+
+  ngOnDestroy(): void {
+    if (this._docClickListener) {
+      document.removeEventListener('click', this._docClickListener, true);
+      this._docClickListener = null;
     }
   }
 }

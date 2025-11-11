@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostListener, input, InputSignal, output, OutputEmitterRef } from '@angular/core';
+import { Component, ElementRef, input, InputSignal, output, OutputEmitterRef, OnInit, OnDestroy } from '@angular/core';
 import { Category } from '../../enums/category.enum';
 import { CommonModule } from '@angular/common';
 
@@ -8,7 +8,7 @@ import { CommonModule } from '@angular/common';
   templateUrl: './category-drop.component.html',
   styleUrl: './category-drop.component.scss'
 })
-export class CategoryDropComponent {
+export class CategoryDropComponent implements OnInit, OnDestroy {
 
   // #region attributes
 
@@ -24,6 +24,25 @@ export class CategoryDropComponent {
 
   constructor(private elementRef: ElementRef) {}
 
+  private _docClickListener: ((evt: Event) => void) | null = null;
+
+  ngOnInit(): void {
+    this._docClickListener = (event: Event) => {
+      const target = event.target as Node | null;
+      if (target && !this.elementRef.nativeElement.contains(target)) {
+        this.isOpen = false;
+      }
+    };
+    document.addEventListener('click', this._docClickListener, true);
+  }
+
+  ngOnDestroy(): void {
+    if (this._docClickListener) {
+      document.removeEventListener('click', this._docClickListener, true);
+      this._docClickListener = null;
+    }
+  }
+
   // #region methods
 
   /**
@@ -37,18 +56,6 @@ export class CategoryDropComponent {
   updateCategory(category: Category) {
     this.newCategory.emit(category);
     this.isOpen = false;
-  }
-
-  /**
-   * Click event of onClick outside of content to close pop up.
-   * 
-   * @param event click event on outside of content.
-   */
-  @HostListener('document:click', ['$event'])
-  onDocumentClick(event: MouseEvent) {
-    if (!this.elementRef.nativeElement.contains(event.target)) {
-      this.isOpen = false;
-    }
   }
 
   // #endregion methods

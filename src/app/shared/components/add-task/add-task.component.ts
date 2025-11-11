@@ -6,13 +6,12 @@ import { Task } from '../../classes/task';
 import { CommonModule } from '@angular/common';
 import { PriorityButtonsComponent } from "../priority-buttons/priority-buttons.component";
 import { Category } from '../../enums/category.enum';
-import { query, Unsubscribe, where, Query, onSnapshot, Timestamp, Firestore, collection, CollectionReference, addDoc, updateDoc } from '@angular/fire/firestore';
+import { query, Unsubscribe, where, Query, onSnapshot, Timestamp, Firestore } from '@angular/fire/firestore';
 import { Contact } from '../../classes/contact';
 import { DatePickerComponent } from "../date-picker/date-picker.component";
 import { AssignContactsComponent } from "../assign-contacts/assign-contacts.component";
 import { ToastMsgService } from '../../services/toast-msg.service';
 import { SubtaskComponent } from '../subtask/subtask.component';
-import { SubtaskEditState } from '../../enums/subtask-edit-state';
 import { SubTask } from '../../classes/subTask';
 import { CategoryDropComponent } from "../category-drop/category-drop.component";
 
@@ -160,5 +159,6 @@ export class AddtaskComponent implements OnDestroy {
   closeModal() {
     this.close.emit(true);
   }
+
   // #endregion methods
 }
