@@ -132,7 +132,7 @@ export class ModalService {
    * Opens the add task modal. 
    * 
    */
-  openAddTaskModal(task: Task = new Task()) {
+  openAddTaskModal(task: Task = new Task(), kindOf: 'add' |'edit' = 'add') {
     // creates a component
     const componentRef = createComponent(AddTaskModalComponent, {
       environmentInjector: this.appRef.injector,
@@ -141,6 +141,7 @@ export class ModalService {
 
     // set the @Inputs for component
     componentRef.setInput('currentTask', task);
+    componentRef.setInput('kindOf', kindOf);
 
     // callback function if call close modal
     componentRef.instance.dissolve = () => {

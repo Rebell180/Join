@@ -66,7 +66,7 @@
 
 			<hr />
 
-			<button (click)="modalService.openAddTaskModal(task()); closeTaskModal()">
+			<button (click)="modalService.openAddTaskModal(task(), 'edit'); closeTaskModal()">
 				<img src="assets/Icons/taskBoard/edit.png" alt="Edit" />
 				Edit
 			</button>
