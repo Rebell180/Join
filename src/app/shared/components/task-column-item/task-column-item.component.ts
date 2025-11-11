@@ -15,12 +15,10 @@ import { Firestore } from '@angular/fire/firestore';
 })
 export class TaskColumnItemComponent {
 
-  // protected fireDB: FirebaseDBService = inject(FirebaseDBService);
   protected modalService: ModalService = inject(ModalService);
   firestore: Firestore = inject(Firestore);
 
   task: InputSignal<Task> = input.required<Task>();
-
 
   Category = Category;
 

@@ -47,9 +47,9 @@ export class ValidationService {
         }
       });
     }
-
     return errors
   }
+
   /**
    * Gets an error message for user.
    * @param errorKey - Key in Error-Record

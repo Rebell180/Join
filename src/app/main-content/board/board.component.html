@@ -10,9 +10,6 @@
 <div class="search-task-container-mobile">
     <app-search-task class="search-task" (seachOut)="filterTasks($event)"></app-search-task>
 </div>
-<div class="search-task-container-mobile">
-    <app-search-task class="search-task" (seachOut)="filterTasks($event)"></app-search-task>
-</div>
 <div class="task-list-wrapper">
     <section cdkDropList #todo="cdkDropList" [cdkDropListData]="taskItems[0]"
             [cdkDropListConnectedTo]="[progress, review, done]" (cdkDropListDropped)="drop($event)" class="task-list">

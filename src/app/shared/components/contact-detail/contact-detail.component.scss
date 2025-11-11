@@ -167,7 +167,6 @@
 
     // #endregion
 
-
     .mobile-options-container {
         @include all.absolute($bottom: 0, $right: 1rem);
         @include all.size($w: 5rem, $h: 5rem);

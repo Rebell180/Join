@@ -64,7 +64,6 @@ export class ModalService {
 
   // #endregion properties
 
-
   // #region methods
 
   /**

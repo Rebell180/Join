@@ -76,8 +76,6 @@
           }
 
           span {
-            // width: 28dvw;
-            // max-width: 20rem;
             width: 80%;
             @include all.limiter();
             font-size: 16px;

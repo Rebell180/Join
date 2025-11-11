@@ -71,16 +71,11 @@ h3 {
 				}
 			}
 
-
 			.task-detail-main-container {
 				@include all.size($w: 100%, $h: 65dvh);
 				@include all.fl($flexdir: column, $gap: 2rem);
 				@include all.scrollbar();
 				overflow-y: auto;
-
-				@include all.tablet{
-					// width: 80dvw;
-				}
 
 				.title {
 					@include all.limiter($lines: 3);
@@ -129,8 +124,6 @@ h3 {
 						@include all.fl($alit: center, $jc: end, $gap: 1rem);
 						@include all.size($w: 50%);
 
-						
-
 						img {
 							@include all.size($w: 2rem, $h: 1.2rem);
 						}
@@ -161,7 +154,6 @@ h3 {
 								@include all.limiter();
 							}
 						}
-
 					}
 				}
 
@@ -190,7 +182,6 @@ h3 {
 					}
 				}
 			}
-
 		}
 	}
 
@@ -213,5 +204,4 @@ h3 {
 			background: rgb(196, 195, 195);
 		}
 	}
-
 }

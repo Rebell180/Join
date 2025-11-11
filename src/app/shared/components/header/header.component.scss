@@ -1,7 +1,5 @@
 @use './../../../../../public/styles/all_styles.scss' as all;
 
-// Hier hatte ich den header-Selctor zu host geändert.
-// Mit :host kann man in Angular die gesamte Komponente stylen.
 :host {
     .small-header {
         @include all.size($w: 100%, $h: 10dvh);
