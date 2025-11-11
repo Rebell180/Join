@@ -28,7 +28,7 @@
                         <div class="input-container firstname-input-container">
                             <div class="input-img-container">
                                 <input type="text" placeholder="firstname"
-                                    onchange="vds.validate(ContactFields.FIRSTNAME.value, contact().firstname)"
+                                    onchange="changeInput(ContactFields.FIRSTNAME, $value)"
                                     (focus)="focusOnInput(ContactFields.FIRSTNAME)" autocomplete="off"
                                     [value]="contact().firstname">
                                 <img src="assets/Icons/contact/person.png">
@@ -39,7 +39,7 @@
                         <div class="input-container lastname-input-container">
                             <div class="input-img-container">
                                 <input type="text" placeholder="lastname"
-                                    onchange="vds.validate(ContactFields.LASTNAME.value, contact().lastname)"
+                                    onchange="changeInput(ContactFields.LASTNAME, $value)"
                                     (focus)="focusOnInput(ContactFields.LASTNAME)" autocomplete="off"
                                     [value]="contact().lastname">
                                 <img src="assets/Icons/contact/person.png">
@@ -50,7 +50,7 @@
                         <div class="input-container email-input-container">
                             <div class="input-img-container">
                                 <input type="email" placeholder="email"
-                                    onchange="vds.validate(ContactFields.EMAIL.value, contact().email)"
+                                    onchange="changeInput(ContactFields.EMAIL, $value)"
                                     (focus)="focusOnInput(ContactFields.EMAIL)" autocomplete="off"
                                     [value]="contact().email">
                                 <img src="assets/Icons/contact/mail.png">
@@ -61,7 +61,7 @@
                         <div class="input-container phone-input-container">
                             <div class="input-img-container">
                                 <input type="text" placeholder="phonenumber"
-                                    onchange="vds.validate(ContactFields.PHONE.value, contact().tel)"
+                                    onchange="changeInput(ContactFields.PHONE, $value)"
                                     (focus)="focusOnInput(ContactFields.PHONE)" autocomplete="off"
                                     [value]="contact().tel">
                                 <img src="assets/Icons/contact/call.png">

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { ContactFields } from '../enums/contact-fields';
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +10,13 @@ export class ValidationService {
   forms: Map<string, FormGroup> = new Map<string, FormGroup>();
 
   // #region Methods
+
+  validate(field: ContactFields, value: string): boolean {
+    return true;
+  }
+
+
+
   /**
    * Adds a new from for registry.
    * @param key - Key of form.

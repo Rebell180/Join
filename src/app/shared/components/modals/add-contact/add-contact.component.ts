@@ -1,5 +1,5 @@
-import { Component, inject, AfterViewInit, input, InputSignal, OnInit, OnDestroy } from '@angular/core';
-import { AbstractControl, FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Component, inject, AfterViewInit, input, InputSignal, OnInit, OnDestroy, ElementRef, ViewChild } from '@angular/core';
+import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { ContactIconComponent } from "./../../contact-icon/contact-icon.component";
@@ -7,8 +7,6 @@ import { Contact } from '../../../classes/contact';
 import { FirebaseDBService } from '../../../services/firebase-db.service';
 import { ToastMsgService } from '../../../services/toast-msg.service';
 import { ValidationService } from '../../../services/validation.service';
-import { Subscription } from 'rxjs';
-import { CustomValidator } from '../../../classes/custom-validator';
 import { ContactFields } from '../../../enums/contact-fields';
 
 @Component({
@@ -36,9 +34,10 @@ import { ContactFields } from '../../../enums/contact-fields';
     ])
   ]
 })
-export class AddContactComponent implements OnInit, AfterViewInit, OnDestroy {
-
+export class AddContactComponent implements OnInit, AfterViewInit {
   // #region properties
+  @ViewChild('myInput') myInputRef!: ElementRef<HTMLInputElement>;
+  // TODO MARCEL -> Childs for Inputs to get value over Native Element Ref for validate and dad and update
 
   /** Inputs will set in ModalService */
   contact: InputSignal<Contact> = input.required<Contact>();
@@ -47,11 +46,10 @@ export class AddContactComponent implements OnInit, AfterViewInit, OnDestroy {
   ContactFields = ContactFields;
   /** callback function on close => remove from DOM => will be set in ModalService */
   dissolve?: () => void;
-  subFormCahange ?:Subscription;
 
+  protected vds: ValidationService = inject(ValidationService);
   private fireDB: FirebaseDBService = inject(FirebaseDBService);
   private tms: ToastMsgService = inject(ToastMsgService);
-  private val: ValidationService = inject(ValidationService);
   
   isOpen = false;
 
@@ -65,15 +63,26 @@ export class AddContactComponent implements OnInit, AfterViewInit, OnDestroy {
     setTimeout(() => this.isOpen = true, 10); // Animation trigger
   }
 
-  ngOnDestroy(): void {
-    this.subFormCahange?.unsubscribe();
-    this.val.removeForm('contact');
-  }
-
   // #region methods
   // #region Form-Management
-  /** Validates the form. */
-  private validateForm() {
+  async changeInput(inputName: ContactFields, value: string) {
+    // validate: with service
+    switch(inputName) {
+      case ContactFields.FIRSTNAME:
+        // validate 
+        break;
+      case ContactFields.LASTNAME:
+        // validate
+        break;
+      case ContactFields.EMAIL:
+        // validate
+        break;
+      case ContactFields.PHONE:
+        // validate
+        break;
+      default:
+        break;
+    }
   }
 
   /**
@@ -94,8 +103,9 @@ export class AddContactComponent implements OnInit, AfterViewInit, OnDestroy {
 
   /** Submit the entered data as add or as update after validation */
   async submitForm() {
-    this.validateForm();
+    // this.validateForm();
     const contact = this.contact();
+    // contact.firstname = document.
     if(contact.id == '') {
       await this.fireDB.addToDB('contacts', contact);
       this.tms.add('Contact was created', 3000, 'success');
