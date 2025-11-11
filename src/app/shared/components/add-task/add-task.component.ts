@@ -36,6 +36,7 @@ export class AddtaskComponent implements OnDestroy {
   Category = Category;
 
   currentTask: InputSignal<Task> = input.required<Task>();
+  kindOf: InputSignal<'add' | 'edit'> = input.required<'add' | 'edit'>();
   close: OutputEmitterRef<boolean> = output<boolean>();
   contacts: Array<Contact> = []
 
@@ -74,8 +75,8 @@ export class AddtaskComponent implements OnDestroy {
    */
   protected async addTask(): Promise<void> {
     await this.fireDB.taskAddToDB('tasks', this.currentTask());
-    this.cdr.detectChanges();
     this.clear();
+    this.cdr.detectChanges();
   }
 
   /**
@@ -91,6 +92,7 @@ export class AddtaskComponent implements OnDestroy {
    * Reset all inputs to default.
    */
   clear() {
+    this.currentTask().id = '';
     this.currentTask().title = '';
     this.currentTask().description = '';
     this.currentTask().category = Category.TASK;

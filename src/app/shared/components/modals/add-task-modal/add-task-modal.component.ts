@@ -31,6 +31,7 @@ export class AddTaskModalComponent implements AfterViewInit{
 
   /** InputSignal for currentTask. */
   currentTask: InputSignal<Task> = input<Task>(new Task());
+  kindOf: InputSignal<'add' | 'edit'> = input.required<'add' | 'edit'>();
 
   /** callback function on close => remove from DOM => will be set in ModalService */
   dissolve?: () => void;

@@ -1,11 +1,11 @@
 <section class="add-task-section">
     <form #addTaskForm="ngForm" id="add-task-form">
         <header class="add-task-header">
-            @if(currentTask().id == '') {
-            <h1 id="add-task-headline">Add Task</h1>
+            @if(kindOf() === 'add') {
+                <h1 id="add-task-headline">Add Task</h1>
             }
             @else {
-            <h1 id="add-task-headline">Edit Task</h1>
+                <h1 id="add-task-headline">Edit Task</h1>
             }
         </header>
 
@@ -65,12 +65,12 @@
         <footer class="add-task-footer">
             <span class="required-info-txt"><b>*</b> this field is required</span>
             <div class="add-task-btn-container">
-                @if(currentTask().id == '') {
-                <button class="btn-default" type="button" (click)="clear()">Clear</button>
-                <button class="btn-set" type="submit" (click)="addTask()" [disabled]="addTaskForm.invalid || !currentTask().dueDate">Create Task</button>
+                @if(kindOf() === 'add') {
+                    <button class="btn-default" type="button" (click)="clear()">Clear</button>
+                    <button class="btn-set" type="submit" (click)="addTask()" [disabled]="addTaskForm.invalid || !currentTask().dueDate">Create Task</button>
                 }
                 @else {
-                <button class="btn-set" type="submit" (click)="updateTask()" [disabled]="addTaskForm.invalid || !currentTask().dueDate">Update Task</button>
+                    <button class="btn-set" type="submit" (click)="updateTask()" [disabled]="addTaskForm.invalid || !currentTask().dueDate">Update Task</button>
                 }
             </div>
         </footer>
