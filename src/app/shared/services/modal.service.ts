@@ -6,6 +6,7 @@ import { AddTaskModalComponent } from '../components/modals/add-task-modal/add-t
 import { HelpModalComponent } from '../components/modals/help-modal/help-modal.component';
 import { Task } from '../classes/task';
 import { TaskModalComponent } from '../components/modals/task-modal/task-modal.component';
+import { FirebaseDBService } from './firebase-db.service';
 
 
 /**
@@ -61,6 +62,7 @@ export class ModalService {
 
   private appRef: ApplicationRef = inject(ApplicationRef);
   private injector: Injector = inject(Injector);
+  private fireDB: FirebaseDBService = inject(FirebaseDBService);
 
   // #endregion properties
 
@@ -91,7 +93,14 @@ export class ModalService {
     // (3) define a closing callback function
     componentRef.instance.dissolve = () => {
       this.appRef.detachView(componentRef.hostView); // removes modal component from app
-      componentRef.destroy();                       // destroy the component itself
+      componentRef.destroy();                // destroy the component itself
+
+      if(kindOf === 'edit') {
+        const a = this.fireDB.currentContact$;
+        a.forEach((contact) => {
+          contact.selected = true;
+        });                                 
+      }
     }
 
     // (4) add modal component to your view

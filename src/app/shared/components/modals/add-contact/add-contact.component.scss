@@ -62,7 +62,7 @@
         }
 
         img {
-            @include all.tablet {
+            @include all.notebook {
                 display: none;
             }
         }
@@ -80,11 +80,26 @@
             @include all.size($w: 94%, $h: 94%);
             @include all.fl($flexdir: column, $alit: center, $jc: center);
 
+            .edit-contact-mobile-icon {
+                display: none;
+
+                @include all.notebook {
+                    width: 16rem;
+                    height: 16rem;
+                    display: flex;
+                    position: absolute; 
+                    top: -5%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    font-size: 60px;
+                }
+            }
+
             .form-main-container {
                 @include all.size($w: 100%, $h:70%);
                 @include all.fl($alit: center, $jc: center);
 
-                @include all.tablet {
+                @include all.notebook {
                     @include all.size($w: 100%, $h:70%);
                     @include all.fl($flexdir: column, $alit: center, $jc: center);
                 }
@@ -94,20 +109,16 @@
                     @include all.fl($alit: center, $jc: center);
 
                     @include all.tablet {
-                        height: 10%;
+                        width: 100%;
                     }
 
-                    img {
-                        width: 100%;
-                        height: auto;
-                        
-                        @include all.tablet {
-                            width: 16rem;
-                            height: 16rem;
-                            position: absolute; 
-                            top: -300%;
-                            left: 50%;
-                            transform: translate(-50%, -50%);
+                    .edit-contact-icon {
+                        width: 16rem;
+                        height: 16rem;
+                        font-size: 60px;
+
+                        @include all.notebook {
+                            display: none;
                         }
                     }
                 }
@@ -118,12 +129,9 @@
                     @include all.marpad($pad: 0 2rem);
 
                     @include all.notebook {
-                        gap: 3rem;
-                    }
-
-                    @include all.tablet {
-                        z-index: 3;
                         width: 100%;
+                        gap: 3rem;
+                        z-index: 3;
                     }
 
                     .input-container {
@@ -175,7 +183,7 @@
                 @include all.size($w: 100%, $h:10%);
                 @include all.fl($alit: center, $jc: end, $gap: 2rem);
 
-                @include all.tablet {
+                @include all.notebook {
                     position: absolute;
                     bottom: 0; 
                     right: 2.5rem;
