@@ -2,10 +2,10 @@
 
 <nav class="nav-buttons">
     @for (navItem of items; track navItem.sectionId; let i = $index) {
-    <button type="button" nav-item [item]="navItem" [ngClass]="{ active: navItem.active }"
-        [attr.aria-pressed]="navItem.active" (click)="selectSection(i)">
-        {{ navItem.title }}
-    </button>
+        <button type="button" nav-item [item]="navItem" [ngClass]="{ active: navItem.active }"
+            [attr.aria-pressed]="navItem.active" (click)="selectSection(i)">
+            {{ navItem.title }}
+        </button>
     }
 </nav>
 

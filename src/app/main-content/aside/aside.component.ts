@@ -3,28 +3,14 @@ import { SectionType } from '../../shared/enums/section-type';
 import { CommonModule } from '@angular/common';
 import { ModalService } from '../../shared/services/modal.service';
 import { NavItemComponent } from '../../shared/components/nav-item/nav-item.component';
-
-
-export interface NavItemData {
-      sectionId: string,
-      title: string,
-      imagePath: string,
-      section: SectionType,
-      active: boolean
-}
-
-export interface LegalLinks {
-      sectionId: string,
-      title: string,
-      section: SectionType,
-      active: boolean
-}
+import { NavItemData } from '../../shared/interfaces/nav-item-data';
+import { LegalLinks } from '../../shared/interfaces/legal-links';
 
 @Component({
-  selector: 'aside[app-aside]',
-  imports: [CommonModule, NavItemComponent],
-  templateUrl: './aside.component.html',
-  styleUrl: './aside.component.scss'
+      selector: 'aside[app-aside]',
+      imports: [CommonModule, NavItemComponent],
+      templateUrl: './aside.component.html',
+      styleUrl: './aside.component.scss'
 })
 export class AsideComponent {
       protected items: NavItemData[] = [

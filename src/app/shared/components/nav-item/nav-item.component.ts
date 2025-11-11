@@ -1,5 +1,5 @@
 import { Component, input } from '@angular/core';
-import { NavItemData } from '../../../main-content/aside/aside.component';
+import { NavItemData } from '../../interfaces/nav-item-data';
 
 @Component({
   selector: '[nav-item]',
@@ -8,7 +8,5 @@ import { NavItemData } from '../../../main-content/aside/aside.component';
   styleUrl: './nav-item.component.scss'
 })
 export class NavItemComponent {
-
   item = input.required<NavItemData>()
-  
 }
