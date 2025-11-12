@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { Contact } from '../../../shared/classes/contact';
 import { FormsModule } from "@angular/forms";
 import { ContactIconComponent } from "./../../../shared/components/contact-icon/contact-icon.component";
@@ -28,15 +29,20 @@ export class ContactListComponent implements OnDestroy {
   groups: Array<string> = [];
 
   unsubContacts: Unsubscribe;
+  private currentContactSub?: Subscription;
 
   // #endregion properties 
   constructor() {
     this.unsubContacts = this.getContactsSnapshot();
-
+    this.currentContactSub = this.fireDB.currentContact$.subscribe((c) => {
+      if (!c || !c.id) return;
+      this.contacts.forEach((contact) => contact.selected = (contact.id === c.id));
+    });
   }
 
   ngOnDestroy(): void {
     this.unsubContacts();
+    this.currentContactSub?.unsubscribe();
   }
 
   // #region methods

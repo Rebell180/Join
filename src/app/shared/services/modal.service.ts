@@ -94,13 +94,6 @@ export class ModalService {
     componentRef.instance.dissolve = () => {
       this.appRef.detachView(componentRef.hostView); // removes modal component from app
       componentRef.destroy();                // destroy the component itself
-
-      if(kindOf === 'edit') {
-        const a = this.fireDB.currentContact$;
-        a.forEach((contact) => {
-          contact.selected = true;
-        });                                 
-      }
     }
 
     // (4) add modal component to your view

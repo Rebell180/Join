@@ -65,7 +65,10 @@ export class FirebaseDBService {
    */
   getDocRef(collectionName: string, docId: string): DocumentReference  {
     const collectionRef: CollectionReference = this.getCollectionRef(collectionName);
-    const docRef: DocumentReference = doc(collectionRef, `/${docId}`);
+    // Firestore doc() expects the document id without a leading slash.
+    // Previously a leading slash was included which produces an incorrect path
+    // and causes update/delete operations to silently fail.
+    const docRef: DocumentReference = doc(collectionRef, docId);
     return docRef;
   }
 
@@ -147,11 +150,22 @@ export class FirebaseDBService {
    * @param object The object with data to update.
    */
   async updateInDB(collectionName: string, object: DBObject) {
-    if( object instanceof Contact ) {
-      object.group = object.firstname[0];
+    if (object instanceof Contact) {
+      object.group = object.firstname?.[0]?.toUpperCase() || '';
     }
-    const docRef  = this.getDocRef(collectionName, object.id);
-    await updateDoc(docRef, object.toJSON());
+
+    if (!object.id) {
+      this.tms.add('Cannot update document: missing id', 3000, 'error');
+      return;
+    }
+
+    try {
+      const docRef = this.getDocRef(collectionName, object.id);
+      await updateDoc(docRef, object.toJSON());
+    } catch (e) {
+      console.error('updateInDB failed', e);
+      this.tms.add('Update failed', 3000, 'error');
+    }
   }
 
   /**
@@ -172,8 +186,18 @@ export class FirebaseDBService {
    * @param docId The id to remove.
    */
   async deleteInDB(collectionName: string, doc: DBObject) {
-    const docRef = this.getDocRef(collectionName, doc.id);
-    await deleteDoc(docRef);
+    if (!doc.id) {
+      this.tms.add('Cannot delete document: missing id', 3000, 'error');
+      return;
+    }
+
+    try {
+      const docRef = this.getDocRef(collectionName, doc.id);
+      await deleteDoc(docRef);
+    } catch (e) {
+      console.error('deleteInDB failed', e);
+      this.tms.add('Delete failed', 3000, 'error');
+    }
   }
 
   /**

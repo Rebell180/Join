@@ -36,27 +36,28 @@ import { ContactFields } from '../../../enums/contact-fields';
 })
 export class AddContactComponent implements OnInit, AfterViewInit {
   // #region properties
-  @ViewChild('myInput') myInputRef!: ElementRef<HTMLInputElement>;
-  // TODO MARCEL -> Childs for Inputs to get value over Native Element Ref for validate and dad and update
 
-  /** Inputs will set in ModalService */
   contact: InputSignal<Contact> = input.required<Contact>();
   headlineTxt: InputSignal<string> = input.required<string>();
   submitBtnTxt: InputSignal<string> = input.required<string>();
-  ContactFields = ContactFields;
-  /** callback function on close => remove from DOM => will be set in ModalService */
-  dissolve?: () => void;
 
   protected vds: ValidationService = inject(ValidationService);
   private fireDB: FirebaseDBService = inject(FirebaseDBService);
   private tms: ToastMsgService = inject(ToastMsgService);
   
+  ContactFields = ContactFields;
+  
   isOpen = false;
+  protected formContact: Contact = new Contact();
+  
+  /** callback function on close => remove from DOM => will be set in ModalService */
+  dissolve?: () => void;
 
   // #endregion properties
   
   ngOnInit(): void {
-    
+    const c = this.contact();
+    this.formContact = c ? { ...c } as Contact : this.formContact;
   }
 
   ngAfterViewInit() {
@@ -64,7 +65,6 @@ export class AddContactComponent implements OnInit, AfterViewInit {
   }
 
   // #region methods
-  // #region Form-Management
   async changeInput(inputName: ContactFields, value: string) {
     // validate: with service
     switch(inputName) {
@@ -101,21 +101,23 @@ export class AddContactComponent implements OnInit, AfterViewInit {
     return false;
   }
 
-  /** Submit the entered data as add or as update after validation */
+  /** 
+   * Submit the entered data as add or as update after validation 
+   */
   async submitForm() {
     // this.validateForm();
-    const contact = this.contact();
-    // contact.firstname = document.
-    if(contact.id == '') {
-      await this.fireDB.addToDB('contacts', contact);
+    const orig = this.contact();
+    if (!orig || orig.id == '') {
+      await this.fireDB.addToDB('contacts', this.formContact);
       this.tms.add('Contact was created', 3000, 'success');
     } else {
-      await this.fireDB.updateInDB('contacts', contact);
+      Object.assign(orig, this.formContact);
+      await this.fireDB.updateInDB('contacts', orig);
+      this.fireDB.setCurrentContact(orig);
       this.tms.add('Contact was updated', 3000, 'success');
     }
     this.closeModal();
   }
-  // #endregion
   
   /**
    * Closes the modal
