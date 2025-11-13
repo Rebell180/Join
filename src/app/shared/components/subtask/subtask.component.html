@@ -23,7 +23,7 @@
                     <li>
                         <div class="add-subtask-container active">
                             <input #editsub type="text" class="add-subtask-input" name="add-subtask-input" placeholder="Edit name..."
-                                [(ngModel)]="subtask.name" autocomplete="off">
+                                [(ngModel)]="editSubtask.name" (keyup)="vds.validate(ValidationFields.SUBTASK, editSubtask.name)" autocomplete="off">
 
                             <div class="add-subtask-input-btns-container">
                                 <button class="add-subtask-input-btn" type="button" (click)="reset($index)">

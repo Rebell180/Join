@@ -23,13 +23,14 @@ export class SubtaskComponent {
   subtasks: InputSignal<SubTask[]> = input.required<SubTask[]>();
   outSubtasks: OutputEmitterRef<SubTask[]> = output<SubTask[]>()
   protected newSubtask = new SubTask();
+  protected editSubtask = new SubTask();
   protected SubtaskEditState = SubtaskEditState;
+  protected ValidationFields = ValidationFields;
 
   vds: ValidationService = inject(ValidationService);
   ems: ErrorMsgService = inject(ErrorMsgService);
   tms: ToastMsgService = inject(ToastMsgService);
   
-  ValidationFields = ValidationFields;
 
   @ViewChild('editsub') editsub!: ElementRef<HTMLInputElement>;
   @ViewChild('errmsg') errmsg!: ElementRef<HTMLParagraphElement>;
@@ -51,6 +52,8 @@ export class SubtaskComponent {
         this.newSubtask.editMode = false;
         this.outSubtasks.emit(this.subtasks());
       }
+      this.ems.setErrorMsg(ValidationFields.SUBTASK, '');
+      this.vds.formValidSubtask();
     };
     document.addEventListener('click', this._docClickListener, true);
   }
@@ -70,7 +73,7 @@ export class SubtaskComponent {
    * Adds a valid subtask to array and emits output.
    */
   addSub() {
-    this.vds.validateSubTasksWithNew(this.newSubtask.name, this.subtasks());
+    this.vds.validateSubTasksWithNew(this.newSubtask.name.trim(), this.subtasks());
     if(this.ems.subtaskErrorMsg() == '' && this.newSubtask.name.trim() != '') {
       this.newSubtask.editMode = false;
       this.newSubtask.editState = SubtaskEditState.NEW;
@@ -92,14 +95,17 @@ export class SubtaskComponent {
    * @param index index of subtask array.
    */
   updateSub(index: number): void {
-    this.vds.validateSubTasksWithNew(this.subtasks()[index].name, this.subtasks());
-    if(this.ems.subtaskErrorMsg() == '' && this.subtasks()[index].name.trim() != '') {
+    console.log(this.editSubtask);
+    console.log(this.subtasks());
+    this.vds.validateSubTasksWithNew(this.editSubtask.name.trim(), this.subtasks());
+    if(this.ems.subtaskErrorMsg() == '' && this.editSubtask.name.trim() != '') {
       const allSubtasks = this.subtasks();
+      allSubtasks[index].name = this.editSubtask.name.trim();
       allSubtasks[index].editMode = false;
       allSubtasks[index].editState = SubtaskEditState.CHANGED;
       this.outSubtasks.emit(allSubtasks);
       this.validateSubtaskList();
-    } else if(this.subtasks()[index].name.trim() != '') {
+    } else if(this.editSubtask.name.trim() == '') {
       this.ems.setErrorMsg(ValidationFields.SUBTASK, 'Empty subtasks are not allowed.');
     } else {
       this.tms.add('Could not update subtask.');
@@ -129,6 +135,8 @@ export class SubtaskComponent {
    * @param index - Index of subtaskarray
    */
   protected selectEditInput(index: number) {
+    this.editSubtask = { ...this.subtasks()[index]} as SubTask;
+    console.log(this.editSubtask);
     this.endbleEditMode(index);
     this.focusEdit();
   }
