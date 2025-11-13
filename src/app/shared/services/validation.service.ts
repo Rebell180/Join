@@ -1,4 +1,4 @@
-import { inject, Injectable } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
 import { ValidationFields } from '../enums/validation-fields';
 import { ErrorMsgService } from './error-msg.service';
 import { Timestamp } from '@angular/fire/firestore';
@@ -9,6 +9,11 @@ import { Timestamp } from '@angular/fire/firestore';
 export class ValidationService {
 
   ems: ErrorMsgService = inject(ErrorMsgService);
+
+  formValidContact = signal<boolean>(false);
+  formValidTask = signal<boolean>(false);
+  formValidSubtask = signal<boolean>(false);
+  // TODO signup and login forms
 
   // #region Methods
 
@@ -50,6 +55,7 @@ export class ValidationService {
         break;
     }
     this.ems.setErrorMsg(field, errorMsg);
+    this.setFormValidation(field);
   }
 
   // #region input field methods
@@ -309,5 +315,58 @@ export class ValidationService {
 
   // #endregion validation methods
 
+  // #region form validation
+
+  /**
+   * Set the form validation for form of submitted field.
+   * Can be used for full form validation for example to enable submit-buttons.
+   * 
+   * @param field field to find group to validate.
+   */
+  private setFormValidation(field: ValidationFields) {
+    switch(field) {
+      case ValidationFields.FIRSTNAME || ValidationFields.LASTNAME || ValidationFields.EMAIL || ValidationFields.PHONE:
+        this.validateContactForm();
+        break;
+      case ValidationFields.TITLE || ValidationFields.DESCRIPTION || ValidationFields.DUEDATE:
+        this.validateTaskForm();
+        break;
+      case ValidationFields.SUBTASK:
+        this.validateSubtaskForm();
+        break;
+      default: 
+        break;
+    }
+  }
+
+  /**
+   * Check the current errorMsgs of contact form
+   * to validate full form
+   */
+  private validateContactForm() {
+    let errors: string = this.ems.firstnameErrorMsg() + this.ems.lastnameErrorMsg() + this.ems.emailErrorMsg() + this.ems.phoneErrorMsg();
+    this.formValidContact.set(!(errors.length > 0));
+  }
+
+  /**
+   * Check the current errorMsgs of task form
+   * to validate full form
+   */
+  private validateTaskForm() {
+    let errors: string = this.ems.titleErrorMsg() + this.ems.descriptionErrorMsg() + this.ems.dueDateErrorMsg();
+    this.formValidContact.set(!(errors.length > 0));
+  }
+
+  /**
+   * Check the current errorMsgs of subtask form
+   * to validate full form
+   */
+  private validateSubtaskForm() {
+    let errors: string = this.ems.subtaskErrorMsg();
+    this.formValidContact.set(!(errors.length > 0));
+  }
+
+  // #endregion form validation
+  
   // #endregion
 }
