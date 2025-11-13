@@ -351,6 +351,8 @@ export class ValidationService {
         break;
       case ValidationFields.SUBTASK:
         this.validateSubtaskForm();
+        this.validateTaskForm();
+        break;
       case ValidationFields.TITLE || ValidationFields.DESCRIPTION || ValidationFields.DUEDATE:
         this.validateTaskForm();
         break;
