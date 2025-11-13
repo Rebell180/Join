@@ -61,7 +61,7 @@
     }
 
     .task-list-wrapper {
-        @include all.size($w: 100%, $h: 74dvh);
+        @include all.size($w: 100%, $h: 68dvh);
         @include all.fl($gap: 2rem, $jc: space-between);
 
         @media(max-width: 1280px) {

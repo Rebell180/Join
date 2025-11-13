@@ -74,7 +74,7 @@ export class SubtaskComponent {
    */
   addSub() {
     this.vds.validateSubTasksWithNew(this.newSubtask.name.trim(), this.subtasks());
-    if(this.ems.subtaskErrorMsg() == '' && this.newSubtask.name.trim() != '') {
+    if(this.ems.subtaskErrorMsg() == '' && this.newSubtask.name.trim().length > 1) {
       this.newSubtask.editMode = false;
       this.newSubtask.editState = SubtaskEditState.NEW;
       const allSubtasks = this.subtasks();
@@ -82,8 +82,8 @@ export class SubtaskComponent {
       this.outSubtasks.emit(allSubtasks);
       this.newSubtask = new SubTask();
       this.validateSubtaskList();
-    } else if(this.newSubtask.name.trim() == ''){
-      this.ems.setErrorMsg(ValidationFields.SUBTASK, 'Empty subtasks are not allowed.');
+    } else if(this.newSubtask.name.trim().length < 2){
+      this.ems.setErrorMsg(ValidationFields.SUBTASK, 'Minimum of 2 letters needed.');
     } else {
       this.tms.add('Could not add subtask.');
     }
@@ -98,15 +98,15 @@ export class SubtaskComponent {
     console.log(this.editSubtask);
     console.log(this.subtasks());
     this.vds.validateSubTasksWithNew(this.editSubtask.name.trim(), this.subtasks());
-    if(this.ems.subtaskErrorMsg() == '' && this.editSubtask.name.trim() != '') {
+    if(this.ems.subtaskErrorMsg() == '' && this.editSubtask.name.trim().length > 1) {
       const allSubtasks = this.subtasks();
       allSubtasks[index].name = this.editSubtask.name.trim();
       allSubtasks[index].editMode = false;
       allSubtasks[index].editState = SubtaskEditState.CHANGED;
       this.outSubtasks.emit(allSubtasks);
       this.validateSubtaskList();
-    } else if(this.editSubtask.name.trim() == '') {
-      this.ems.setErrorMsg(ValidationFields.SUBTASK, 'Empty subtasks are not allowed.');
+    } else if(this.editSubtask.name.trim().length < 2) {
+      this.ems.setErrorMsg(ValidationFields.SUBTASK, 'Minimum of 2 letters needed.');
     } else {
       this.tms.add('Could not update subtask.');
     }
