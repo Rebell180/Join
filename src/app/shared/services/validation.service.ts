@@ -76,6 +76,7 @@ export class ValidationService {
       }
     });
     this.ems.setErrorMsg(ValidationFields.SUBTASK, errorMsg);
+    this.setFormValidation(ValidationFields.SUBTASK);
   }
 
   // #region input field methods
@@ -348,12 +349,12 @@ export class ValidationService {
       case ValidationFields.FIRSTNAME || ValidationFields.LASTNAME || ValidationFields.EMAIL || ValidationFields.PHONE:
         this.validateContactForm();
         break;
+      case ValidationFields.SUBTASK:
+        this.validateSubtaskForm();
       case ValidationFields.TITLE || ValidationFields.DESCRIPTION || ValidationFields.DUEDATE:
         this.validateTaskForm();
         break;
-      case ValidationFields.SUBTASK:
-        this.validateSubtaskForm();
-        break;
+      
       default: 
         break;
     }
