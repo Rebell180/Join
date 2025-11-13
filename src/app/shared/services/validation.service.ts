@@ -2,6 +2,8 @@ import { inject, Injectable, signal } from '@angular/core';
 import { ValidationFields } from '../enums/validation-fields';
 import { ErrorMsgService } from './error-msg.service';
 import { Timestamp } from '@angular/fire/firestore';
+import { SubTask } from '../classes/subTask';
+import { SubtaskEditState } from '../enums/subtask-edit-state';
 
 @Injectable({
   providedIn: 'root'
@@ -56,6 +58,24 @@ export class ValidationService {
     }
     this.ems.setErrorMsg(field, errorMsg);
     this.setFormValidation(field);
+  }
+
+  /**
+   * Validate a new subtask in group.
+   * 
+   * @param newSubtask @string new subtask value to validate in Group.
+   * @param currentSubtasks @Array @SubTask array of current existing subtasks for reference. 
+   */
+  validateSubTasksWithNew(newSubtask: string, currentSubtasks: Array<SubTask>) {
+    let errorMsg = '';
+    currentSubtasks.forEach((subtask) => {
+      if(errorMsg == '') {
+        if(subtask.editState != SubtaskEditState.DELETED && subtask.name == newSubtask) {
+          errorMsg = 'Subtask allready exist';
+        }
+      }
+    });
+    this.ems.setErrorMsg(ValidationFields.SUBTASK, errorMsg);
   }
 
   // #region input field methods
@@ -200,7 +220,7 @@ export class ValidationService {
   private validateSubTaskInput(value: string): string {
     let errorMsg: string = '';
     errorMsg = this.validateTextInput(value as string, {min: 2, max: 30});
-    if(errorMsg.length) {
+    if(!errorMsg.length) {
       errorMsg = this.validateTextStyleInput(value as string);
       if(!errorMsg.length) {
         errorMsg = this.validateTextContentInput(value as string);

@@ -3,6 +3,9 @@ import { ChangeDetectorRef, Component, ElementRef, inject, input, InputSignal, o
 import { SubTask } from '../../classes/subTask';
 import { FormsModule } from '@angular/forms';
 import { SubtaskEditState } from '../../enums/subtask-edit-state';
+import { ValidationFields } from '../../enums/validation-fields';
+import { ValidationService } from '../../services/validation.service';
+import { ErrorMsgService } from '../../services/error-msg.service';
 
 @Component({
   selector: 'app-subtask',
@@ -21,8 +24,12 @@ export class SubtaskComponent {
   protected newSubtask = new SubTask();
   protected SubtaskEditState = SubtaskEditState;
 
-  cdr: ChangeDetectorRef = inject(ChangeDetectorRef);
-  rd2: Renderer2 = inject(Renderer2);
+  vds: ValidationService = inject(ValidationService);
+  ems: ErrorMsgService = inject(ErrorMsgService);
+  // cdr: ChangeDetectorRef = inject(ChangeDetectorRef);
+  // rd2: Renderer2 = inject(Renderer2);
+  
+  ValidationFields = ValidationFields;
 
   @ViewChild('editsub') editsub!: ElementRef<HTMLInputElement>;
   @ViewChild('errmsg') errmsg!: ElementRef<HTMLParagraphElement>;
@@ -63,7 +70,8 @@ export class SubtaskComponent {
    * Adds a valid subtask to array and emits output.
    */
   addSub() {
-    if(this.validateSubtask(this.newSubtask)) {
+    this.vds.validateSubTasksWithNew(this.newSubtask.name, this.subtasks());
+    if(this.ems.subtaskErrorMsg() == '') {
       this.newSubtask.editMode = false;
       this.newSubtask.editState = SubtaskEditState.NEW;
       const allSubtasks = this.subtasks();
@@ -80,7 +88,8 @@ export class SubtaskComponent {
    * @param index index of subtask array.
    */
   updateSub(index: number): void {
-    if(this.validateSubtask(this.subtasks()[index])) {
+    this.vds.validateSubTasksWithNew(this.subtasks()[index].name, this.subtasks());
+    if(this.ems.subtaskErrorMsg() == '') {
       const allSubtasks = this.subtasks();
       allSubtasks[index].editMode = false;
       allSubtasks[index].editState = SubtaskEditState.CHANGED;
@@ -99,6 +108,7 @@ export class SubtaskComponent {
     allSubtasks[index].editMode = false;
     allSubtasks[index].editState = SubtaskEditState.DELETED;
     this.outSubtasks.emit(allSubtasks);
+    this.vds.validateSubTasksWithNew(this.subtasks()[index].name, this.subtasks());
     this.validateSubtaskList();
   }
 
@@ -155,54 +165,11 @@ export class SubtaskComponent {
    */
   private focusEdit(): void {
     setTimeout(() => {
-      this.cdr.detectChanges();
+      // this.cdr.detectChanges();
       const el = this.editsub.nativeElement;
       el.focus();
       el.select();
     })
-  }
-
-  /**
-   * Sende an error message to UI.
-   * @param msg - Message to send.
-   */
-  private sendErrMsg(msg: string): void {
-    this.rd2.setProperty(this.errmsg.nativeElement, 'innerText', msg)
-  }
-
-  /**
-   * Counts name of same subtask.
-   * @param subtask - Instance of Subtask.
-   * @returns - Number of same Subtask.
-   */
-  private countSubtaskName(subtask: SubTask): number {
-    let counter: number = 0;
-    this.subtasks().forEach(cSubtask => {
-      if (cSubtask.name == subtask.name && cSubtask.editState != SubtaskEditState.DELETED){
-        counter++;
-      } 
-    });
-    return counter;
-  }
-
-  /**
-   * Validate the submitted subtask.
-   * 
-   * @param subtask subtask to validate
-   * @returns @boolean if subtask is valid
-   */
-  private validateSubtask(subtask: SubTask): boolean {
-    if (subtask.name.length == 0) {
-      this.sendErrMsg('Name is required.');
-      return false;
-    }
-    
-    if (this.countSubtaskName(subtask) > 0) {
-      this.sendErrMsg('Subtask already exists.');
-      return false;
-    }
-    this.sendErrMsg('');
-    return true;
   }
 
   /**
@@ -211,7 +178,9 @@ export class SubtaskComponent {
   private validateSubtaskList() {
     let activeSubtasks = this.subtasks().filter((subtask) => subtask.editState != SubtaskEditState.DELETED);
     if (activeSubtasks.length <= 1) {  
-      this.sendErrMsg('Add another Subtask.');
+      this.ems.subtaskErrorMsg.set('Add another task');
+    } else {
+      this.ems.subtaskErrorMsg.set('');
     }
   }
 

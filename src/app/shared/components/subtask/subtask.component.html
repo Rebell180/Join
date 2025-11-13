@@ -1,6 +1,6 @@
 <div class="add-subtask-container" [ngClass]="{'active': newSubtask.editMode == true}" (click)="endbleEditMode(-1)">
     <input type="text" class="add-subtask-input" name="add-subtask-input" placeholder="Add new Subtask..."
-        [(ngModel)]="newSubtask.name" autocomplete="off">
+        [(ngModel)]="newSubtask.name" (keyup)="vds.validate(ValidationFields.SUBTASK, newSubtask.name)" autocomplete="off">
     
     @if(newSubtask.editMode) {
         <div class="add-subtask-input-btns-container">
@@ -14,7 +14,7 @@
         </div>
     }
 </div>
-<p class="errmsg" #errmsg></p>
+<span class="error">{{ems.subtaskErrorMsg()}}</span>
 @if (subtasks() && subtasks().length > 0) {
     <ol>
         @for (subtask of subtasks(); track $index) {

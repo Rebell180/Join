@@ -51,7 +51,7 @@
                         (selectionChange)="updateContacts($event)"></app-assign-contacts>
                 </div>
 
-                <div class="input-wrapper add-task-category-container" (click)="$event.stopPropagation()">
+                <div class="input-wrapper add-task-category-container" >
                     <label class="add-task-input-lbl" for="add-task-category">Category <b>*</b></label>
                     
                     <app-category-drop #category [currentCategory]="currentTask().category" (newCategory)="updateCategory($event)"></app-category-drop>
