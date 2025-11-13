@@ -74,7 +74,7 @@
                     } @else if(headlineTxt() == 'Edit') {
                         <input class="btn-default" type="button" (click)="deleteContact()" value="Delete">
                     }
-                    <input class="btn-set sub-btn" type="submit" value="{{ submitBtnTxt() }}">
+                    <input class="btn-set sub-btn" type="submit" [disabled]="!vds.formValidContact()" value="{{ submitBtnTxt() }}">
                 </div>
             </form>
             <div class="icon-area-mobile">

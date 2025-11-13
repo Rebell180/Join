@@ -345,6 +345,7 @@ export class ValidationService {
    */
   private validateContactForm() {
     let errors: string = this.ems.firstnameErrorMsg() + this.ems.lastnameErrorMsg() + this.ems.emailErrorMsg() + this.ems.phoneErrorMsg();
+    console.log(errors.length);
     this.formValidContact.set(!(errors.length > 0));
   }
 

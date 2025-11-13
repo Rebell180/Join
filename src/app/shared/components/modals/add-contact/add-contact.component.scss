@@ -201,6 +201,14 @@
                     
                     &.sub-btn {
                         padding: 0 2rem;
+
+                        &:disabled {
+                            cursor: not-allowed;
+                            opacity: 0.5;
+                            background: linear-gradient(145deg, #999, #777);
+                            box-shadow: none;
+                            transform: none;
+                        }
                     }
 
                     &.btn-default {
