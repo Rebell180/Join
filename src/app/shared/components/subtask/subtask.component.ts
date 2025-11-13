@@ -52,8 +52,7 @@ export class SubtaskComponent {
         this.newSubtask.editMode = false;
         this.outSubtasks.emit(this.subtasks());
       }
-      this.ems.setErrorMsg(ValidationFields.SUBTASK, '');
-      this.vds.formValidSubtask();
+      this.validateSubtaskList();
     };
     document.addEventListener('click', this._docClickListener, true);
   }
