@@ -157,6 +157,7 @@ export class AddtaskComponent implements OnDestroy {
       this.currentTask().subtasks.push(subtask);
     });
     this.currentTask().hasSubtasks = this.currentTask().subtasks.length >= 1;
+    this.vds.formValidSubtask();
   }
 
   /**
