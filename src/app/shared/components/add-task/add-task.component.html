@@ -15,22 +15,25 @@
                 <div class="input-wrapper">
                     <label class="add-task-input-lbl" for="title">Title <b>*</b></label>
                     <input class="add-task-input" type="text" name="title" id="add-task-info-title"
-                        placeholder="Enter a title" [(ngModel)]="currentTask().title" required #title="ngModel" />
-                    <small class="error" *ngIf="title.invalid && title.touched">Title is required.</small>
+                        placeholder="Enter a title" [(ngModel)]="currentTask().title" 
+                        (keyup)="vds.validate(ValidationFields.TITLE, currentTask().title)" required />
+                    <span class="error">{{ems.titleErrorMsg()}}</span>
                 </div>
 
                 <div class="input-wrapper">
                     <label class="add-task-input-lbl" for="descr">Description</label>
                     <textarea name="descr" id="add-task-info-description" class="add-task-input"
-                        placeholder="Enter a Description ..." [(ngModel)]="currentTask().description"></textarea>
+                        placeholder="Enter a Description ..." [(ngModel)]="currentTask().description" 
+                        (keyup)="vds.validate(ValidationFields.DESCRIPTION, currentTask().description)"></textarea>
+                    <span class="error">{{ems.descriptionErrorMsg()}}</span>
                 </div>
 
                 <div class="input-wrapper">
                     <label class="add-task-input-lbl" for="due-date-picker">Due Date <b>*</b></label>
                     <app-date-picker name="due-date-picker" required [selectedTimestamp]="currentTask().dueDate"
-                        (dateSelected)="currentTask().dueDate = $event"></app-date-picker>
-                    <small class="error" *ngIf="!currentTask().dueDate && addTaskForm.submitted">Due date is
-                        required.</small>
+                        (dateSelected)="currentTask().dueDate = $event" 
+                        (keyup)="vds.validate(ValidationFields.DUEDATE, currentTask().dueDate.seconds)" ></app-date-picker>
+                    <span class="error">{{ems.dueDateErrorMsg()}}</span>
                 </div>
             </div>
 
@@ -66,11 +69,11 @@
             <span class="required-info-txt"><b>*</b> this field is required</span>
             <div class="add-task-btn-container">
                 @if(kindOf() === 'add') {
-                    <button class="btn-default" type="button" (click)="clear()">Clear</button>
-                    <button class="btn-set" type="submit" (click)="addTask()" [disabled]="addTaskForm.invalid || !currentTask().dueDate">Create Task</button>
+                    <input class="btn-default" type="button" (click)="clear()" value="Clear"/>
+                    <input class="btn-set" type="submit" [disabled]="!vds.formValidTask()" (click)="addTask()" value="Create Task"/>
                 }
                 @else {
-                    <button class="btn-set" type="submit" (click)="updateTask()" [disabled]="addTaskForm.invalid || !currentTask().dueDate">Update Task</button>
+                    <input class="btn-set" type="submit" [disabled]="!vds.formValidTask()" (click)="updateTask()" value="Update Task"/>
                 }
             </div>
         </footer>

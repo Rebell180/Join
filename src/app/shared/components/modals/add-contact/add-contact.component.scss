@@ -130,24 +130,24 @@
 
                     @include all.notebook {
                         width: 100%;
-                        gap: 3rem;
+                        gap: 0.5rem;
                         z-index: 3;
                     }
 
                     .input-container {
-                        @include all.size($w: 100%, $h: 4.5rem);
-                        @include all.fl($flexdir: column, $alit: start, $jc: center);
-
-                        @include all.tablet {
-                            height: 3.8rem;
-                        }
+                        @include all.size($w: 100%, $h: 8rem);
+                        @include all.fl($flexdir: column, $alit: center, $jc: start);
 
                         .input-img-container {
-                            @include all.size($w: 100%, $h:100%);
+                            @include all.size($w: 100%);
                             @include all.fl($alit: center, $jc: center, $gap: 2rem);
                             @include all.borRad($radius: 16px, $c: rgba(0, 0, 0, 0.4));
                             @include all.marpad($pad: 2rem);
                             
+                            @include all.notebook {
+                                @include all.marpad($pad: 1rem);
+                            }
+
                             input {
                                 @include all.size($w: 100%);
                                 font-family: 'Inter', sans-serif;
@@ -167,13 +167,6 @@
                             img {
                                 @include all.size($w: 2.5rem, $h: 2.5rem);
                             }
-                        }
-
-                        .error {
-                            width: 100%;
-                            padding-left: 2rem;
-                            font-size: 16px;
-                            color: #800000;
                         }
                     }
                 }
@@ -201,14 +194,6 @@
                     
                     &.sub-btn {
                         padding: 0 2rem;
-
-                        &:disabled {
-                            cursor: not-allowed;
-                            opacity: 0.5;
-                            background: linear-gradient(145deg, #999, #777);
-                            box-shadow: none;
-                            transform: none;
-                        }
                     }
 
                     &.btn-default {

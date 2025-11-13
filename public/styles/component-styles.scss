@@ -13,6 +13,14 @@
         border: 1px solid #29ABE2;
         box-shadow: 0 8px 8px rgba(0, 0, 0, 0.2);
     }
+
+    &:disabled {
+        cursor: not-allowed;
+        opacity: 0.5;
+        background: linear-gradient(145deg, #999, #777);
+        box-shadow: none;
+        transform: none;
+    }
 }
 
 .btn-default {
@@ -27,4 +35,21 @@
         color: #29ABE2;
         box-shadow: 0 8px 8px rgba(0, 0, 0, 0.2);
     }
+}
+
+.error {
+    width: 100%;
+    max-width: 100%;
+    height: 2.4rem;
+    padding-left: 2rem;
+    display: -webkit-box;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    color: #800000;
+    line-clamp: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-word;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
 }

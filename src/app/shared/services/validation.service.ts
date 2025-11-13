@@ -147,7 +147,7 @@ export class ValidationService {
   private validateTitleInput(value: string): string {
     let errorMsg: string = '';
     errorMsg = this.validateTextInput(value as string, {min: 3, max: 50});
-    if(errorMsg.length) {
+    if(!errorMsg.length) {
       errorMsg = this.validateTextStyleInput(value as string);
       if(!errorMsg.length) {
         errorMsg = this.validateTextContentInput(value as string);
@@ -165,7 +165,7 @@ export class ValidationService {
   private validateDescriptionInput(value: string): string {
     let errorMsg: string = '';
     this.validateTextInput(value as string);
-      if(errorMsg.length) {
+      if(!errorMsg.length) {
         errorMsg = this.validateTextStyleInput(value as string);
         if(!errorMsg.length) {
           errorMsg = this.validateTextContentInput(value as string);
@@ -346,7 +346,7 @@ export class ValidationService {
   private validateContactForm() {
     let errors: string = this.ems.firstnameErrorMsg() + this.ems.lastnameErrorMsg() + this.ems.emailErrorMsg() + this.ems.phoneErrorMsg();
     console.log(errors.length);
-    this.formValidContact.set(!(errors.length > 0));
+    this.formValidContact.set(errors.length == 0);
   }
 
   /**
@@ -354,8 +354,8 @@ export class ValidationService {
    * to validate full form
    */
   private validateTaskForm() {
-    let errors: string = this.ems.titleErrorMsg() + this.ems.descriptionErrorMsg() + this.ems.dueDateErrorMsg();
-    this.formValidContact.set(!(errors.length > 0));
+    let errors: string = this.ems.titleErrorMsg() + this.ems.descriptionErrorMsg() + this.ems.dueDateErrorMsg() + this.ems.subtaskErrorMsg();
+    this.formValidTask.set(errors.length == 0);
   }
 
   /**
@@ -364,7 +364,7 @@ export class ValidationService {
    */
   private validateSubtaskForm() {
     let errors: string = this.ems.subtaskErrorMsg();
-    this.formValidContact.set(!(errors.length > 0));
+    this.formValidSubtask.set(errors.length == 0);
   }
 
   // #endregion form validation

@@ -14,6 +14,9 @@ import { ToastMsgService } from '../../services/toast-msg.service';
 import { SubtaskComponent } from '../subtask/subtask.component';
 import { SubTask } from '../../classes/subTask';
 import { CategoryDropComponent } from "../category-drop/category-drop.component";
+import { ErrorMsgService } from '../../services/error-msg.service';
+import { ValidationService } from '../../services/validation.service';
+import { ValidationFields } from '../../enums/validation-fields';
 
 
 @Component({
@@ -27,12 +30,16 @@ export class AddtaskComponent implements OnDestroy {
 
   // #region properties
 
-  fireDB: FirebaseDBService = inject(FirebaseDBService);
-  fs: Firestore = inject(Firestore);
-  tms: ToastMsgService = inject(ToastMsgService);
-  cdr: ChangeDetectorRef = inject(ChangeDetectorRef);
+  protected fs: Firestore = inject(Firestore);
+  protected fireDB: FirebaseDBService = inject(FirebaseDBService);
+  protected vds: ValidationService = inject(ValidationService);
+  protected ems: ErrorMsgService = inject(ErrorMsgService);
+  protected tms: ToastMsgService = inject(ToastMsgService);
+  private cdr: ChangeDetectorRef = inject(ChangeDetectorRef);
+
   Priority = Priority;
   Category = Category;
+  ValidationFields = ValidationFields;
 
   currentTask: InputSignal<Task> = input.required<Task>();
   kindOf: InputSignal<'add' | 'edit'> = input.required<'add' | 'edit'>();
