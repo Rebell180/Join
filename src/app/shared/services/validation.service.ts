@@ -1,6 +1,4 @@
 import { inject, Injectable } from '@angular/core';
-import { FormGroup } from '@angular/forms';
-import { ContactFields } from '../enums/contact-fields';
 import { ValidationFields } from '../enums/validation-fields';
 import { ErrorMsgService } from './error-msg.service';
 import { Timestamp } from '@angular/fire/firestore';
@@ -14,6 +12,13 @@ export class ValidationService {
 
   // #region Methods
 
+  /**
+   * Validate the submitted input value. 
+   * Accept string and number values.
+   * 
+   * @param field @ValidationFields type of input field to validate.
+   * @param value @string | @number value to validate.
+   */
   validate(field: ValidationFields, value: string | number): void {
     let errorMsg: string = '';
     switch(field) {
@@ -62,7 +67,6 @@ export class ValidationService {
     if(!errorMsg.length) {
       errorMsg = this.validateTextStyleInput(value as string);
       if(!errorMsg.length) {
-        // inputTypes => enum? => to define regex type
         errorMsg = this.validateTextContentInput(value as string);
       }
     }
@@ -94,8 +98,15 @@ export class ValidationService {
    * @returns @string error message of validation.
    */
   private validateEmailInput(value: string): string {
-    // TODO
-    return '';
+    let errorMsg: string = '';
+    errorMsg = this.validateTextInput(value, {min: 9, max: 30});
+    if (errorMsg == '') {
+      const regex: RegExp = /^\S+@\S+\.\S+$/;
+      if (!regex.test(value)) {
+        errorMsg = 'Wrong format. Allowed: "[abc]@[abc].[de, com ...]"';
+      } 
+    }
+    return errorMsg;
   }
 
   /**
@@ -105,12 +116,13 @@ export class ValidationService {
    * @returns @string error message of validation.
    */
   private validatePhoneInput(value: string): string {
+    // '^[0-9]'
     let errorMsg: string = '';
     errorMsg = this.validateTextInput(value, {min: 8, max: 16});
     if (errorMsg == '') {
       const regex: RegExp = /^0\d+ \d+$/;
       if (!regex.test(value)) {
-        errorMsg = 'Wrong format. Allowed: "+49 [numbers]", "0152 [numbers]"';
+        errorMsg = 'Wrong format. Allowed: "+49 [012]", "0152 [012]"';
       } 
     }
     return errorMsg;
@@ -267,9 +279,9 @@ export class ValidationService {
    * @returns @string errorMsg 
    */
   private validateTextInput(value: string, {min = 0, max = 500 } = {}): string {
-    if(value.length < min) {
+    if(value.trim().length < min) {
       return 'Text is to short.';
-    } else if(value.length > max) {
+    } else if(value.trim().length > max) {
       return 'Text is to long.';
     } else {
       return '';

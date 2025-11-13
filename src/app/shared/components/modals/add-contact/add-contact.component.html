@@ -28,41 +28,41 @@
                         <div class="input-container firstname-input-container">
                             <div class="input-img-container">
                                 <input name="firstname" type="text" placeholder="firstname"
-                                    [(ngModel)]="formContact.firstname"
-                                    (focus)="focusOnInput(ContactFields.FIRSTNAME)" autocomplete="off">
+                                    [(ngModel)]="editContact.firstname" (keyup)="vds.validate(ValidationFields.FIRSTNAME, editContact.firstname)"
+                                    (focus)="focusOnInput(ValidationFields.FIRSTNAME)" autocomplete="off">
                                 <img src="assets/Icons/contact/person.png">
                             </div>
-                            <span id="error-firstname" class="error">la</span>
+                            <span id="error-firstname" class="error">{{ems.firstnameErrorMsg()}}</span>
                         </div>
 
                         <div class="input-container lastname-input-container">
                             <div class="input-img-container">
                                 <input name="lastname" type="text" placeholder="lastname"
-                                    [(ngModel)]="formContact.lastname"
-                                    (focus)="focusOnInput(ContactFields.LASTNAME)" autocomplete="off">
+                                    [(ngModel)]="editContact.lastname" (keyup)="vds.validate(ValidationFields.LASTNAME, editContact.lastname)"
+                                    (focus)="focusOnInput(ValidationFields.LASTNAME)" autocomplete="off">
                                 <img src="assets/Icons/contact/person.png">
                             </div>
-                            <span id="error-lastname" class="error">la</span>
+                            <span id="error-lastname" class="error">{{ems.lastnameErrorMsg()}}</span>
                         </div>
 
                         <div class="input-container email-input-container">
                             <div class="input-img-container">
                                 <input name="email" type="email" placeholder="email"
-                                    [(ngModel)]="formContact.email"
-                                    (focus)="focusOnInput(ContactFields.EMAIL)" autocomplete="off">
+                                    [(ngModel)]="editContact.email" (keyup)="vds.validate(ValidationFields.EMAIL, editContact.email)"
+                                    (focus)="focusOnInput(ValidationFields.EMAIL)" autocomplete="off">
                                 <img src="assets/Icons/contact/mail.png">
                             </div>
-                            <span id="error-email" class="error">la</span>
+                            <span id="error-email" class="error">{{ems.emailErrorMsg()}}</span>
                         </div>
 
                         <div class="input-container phone-input-container">
                             <div class="input-img-container">
                                 <input name="tel" type="text" placeholder="phonenumber"
-                                    [(ngModel)]="formContact.tel"
-                                    (focus)="focusOnInput(ContactFields.PHONE)" autocomplete="off">
+                                    [(ngModel)]="editContact.tel" (keyup)="vds.validate(ValidationFields.PHONE, editContact.tel)"
+                                    (focus)="focusOnInput(ValidationFields.PHONE)" autocomplete="off">
                                 <img src="assets/Icons/contact/call.png">
                             </div>
-                            <span id="error-phone" class="error">la</span>
+                            <span id="error-phone" class="error">{{ems.phoneErrorMsg()}}</span>
                         </div>
                     </div>
                 </div>

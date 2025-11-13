@@ -1,4 +1,4 @@
-import { Component, inject, AfterViewInit, input, InputSignal, OnInit, OnDestroy, ElementRef, ViewChild } from '@angular/core';
+import { Component, inject, AfterViewInit, input, InputSignal, OnInit } from '@angular/core';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { trigger, state, style, transition, animate } from '@angular/animations';
@@ -8,6 +8,8 @@ import { FirebaseDBService } from '../../../services/firebase-db.service';
 import { ToastMsgService } from '../../../services/toast-msg.service';
 import { ValidationService } from '../../../services/validation.service';
 import { ContactFields } from '../../../enums/contact-fields';
+import { ErrorMsgService } from '../../../services/error-msg.service';
+import { ValidationFields } from '../../../enums/validation-fields';
 
 @Component({
   selector: 'app-add-contact',
@@ -42,13 +44,14 @@ export class AddContactComponent implements OnInit, AfterViewInit {
   submitBtnTxt: InputSignal<string> = input.required<string>();
 
   protected vds: ValidationService = inject(ValidationService);
+  protected ems: ErrorMsgService = inject(ErrorMsgService);
   private fireDB: FirebaseDBService = inject(FirebaseDBService);
   private tms: ToastMsgService = inject(ToastMsgService);
   
-  ContactFields = ContactFields;
+  ValidationFields = ValidationFields;
   
   isOpen = false;
-  protected formContact: Contact = new Contact();
+  protected editContact: Contact = new Contact();
   
   /** callback function on close => remove from DOM => will be set in ModalService */
   dissolve?: () => void;
@@ -57,32 +60,11 @@ export class AddContactComponent implements OnInit, AfterViewInit {
   
   ngOnInit(): void {
     const c = this.contact();
-    this.formContact = c ? { ...c } as Contact : this.formContact;
+    this.editContact = c ? { ...c } as Contact : this.editContact;
   }
 
   ngAfterViewInit() {
     setTimeout(() => this.isOpen = true, 10); // Animation trigger
-  }
-
-  // #region methods
-  async changeInput(inputName: ContactFields, value: string) {
-    // validate: with service
-    switch(inputName) {
-      case ContactFields.FIRSTNAME:
-        // validate 
-        break;
-      case ContactFields.LASTNAME:
-        // validate
-        break;
-      case ContactFields.EMAIL:
-        // validate
-        break;
-      case ContactFields.PHONE:
-        // validate
-        break;
-      default:
-        break;
-    }
   }
 
   /**
@@ -108,10 +90,10 @@ export class AddContactComponent implements OnInit, AfterViewInit {
     // this.validateForm();
     const orig = this.contact();
     if (!orig || orig.id == '') {
-      await this.fireDB.addToDB('contacts', this.formContact);
+      await this.fireDB.addToDB('contacts', this.editContact);
       this.tms.add('Contact was created', 3000, 'success');
     } else {
-      Object.assign(orig, this.formContact);
+      Object.assign(orig, this.editContact);
       await this.fireDB.updateInDB('contacts', orig);
       this.fireDB.setCurrentContact(orig);
       this.tms.add('Contact was updated', 3000, 'success');
