@@ -6,6 +6,7 @@ import { SubtaskEditState } from '../../enums/subtask-edit-state';
 import { ValidationFields } from '../../enums/validation-fields';
 import { ValidationService } from '../../services/validation.service';
 import { ErrorMsgService } from '../../services/error-msg.service';
+import { ToastMsgService } from '../../services/toast-msg.service';
 
 @Component({
   selector: 'app-subtask',
@@ -26,8 +27,7 @@ export class SubtaskComponent {
 
   vds: ValidationService = inject(ValidationService);
   ems: ErrorMsgService = inject(ErrorMsgService);
-  // cdr: ChangeDetectorRef = inject(ChangeDetectorRef);
-  // rd2: Renderer2 = inject(Renderer2);
+  tms: ToastMsgService = inject(ToastMsgService);
   
   ValidationFields = ValidationFields;
 
@@ -71,7 +71,7 @@ export class SubtaskComponent {
    */
   addSub() {
     this.vds.validateSubTasksWithNew(this.newSubtask.name, this.subtasks());
-    if(this.ems.subtaskErrorMsg() == '') {
+    if(this.ems.subtaskErrorMsg() == '' && this.newSubtask.name.trim() != '') {
       this.newSubtask.editMode = false;
       this.newSubtask.editState = SubtaskEditState.NEW;
       const allSubtasks = this.subtasks();
@@ -79,6 +79,10 @@ export class SubtaskComponent {
       this.outSubtasks.emit(allSubtasks);
       this.newSubtask = new SubTask();
       this.validateSubtaskList();
+    } else if(this.newSubtask.name.trim() == ''){
+      this.ems.setErrorMsg(ValidationFields.SUBTASK, 'Empty subtasks are not allowed.');
+    } else {
+      this.tms.add('Could not add subtask.');
     }
   }
 
@@ -89,12 +93,16 @@ export class SubtaskComponent {
    */
   updateSub(index: number): void {
     this.vds.validateSubTasksWithNew(this.subtasks()[index].name, this.subtasks());
-    if(this.ems.subtaskErrorMsg() == '') {
+    if(this.ems.subtaskErrorMsg() == '' && this.subtasks()[index].name.trim() != '') {
       const allSubtasks = this.subtasks();
       allSubtasks[index].editMode = false;
       allSubtasks[index].editState = SubtaskEditState.CHANGED;
       this.outSubtasks.emit(allSubtasks);
       this.validateSubtaskList();
+    } else if(this.subtasks()[index].name.trim() != '') {
+      this.ems.setErrorMsg(ValidationFields.SUBTASK, 'Empty subtasks are not allowed.');
+    } else {
+      this.tms.add('Could not update subtask.');
     }
   }
 

@@ -66,6 +66,7 @@
 
         @media(max-width: 1280px) {
             width: calc(100dvw - 20rem - 6%);
+            height: 72dvh;
             @include all.fl($flexdir: column);
             @include all.scrollbar();
             overflow-y: auto;
@@ -73,13 +74,13 @@
 
         @include all.tablet {
             width: calc(100dvw - 6%);
-            height: 64dvh;
+            height: 62dvh;
             padding: 0 1rem 2rem 0;
         }
 
         @include all.mobile {
             padding: 0 0 4rem 0;
-            height: 57dvh;
+            height: 54dvh;
         }
 
         .task-list {
@@ -88,7 +89,7 @@
 
             @media (max-width: 1280px) {
                 width: 100%;
-                margin-bottom: 1rem;
+                padding-bottom: 1rem;
                 padding-right: 1rem;
             }
 
@@ -124,7 +125,7 @@
 
                 .drag-content {
                     @include all.size($w: 100%, $h: 26rem);
-                    min-width: 24rem;
+                    min-width: 22rem;
 
                     @media(max-width: 1280px) {
                         width: 23rem;
